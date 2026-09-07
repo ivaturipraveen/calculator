@@ -1,0 +1,174 @@
+{
+  "schema_version": "1.0",
+  "slug": "si-unit-conversions-drugs",
+  "title": "SI Unit Conversions: Drugs",
+  "subtitle": null,
+  "category": "Unit Conversion",
+  "renderer": "convert",
+  "engine": "convert",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "from",
+      "label": "FROM",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "to",
+      "label": "TO",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "set_maximal_display_precision_in_decimal_points_1",
+      "label": "Set maximal display precision in decimal points: 1",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "convert",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": null,
+  "tables": {
+    "pairs": [
+      {
+        "from": "Digoxin (ng/mL)",
+        "to": "Digoxin (nmol/L)",
+        "factor": 1.281
+      },
+      {
+        "from": "Phenytoin (mcg/mL)",
+        "to": "Phenytoin (µmol/L)",
+        "factor": 3.964
+      },
+      {
+        "from": "Vancomycin (mcg/mL)",
+        "to": "Vancomycin (µmol/L)",
+        "factor": 0.69
+      },
+      {
+        "from": "Lithium (mEq/L)",
+        "to": "Lithium (mmol/L)",
+        "factor": 1
+      },
+      {
+        "from": "Theophylline (mcg/mL)",
+        "to": "Theophylline (µmol/L)",
+        "factor": 5.55
+      },
+      {
+        "from": "Salicylate (mg/dL)",
+        "to": "Salicylate (mmol/L)",
+        "factor": 0.0724
+      },
+      {
+        "from": "Ethanol (mg/dL)",
+        "to": "Ethanol (mmol/L)",
+        "factor": 0.2171
+      }
+    ]
+  },
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": null,
+    "notes": [
+      "In this calculator, mcg is the abbreviation for micrograms.",
+      "To make simple unit conversions, select the starting units with the pull-down selector on the right. Then type a starting value in the top FROM input box. To convert the value, choose the new unit in the lower right selector. The converted value will appear immediately in the TO box.",
+      "Helpful Tips Conversion factors acetaminophen [Tylenol] mcg/mL X 6.62 = acetaminophen [Tylenol] mcmol/L amikacin mcg/mL X 1.71 = amikacin mcmol/L amitriptyline ng/mL X 3.61 = amitriptyline nmol/L amobarbital mcg/mL X 4.42 = amobarbital mcmol/L amphetamine mcg/mL X 7.4 = amphetamine mcmol/L bromide mcg/mL X 0.0125 = bromide mmol/L caffeine mcg/mL X 5.15 = caffeine mcmol/L carbamazepine [Tegretol] mcg/mL X 4.23 = carbamazepine [Tegretol] mcmol/L carbenicillin mcg/mL X 2.64 = carbenicillin mcmol/L chloral hydrate mcg/mL X 6.69 = chloral hydrate mcmol/L chloramphenicol mcg/mL X 3.09 = chloramphenicol mcmol/L chlordiazepoxide [Librium] ng/mL X 0.00334 = chlordiazepoxide [Librium] mcmol/L chlordiazepoxide [Librium] ng/mL X 0.00334 = chlordiazepoxide [Librium] mcmol/L chlorpromazine [Thorazine] ng/mL X 3.14 = chlorpromazine [Thorazine] nmol/L chlorpropamide [Diabinese] mcg/mL X 3.61 = chlorpropamide [Diabinese] mcmol/L cimetidine [Tagamet] mcg/mL X 3.96 = cimetidine [Tagamet] mcmol/L clonazepam [Clonopin] ng/mL X 3.17 = clonazepam [Clonopin] nmol/L clonidine [Catapres] ng/mL X 4.35 = clonidine [Catapres] nmol/L cocaine ng/mL X 3.3 = cocaine nmol/L codeine ng/mL X 3.34 = codeine nmol/L desipramine [Norpramin] ng/mL X 3.75 = desipramine [Norpramin] nmol/L diazepam [Valium] ng/mL X 0.0035 = diazepam [Valium] nmol/L digitoxin ng/mL X 1.31 = digitoxin nmol/L digoxin ng/mL X 1.28 = digoxin nmol/L disulfiram mcg/mL X 3.37 = disulfiram mcmol/L doxepin [Sinequan] ng/mL X 3.58 = doxepin [Sinequan] nmol/L ethanol mg/dL X 0.217 = ethanol mmol/L ethchlorvynol [Placidyl] mcg/mL X 6.92 = ethchlorvynol [Placidyl] mcmol/L ethosuximide [Zarontin] mcg/mL X 7.08 = ethosuximide [Zarontin] mcmol/L gentamicin mcg/mL X 2.09 = gentamicin mcmol/L glutethimide [Doriden] mcg/mL X 4.6 = glutethimide [Doriden] mcmol/L haloperidol [Haldol] ng/mL X 2.66 = haloperidol [Haldol] nmol/L hydromorphone [Dilaudid] ng/mL X 4.85 = hydromorphone [Dilaudid] nmol/L ibuprofen mcg/mL X 4.85 = ibuprofen mcmol/L imipramine [Tofranil] ng/mL X 3.57 = imipramine [Tofranil] nmol/L isoniazid mcg/mL X 7.29 = isoniazid mcmol/L kanamycin [Kantrex] mcg/mL X 2.06 = kanamycin [Kantrex] mcmol/L lidocaine [Xylocaine] mcg/mL X 4.27 = lidocaine [Xylocaine] mcmol/L lithium mmol/L X 1 = lithium mEq/L lorazepam ng/mL X 3.11 = lorazepam nmol/L LSD mcg/mL X 3.09 = LSD mcmol/L meperidine [Demerol] ng/mL X 4.04 = meperidine [Demerol] nmol/L meprobamate mg/L X 4.58 = meprobamate mcmol/L methadone ng/mL X 0.00323 = methadone mcmol/L methaqualone [Quaalude] mcg/mL X 4 = methaqualone [Quaalude] mcmol/L methotrexate ng/mL X 2.2 = methotrexate nmol/L methsuximide mcg/mL X 5.29 = methsuximide mcmol/L methyldopa [Aldomet] mcg/mL X 4.73 = methyldopa [Aldomet] mcmol/L morphine ng/mL X 0.0035 = morphine mcmol/L nortriptyline ng/mL X 3.8 = nortriptyline nmol/L oxazepam mcg/mL X 3.49 = oxazepam mcmol/L oxycodone [Percodan] ng/mL X 3.17 = oxycodone [Percodan] nmol/L paraldehyde mcg/mL X 7.57 = paraldehyde mcmol/L pentobarbital [Nembutal] mcg/mL X 4.42 = pentobarbital [Nembutal] mcmol/L pentobarbital [Nembutal] mcg/mL X 4.42 = pentobarbital [Nembutal] mcmol/L phenacetin mcg/mL X 5.58 = phenacetin mcmol/L phenobarbital [Luminal] mcg/mL X 4.31 = phenobarbital [Luminal] mcmol/L phenylbutazone [Butazolidin] mcg/mL X 3.08 = phenylbutazone [Butazolidin] mcmol/L phenytoin [Dilantin] mcg/mL X 3.96 = phenytoin [Dilantin] mcmol/L primidone mcg/mL X 4.58 = primidone mcmol/L procainamide [Pronestyl] mcg/mL X 4.23 = procainamide [Pronestyl] mcmol/L procaine [Novocaine] mcg/mL X 4.23 = procaine [Novocaine] mcmol/L propoxyphene [Darvon] mcg/mL X 3.07 = propoxyphene [Darvon] mcmol/L propranolol ng/mL X 3.86 = propranolol nmol/L quinidine mcg/mL X 3.08 = quinidine mcmol/L quinine mcg/mL X 3.08 = quinine mcmol/L salicylic acid mcg/mL X 7.24 = salicylic acid mcmol/L secobarbital [Seconal] mcg/mL X 4.2 = secobarbital [Seconal] mcmol/L theophylline mcg/mL X 5.55 = theophylline mcmol/L tobramycin mcg/mL X 2.14 = tobramycin mcmol/L valproic acid mcg/mL X 6.93 = valproic acid mcmol/L vancomycin mg/L X 1 = vancomycin mcg/mL"
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Young DS. Implementation of SI Units for Clinical Laboratory Data. Ann Int Med. 1987; 106:114.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "[PubMed 3789557]",
+        "pubmed_id": "3789557",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3789557/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 257117 v19.2]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "SI Unit Conversions- Drugs.pdf",
+      "source_sha256": "c3eb7ad31eeaa0b5c54d6dd880dfc29e3523f7679716649a2ad59a8e6fd3fbc7",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "SI Unit Conversions: Drugs",
+        "form_name": "SI_drugs",
+        "filename_title": "SI Unit Conversions- Drugs",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('SI Unit Conversions: Drugs')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (siunitconversionsdrugs)",
+          "title_vs_form": "differs (siunitconversionsdrugs vs sidrugs) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf151",
+      "title": "SI Unit Conversions: Drugs",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "inputs_from_printed_form_only",
+        "severity": "medium",
+        "detail": "3 field(s) recovered from the printed form; the calculation itself is not in the PDF"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 7,
+    "checks_total": 7,
+    "missing": []
+  }
+}

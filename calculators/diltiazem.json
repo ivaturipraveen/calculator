@@ -1,0 +1,191 @@
+{
+  "schema_version": "1.0",
+  "slug": "diltiazem",
+  "title": "Diltiazem",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "titration_table",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "dose",
+      "label": "Dose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/hr",
+      "units": null,
+      "constraints": {
+        "min": 5.0,
+        "max": 15.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "dose",
+        "id_const": "ID_DOSE"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Dose must be between 5 and 15."
+      ]
+    },
+    {
+      "key": "concentration",
+      "label": "Concentration",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "concentration",
+        "id_const": "ID_CONCENTRATION"
+      },
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "250mg_per_550mL",
+          "value": 0.45454545454545453,
+          "code": "250mg_per_550mL"
+        },
+        {
+          "label": "250mg_per_300mL",
+          "value": 0.8333333333333334,
+          "code": "250mg_per_300mL"
+        }
+      ],
+      "options_source": "pdf_script_comparisons+code_map"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "rate",
+        "expr": "dose / concentration"
+      },
+      {
+        "key": "rate_v2",
+        "expr": "round(rate, 1)"
+      },
+      {
+        "key": "value",
+        "expr": "dose / concentration",
+        "note": "per-row formula"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "rate",
+        "label": "Infuse Rate",
+        "expr": "rate_v2",
+        "decimals": null,
+        "base_unit": "mL/hr",
+        "kind": "number",
+        "label_source": "printed form (qualified name)",
+        "unit_source": "formula_prose"
+      }
+    ],
+    "row_variable": "dose"
+  },
+  "scoring": null,
+  "tables": {
+    "dose_ladder": {
+      "name": "TABLE_VALUES_COL_1",
+      "values": [
+        5.0,
+        6.0,
+        7.0,
+        8.0,
+        9.0,
+        10.0,
+        11.0,
+        12.0,
+        13.0,
+        14.0,
+        15.0
+      ],
+      "count": 11,
+      "step": 1.0,
+      "truncated_in_pdf": true
+    }
+  },
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": "Infuse Rate:\nInfuse Rate = Dose / Concentration\n• Infuse Rate is calculated in mL/hr\n• Dose is input in mg/hr\n• Concentration is input in mg/mL",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 1
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Diltiazem.pdf",
+      "source_sha256": "87f63893725804a277ff561ed9f36abab04e8e5390c9197ce5a603ba9a720bb3",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Diltiazem",
+        "form_name": null,
+        "filename_title": "Diltiazem",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Diltiazem')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (diltiazem)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf69",
+      "title": "Diltiazem",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "dose_ladder_truncated",
+        "severity": "high",
+        "detail": "the printed dose array is cut off after 11 values (last 15.0, step 1.0); confirm the full ladder before publishing"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 84.6,
+    "checks_passed": 11,
+    "checks_total": 13,
+    "missing": [
+      "notes",
+      "unit options on every field"
+    ]
+  }
+}

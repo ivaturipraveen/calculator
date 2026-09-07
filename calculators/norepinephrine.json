@@ -1,0 +1,241 @@
+{
+  "schema_version": "1.0",
+  "slug": "norepinephrine",
+  "title": "Norepinephrine",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "titration_table",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "drug_amount",
+      "label": "Drug Amount",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg",
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "drugAmount",
+        "id_const": "ID_AMOUNT"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose"
+    },
+    {
+      "key": "dose",
+      "label": "Dose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mcg/min",
+      "units": null,
+      "constraints": {
+        "min": 0.5,
+        "max": 60.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "dose",
+        "id_const": "ID_DOSE"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Dose must be between 0.5 and 60."
+      ]
+    },
+    {
+      "key": "infusate_volume",
+      "label": "Infusate Volume",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "Infuse Rate",
+      "units": [
+        {
+          "code": "Infuse Rate",
+          "label": "Infuse Rate",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 0.0,
+        "exclusive_min": true
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "infusateVolume",
+        "id_const": "ID_VOLUME"
+      },
+      "dimension": null,
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "concentration",
+        "expr": "drug_amount * 1000 / infusate_volume"
+      },
+      {
+        "key": "rate",
+        "expr": "dose / concentration * 60"
+      },
+      {
+        "key": "rate_v2",
+        "expr": "round(rate, 1)"
+      },
+      {
+        "key": "value",
+        "expr": "dose / concentration * 60",
+        "note": "per-row formula"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "infuse_rate",
+        "label": "Infuse Rate",
+        "expr": "rate_v2",
+        "decimals": null,
+        "base_unit": "mL/hr",
+        "kind": "number",
+        "label_source": "printed form",
+        "unit_source": "formula_prose"
+      }
+    ],
+    "row_variable": "dose"
+  },
+  "scoring": null,
+  "tables": {
+    "dose_ladder": {
+      "name": "TABLE_VALUES_COL_1",
+      "values": [
+        0.5,
+        1.5,
+        2.5,
+        3.5,
+        4.5,
+        5.5,
+        6.5,
+        7.5,
+        8.5,
+        9.5,
+        10.5,
+        11.5,
+        12.5,
+        13.5,
+        14.5,
+        15.5,
+        16.5,
+        17.5,
+        18.5,
+        19.5,
+        20.5,
+        21.5,
+        22.5,
+        23.5,
+        24.5,
+        25.5,
+        26.5,
+        27.5,
+        28.5,
+        29.5,
+        30.5,
+        31.5,
+        32.5
+      ],
+      "count": 33,
+      "step": 1.0,
+      "truncated_in_pdf": true
+    }
+  },
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": "Infuse Rate:\nInfuse Rate = [(Dose * 60) / 1000] / (Drug Amount / Infusate Volume)\n• Infuse Rate is calculated in mL/hr\n• Dose is input in mcg/min\n• Drug Amount is input in mg\n• Infusate Volume is input in mL",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again.",
+    "stated_limits": [
+      {
+        "name": "Concentration",
+        "applies_to": "concentration",
+        "min": 4.0,
+        "unit": "mcg/mL",
+        "max": 64.0
+      }
+    ],
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 1
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Norepinephrine.pdf",
+      "source_sha256": "b7f1c1311b123a86ed944fcf6df1e64141c71f15c4681bbe124418d059a3189e",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Norepinephrine",
+        "form_name": null,
+        "filename_title": "Norepinephrine",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Norepinephrine')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (norepinephrine)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf127",
+      "title": "Norepinephrine",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "dose_ladder_truncated",
+        "severity": "high",
+        "detail": "the printed dose array is cut off after 33 values (last 32.5, step 1.0); confirm the full ladder before publishing"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 84.6,
+    "checks_passed": 11,
+    "checks_total": 13,
+    "missing": [
+      "notes",
+      "unit options on every field"
+    ]
+  }
+}

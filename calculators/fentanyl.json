@@ -1,0 +1,369 @@
+{
+  "schema_version": "1.0",
+  "slug": "fentanyl",
+  "title": "FentaNYL",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "titration_table",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "weight",
+        "id_const": "ID_WEIGHT"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "display_unit": "kg",
+      "dimension": "mass",
+      "units_source": "corpus unit registry"
+    },
+    {
+      "key": "bolus_option",
+      "label": "Bolus Option",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "bolusOption",
+        "id_const": "ID_BOLUS_OPTION"
+      },
+      "options": [
+        {
+          "label": "yes",
+          "value": "yes",
+          "source": "script comparison"
+        },
+        {
+          "label": "No",
+          "value": "No",
+          "source": "binary partner"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "bolus_dose",
+      "label": "Bolus Dose",
+      "widget": "quantity",
+      "required": false,
+      "default": null,
+      "base_unit": "mcg/kg",
+      "units": null,
+      "constraints": {
+        "min": 1.0,
+        "max": 5.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "bolusDose",
+        "id_const": "ID_BOLUS_DOSE"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "required_when": {
+        "field": "bolus_option",
+        "equals": [
+          "yes"
+        ]
+      }
+    },
+    {
+      "key": "infusion_dose",
+      "label": "Infusion Dose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mcg/kg/hour",
+      "units": null,
+      "constraints": {
+        "min": 0.5,
+        "max": 20.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "infusionDose",
+        "id_const": "ID_INFUSION_DOSE"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Infusion Dose must be between 0.5 and 20."
+      ]
+    },
+    {
+      "key": "concentration",
+      "label": "Concentration",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "Infusion Rate",
+      "units": [
+        {
+          "code": "Infusion Rate",
+          "label": "Infusion Rate",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 2.0,
+        "max": 50.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "concentration",
+        "id_const": "ID_CONCENTRATION"
+      },
+      "dimension": null,
+      "label_source": "printed form",
+      "options": null,
+      "accepts_sentinel": [
+        "other"
+      ]
+    },
+    {
+      "key": "drug_amount",
+      "label": "Drug Amount",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mcg",
+      "units": null,
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "drugAmount",
+        "id_const": "ID_AMOUNT"
+      },
+      "unit_source": "formula_prose"
+    },
+    {
+      "key": "infusate_volume",
+      "label": "Infusate Volume",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mL",
+      "units": null,
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "infusateVolume",
+        "id_const": "ID_IFUSATE_VOLUME"
+      },
+      "unit_source": "formula_prose"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "concentration_calc_v2",
+        "expr": "(drug_amount / infusate_volume) if (concentration == 'other') else ((concentration))"
+      },
+      {
+        "key": "rate_v2",
+        "expr": "((infusion_dose * weight) / ((drug_amount / infusate_volume))) if (concentration == 'other') else ((infusion_dose * weight) /((concentration)))"
+      },
+      {
+        "key": "rate_v3",
+        "expr": "round(rate_v2, 2)"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "bolus_dose_output_inputm_l",
+        "label": "Bolus Dose (mL)",
+        "expr": "((round(((weight * bolus_dose)/concentration_calc_v2),2))) if ((bolus_option=='yes')) else (0)",
+        "decimals": null,
+        "base_unit": "mL",
+        "kind": "text",
+        "unit_source": "formula_prose"
+      },
+      {
+        "key": "infuse_rate",
+        "label": "Infusion Rate",
+        "expr": "rate_v3",
+        "decimals": null,
+        "base_unit": "mL/hour",
+        "kind": "number",
+        "label_source": "printed form (position)",
+        "unit_source": "formula_prose"
+      }
+    ],
+    "row_variable": "dose"
+  },
+  "scoring": null,
+  "tables": {
+    "dose_ladder": {
+      "name": "TABLE_VALUES_COL_1",
+      "values": [
+        0.5,
+        1.0,
+        1.5,
+        2.0,
+        2.5,
+        3.0,
+        3.5,
+        4.0,
+        4.5,
+        5.0,
+        5.5,
+        6.0,
+        6.5,
+        7.0,
+        7.5,
+        8.0,
+        8.5,
+        9.0,
+        9.5,
+        10.0,
+        10.5,
+        11.0,
+        11.5,
+        12.0,
+        12.5,
+        13.0,
+        13.5,
+        14.0,
+        14.5,
+        15.0,
+        15.5,
+        16.0,
+        16.5,
+        17.0,
+        17.5,
+        18.0,
+        18.5,
+        19.0,
+        19.5,
+        20.0
+      ],
+      "count": 40,
+      "step": 0.5,
+      "truncated_in_pdf": true
+    }
+  },
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": "Bolus Dose:\nWhen Bolus Dose = “Yes”:\nBolus Dose (mL) = (Weight * Bolus Dose) / Concentration\n• Bolus Dose (mL) is calculated in mL\n• Weight is input in kg\n• Bolus Dose is input in mcg/kg\n• Concentration is input in mcg/mL\nInfusion Rate:\nIf Concentration = anything except “Other”:\nIf Concentration = anything except “Other”:\nInfusion Rate = (Infusion Dose * Weight) / Concentration\n• Infusion Rate is calculated in mL/hour\n• Infusion Dose is input in mcg/kg/hour\n• Weight is input in kg\n• Concentration is input in mcg/mL\nIf Concentration = “Other”:\nInfusion Rate = (Infusion Dose * Weight) / (Drug Amount / Infusate Volume)\n• Infusion Rate is calculated in mL/hour\n• Infusion Dose is input in mcg/kg/hour\n• Weight is input in kg\n• Drug Amount is input in mcg\n• Infusate Volume is input in mL",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 1
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "FentaNYL.pdf",
+      "source_sha256": "9f29c6382a7cb77dc1906c8cb951e39c1be6486b29bd4e8fb68a153672a86867",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "FentaNYL",
+        "form_name": null,
+        "filename_title": "FentaNYL",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('FentaNYL')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (fentanyl)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf85",
+      "title": "FentaNYL",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "dose_ladder_truncated",
+        "severity": "high",
+        "detail": "the printed dose array is cut off after 40 values (last 20.0, step 0.5); confirm the full ladder before publishing"
+      },
+      {
+        "kind": "dead_steps_pruned",
+        "severity": "low",
+        "detail": "unreachable and unused: ['value']"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 84.6,
+    "checks_passed": 11,
+    "checks_total": 13,
+    "missing": [
+      "notes",
+      "unit options on every field"
+    ]
+  }
+}

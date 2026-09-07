@@ -1,0 +1,237 @@
+{
+  "schema_version": "1.0",
+  "slug": "acetaminophen-toxicity-assessment",
+  "title": "Acetaminophen Toxicity Assessment",
+  "subtitle": null,
+  "category": "Toxicology / Assessment Tool",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "time_after_ingestion",
+      "js_name": "Time_After_Ingestion",
+      "label": "Time After Ingestion",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "Hours",
+      "display_unit": "Hours",
+      "units": [
+        {
+          "code": "Days",
+          "label": "Days",
+          "factor": 24,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "Hours",
+          "label": "Hours",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 4.0,
+        "max": 24.0
+      },
+      "messages": null,
+      "dimension": "time",
+      "label_source": "printed form"
+    },
+    {
+      "key": "acetaminophen_level",
+      "js_name": "Acetaminophen_Level",
+      "label": "Acetaminophen Level",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mcg/mL",
+      "display_unit": "mcg/mL",
+      "units": [
+        {
+          "code": "mcg/mL",
+          "label": "mcg/mL",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "mcmol/L",
+          "label": "mcmol/L",
+          "factor": 0.1510574018126888,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 10,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "creatinine",
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "toxlevel",
+        "js_name": "ToxLevel",
+        "label": "ToxLevel",
+        "expr": "exp(5.703782 - ((time_after_ingestion - 4) * 0.175148))",
+        "base_unit": null,
+        "units": null
+      },
+      {
+        "key": "rxlevel",
+        "js_name": "RxLevel",
+        "label": "RxLevel",
+        "expr": "toxlevel - (0.5 * toxlevel)",
+        "base_unit": null,
+        "units": null
+      },
+      {
+        "key": "toxlevelsi",
+        "js_name": "ToxLevelSI",
+        "label": "ToxLevelSI",
+        "expr": "toxlevel * 6.62",
+        "base_unit": null,
+        "units": null
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "ToxLevel = fixDP(e(5.703782-((Time_After_Ingestion-4)*0.175148)),1)\nRxLevel = fixDP(ToxLevel - (0.5 * ToxLevel),1)",
+    "notes": [
+      "In this calculator, mcg is the abbreviation for micrograms.",
+      "This calculator is based on the 2023 revised Rumack and Matthew Nomogram.1 Treatment threshold levels are calculated to be 50% lower than the high-risk drug level.",
+      "Drug levels done before the 4 hour point may not represent the true peak of absorption.",
+      "The revised Rumack-Matthew nomogram may be used following an acute acetaminophen ingestion (ie, an ingestion period of ≤24 hours regardless of the ingestion pattern) when the history is reliable and accurate. Use of this nomogram is not appropriate for acute ingestions when the history is unknown or unreliable, or following repeated supratherapeutic ingestions.",
+      "In this calculation, the revised Rumack nomogram is represented by the following equations:",
+      "Toxic Level = e(5.703782 - ((Time_After_Ingestion - 4) * 0.175148))",
+      "Treatment Level = Toxic Level - (0.5 * Toxic Level)"
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Dart RC, Mullins ME, Matoushek T, et al. Management of Acetaminophen Poisoning in the US and Canada: A Consensus Statement. JAMA Netw Open. 2023 Aug 1;6(8):e2327739.[PubMed 37552484]",
+        "pubmed_id": "37552484",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/37552484/"
+      },
+      {
+        "text": "Rumack BH, Matthew H. Acetaminophen poisoning and toxicity. Pediatrics. 1975 Jun;55(6):871-6.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "[PubMed 1134886]",
+        "pubmed_id": "1134886",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/1134886/"
+      },
+      {
+        "text": "White SJ, Rumack BH. The acetaminophen toxicity equations: \"solutions\" for acetaminophen toxicity based on the Rumack-Matthew nomogram. Ann Emerg Med. 2005 May;45(5):563-4.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "[PubMed 15855961]",
+        "pubmed_id": "15855961",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/15855961/"
+      },
+      {
+        "text": "Buckley NA, Whyte IM, O'Connell DL, et al. Activated charcoal reduces the need for N- acetylcysteine treatment after acetaminophen (paracetamol) overdose. J Toxicol Clin Toxicol. 1999;37(6):753-7. [PubMed 10584587]",
+        "pubmed_id": "10584587",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10584587/"
+      },
+      {
+        "text": "1999;37(6):753-7. [PubMed 10584587]",
+        "pubmed_id": "10584587",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10584587/"
+      },
+      {
+        "text": "Vale JA, Proudfoot AT. Paracetamol (acetaminophen) poisoning. Lancet. 1995 Aug 26;346(8974):547-52. Review. [PubMed 7658783]",
+        "pubmed_id": "7658783",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/7658783/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2023 Foundation Internet Services, LLC [Build 271550 v23.3]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Acetaminophen Toxicity Assessment.pdf",
+      "source_sha256": "cb102e31b74b910671b60d545590d26bd43bc5aa8749e11e7f19273bea8befd0",
+      "extractor": "pdf",
+      "form_name": "AcetaminophenTox2023",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Acetaminophen Toxicity Assessment",
+        "form_name": "AcetaminophenTox2023",
+        "filename_title": "Acetaminophen Toxicity Assessment",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Acetaminophen Toxicity Assessment')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (acetaminophentoxicityassessment)",
+          "title_vs_form": "differs (acetaminophentoxicityassessment vs acetaminophentox2023) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "acetamintox",
+      "title": "Acetaminophen Toxicity Assessment",
+      "matched": true
+    },
+    "unit_registry_stems": [
+      "ACETAMINTOX_LEVEL",
+      "ACETAMINTOX_TIME"
+    ],
+    "conflicts": [
+      {
+        "kind": "dead_steps_pruned",
+        "severity": "low",
+        "detail": "unreachable and unused: ['toxleveltxt', 'resultinterp1', 'resultinterp2']"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 93.8,
+    "checks_passed": 15,
+    "checks_total": 16,
+    "missing": [
+      "field help text"
+    ]
+  }
+}

@@ -1,0 +1,489 @@
+{
+  "schema_version": "1.0",
+  "slug": "a-a-gradient",
+  "title": "A-a Gradient",
+  "subtitle": null,
+  "category": "Pulmonology",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "age",
+      "js_name": "Age",
+      "label": "Age",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "yr",
+      "display_unit": "yr",
+      "units": [
+        {
+          "code": "mo",
+          "label": "mo",
+          "factor": 0.08333333333333333,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "yr",
+          "label": "yr",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 0.0,
+        "max": 120.0
+      },
+      "messages": {
+        "min": "The minimum value for Age is 0 yr.",
+        "max": "The maximum value for Age is 120 yr."
+      },
+      "dimension": "time_age",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Age is 0 yr. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Age is 120 yr. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "patient_temp",
+      "js_name": "Patient_Temp",
+      "label": "Patient Temp",
+      "widget": "quantity",
+      "required": true,
+      "default": 37.0,
+      "base_unit": "degC",
+      "display_unit": "degC",
+      "units": [
+        {
+          "code": "Degrees F",
+          "label": "Degrees F",
+          "factor": 0.5555555555555556,
+          "offset": -17.77777777777778,
+          "resolved": true,
+          "factor_source": "canonical"
+        },
+        {
+          "code": "degC",
+          "label": "degC",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "factor_source": "canonical"
+        }
+      ],
+      "constraints": {
+        "min": 0.0,
+        "max": 50.0
+      },
+      "messages": {
+        "min": "The minimum value for Patient Temp is 0 degC.",
+        "max": "The maximum value for Patient Temp is 50 degC."
+      },
+      "dimension": "temperature",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Patient Temp is 0 degC. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Patient Temp is 50 degC. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "elevation",
+      "js_name": "Elevation",
+      "label": "Elevation",
+      "widget": "quantity",
+      "required": true,
+      "default": 0.0,
+      "base_unit": "meters",
+      "display_unit": "meters",
+      "units": [
+        {
+          "code": "feet",
+          "label": "feet",
+          "factor": 0.3048,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "kilometre",
+          "label": "kilometre",
+          "factor": 1000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "meters",
+          "label": "meters",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "mile",
+          "label": "mile",
+          "factor": 1609.344,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 0.0,
+        "max": 10000.0
+      },
+      "messages": {
+        "min": "The minimum value for Elevation is 0 meters.",
+        "max": "The maximum value for Elevation is 10000 meters."
+      },
+      "dimension": "length",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Elevation is 0 meters. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Elevation is 10000 meters. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "percent_inspired_o2",
+      "js_name": "Percent_Inspired_O2",
+      "label": "Percent Inspired O2",
+      "widget": "quantity",
+      "required": true,
+      "default": 21.0,
+      "base_unit": "%",
+      "display_unit": "%",
+      "units": [
+        {
+          "code": "%",
+          "label": "%",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "fractionO2",
+          "label": "fractionO2",
+          "factor": 100.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 1.0,
+        "max": 100.0
+      },
+      "messages": {
+        "min": "The minimum value for Percent Inspired O2 is 1 %.",
+        "max": "The maximum value for Percent Inspired O2 is 100 %."
+      },
+      "dimension": "fraction",
+      "units_rebased_to": "%",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Percent Inspired O2 is 1 %. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Percent Inspired O2 is 100 %. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "p_co2",
+      "js_name": "p_CO2",
+      "label": "p CO2",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mmHg",
+      "display_unit": "mmHg",
+      "units": [
+        {
+          "code": "Pascal",
+          "label": "Pascal",
+          "factor": 0.00750062,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "cmH2O",
+          "label": "cmH2O",
+          "factor": 0.735559,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "mmHg",
+          "label": "mmHg",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "torr",
+          "label": "torr",
+          "factor": 0.999999857533699,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "pressure",
+      "label_source": "printed form"
+    },
+    {
+      "key": "resp_quot",
+      "js_name": "Resp_Quot",
+      "label": "Resp Quot",
+      "widget": "quantity",
+      "required": true,
+      "default": 0.8,
+      "base_unit": "ratio",
+      "display_unit": "ratio",
+      "units": [
+        {
+          "code": "percent",
+          "label": "percent",
+          "factor": 0.01,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "ratio",
+          "label": "ratio",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 0.01,
+        "max": 1.0
+      },
+      "messages": {
+        "min": "The minimum value for Resp Quot is 0.01 ratio."
+      },
+      "dimension": "ratio",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Resp Quot is 0.01 ratio. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Resp Quot is 1 ratio. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "p_ao2",
+      "js_name": "p_aO2",
+      "label": "p aO2",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mmHg",
+      "display_unit": "mmHg",
+      "units": [
+        {
+          "code": "Pascal",
+          "label": "Pascal",
+          "factor": 0.00750062,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "cmH2O",
+          "label": "cmH2O",
+          "factor": 0.735559,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "mmHg",
+          "label": "mmHg",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "torr",
+          "label": "torr",
+          "factor": 0.999999857533699,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "pressure",
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "p_atm",
+        "js_name": "p_Atm",
+        "expr": "760 * exp(elevation / -7000)"
+      },
+      {
+        "key": "p_h2o",
+        "js_name": "p_H2O",
+        "expr": "47 * exp((patient_temp - 37) / 18.4)"
+      },
+      {
+        "key": "fio2",
+        "js_name": "FIO2",
+        "expr": "percent_inspired_o2 / 100"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "expected_aag",
+        "js_name": "Expected_AaG",
+        "label": "Expected AaG",
+        "expr": "2.5 + (0.21 * age)",
+        "base_unit": "mmHg",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "measured_aag",
+        "js_name": "Measured_AaG",
+        "label": "Measured AaG",
+        "expr": "(fio2 * (p_atm - p_h2o)) - (p_co2 / resp_quot) + (p_co2 * fio2 * (1 - resp_quot) / resp_quot) - p_ao2",
+        "base_unit": "mmHg",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "p_Atm = 760 * e(Elevation/-7000)\np_H2O = 47 * e((Patient_Temp-37)/18.4)\nFIO2 = Percent_Inspired_O2 / 100\nExpected_AaG = 2.5 + (0.21 * Age)\nMeasured_AaG = (FIO2 * (p_Atm - p_H2O)) - (p_CO2 / Resp_Quot) + (p_CO2 * FIO2 * (1 - Resp_Quot) / Resp_Quot) - p_aO2",
+    "notes": [
+      "High A-a gradients are associated with oxygen transfer / gas exchange problems. These are usually associated with alveolar membrane diseases, interstitial diseases or V/Q mismatch.",
+      "Hypoxemia in the face of a normal A-a gradient implies hypoventilation with displacement of alveolar O2 by CO2 or other substance.",
+      "The FIO2 (fraction of inspired oxygen) is equal to the Percent Inspired O2 / 100.",
+      "In this calculator, pATM is estimated by elevation above sea level using this formula: pAtm = 760 * eTo(Elevation / -7000) pH2O is dependent on body temperature and calculated with the following formula: pH2O = 47 * eTo((Patient Temp - 37) / 18.4)",
+      "The equation for expected A-a gradient assumes the patient is breathing room air; therefore, it is less accurate at higher percentages of inspired oxygen."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "West JB. Respiratory physiology: the essentials. 7th edition, Philadelphia, Lippincott William & Wilkins 2005, p.170.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Wilkins 2005, p.170.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Kanber GJ, King FW, Eshchar YR, et al. The alveolar-arterial oxygen gradient in young and elderly men during air and oxygen breathing. Am Rev Respir Dis. 1968 Mar;97(3):376-81.[PubMed 5638492]",
+        "pubmed_id": "5638492",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/5638492/"
+      },
+      {
+        "text": "Mellemgaard K. The alveolar-arterial oxygen difference: its size and components in normal man.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Acta Physiol Scand. 1966 May;67(1):10-20. [PubMed 5963295]",
+        "pubmed_id": "5963295",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/5963295/"
+      },
+      {
+        "text": "Cole RB, Bishop JM. Variation in alveolar-arterial O2 tension difference at high levels of alveolar O2 tension. J Appl Physiol. 1967 Apr;22(4):685-93. [PubMed 6023181]",
+        "pubmed_id": "6023181",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/6023181/"
+      },
+      {
+        "text": "Lilienthal JL, Riley RL, et al. An experimental analysis in man of the oxygen pressure gradient from alveolar air to arterial blood during rest and exercise at sea level and at altitude. Am J Physiol. 1946 Sep;147:199-216. [PubMed 21000737]",
+        "pubmed_id": "21000737",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21000737/"
+      },
+      {
+        "text": "Le Huu Thien B,Huynh Quang D. Equation des gaz alveolaires et difference alveolo-arterielle en oxygene. J Fran Viet Pneu. 2014; 05(14): 4-10.",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER. Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 5
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "A-a Gradient.pdf",
+      "source_sha256": "1393c23376ab59892daa1f4248b3239625c8bc8f5b618354cf8d1b5569778249",
+      "extractor": "pdf",
+      "form_name": "AAGradient",
+      "identity": {
+        "doc_id": "70017",
+        "title": "A-a Gradient",
+        "form_name": "AAGradient",
+        "filename_title": "A-a Gradient",
+        "confidence": 1.0,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('A-a Gradient')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (aagradient)",
+          "title_vs_form": "MATCH (aagradient)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf2",
+      "title": "A-a Gradient",
+      "matched": true
+    },
+    "unit_registry_stems": [
+      "PDF2_AGE",
+      "PDF2_ELEV",
+      "PDF2_FIO2",
+      "PDF2_PRESSURE",
+      "PDF2_RQ",
+      "PDF2_TEMP"
+    ],
+    "conflicts": [
+      {
+        "kind": "base_unit_disagreement",
+        "severity": "medium",
+        "field": "percent_inspired_o2",
+        "pdf": "%",
+        "html": "fractionO2"
+      },
+      {
+        "kind": "base_unit_disagreement",
+        "severity": "medium",
+        "field": "resp_quot",
+        "pdf": "ratio",
+        "html": "fraction"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 16,
+    "checks_total": 16,
+    "missing": []
+  }
+}

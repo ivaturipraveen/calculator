@@ -1,0 +1,202 @@
+{
+  "schema_version": "1.0",
+  "slug": "single-dose-volume-conversion",
+  "title": "Single Dose-Volume Conversion",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "dose",
+      "label": "Dose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "g, mcg, mEq, mg, mmol, or un",
+      "units": null,
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "dose",
+        "id_const": "ID_DOSE"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose"
+    },
+    {
+      "key": "drug_amount",
+      "label": "Drug Amount",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "g, mcg, mEq, mg, mmol, or un",
+      "units": null,
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "drugAmount",
+        "id_const": "ID_AMOUNT"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose"
+    },
+    {
+      "key": "per",
+      "label": "Per",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mL",
+      "units": null,
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "per",
+        "id_const": "ID_PER"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose"
+    },
+    {
+      "key": "dose_unit_list",
+      "label": "Dose Unit",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "doseUnitList",
+        "id_const": "ID_DOSE_UNITS"
+      }
+    },
+    {
+      "key": "drug_amount_unit_list",
+      "label": "Drug Amount Unit",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "drugAmountUnitList",
+        "id_const": "ID_AMOUNT_UNITS"
+      }
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "output",
+        "expr": "dose * (per / drug_amount)"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "dose_in_m_l",
+        "label": "Dose in mL",
+        "expr": "output",
+        "decimals": 3,
+        "base_unit": "mL",
+        "kind": "number",
+        "label_source": "printed form",
+        "unit_source": "formula_prose"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 3,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Dose in mL = Dose / (Drug Amount / Per)\n• Dose in mL is calculated in mL\n• Dose is input in g, mcg, mEq, mg, mmol, or units\no Input unit must match input unit of Drug Amount\n• Drug Amount is input in g, mcg, mEq, mg, mmol, or units\no Input unit must match input unit of Dose\n• Per is input in mL",
+    "notes": [],
+    "conditional_notes": [
+      "\nWarning: Calculator does not make adjustments for maximum doses - please check all\ncalculations with dosing in monograph<\\/p>\nNote: Doses may need to be rounded to accommodate available dosage forms<\\/p>"
+    ],
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again. This calculation allows for the calculation of the volume of drug required to deliver a specified single dose. The calculator does not make adjustments for maximum doses - please check all calculations with dosing in monograph. In addition, the calculator does not take into account available dosage forms - please refer to the individual drug monograph; it may be necessary to round results appropriately.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": [
+      "Error: Dosing unit does not match Drug Amount unit"
+    ],
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Single Dose-Volume Conversion.pdf",
+      "source_sha256": "1517d24315f4639d6b2b1baf0f56eeba8c83f7fa8a56a81ed4b02803e8eb704d",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Single Dose-Volume Conversion",
+        "form_name": null,
+        "filename_title": "Single Dose-Volume Conversion",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Single Dose-Volume Conversion')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (singledosevolumeconversion)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf154",
+      "title": "Single Dose-Volume Conversion",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 76.9,
+    "checks_passed": 10,
+    "checks_total": 13,
+    "missing": [
+      "notes",
+      "unit options on every field",
+      "field help text"
+    ]
+  }
+}

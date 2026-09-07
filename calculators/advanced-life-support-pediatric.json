@@ -1,0 +1,664 @@
+{
+  "schema_version": "1.0",
+  "slug": "advanced-life-support-pediatric",
+  "title": "Advanced Life Support: Pediatric",
+  "subtitle": null,
+  "category": "Emergency Medicine / Dosing Reference",
+  "renderer": "dose_table",
+  "engine": "dose_table",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "weight",
+      "label": "Weight",
+      "type": "select",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "options": [],
+      "label_source": "printed form",
+      "base_unit": "kg",
+      "unit_source": "formula_prose",
+      "help": [
+        "Weight must be a valid value."
+      ],
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "display_unit": "kg",
+      "dimension": "mass",
+      "units_source": "corpus unit registry"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": null,
+  "tables": {
+    "drugs": [
+      {
+        "name": "Adenosine",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 3,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": true,
+                "amt": 0.1,
+                "unit": "mg",
+                "max": 6,
+                "decimals": 2,
+                "note": "Rapid bolus over 1–2 seconds via the IV site closest to the heart, immediately followed by a rapid NS flush."
+              },
+              {
+                "phase": "Repeat",
+                "perKg": true,
+                "amt": 0.2,
+                "unit": "mg",
+                "max": 12,
+                "decimals": 2,
+                "note": "May repeat once if no response to the initial dose."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Amiodarone",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 50,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": true,
+                "amt": 5,
+                "unit": "mg",
+                "max": 300,
+                "decimals": 2,
+                "note": "Administer as an undiluted bolus during cardiac arrest, or infuse over 20–60 minutes for a perfusing rhythm; may repeat up to a total cumulative dose of 15 mg/kg/day."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Atropine",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 0.1,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": true,
+                "amt": 0.02,
+                "unit": "mg",
+                "max": 0.5,
+                "min": 0.1,
+                "decimals": 3,
+                "note": "Minimum single dose 0.1 mg (lower doses may cause paradoxical bradycardia); may repeat once."
+              }
+            ]
+          },
+          {
+            "label": "ETT",
+            "conc": 0.1,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": true,
+                "amt": [
+                  0.04,
+                  0.06
+                ],
+                "unit": "mg",
+                "max": 1.5,
+                "min": 0.1,
+                "decimals": 3,
+                "note": "ETT dose is higher than the IV dose to account for reduced absorption; minimum single dose 0.1 mg."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Calcium Chloride (10%)",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 100,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": true,
+                "amt": 20,
+                "unit": "mg",
+                "max": 2000,
+                "decimals": 2,
+                "note": "For hyperkalemia, hypocalcemia, or calcium channel blocker toxicity."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Calcium Gluconate (10%)",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 100,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": true,
+                "amt": [
+                  60,
+                  100
+                ],
+                "unit": "mg",
+                "max": 3000,
+                "decimals": 2,
+                "note": "For hyperkalemia, hypocalcemia, or calcium channel blocker toxicity."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Cardioversion (synchronized)",
+        "routes": [
+          {
+            "label": "Manual (weight-based)",
+            "energyOnly": true,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": true,
+                "amt": [
+                  0.5,
+                  1
+                ],
+                "unit": "J",
+                "max": 200,
+                "decimals": 1,
+                "note": "Sedate whenever possible; increase stepwise if unsuccessful."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Defibrillation",
+        "routes": [
+          {
+            "label": "Manual (weight-based)",
+            "energyOnly": true,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": true,
+                "amt": 2,
+                "unit": "J",
+                "max": 360,
+                "decimals": 1,
+                "note": "For VF/pulseless VT."
+              },
+              {
+                "phase": "Repeat",
+                "perKg": true,
+                "amt": 4,
+                "unit": "J",
+                "max": 360,
+                "decimals": 1,
+                "note": "May increase further on subsequent attempts, up to the device maximum."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Dextrose (25%)",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 0.25,
+            "concUnit": "g/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": true,
+                "amt": [
+                  0.5,
+                  1
+                ],
+                "unit": "g",
+                "max": 25,
+                "decimals": 2,
+                "note": "For hypoglycemia."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Dextrose (50%)",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 0.5,
+            "concUnit": "g/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": true,
+                "amt": [
+                  0.5,
+                  1
+                ],
+                "unit": "g",
+                "max": 25,
+                "decimals": 2,
+                "note": "For hypoglycemia; dilute 1:1 with NS/sterile water in infants and young children to reduce osmolality."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "EPINEPHrine (1:1,000)",
+        "routes": [
+          {
+            "label": "ETT",
+            "conc": 1,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": true,
+                "amt": 0.1,
+                "unit": "mg",
+                "max": 2.5,
+                "decimals": 3,
+                "note": "Flush with 5 mL NS, follow with 5 consecutive positive-pressure ventilations. ETT dose is 2–3 times the recommended IV dose."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "EPINEPHrine (1:10,000)",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 0.1,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": true,
+                "amt": 0.01,
+                "unit": "mg",
+                "max": 1,
+                "decimals": 3,
+                "note": "Flush with 5 mL NS, follow with 5 consecutive positive-pressure ventilations; may repeat every 3–5 minutes."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Lidocaine",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 10,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": true,
+                "amt": 1,
+                "unit": "mg",
+                "max": 150,
+                "decimals": 2,
+                "note": "Administer by rapid bolus."
+              }
+            ]
+          },
+          {
+            "label": "ETT",
+            "conc": 10,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": true,
+                "amt": [
+                  2,
+                  3
+                ],
+                "unit": "mg",
+                "max": 450,
+                "decimals": 2,
+                "note": "ETT dose is higher than the IV dose to account for reduced absorption."
+              }
+            ]
+          },
+          {
+            "label": "Infusion",
+            "conc": 4,
+            "concUnit": "mg/mL",
+            "concFactor": 1000,
+            "doses": [
+              {
+                "phase": "Infusion Rate",
+                "perKg": true,
+                "amt": [
+                  20,
+                  50
+                ],
+                "unit": "mcg",
+                "rate": true,
+                "max": 4000,
+                "decimals": 2,
+                "note": "Maintenance infusion following a bolus dose."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Magnesium Sulfate",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 500,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": true,
+                "amt": [
+                  25,
+                  50
+                ],
+                "unit": "mg",
+                "max": 2000,
+                "decimals": 2,
+                "note": "For torsade de pointes or suspected hypomagnesemia; dilute and infuse slowly if not in cardiac arrest."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Naloxone",
+        "routes": [
+          {
+            "label": "IV/IM/SubQ/IO",
+            "conc": 1,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": true,
+                "amt": 0.1,
+                "unit": "mg",
+                "max": 2,
+                "decimals": 2,
+                "note": "For reversal of opioid-induced respiratory depression."
+              }
+            ]
+          },
+          {
+            "label": "ETT",
+            "conc": 1,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": true,
+                "amt": [
+                  0.2,
+                  0.3
+                ],
+                "unit": "mg",
+                "max": 4,
+                "decimals": 2,
+                "note": "ETT dose is higher than the IV dose to account for reduced absorption."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Procainamide",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 500,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": true,
+                "amt": 15,
+                "unit": "mg",
+                "max": 1500,
+                "decimals": 2,
+                "note": "Infuse slowly (over 30–60 minutes); stop if hypotension develops or the QRS widens >50%."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Sodium Bicarbonate (4.2%)",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 0.5,
+            "concUnit": "mEq/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": true,
+                "amt": 1,
+                "unit": "mEq",
+                "max": 200,
+                "decimals": 2,
+                "note": "For known/suspected severe metabolic acidosis or hyperkalemia; not routinely recommended in cardiac arrest."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Sodium Bicarbonate (8.4%)",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 1,
+            "concUnit": "mEq/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": true,
+                "amt": 1,
+                "unit": "mEq",
+                "max": 200,
+                "decimals": 2,
+                "note": "For known/suspected severe metabolic acidosis or hyperkalemia; not routinely recommended in cardiac arrest."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": "In general, the formulas used to populate the table are:\nDose = Weight * Weight-Based Dose\n• Dose is calculated in units that correspond to the Weight-Based Dose (eg, mg, g,\nmg/minute)\n• Weight is input in kg\n• Weight-Based Dose units are drug-specific\nNote: A dosage range may be provided; each portion of the range is calculated using the\nabove formula. Some agents have fixed-dose recommendations which are not\naffected by the weight input by the user.\nVolume = Dose / Concentration\n• Volume is calculated in units that correspond to the Dose and Concentration\nWhen the dose is provided as a rate (eg, mcg/minute), the volume to be administered will\nalso be calculated as a rate according to the following formula:\nInfuse Rate = (Dose / Concentration) / Time\n• Infuse Rate is calculated in units that correspond to the Dose, Concentration,\nand Time of administration\nNote: A range of volumes or rates may be provided; each portion of the range is\nNote: A range of volumes or rates may be provided; each portion of the range is\ncalculated using the above formula(s).\nLength-Based Weight:\nLength-based weight is determined by using Centers for Disease Control and Prevention\n(CDC) or World Health Organization (WHO) growth chart data as appropriate based on\nthe inputted age.",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Grummer-Strawn LM, Reinold C, and Krebs NF, “Use of World Health Organization and CDC Growth Charts for Children Aged 0--59 Months in the United States,” MMWR, 2010, 59(rr-9):1-15.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "[PubMed 20829749]",
+        "pubmed_id": "20829749",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20829749/"
+      },
+      {
+        "text": "Centers for Disease Control and Prevention (CDC), “Body Mass Index for Age Tables, Children Ages 2-20 Years Selected Percentiles,” 2000, available at: http://www.cdc.gov/growthcharts/html_charts/bmiagerev.htm Centers for Disease Control and Prevention (CDC), “Weight for Stature Tables,” 2000, available at: http://www.cdc.gov/growthcharts/html_charts/wtstat.htm de Caen AR, Berg MD, Chameides L, et al. Part 12: Pediatric Advanced Life Support: 2015 American Heart Association guidelines update for cardiopulmonary resuscitation and emergency cardiovascular care. Circulation. 2015;132 (18 Suppl 2):S526-542.[PubMed 26473000]",
+        "pubmed_id": "26473000",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26473000/"
+      },
+      {
+        "text": "Field JM, Hazinski MF, Sayre MR, et al, \"Part 1: Executive Summary: 2010 American Heart Association Guidelines for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care,\" Circulation, 2010, 122 (Suppl 3):640-56.[PubMed 20956217]",
+        "pubmed_id": "20956217",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20956217/"
+      },
+      {
+        "text": "Hegenbarth MA and the Committee on Drugs, \"Preparing for Pediatric Emergencies: Drugs to Consider,\" Pediatrics, 2008, 121:433-43. [PubMed 18245435]",
+        "pubmed_id": "18245435",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/18245435/"
+      },
+      {
+        "text": "World Health Organization (WHO), “Data Table for Boys Weight-for-Length,” 2006, available at: http://www.cdc.gov/growthcharts/who/boys_weight_head_circumference.htm World Health Organization (WHO), “Data Table for Girls Weight-for-Length,” 2006, available at: http://www.cdc.gov/growthcharts/who/girls_weight_head_circumference.htm",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": null,
+    "stated_limits": [
+      {
+        "name": "Age",
+        "applies_to": null,
+        "max": 18.0
+      },
+      {
+        "name": "Weight",
+        "applies_to": null,
+        "min": 0.0,
+        "unit": "kg"
+      },
+      {
+        "name": "Length",
+        "applies_to": null,
+        "min": 45.0,
+        "unit": "cm",
+        "max": 214.0
+      }
+    ],
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 1
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Advanced Life Support- Pediatric.pdf",
+      "source_sha256": "bccb93af7024989687ce090f041029ad7a1f966ed8bef571c041d9625e2e9c72",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "3504222",
+        "title": "Advanced Life Support: Pediatric",
+        "form_name": null,
+        "filename_title": "Advanced Life Support- Pediatric",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Advanced Life Support: Pediatric')",
+          "doc_id": "present (3504222)",
+          "title_vs_filename": "MATCH (advancedlifesupportpediatric)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "als_pediatric",
+      "title": "Advanced Life Support: Pediatric",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "inputs_from_printed_form_only",
+        "severity": "medium",
+        "detail": "1 field(s) recovered from the printed form; the calculation itself is not in the PDF"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 5,
+    "checks_total": 5,
+    "missing": []
+  }
+}

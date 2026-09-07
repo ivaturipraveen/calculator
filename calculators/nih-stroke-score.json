@@ -1,0 +1,578 @@
+{
+  "schema_version": "1.0",
+  "slug": "nih-stroke-score",
+  "title": "NIH Stroke Score",
+  "subtitle": null,
+  "category": "Neurology / Scoring System",
+  "renderer": "score",
+  "engine": "score",
+  "status": "draft",
+  "version": 1,
+  "inputs": [],
+  "compute": {
+    "engine": "score",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": {
+    "groups": [
+      {
+        "key": "level of consciousness",
+        "label": "Level of Consciousness",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_0_0",
+            "label": "Alert",
+            "points": 0
+          },
+          {
+            "key": "opt_0_1",
+            "label": "Not alert, but arousable with minimal stimulation",
+            "points": 1
+          },
+          {
+            "key": "opt_0_2",
+            "label": "Not alert, requires repeated stimulation to attend",
+            "points": 2
+          },
+          {
+            "key": "opt_0_3",
+            "label": "Coma",
+            "points": 3
+          }
+        ]
+      },
+      {
+        "key": "patient knows month and own age",
+        "label": "Patient Knows Month and Own Age",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_1_0",
+            "label": "Answers both correctly",
+            "points": 0
+          },
+          {
+            "key": "opt_1_1",
+            "label": "Answers one correctly",
+            "points": 1
+          },
+          {
+            "key": "opt_1_2",
+            "label": "Both incorrect",
+            "points": 2
+          }
+        ]
+      },
+      {
+        "key": "patient opens and close eyes on command",
+        "label": "Patient Opens and Close Eyes on Command",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_2_0",
+            "label": "Obeys both correctly",
+            "points": 0
+          },
+          {
+            "key": "opt_2_1",
+            "label": "Obeys one correctly",
+            "points": 1
+          },
+          {
+            "key": "opt_2_2",
+            "label": "Both incorrect",
+            "points": 2
+          }
+        ]
+      },
+      {
+        "key": "best gaze only horizontal eye movement",
+        "label": "Best Gaze (only horizontal eye movement)",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_3_0",
+            "label": "Normal",
+            "points": 0
+          },
+          {
+            "key": "opt_3_1",
+            "label": "Partial gaze palsy",
+            "points": 1
+          },
+          {
+            "key": "opt_3_2",
+            "label": "Forced deviation",
+            "points": 2
+          }
+        ]
+      },
+      {
+        "key": "visual field testing",
+        "label": "Visual Field testing",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_4_0",
+            "label": "No visual field loss",
+            "points": 0
+          },
+          {
+            "key": "opt_4_1",
+            "label": "Partial hemianopia",
+            "points": 1
+          },
+          {
+            "key": "opt_4_2",
+            "label": "Complete hemianopia",
+            "points": 2
+          },
+          {
+            "key": "opt_4_3",
+            "label": "Bilateral hemianopia (blind including cortical blindness)",
+            "points": 3
+          }
+        ]
+      },
+      {
+        "key": "facial paresis ask patient to show teeth or raise eyebrows a",
+        "label": "Facial Paresis (Ask patient to show teeth or raise eyebrows and close eye)",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_5_0",
+            "label": "Normal symmetrical movement",
+            "points": 0
+          },
+          {
+            "key": "opt_5_1",
+            "label": "Minor paralysis",
+            "points": 1
+          },
+          {
+            "key": "opt_5_2",
+            "label": "Partial paralysis (total or near total paralysis of lower face)",
+            "points": 2
+          },
+          {
+            "key": "opt_5_3",
+            "label": "Complete paralysis of one or both sides",
+            "points": 3
+          }
+        ]
+      },
+      {
+        "key": "motor function of right arm",
+        "label": "Motor Function of Right Arm",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_6_0",
+            "label": "Normal",
+            "points": 0
+          },
+          {
+            "key": "opt_6_1",
+            "label": "Drift",
+            "points": 1
+          },
+          {
+            "key": "opt_6_2",
+            "label": "Some effort against gravity",
+            "points": 2
+          },
+          {
+            "key": "opt_6_3",
+            "label": "No effort against gravity",
+            "points": 3
+          },
+          {
+            "key": "opt_6_4",
+            "label": "No movement",
+            "points": 4
+          },
+          {
+            "key": "opt_6_5",
+            "label": "Untestable*",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "key": "motor function of left arm",
+        "label": "Motor Function of Left Arm",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_7_0",
+            "label": "Normal",
+            "points": 0
+          },
+          {
+            "key": "opt_7_1",
+            "label": "Drift",
+            "points": 1
+          },
+          {
+            "key": "opt_7_2",
+            "label": "Some effort against gravity",
+            "points": 2
+          },
+          {
+            "key": "opt_7_3",
+            "label": "No effort against gravity",
+            "points": 3
+          },
+          {
+            "key": "opt_7_4",
+            "label": "No movement",
+            "points": 4
+          },
+          {
+            "key": "opt_7_5",
+            "label": "Untestable*",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "key": "motor function of right leg",
+        "label": "Motor Function of Right Leg",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_8_0",
+            "label": "Normal",
+            "points": 0
+          },
+          {
+            "key": "opt_8_1",
+            "label": "Drift",
+            "points": 1
+          },
+          {
+            "key": "opt_8_2",
+            "label": "Some effort against gravity",
+            "points": 2
+          },
+          {
+            "key": "opt_8_3",
+            "label": "No effort against gravity",
+            "points": 3
+          },
+          {
+            "key": "opt_8_4",
+            "label": "No movement",
+            "points": 4
+          },
+          {
+            "key": "opt_8_5",
+            "label": "Untestable*",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "key": "motor function of left leg",
+        "label": "Motor Function of Left Leg",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_9_0",
+            "label": "Normal",
+            "points": 0
+          },
+          {
+            "key": "opt_9_1",
+            "label": "Drift",
+            "points": 1
+          },
+          {
+            "key": "opt_9_2",
+            "label": "Some effort against gravity",
+            "points": 2
+          },
+          {
+            "key": "opt_9_3",
+            "label": "No effort against gravity",
+            "points": 3
+          },
+          {
+            "key": "opt_9_4",
+            "label": "No movement",
+            "points": 4
+          },
+          {
+            "key": "opt_9_5",
+            "label": "Untestable*",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "key": "limb ataxia",
+        "label": "Limb Ataxia",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_10_0",
+            "label": "None",
+            "points": 0
+          },
+          {
+            "key": "opt_10_1",
+            "label": "One limb",
+            "points": 1
+          },
+          {
+            "key": "opt_10_2",
+            "label": "Two Limbs",
+            "points": 2
+          }
+        ]
+      },
+      {
+        "key": "sensory by pinprick",
+        "label": "Sensory by Pinprick",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_11_0",
+            "label": "Normal",
+            "points": 0
+          },
+          {
+            "key": "opt_11_1",
+            "label": "Mild to moderate decrease in sensation",
+            "points": 1
+          },
+          {
+            "key": "opt_11_2",
+            "label": "Severe to total sensory loss",
+            "points": 2
+          }
+        ]
+      },
+      {
+        "key": "language",
+        "label": "Language",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_12_0",
+            "label": "No aphasia",
+            "points": 0
+          },
+          {
+            "key": "opt_12_1",
+            "label": "Mild - Moderate aphasia",
+            "points": 1
+          },
+          {
+            "key": "opt_12_2",
+            "label": "Severe aphasia",
+            "points": 2
+          },
+          {
+            "key": "opt_12_3",
+            "label": "No speech production",
+            "points": 3
+          }
+        ]
+      },
+      {
+        "key": "dysarthria",
+        "label": "Dysarthria",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_13_0",
+            "label": "None",
+            "points": 0
+          },
+          {
+            "key": "opt_13_1",
+            "label": "Mild - Moderate slurring",
+            "points": 1
+          },
+          {
+            "key": "opt_13_2",
+            "label": "Severe",
+            "points": 2
+          },
+          {
+            "key": "opt_13_3",
+            "label": "Intubated or other physical impediment to testing",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "key": "extinction and inattention",
+        "label": "Extinction and Inattention",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_14_0",
+            "label": "Normal",
+            "points": 0
+          },
+          {
+            "key": "opt_14_1",
+            "label": "Inattention or extinction to bilateral simultaneous stimulation in one of the sensory modalities",
+            "points": 1
+          },
+          {
+            "key": "opt_14_2",
+            "label": "Severe hemi-inattention or hemi-inattention to more than one modality",
+            "points": 2
+          }
+        ]
+      }
+    ],
+    "bands": [
+      {
+        "min": 0,
+        "max": 0,
+        "label": "No stroke symptoms",
+        "raw": null
+      },
+      {
+        "min": 1,
+        "max": 4,
+        "label": "Minor stroke",
+        "raw": null
+      },
+      {
+        "min": 5,
+        "max": 15,
+        "label": "Moderate stroke",
+        "raw": null
+      },
+      {
+        "min": 16,
+        "max": 20,
+        "label": "Moderate to severe stroke",
+        "raw": null
+      },
+      {
+        "min": 21,
+        "max": 42,
+        "label": "Severe stroke",
+        "raw": null
+      }
+    ],
+    "total": {
+      "key": "total_score",
+      "label": "Total Criteria Point Count",
+      "unit": "points",
+      "min": 0.0,
+      "max": 42.0
+    },
+    "bands_source": "html"
+  },
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [
+      "* If an arm or leg cannot be tested due to amputation or other limitation, untestable is recorded and no points are counted.",
+      "NIH Stroke scores >22 are considered very significant and may predict increased complication risk.",
+      "The score is commonly used to track outcomes, improvement or deterioration of a stroke."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Brott T, Adams HP Jr, Olinger CP, et al. Measurements of acute cerebral infarction: a clinical examination scale. Stroke. 1989 Jul;20(7):864-70.[PubMed 2749846]",
+        "pubmed_id": "2749846",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/2749846/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "NIH Stroke Score.pdf",
+      "source_sha256": "02e3da56510be25b2598fda3573beb02a127abd992a920ac58f2f76bff6821b4",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "NIH Stroke Score",
+        "form_name": null,
+        "filename_title": "NIH Stroke Score",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('NIH Stroke Score')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (nihstrokescore)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf123",
+      "title": "NIH Stroke Score",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 9,
+    "checks_total": 9,
+    "missing": []
+  }
+}

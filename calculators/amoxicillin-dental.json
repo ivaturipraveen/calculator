@@ -1,0 +1,194 @@
+{
+  "schema_version": "1.0",
+  "slug": "amoxicillin-dental",
+  "title": "Amoxicillin (Dental)",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "dosage_form",
+      "label": "Dosage form",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "Dose in mg",
+      "units": [
+        {
+          "code": "Dose in mg",
+          "label": "Dose in mg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "dosageForm",
+        "id_const": "ID_FORM"
+      },
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "constraints": {
+        "min": 1.0,
+        "max": 40.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "weight",
+        "id_const": "ID_WEIGHT"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "weight must be a valid value."
+      ],
+      "display_unit": "kg",
+      "dimension": "mass",
+      "units_source": "corpus unit registry"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "output_dose",
+        "expr": "weight * 50"
+      },
+      {
+        "key": "output_dose_v2",
+        "expr": "((round(output_dose)) if (output_dose <500) else ((500) if (output_dose < 687.5) else ((875) if (output_dose < 937.5) else ((1000) if (output_dose < 1187.5) else ((1375) if (output_dose < 1437.5) else ((1500) if (output_dose < 1625) else ((1750) if (output_dose < 1812.5) else ((1875) if (output_dose < 1937.5) else (2000))))))))) if (dosage_form == 2) else (((round(output_dose)) if (output_dose < 125) else ((125) if (output_dose < 162.5) else ((200) if (output_dose < 225) else ((250) if (output_dose < 287.5) else ((325) if (output_dose < 350) else ((375) if (output_dose < 387.5) else ((400) if (output_dose < 425) else ((450) if (output_dose < 475) else ((500) if (output_dose < 537.5) else ((550) if (output_dose < 587.5) else ((600) if (output_dose < 612.5) else ((625) if (output_dose < 662.5) else ((700) if (output_dose < 725) else ((750) if (output_dose < 775) else ((800) if (output_dose < 812.5) else ((825) if (output_dose < 850) else ((875) if (output_dose < 912.5) else ((950) if (output_dose < 975) else ((1000) if (output_dose < 1037.5) else ((1075) if (output_dose < 1100) else ((1125) if (output_dose < 1162.5) else ((1200) if (output_dose < 1225) else ((1250) if (output_dose < 1287.5) else ((1325) if (output_dose < 1350) else ((1375) if (output_dose < 1387.5) else ((1400) if (output_dose < 1425) else ((1450) if (output_dose < 1475) else ((1500) if (output_dose < 1537.5) else ((1575) if (output_dose < 1587.5) else ((1600) if (output_dose < 1612.5) else ((1625) if (output_dose < 1662.5) else ((1700) if (output_dose < 1725) else ((1750) if (output_dose < 1775) else ((1800) if (output_dose < 1812.5) else ((1825) if (output_dose < 1850) else ((1875) if (output_dose < 1912.5) else ((1950) if (output_dose < 1975) else (2000)))))))))))))))))))))))))))))))))))))) if (dosage_form == 3) else (((round(output_dose)) if (output_dose <250) else (round(output_dose / 250) * 250)) if (dosage_form == 1) else (round(output_dose))))"
+      },
+      {
+        "key": "output_dose_m_l",
+        "expr": "(0) if (dosage_form == 2) else ((0) if (dosage_form == 3) else ((0) if (dosage_form == 1) else (output_dose / dosage_form)))"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "output",
+        "label": "Dose in mg",
+        "expr": "output_dose_v2",
+        "decimals": 0,
+        "base_unit": null,
+        "kind": "number",
+        "label_source": "printed form (position)"
+      },
+      {
+        "key": "output_m_l",
+        "label": "Dose in mL",
+        "expr": "output_dose_m_l",
+        "decimals": 1,
+        "base_unit": null,
+        "kind": "number",
+        "label_source": "printed form (position)"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 0,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Dose in mg:\nDose in mg = 50 * Weight\n• Weight is input in kg\n• When capsules, tablets, or chewable tablets are chosen as the dosage form, the\ndose in mg is rounded based on combination available with selected formulation\ndosage strengths\nDose in mL:\nDose in mL = (50 * Weight) / Concentration\n• Weight is input in kg\n• Concentration is input in mg/mL",
+    "notes": [
+      "Tablet, capsule, and chewable tablet answers are rounded to the closest dosage based on available dosage forms; oral solution answers are rounded to the nearest whole number (mg), 0.5 mL, and 0.1 tsp."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT. TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Amoxil (amoxicillin) [prescribing information]. Bristol, TN: Dr Reddy’s Laboratories; December 2015.",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again. This calculation is intended to provide an infective endocarditis prophylaxis dose for pediatric patients >3 months of age and <40 kg. Children ≥40 kg should typically follow adult dosing.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 1
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Amoxicillin (Dental).pdf",
+      "source_sha256": "9a329c9da2598155421ed9ca65dfe79ba24d4d6aab9a2f126c513721eaa3f63d",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Amoxicillin (Dental)",
+        "form_name": null,
+        "filename_title": "Amoxicillin (Dental)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Amoxicillin (Dental)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (amoxicillindental)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf20",
+      "title": "Amoxicillin (Dental Prophylaxis)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 92.9,
+    "checks_passed": 13,
+    "checks_total": 14,
+    "missing": [
+      "unit options on every field"
+    ]
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "schema_version": "1.0",
+  "slug": "urinary-protein-excretion-estimation",
+  "title": "Urinary Protein Excretion Estimation",
+  "subtitle": null,
+  "category": "Renal Function",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "spot_urine_protein",
+      "js_name": "Spot_Urine_Protein",
+      "label": "Spot Urine Protein",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/dL",
+      "display_unit": "mg/dL",
+      "units": [
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "creatinine",
+      "label_source": "printed form"
+    },
+    {
+      "key": "spot_urine_creat",
+      "js_name": "Spot_Urine_Creat",
+      "label": "Spot Urine Creat",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/dL",
+      "display_unit": "mg/dL",
+      "units": [
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "creatinine",
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "protein_excreted",
+        "js_name": "Protein_Excreted",
+        "label": "Protein Excreted",
+        "expr": "spot_urine_protein / spot_urine_creat",
+        "base_unit": "g/day",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "Protein_Excreted = Spot_Urine_Protein / Spot_Urine_Creat",
+    "notes": [
+      "In this calculator, mcg is the abbreviation for micrograms."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Schwab SJ, Christensen RL, Dougherty K, Klahr S. Quantitation of proteinuria by the use of protein-to-creatinine ratios in single urine samples. Arch Intern Med. 1987 May;147(5):943-4. protein-to-creatinine ratios in single urine samples. Arch Intern Med. 1987 May;147(5):943-4.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "[PubMed 3555378]",
+        "pubmed_id": "3555378",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3555378/"
+      },
+      {
+        "text": "Ginsberg JM, Chang BS, Matarese RA, Garella S. Use of single voided urine samples to estimate quantitative proteinuria. N Engl J Med. 1983 Dec 22;309(25):1543-6. [PubMed 6656849]",
+        "pubmed_id": "6656849",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/6656849/"
+      },
+      {
+        "text": "Houser M. Assessment of proteinuria using random urine samples. J Pediatr. 1984 Jun;104(6):845-8. [PubMed 6726514]",
+        "pubmed_id": "6726514",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/6726514/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Urinary Protein Excretion Estimation.pdf",
+      "source_sha256": "c11b1608af6bdf25f88e16160669031c473131fc0fffe7720f0c57880a1c1dd5",
+      "extractor": "pdf",
+      "form_name": "UrinaryProteinExcretion",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Urinary Protein Excretion Estimation",
+        "form_name": "UrinaryProteinExcretion",
+        "filename_title": "Urinary Protein Excretion Estimation",
+        "confidence": 0.97,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Urinary Protein Excretion Estimation')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (urinaryproteinexcretionestimation)",
+          "title_vs_form": "PARTIAL (urinaryproteinexcretionestimation ~ urinaryproteinexcretion)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf173",
+      "title": "Urinary Protein Excretion Estimation",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 87.5,
+    "checks_passed": 14,
+    "checks_total": 16,
+    "missing": [
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

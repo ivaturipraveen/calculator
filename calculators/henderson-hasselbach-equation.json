@@ -1,0 +1,152 @@
+{
+  "schema_version": "1.0",
+  "slug": "henderson-hasselbach-equation",
+  "title": "Henderson-Hasselbach Equation",
+  "subtitle": null,
+  "category": "Pulmonology",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "hco3",
+      "js_name": "HCO3",
+      "label": "HCO3",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq/L",
+      "display_unit": "mEq/L",
+      "units": [
+        {
+          "code": "mEq/L",
+          "label": "mEq/L",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "paco2",
+      "js_name": "PaCO2",
+      "label": "PaCO2",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mmHg",
+      "display_unit": "mmHg",
+      "units": [
+        {
+          "code": "mmHg",
+          "label": "mmHg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "pressure",
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "ph",
+        "js_name": "pH",
+        "label": "pH",
+        "expr": "6.1 + log10(hco3 / (0.03 * paco2))",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "pH = 6.1 + log(HCO3 / (0.03 * PaCO2))",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Bleich HL. Computer Evaluation of Acid-Base Disorders. J Clin Invest. 1969; 48:1689-1696.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "[PubMed 4898409]",
+        "pubmed_id": "4898409",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/4898409/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Henderson-Hasselbach Equation.pdf",
+      "source_sha256": "5f86c7a4af7b7722e9487b844136a5e280fe4fd481a7ea9f952c856ddbb69b87",
+      "extractor": "pdf",
+      "form_name": "HendersonHasselbach",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Henderson-Hasselbach Equation",
+        "form_name": "HendersonHasselbach",
+        "filename_title": "Henderson-Hasselbach Equation",
+        "confidence": 0.97,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Henderson-Hasselbach Equation')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (hendersonhasselbachequation)",
+          "title_vs_form": "PARTIAL (hendersonhasselbachequation ~ hendersonhasselbach)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf99",
+      "title": "Henderson-Hasselbach Equation",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 81.2,
+    "checks_passed": 13,
+    "checks_total": 16,
+    "missing": [
+      "notes",
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

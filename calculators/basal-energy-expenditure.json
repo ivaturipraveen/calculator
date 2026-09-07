@@ -1,0 +1,182 @@
+{
+  "schema_version": "1.0",
+  "slug": "basal-energy-expenditure",
+  "title": "Basal Energy Expenditure",
+  "subtitle": null,
+  "category": "Anthropometrics",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "weight",
+      "js_name": "Weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "display_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "mass",
+      "label_source": "printed form"
+    },
+    {
+      "key": "height",
+      "js_name": "Height",
+      "label": "Height",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "cm",
+      "display_unit": "cm",
+      "units": [
+        {
+          "code": "cm",
+          "label": "cm",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "length",
+      "label_source": "printed form"
+    },
+    {
+      "key": "age",
+      "js_name": "Age",
+      "label": "Age",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "yr",
+      "display_unit": "yr",
+      "units": [
+        {
+          "code": "yr",
+          "label": "yr",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "time_age",
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "bee_females",
+        "js_name": "BEE_Females",
+        "label": "BEE Females",
+        "expr": "655.1 + (9.563 * weight) + (1.85 * height) - (4.676 * age)",
+        "base_unit": "kcal/day",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "bee_males",
+        "js_name": "BEE_Males",
+        "label": "BEE Males",
+        "expr": "66.5 + (13.75 * weight) + (5.003 * height) - (6.775 * age)",
+        "base_unit": "kcal/day",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "BEE_Females = 655.1 + (9.563 * Weight) + (1.85 * Height) - (4.676 * Age)\nBEE_Males = 66.5 + (13.75 * Weight) + (5.003 * Height) - (6.775 * Age)",
+    "notes": [
+      "The default unit of measure for weight is kilograms. Please verify that the correct unit of measure has been selected.",
+      "This is an approximation of BEE.",
+      "Expect 20-30% variability between individuals."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Harris JA, Benedict FG. A Biometric Study of Human Basal Metabolism. Proc Natl Acad Sci USA. 1918 Dec;4(12):370-3.[PubMed 16576330]",
+        "pubmed_id": "16576330",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16576330/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Basal Energy Expenditure.pdf",
+      "source_sha256": "73d5250063080e09be47d87de4b9cf0c400e6a7cf34ec39091190bc18fea2815",
+      "extractor": "pdf",
+      "form_name": "HarrisBenedict",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Basal Energy Expenditure",
+        "form_name": "HarrisBenedict",
+        "filename_title": "Basal Energy Expenditure",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Basal Energy Expenditure')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (basalenergyexpenditure)",
+          "title_vs_form": "differs (basalenergyexpenditure vs harrisbenedict) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf30",
+      "title": "Basal Energy Expenditure",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 87.5,
+    "checks_passed": 14,
+    "checks_total": 16,
+    "missing": [
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

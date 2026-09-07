@@ -1,0 +1,313 @@
+{
+  "schema_version": "1.0",
+  "slug": "adjusted-body-weight",
+  "title": "Adjusted Body Weight",
+  "subtitle": null,
+  "category": "Dosing / Weight-Based Calculations",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "height",
+      "label": "Height",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "in",
+      "units": [
+        {
+          "code": "cm",
+          "label": "cm",
+          "factor": 0.39370078740157477,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "in",
+          "label": "in",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 36.0,
+        "max": 90.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "height",
+        "id_const": "ID_HEIGHT"
+      },
+      "dimension": "length",
+      "label_source": "printed form",
+      "help": [
+        "Height must be between 36 and 90."
+      ]
+    },
+    {
+      "key": "weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 22.0,
+        "max": 182.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "weight",
+        "id_const": "ID_WEIGHT"
+      },
+      "dimension": "mass",
+      "label_source": "printed form",
+      "help": [
+        "Weight must be between 22 and 182."
+      ]
+    },
+    {
+      "key": "method_list",
+      "label": "IBW Method",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "methodList",
+        "id_const": "ID_METHOD"
+      },
+      "label_source": "printed form (shared word)",
+      "options": [
+        {
+          "label": "Devine",
+          "value": "Devine"
+        },
+        {
+          "label": "Robinson",
+          "value": "Robinson"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "gender_list",
+      "label": "Gender",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "genderList",
+        "id_const": "ID_GENDER"
+      },
+      "options": [
+        {
+          "label": "Male",
+          "value": "Male"
+        },
+        {
+          "label": "Female",
+          "value": "Female"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "abw_unit_list",
+      "label": "ABW Unit",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "abwUnitList",
+        "id_const": "ID_ABW_UNITS"
+      },
+      "options": [
+        {
+          "label": "kg",
+          "value": "kg"
+        },
+        {
+          "label": "lbs",
+          "value": "lbs"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "ibw",
+        "expr": "((((50 + (2.3 * (max((height), 60) - 60)))) if ((gender_list) == 'Male') else (45.5 + (2.3 * (max((height), 60) - 60))))) if (method_list == 'Devine') else ((((52 + (1.9 * (max((height), 60) - 60)))) if ((gender_list) == 'Male') else (49 + (1.7 * (max((height), 60) - 60)))))"
+      },
+      {
+        "key": "abw",
+        "expr": "ibw + (0.4 * (weight - ibw))"
+      },
+      {
+        "key": "ibw_per",
+        "expr": "(weight / ibw) * 100"
+      },
+      {
+        "key": "abw_v2",
+        "expr": "((abw / 0.45359237)) if (abw_unit_list != 'kg') else (abw)"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "ibw_percent",
+        "label": "%IBW",
+        "expr": "ibw_per",
+        "decimals": 0,
+        "base_unit": null,
+        "kind": "number",
+        "label_source": "printed form (position)"
+      },
+      {
+        "key": "abw",
+        "label": "Adjusted Body Weight",
+        "expr": "(abw_v2) if ((not (weight < ibw))) else (('N/A') if ((weight < ibw)) else (0))",
+        "decimals": 1,
+        "base_unit": null,
+        "kind": "text",
+        "label_source": "printed form (word match)"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 0,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Ideal Body Weight, Devine Method:\nMale: IBW = 50 + [2.3 x (height - 60)]\nFemale: IBW = 45.5 + [2.3 x (height - 60)]\nIBW = ideal body weight in kg\nHeight measured in inches\nFor patients <60 inches, default weights of 50 kg for males and 45.5 kg for females are used in this\ncalculation.\nIdeal Body Weight, Robinson Method:\nMale: IBW = 52 + [1.9 x (height - 60)]\nFemale: IBW = 49 + [1.7 x (height - 60)]\nIBW = ideal body weight in kg\nHeight measured in inches\nFor patients <60 inches, default weights of 52 kg for males and 49 kg for females are used in this calculation.\nAdjusted Body Weight:\nABW = IBW + [0.4 x (actual weight - IBW)]\nIBW = ideal body weight",
+    "notes": [
+      "This calculation is for adult patients. If a patient's actual weight is less than or equal to their ideal body weight, this calculation will not continue and actual body weight should be used to determine medication doses. Adjusted body weight (sometimes referred to as dosing weight) is a mathematical process often used to dose medications (especially hydrophilic drugs) dosed by weight when a person's actual weight is >130% of their ideal body weight. Drug pharmacokinetics in obese patients are very complex and there is often limited data on use in obese patients. About 30% of adipose tissue is water. Since drug pharmacokinetics in obese patients are so variable, careful monitoring of endpoints, toxicity, response, and serum drug levels is essential. Ideal body weight is a mathematical process of determining a person's 'ideal' weight based on their height and gender. The formulas take into consideration population averages for individuals of similar body types. The Devine method is the most commonly used formula for calculating ideal body weight."
+    ],
+    "conditional_notes": [
+      "Caution actual weight is less than ideal, do not use adjusted body weight."
+    ],
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Brunette DD, \"Resuscitation of the Morbidly Obese Patient,\" Am J Emerg Med, 2004, 22(1):40-7.[PubMed 14724877]",
+        "pubmed_id": "14724877",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14724877/"
+      },
+      {
+        "text": "Cheymol G, \"Effects of Obesity on Pharmacokinetics: Implications for Drug Therapy,\" Clin Pharmacokinetics, 2000, 39(3):215-31.[PubMed 11020136]",
+        "pubmed_id": "11020136",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11020136/"
+      },
+      {
+        "text": "Devine BJ, \"Gentamicin Therapy,\" Drug Intell Clin Pharm, 1974, 8:650-5.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Robinson JD, Lupkiewicz SM, Palenik L, et al, \"Determination of Ideal Body Weight for Drug Dosage Calculations,\" Am J Hosp Pharm, 1983, 40(6):1016-9.[PubMed 6869387]",
+        "pubmed_id": "6869387",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/6869387/"
+      },
+      {
+        "text": "Wurtz R, Itokazu G, and Rodvold K, \"Antimicrobial Dosing in Obese Patients,\" Clin Infect Dis, 1997, 25(1):112-8.[PubMed 9243045]",
+        "pubmed_id": "9243045",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9243045/"
+      }
+    ],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 2
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Adjusted Body Weight.pdf",
+      "source_sha256": "372faabd2020a334e54235cf10e4119cdf5db0f1cdbf401f91e06ab1f08b7342",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Adjusted Body Weight",
+        "form_name": null,
+        "filename_title": "Adjusted Body Weight",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Adjusted Body Weight')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (adjustedbodyweight)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "abw",
+      "title": "Adjusted Body Weight",
+      "matched": true
+    },
+    "unit_registry_stems": [
+      "ABW_HEIGHT",
+      "ABW_WEIGHT"
+    ],
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 92.9,
+    "checks_passed": 13,
+    "checks_total": 14,
+    "missing": [
+      "unit options on every field"
+    ]
+  }
+}

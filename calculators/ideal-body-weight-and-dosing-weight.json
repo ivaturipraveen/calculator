@@ -1,0 +1,229 @@
+{
+  "schema_version": "1.0",
+  "slug": "ideal-body-weight-and-dosing-weight",
+  "title": "Ideal Body Weight and Dosing Weight",
+  "subtitle": null,
+  "category": "Anthropometrics",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "ibw_sex",
+      "js_name": "IBW_Sex",
+      "label": "Sex",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "options": [
+        {
+          "label": "Female",
+          "index": 0,
+          "value": 45.5
+        },
+        {
+          "label": "Male",
+          "index": 1,
+          "value": 50.0
+        }
+      ],
+      "options_source": "pdf_script+printed_form",
+      "variant_variables": null,
+      "source": {
+        "kind": "radio_group",
+        "js_group": "Sex"
+      }
+    },
+    {
+      "key": "height",
+      "js_name": "Height",
+      "label": "Height",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "in",
+      "display_unit": "in",
+      "units": [
+        {
+          "code": "in",
+          "label": "in",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 60.0,
+        "max": 108.0
+      },
+      "messages": {
+        "min": "The minimum value for Height is 60 in.",
+        "max": "The maximum value for Height is 108 in."
+      },
+      "dimension": "length",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Height is 60 in. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Height is 108 in. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "actual_weight",
+      "js_name": "Actual_weight",
+      "label": "Actual weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "display_unit": null,
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 30.0,
+        "max": 300.0
+      },
+      "messages": {
+        "min": "The minimum value for Actual weight is 30 kg.",
+        "max": "The maximum value for Actual weight is 300 kg."
+      },
+      "dimension": "mass",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Actual weight is 30 kg. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Actual weight is 300 kg. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "ideal_body_weight",
+        "js_name": "Ideal_body_weight",
+        "label": "Ideal body weight",
+        "expr": "(2.3 * (height - 60)) + ibw_sex",
+        "base_unit": "kg",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "dosing_weight",
+        "js_name": "Dosing_weight",
+        "label": "Dosing weight",
+        "expr": "0.4 * (actual_weight - ideal_body_weight) + ideal_body_weight",
+        "base_unit": "kg",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "Ideal_body_weight = (2.3 * (Height - 60)) + IBW_Sex\nDosing_weight = 0.4 * (Actual_weight - Ideal_body_weight) + Ideal_body_weight",
+    "notes": [
+      "Ideal body weight (IBW) is estimated by the following equations [1]: Males: IBW (kg) = 50 kg + 2.3 kg for each inch over 5 feet. Females: IBW (kg) = 45.5 kg + 2.3 kg for each inch over 5 feet.",
+      "IBW may be useful for calculating an initial dose of certain medications distributed primarily to nonadipose tissues, such as penicillins, cephalosporins, digoxin, rocuronium, vecuronium, and aminoglycosides (use IBW if overweight, but nonobese) [2,3].",
+      "Dosing weight (DW) is calculated using the formula [3]: Dosing weight = Ideal body weight + (0.4 * [Actual weight - Ideal body weight]).",
+      "DW is a calculated weight that accounts for the increased distribution of certain drugs to nonlean body tissues in obesity. It is only applicable for patients whose Actual body weight is greater than or equal to 125 percent of Ideal body weight. This calculator reports N/A when Dosing weight is not applicable.",
+      "Separate calculators are available for estimating lean (nonadipose) body weight in adult males and lean body weight in females."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Devine BJ. Gentamicin therapy. Drug Intell Clin Pharm. 1974; 8:650-5.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Hanley MJ, Abernethy DR, Greenblatt DJ. Effects of obesity on the pharmacokinetics of drugs in humans. Clin Pharmacokinet. 2010; 49:71-87.[PubMed 20067334]",
+        "pubmed_id": "20067334",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20067334/"
+      },
+      {
+        "text": "Erstad BL. Dosing of medications in morbidly obese patients in the intensive care unit setting.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Erstad BL. Dosing of medications in morbidly obese patients in the intensive care unit setting.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Intensive Care Med. 2004; 30:18-32. [PubMed 14625670]",
+        "pubmed_id": "14625670",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14625670/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 2
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Ideal Body Weight and Dosing Weight.pdf",
+      "source_sha256": "27aa96466d90e577047bbb635868a62c0a251540b2aff222483ae7c724ff5ae7",
+      "extractor": "pdf",
+      "form_name": "IBW_Devine",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Ideal Body Weight and Dosing Weight",
+        "form_name": "IBW_Devine",
+        "filename_title": "Ideal Body Weight and Dosing Weight",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Ideal Body Weight and Dosing Weight')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (idealbodyweightanddosingweight)",
+          "title_vs_form": "differs (idealbodyweightanddosingweight vs ibwdevine) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf102",
+      "title": "Ideal Body Weight and Dosing Weight",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 93.8,
+    "checks_passed": 15,
+    "checks_total": 16,
+    "missing": [
+      "unit options on every field"
+    ]
+  }
+}

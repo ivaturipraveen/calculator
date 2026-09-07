@@ -1,0 +1,244 @@
+{
+  "schema_version": "1.0",
+  "slug": "unit-conversion-metric-conversions",
+  "title": "Unit Conversion: Metric Conversions",
+  "subtitle": null,
+  "category": "Unit Conversion",
+  "renderer": "convert",
+  "engine": "convert",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "temp",
+      "label": "Temp",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "weight",
+      "label": "Weight",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "volume",
+      "label": "Volume",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "length",
+      "label": "Length",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "convert",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": null,
+  "tables": {
+    "pairs": [
+      {
+        "from": "Weight: kg",
+        "to": "lb",
+        "factor": 2.20462262
+      },
+      {
+        "from": "Volume: gallon",
+        "to": "L",
+        "factor": 3.785412
+      },
+      {
+        "from": "Volume: quart",
+        "to": "L",
+        "factor": 0.9463529
+      },
+      {
+        "from": "Volume: cup",
+        "to": "L",
+        "factor": 0.236588236
+      },
+      {
+        "from": "Volume: ounce (fl oz)",
+        "to": "L",
+        "factor": 0.02957353
+      },
+      {
+        "from": "Volume: tablespoon",
+        "to": "L",
+        "factor": 0.0147867648
+      },
+      {
+        "from": "Volume: teaspoon",
+        "to": "L",
+        "factor": 0.0049289217
+      },
+      {
+        "from": "Temperature: Celsius (°C)",
+        "to": "Fahrenheit (°F)",
+        "factor": 1.8,
+        "offset": 32,
+        "source_slug": "unit-conversions-temperature"
+      },
+      {
+        "from": "Temperature: Celsius (°C)",
+        "to": "Kelvin (K)",
+        "factor": 1,
+        "offset": 273.15,
+        "source_slug": "unit-conversions-temperature"
+      },
+      {
+        "from": "Temperature: Fahrenheit (°F)",
+        "to": "Kelvin (K)",
+        "factor": 0.5555555556,
+        "offset": 255.372222,
+        "source_slug": "unit-conversions-temperature"
+      },
+      {
+        "from": "Weight: lb",
+        "to": "oz",
+        "factor": 16,
+        "source_slug": "unit-conversions-weight"
+      },
+      {
+        "from": "Weight: g",
+        "to": "kg",
+        "factor": 0.001,
+        "source_slug": "unit-conversions-weight"
+      },
+      {
+        "from": "Volume: fl oz",
+        "to": "L",
+        "factor": 0.02957353,
+        "source_slug": "unit-conversions-volume"
+      },
+      {
+        "from": "Volume: mL",
+        "to": "L",
+        "factor": 0.001,
+        "source_slug": "unit-conversions-volume"
+      },
+      {
+        "from": "Length: in",
+        "to": "cm",
+        "factor": 2.54,
+        "source_slug": "unit-conversions-length"
+      },
+      {
+        "from": "Length: ft",
+        "to": "m",
+        "factor": 0.3048,
+        "source_slug": "unit-conversions-length"
+      },
+      {
+        "from": "Length: yd",
+        "to": "m",
+        "factor": 0.9144,
+        "source_slug": "unit-conversions-length"
+      },
+      {
+        "from": "Length: mile",
+        "to": "km",
+        "factor": 1.609344,
+        "source_slug": "unit-conversions-length"
+      }
+    ]
+  },
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "This calculation allows you to convert a quantity from one unit of measure to another. To begin, select a unit of measure you want to convert from. Next, enter the quantity in the blank next to the units. Finally, select the unit of measure you want to convert to. This calculation uses the following conversions: Degrees Celsius = (degrees Fahrenheit - 32) x 5/9 Degrees Fahrenheit = (1.8 x degrees Celsius) + 32 1 kg = 2.20462262 lb 1 gallon = 3.785412 L 1 quart = 0.9463529 L 1 quart = 0.9463529 L 1 cup = 0.236588236 L 1 ounce = 0.02957353 L 1 tablespoon = 0.0147867648 L 1 teaspoon = 0.0049289217 L 1 mL = 0.0010 L 1 foot = 12.0 inches 1 cm = 0.3937008 inch 1 meter = 39.37008 inches 1 yard = 36 inches",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Unit Conversion- Metric Conversions.pdf",
+      "source_sha256": "9c8fe3a2b8d3a7d2f55726bb208ec90f4d4a6d616719c133e8560ff0409e6422",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Unit Conversion: Metric Conversions",
+        "form_name": null,
+        "filename_title": "Unit Conversion- Metric Conversions",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Unit Conversion: Metric Conversions')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (unitconversionmetricconversions)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf167",
+      "title": "Unit Conversion: Metric Conversions",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "inputs_from_printed_form_only",
+        "severity": "medium",
+        "detail": "4 field(s) recovered from the printed form; the calculation itself is not in the PDF"
+      }
+    ],
+    "built": "2026-09-07",
+    "pairs_completed_from": [
+      "unit-conversions-temperature",
+      "unit-conversions-weight",
+      "unit-conversions-volume",
+      "unit-conversions-length"
+    ]
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 4,
+    "checks_total": 4,
+    "missing": []
+  }
+}

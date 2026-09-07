@@ -1,0 +1,510 @@
+{
+  "schema_version": "1.0",
+  "slug": "treprostinil",
+  "title": "Treprostinil",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "field_transitioning",
+      "label": "Transitioning from IV Epoprostenol (Flolan®)",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "FIELD_TRANSITIONING",
+        "id_const": "FIELD_TRANSITIONING"
+      },
+      "label_source": "printed form (word match)",
+      "options": [
+        {
+          "label": "Yes",
+          "value": "Yes"
+        },
+        {
+          "label": "No",
+          "value": "No"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "field_epoprostenol_dose",
+      "label": "Epoprostenol (Floan®) Dose",
+      "widget": "quantity",
+      "required": false,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 0.0,
+        "exclusive_min": true,
+        "max": 200.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "FIELD_EPOPROSTENOL_DOSE",
+        "id_const": "FIELD_EPOPROSTENOL_DOSE"
+      },
+      "label_source": "printed form (word match)",
+      "required_when": {
+        "field": "field_transitioning",
+        "equals": [
+          "Yes"
+        ]
+      }
+    },
+    {
+      "key": "field_epoprostenol_conc",
+      "label": "Epoprostenol (Flolan®) Concentration",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "FIELD_EPOPROSTENOL_CONC",
+        "id_const": "FIELD_EPOPROSTENOL_CONC"
+      },
+      "label_source": "printed form (word match)",
+      "help": [
+        "Epoprostenol\n(Flolan) Concentration must be a valid value."
+      ]
+    },
+    {
+      "key": "field_weight",
+      "label": "Dosing Weight",
+      "widget": "quantity",
+      "required": false,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "FIELD_WEIGHT",
+        "id_const": "FIELD_WEIGHT"
+      },
+      "label_source": "printed form (word match)",
+      "help": [
+        "Dosing Weight must be greater than"
+      ],
+      "required_when": {
+        "field": "field_treprostinil_route",
+        "equals": [
+          "IV"
+        ]
+      }
+    },
+    {
+      "key": "field_treprostinil_dose",
+      "label": "Treprostinil Dose",
+      "widget": "quantity",
+      "required": false,
+      "default": null,
+      "base_unit": "ng/kg/minute",
+      "units": null,
+      "constraints": {
+        "min": 0.625,
+        "max": 200.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "FIELD_TREPROSTINIL_DOSE",
+        "id_const": "FIELD_TREPROSTINIL_DOSE"
+      },
+      "label_source": "printed form (word match)",
+      "help": [
+        "Treprostinil\nDose must be at least 0.625 ng/kg/minute."
+      ],
+      "required_when": {
+        "field": "field_transitioning",
+        "equals": [
+          "No"
+        ]
+      }
+    },
+    {
+      "key": "field_freq_final_change",
+      "label": "Frequency of Final Treprostinil Reservoir Change",
+      "widget": "quantity",
+      "required": false,
+      "default": null,
+      "base_unit": "hours",
+      "units": [
+        {
+          "code": "Days",
+          "label": "Days",
+          "factor": 24.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "Hours",
+          "label": "Hours",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "constraints": {
+        "min": 0.0,
+        "max": 48.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "FIELD_FREQ_FINAL_CHANGE",
+        "id_const": "FIELD_FREQ_FINAL_CHANGE"
+      },
+      "label_source": "printed form (word match)",
+      "help": [
+        "Frequency of Final Treprostinil Reservoir Change must be greater than"
+      ],
+      "display_unit": "hours",
+      "dimension": "time",
+      "units_source": "corpus unit registry",
+      "required_when": {
+        "field": "field_transitioning",
+        "equals": [
+          "Yes"
+        ]
+      }
+    },
+    {
+      "key": "field_freq_change",
+      "label": "Frequency of Trepostinil Reservoir Change",
+      "widget": "quantity",
+      "required": false,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 0.0,
+        "max": 48.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "FIELD_FREQ_CHANGE",
+        "id_const": "FIELD_FREQ_CHANGE"
+      },
+      "label_source": "printed form (word match)",
+      "required_when": {
+        "field": "field_transitioning",
+        "equals": [
+          "No"
+        ]
+      }
+    },
+    {
+      "key": "field_treprostinil_route",
+      "label": "Treprostinil Route",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "FIELD_TREPROSTINIL_ROUTE",
+        "id_const": "FIELD_TREPROSTINIL_ROUTE"
+      },
+      "label_source": "printed form (word match)",
+      "accepts_sentinel": [
+        "Select a value"
+      ],
+      "options": [
+        {
+          "label": "IV",
+          "value": "IV",
+          "source": "script comparison"
+        },
+        {
+          "label": "Select a value",
+          "value": "Select a value",
+          "source": "script comparison"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "field_treprostinil_strength",
+      "label": "Treprostinil Injection Vial Strength",
+      "widget": "quantity",
+      "required": false,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "FIELD_TREPROSTINIL_STRENGTH",
+        "id_const": "FIELD_TREPROSTINIL_STRENGTH"
+      },
+      "label_source": "printed form (word match)",
+      "required_when": {
+        "field": "field_treprostinil_route",
+        "equals": [
+          "IV"
+        ]
+      }
+    },
+    {
+      "key": "field_treprostinil_vol",
+      "label": "Treprostinil Reservoir Volume",
+      "widget": "quantity",
+      "required": false,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "FIELD_TREPROSTINIL_VOL",
+        "id_const": "FIELD_TREPROSTINIL_VOL"
+      },
+      "label_source": "printed form (word match)",
+      "required_when": {
+        "field": "field_treprostinil_route",
+        "equals": [
+          "IV"
+        ]
+      }
+    },
+    {
+      "key": "units_weight",
+      "label": "Units Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "UNITS_WEIGHT",
+        "id_const": "UNITS_WEIGHT"
+      }
+    },
+    {
+      "key": "units_epoprostenol_conc",
+      "label": "Units Epoprostenol Conc",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "UNITS_EPOPROSTENOL_CONC",
+        "id_const": "UNITS_EPOPROSTENOL_CONC"
+      }
+    },
+    {
+      "key": "units_output_final",
+      "label": "Units Final",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "UNITS_OUTPUT_FINAL",
+        "id_const": "UNITS_OUTPUT_FINAL"
+      }
+    },
+    {
+      "key": "units_height",
+      "label": "Units Height",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "UNITS_HEIGHT",
+        "id_const": "UNITS_HEIGHT"
+      }
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "output_strength",
+        "label": "Treprostinil Injection Vial Strength",
+        "expr": "(field_treprostinil_strength) if ((not (field_transitioning == 'Yes')) and (field_treprostinil_route == 'IV')) else ((field_treprostinil_strength) if ((field_transitioning == 'Yes') and (field_treprostinil_route == 'IV')) else (0))",
+        "decimals": 1,
+        "base_unit": "ng/kg/minute",
+        "kind": "text",
+        "label_source": "printed form (word match)",
+        "unit_source": "script_constant"
+      },
+      {
+        "key": "output_amount",
+        "label": "Amount of Treprostinil Injection Needed",
+        "expr": "(((round(field_treprostinil_dose * field_weight * 0.00006 / (round(field_treprostinil_vol / field_freq_change, 3)), 3)) / field_treprostinil_strength * field_treprostinil_vol)) if ((not (field_transitioning == 'Yes')) and (field_treprostinil_route == 'IV')) else (((round(((round((field_epoprostenol_dose * 1.1) * field_weight * 0.00006 / (((field_treprostinil_vol / field_freq_final_change) - ((field_treprostinil_vol / field_freq_final_change) % 0.1)) if (field_treprostinil_route == 'IV') else (round((field_epoprostenol_dose * 1.1) * field_weight * 0.00006 / field_treprostinil_strength, 3))), 3)) / field_treprostinil_strength) * field_treprostinil_vol, 1))) if ((field_transitioning == 'Yes') and (field_treprostinil_route == 'IV')) else (0))",
+        "decimals": 1,
+        "base_unit": "mL/hour",
+        "kind": "text",
+        "label_source": "printed form (word match)",
+        "unit_source": "script_constant"
+      },
+      {
+        "key": "output_final",
+        "label": "To Make a Final Treprostinil Concentration of",
+        "expr": "((round(field_treprostinil_dose * field_weight * 0.00006 / (round(field_treprostinil_vol / field_freq_change, 3)), 3))) if ((not (field_transitioning == 'Yes')) and (field_treprostinil_route == 'IV') and (not (units_output_final == \"ng_per_mL\"))) else ((((((round(field_treprostinil_dose * field_weight * 0.00006 / (round(field_treprostinil_vol / field_freq_change, 3)), 3))) * 1000000))) if ((not (field_transitioning == 'Yes')) and (field_treprostinil_route == 'IV') and (units_output_final == \"ng_per_mL\")) else (((round((field_epoprostenol_dose * 1.1) * field_weight * 0.00006 / (((field_treprostinil_vol / field_freq_final_change) - ((field_treprostinil_vol / field_freq_final_change) % 0.1)) if (field_treprostinil_route == 'IV') else (round((field_epoprostenol_dose * 1.1) * field_weight * 0.00006 / field_treprostinil_strength, 3))), 3))) if ((field_transitioning == 'Yes') and (field_treprostinil_route == 'IV') and (not (units_output_final == \"ng_per_mL\"))) else ((((((round((field_epoprostenol_dose * 1.1) * field_weight * 0.00006 / (((field_treprostinil_vol / field_freq_final_change) - ((field_treprostinil_vol / field_freq_final_change) % 0.1)) if (field_treprostinil_route == 'IV') else (round((field_epoprostenol_dose * 1.1) * field_weight * 0.00006 / field_treprostinil_strength, 3))), 3))) * 1000000))) if ((field_transitioning == 'Yes') and (field_treprostinil_route == 'IV') and (units_output_final == \"ng_per_mL\")) else (0))))",
+        "decimals": 3,
+        "base_unit": null,
+        "kind": "text",
+        "label_source": "printed form (word match)"
+      },
+      {
+        "key": "output_iv_rate",
+        "label": "Treprostinil IV Rate",
+        "expr": "((round(field_treprostinil_vol / field_freq_change, 3))) if ((not (field_transitioning == 'Yes')) and (field_treprostinil_route == 'IV')) else (0)",
+        "decimals": 3,
+        "base_unit": null,
+        "kind": "text",
+        "label_source": "printed form (position)"
+      },
+      {
+        "key": "output_subq",
+        "label": "Treprostinil SUBQ Rate",
+        "expr": "((field_treprostinil_dose * field_weight * 0.00006 / field_treprostinil_strength)) if ((not (field_transitioning == 'Yes')) and (not (field_treprostinil_route == 'IV')) and (not (field_treprostinil_route == 'Select a value'))) else (0)",
+        "decimals": 3,
+        "base_unit": null,
+        "kind": "text",
+        "label_source": "printed form (position)"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 3,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": null,
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again. Use with caution and titrate slowly in patients with hepatic impairment; use of treprostinil has not been studied in patients with severe hepatic impairment. Treprostinil SUBQ Rate: SUBQ Infusion Rate (mL/hour) = [Dose (ng/kg/minute) x Dosing Weight (kg) x 0.00006] / Vial Strength (mg/mL) Treprostinil IV Rate: When using an appropriate infusion pump and reservoir, an IV rate should first be selected to allow for a desired infusion period length of up to 48 hours between system changeovers. Reservoir changes are typically made every 24 hours or every 48 hours to keep time of day consistent. Typical IV infusion system reservoirs have volumes of 50 or 100 mL. IV Rate (mL/hour) = Reservoir Volume (mL) / Frequency of Reservoir Change (hours) Diluted IV Treprostinil Concentration: Using the above IV Infusion Rate (mL/hour) and the patient’s dose and weight, the diluted IV treprostinil concentration is calculated using the following formula: Concentration (mg/mL) = [Dose (ng/kg/minute) x Dosing Weight (kg) x 0.00006] / IV Rate (mL/hour) Amount of Treprostinil Needed: The amount of treprostinil injection needed to make the above calculated concentration of diluted The amount of treprostinil injection needed to make the above calculated concentration of diluted treprostinil for the given reservoir size is calculated using the following formula: Amount of treprostinil injection (mL) = [Treprostinil concentration (mg/mL) / Treprostinil vial strength (mg/mL)] x Reservoir volume (mL)",
+    "stated_limits": [
+      {
+        "name": "E Dose",
+        "applies_to": null,
+        "min": 0.0,
+        "unit": "ng/kg/min",
+        "max": 200.0
+      },
+      {
+        "name": "E Conc",
+        "applies_to": null,
+        "min": 3000.0,
+        "unit": "ng/mL",
+        "max": 30000.0
+      },
+      {
+        "name": "T Dose",
+        "applies_to": null,
+        "min": 0.625,
+        "max": 200.0,
+        "unit": "ng/kg/min"
+      }
+    ],
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": [
+      "Frequency of Treprostinil Reservoir Change must be greater than"
+    ],
+    "fields_with_help": 4
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Treprostinil.pdf",
+      "source_sha256": "e7e980ee94e527bca49eed47b6e89b2dd8a488600888a7fcd1b844a59412aa5f",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Treprostinil",
+        "form_name": null,
+        "filename_title": "Treprostinil",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Treprostinil')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (treprostinil)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf166",
+      "title": "Treprostinil",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 76.9,
+    "checks_passed": 10,
+    "checks_total": 13,
+    "missing": [
+      "printed equation text",
+      "notes",
+      "unit options on every field"
+    ]
+  }
+}

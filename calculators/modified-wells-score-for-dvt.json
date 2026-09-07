@@ -1,0 +1,177 @@
+{
+  "schema_version": "1.0",
+  "slug": "modified-wells-score-for-dvt",
+  "title": "Modified Wells Score for DVT",
+  "subtitle": null,
+  "category": "Hematology / Scoring System",
+  "renderer": "score",
+  "engine": "score",
+  "status": "draft",
+  "version": 1,
+  "inputs": [],
+  "compute": {
+    "engine": "score",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": {
+    "groups": [
+      {
+        "key": "ungrouped",
+        "label": "(ungrouped)",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_0_0",
+            "label": "Active cancer (treatment ongoing or within the previous six months or palliative)",
+            "points": 1
+          },
+          {
+            "key": "opt_0_1",
+            "label": "Paralysis, paresis, or recent plaster immobilization of the lower extremities",
+            "points": 1
+          },
+          {
+            "key": "opt_0_2",
+            "label": "Recently bedridden for more than three days or major surgery within four weeks",
+            "points": 1
+          },
+          {
+            "key": "opt_0_3",
+            "label": "Localized tenderness along the distribution of the deep venous system",
+            "points": 1
+          },
+          {
+            "key": "opt_0_4",
+            "label": "Entire leg swollen",
+            "points": 1
+          },
+          {
+            "key": "opt_0_5",
+            "label": "Calf swelling by more than 3 cm when compared with the asymptomatic leg (measured below tibial tuberosity)",
+            "points": 1
+          },
+          {
+            "key": "opt_0_6",
+            "label": "Pitting edema (greater in the symptomatic leg)",
+            "points": 1
+          },
+          {
+            "key": "opt_0_7",
+            "label": "Collateral superficial veins (nonvaricose)",
+            "points": 1
+          },
+          {
+            "key": "opt_0_8",
+            "label": "Alternative diagnosis as likely or more likely than that of DVT",
+            "points": -2
+          },
+          {
+            "key": "opt_0_9",
+            "label": "Previously documented DVT",
+            "points": 1
+          }
+        ]
+      }
+    ],
+    "bands": [
+      {
+        "min": 2,
+        "max": 9,
+        "label": "DVT likely",
+        "raw": "2 to 9 points: DVT likely"
+      },
+      {
+        "min": -2,
+        "max": 1,
+        "label": "DVT unlikely",
+        "raw": "-2 to 1 point: DVT unlikely"
+      }
+    ],
+    "total": {
+      "key": "total_score",
+      "label": "Total Criteria Point Count",
+      "unit": "points",
+      "min": -2.0,
+      "max": 1.0
+    },
+    "interpretation": {
+      "key": "interpretation",
+      "label": "Modified Wells score for DVT interpretation",
+      "printed_rows": [
+        "Modified Wells score for DVT interpretation",
+        "-2 to 1 point: DVT unlikely"
+      ]
+    }
+  },
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Wells PS, Anderson DR, Rodger M, et al. Evaluation of D-dimer in the diagnosis of suspected deep-vein thrombosis. N Engl J Med. 2003 Sep 25;349(13):1227-35.[PubMed 14507948]",
+        "pubmed_id": "14507948",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14507948/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Modified Wells Score for DVT.pdf",
+      "source_sha256": "50d8d8b2b357492b572f5cd09d00f55b1cdd469feda419d2afea091dd92e5bff",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Modified Wells Score for DVT",
+        "form_name": null,
+        "filename_title": "Modified Wells Score for DVT",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Modified Wells Score for DVT')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (modifiedwellsscorefordvt)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf120",
+      "title": "Modified Wells Score for DVT",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 9,
+    "checks_total": 9,
+    "missing": []
+  }
+}

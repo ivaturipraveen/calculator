@@ -1,0 +1,152 @@
+{
+  "schema_version": "1.0",
+  "slug": "sodium-correction-in-hyperglycemia",
+  "title": "Sodium Correction in Hyperglycemia",
+  "subtitle": null,
+  "category": "Lab / Electrolytes",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "measured_sodium",
+      "js_name": "Measured_Sodium",
+      "label": "Measured Sodium",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq/L",
+      "display_unit": "mEq/L",
+      "units": [
+        {
+          "code": "mEq/L",
+          "label": "mEq/L",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "glucose",
+      "js_name": "Glucose",
+      "label": "Glucose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/dL",
+      "display_unit": "mg/dL",
+      "units": [
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "creatinine",
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "corrected_sodium",
+        "js_name": "Corrected_Sodium",
+        "label": "Corrected Sodium",
+        "expr": "measured_sodium + 0.024 * (glucose - 100)",
+        "base_unit": "mEq/L",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "Corrected_Sodium = Measured_Sodium + 0.024 * (Glucose - 100)",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Hillier TA, Abbott RD, Barrett EJ. Hyponatremia: evaluating the correction factor for hyperglycemia.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Am J Med. 1999 Apr;106(4):399-403. 10225241.",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer. and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Sodium Correction in Hyperglycemia.pdf",
+      "source_sha256": "3292fe0e2cb0bfce660f5e9dec8ce8e391e9189b8ffb9f4d9ddbabc43a536de3",
+      "extractor": "pdf",
+      "form_name": "SodiumHyperglycemiaHillier",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Sodium Correction in Hyperglycemia",
+        "form_name": "SodiumHyperglycemiaHillier",
+        "filename_title": "Sodium Correction in Hyperglycemia",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Sodium Correction in Hyperglycemia')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (sodiumcorrectioninhyperglycemia)",
+          "title_vs_form": "differs (sodiumcorrectioninhyperglycemia vs sodiumhyperglycemiahillier) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf155",
+      "title": "Sodium Correction in Hyperglycemia",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 81.2,
+    "checks_passed": 13,
+    "checks_total": 16,
+    "missing": [
+      "notes",
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

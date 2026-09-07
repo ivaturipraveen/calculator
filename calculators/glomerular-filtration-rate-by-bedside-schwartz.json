@@ -1,0 +1,175 @@
+{
+  "schema_version": "1.0",
+  "slug": "glomerular-filtration-rate-by-bedside-schwartz",
+  "title": "Glomerular Filtration Rate by Bedside Schwartz",
+  "subtitle": null,
+  "category": "Renal Function",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "serum_creat",
+      "js_name": "Serum_Creat",
+      "label": "Serum Creat",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/dL",
+      "display_unit": "mg/dL",
+      "units": [
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "creatinine",
+      "label_source": "printed form"
+    },
+    {
+      "key": "height",
+      "js_name": "Height",
+      "label": "Height",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "cm",
+      "display_unit": "cm",
+      "units": [
+        {
+          "code": "cm",
+          "label": "cm",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "length",
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "glomerular_filtration_rate",
+        "js_name": "Glomerular_Filtration_Rate",
+        "label": "Glomerular Filtration Rate",
+        "expr": "(0.413 * height / serum_creat) if (doCalc) else (0.413 * height / serum_creat)",
+        "base_unit": "mL/min/1.73 m2",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Glomerular_Filtration_Rate = 0.413 * Height / Serum_Creat",
+    "notes": [
+      "The original Schwartz Formula was based on serum creatinine measured by the Jaffe method.",
+      "This updated formula is based on serum creatinine measured by enzymatic assay."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Staples A, LeBlond R, Watkins S, et al. Validation of the revised Schwartz estimating equation in a predominantly non-CKD population. Pediatr Nephrol. 2010 Nov;25(11):2321-6.[PubMed 20652327]",
+        "pubmed_id": "20652327",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20652327/"
+      },
+      {
+        "text": "20652327]",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Schwartz GJ, Munoz A, Schneider MF, et al. New equations to estimate GFR in children with CKD.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "J Am Soc Nephrol. 2009 Mar;20(3):629-37. [PubMed 19158356]",
+        "pubmed_id": "19158356",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19158356/"
+      },
+      {
+        "text": "Schwartz GJ, Feld LG, Langford DJ. A simple estimate of glomerular filtration rate in full-term infants during the first year of life. J Pediatr. 1984 Jun;104(6):849-54. [PubMed 6726515]",
+        "pubmed_id": "6726515",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/6726515/"
+      },
+      {
+        "text": "Schwartz GJ, Gauthier B. A simple estimate of glomerular filtration rate in adolescent boys. J Pediatr. 1985 Mar;106(3):522-6. [PubMed 3973793]",
+        "pubmed_id": "3973793",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3973793/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Glomerular Filtration Rate by Bedside Schwartz.pdf",
+      "source_sha256": "84c12a289663c97fc6f6c7120cf8d4294885e039c13e7beb79eb06fbbe2eef62",
+      "extractor": "pdf",
+      "form_name": "GFR_Schwartz_Bedside",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Glomerular Filtration Rate by Bedside Schwartz",
+        "form_name": "GFR_Schwartz_Bedside",
+        "filename_title": "Glomerular Filtration Rate by Bedside Schwartz",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Glomerular Filtration Rate by Bedside Schwartz')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (glomerularfiltrationratebybedsideschwartz)",
+          "title_vs_form": "differs (glomerularfiltrationratebybedsideschwartz vs gfrschwartzbedside) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf95",
+      "title": "Glomerular Filtration Rate by Bedside Schwartz",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 87.5,
+    "checks_passed": 14,
+    "checks_total": 16,
+    "missing": [
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

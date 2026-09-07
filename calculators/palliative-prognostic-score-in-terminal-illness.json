@@ -1,0 +1,200 @@
+{
+  "schema_version": "1.0",
+  "slug": "palliative-prognostic-score-in-terminal-illness",
+  "title": "Palliative Prognostic Score in Terminal Illness",
+  "subtitle": null,
+  "category": "Scoring System",
+  "renderer": "score",
+  "engine": "score",
+  "status": "draft",
+  "version": 1,
+  "inputs": [],
+  "compute": {
+    "engine": "score",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": {
+    "groups": [
+      {
+        "key": "ungrouped",
+        "label": "(ungrouped)",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_0_0",
+            "label": "Dyspnea",
+            "points": 1
+          },
+          {
+            "key": "opt_0_1",
+            "label": "Anorexia",
+            "points": 1.5
+          },
+          {
+            "key": "opt_0_2",
+            "label": "Karnofsky Score <20",
+            "points": 2.5
+          }
+        ]
+      },
+      {
+        "key": "clinical prediction of life expectancy",
+        "label": "Clinical prediction of life expectancy",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_1_0",
+            "label": "More than 12 weeks",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "key": "wbc",
+        "label": "WBC",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_2_0",
+            "label": "Normal (4,800-8,500)",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "key": "lymphocyte percentage",
+        "label": "Lymphocyte percentage",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_3_0",
+            "label": "Normal (20-40%)",
+            "points": 0
+          }
+        ]
+      }
+    ],
+    "bands": [
+      {
+        "min": 0,
+        "max": 5.5,
+        "label": ">70%",
+        "raw": "0 to 5.5 points: >70%"
+      },
+      {
+        "min": 5.6,
+        "max": 11,
+        "label": "30-70%",
+        "raw": "5.6 to 11 points: 30-70%"
+      },
+      {
+        "min": 11.1,
+        "max": 17.5,
+        "label": "<30%",
+        "raw": "11.1 to 17.5 points: <30%"
+      }
+    ],
+    "total": {
+      "key": "total_score",
+      "label": "Total Criteria Point Count",
+      "unit": "points",
+      "min": 1.0,
+      "max": 2.5
+    },
+    "interpretation": {
+      "key": "interpretation",
+      "label": "30 Day Probability of Survival",
+      "printed_rows": [
+        "30 Day Probability of Survival"
+      ]
+    }
+  },
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Maltoni M, Nanni O, Pirovano M, et al. Successful validation of the palliative prognostic score in terminally ill cancer patients. J Pain Sympt Manage. 1999; 17: 240-7.[PubMed 10203876]",
+        "pubmed_id": "10203876",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10203876/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Palliative Prognostic Score in Terminal Illness.pdf",
+      "source_sha256": "eb375b0508d08e46ad8f6568fdd2b528689ec6c8b4190b2ba3fbb5835f73cdfb",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Palliative Prognostic Score in Terminal Illness",
+        "form_name": null,
+        "filename_title": "Palliative Prognostic Score in Terminal Illness",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Palliative Prognostic Score in Terminal Illness')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (palliativeprognosticscoreinterminalillness)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf133",
+      "title": "Palliative Prognostic Score in Terminal Illness",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "score_criteria_frozen",
+        "severity": "critical",
+        "detail": "3 of the 4 criteria offer only the 0-point choice the source PDF printed, so they can never add to the total: clinical prediction of life expectancy, wbc, lymphocyte percentage",
+        "fields": [
+          "clinical prediction of life expectancy",
+          "wbc",
+          "lymphocyte percentage"
+        ]
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 9,
+    "checks_total": 9,
+    "missing": []
+  }
+}

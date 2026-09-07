@@ -1,0 +1,245 @@
+{
+  "schema_version": "1.0",
+  "slug": "meld-score-si-units",
+  "title": "MELD Score (SI units)",
+  "subtitle": null,
+  "category": "Hepatology",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "hemodialysis_twice_in_week_prior",
+      "js_name": "Hemodialysis_twice_in_week_prior",
+      "label": "Hemodialysis twice in week prior",
+      "widget": "select",
+      "required": true,
+      "default": 0,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "options": [
+        {
+          "label": "No",
+          "value": 0
+        },
+        {
+          "label": "Yes",
+          "value": 1
+        }
+      ],
+      "options_source": "pdf_script+printed_form",
+      "source": {
+        "kind": "input_override",
+        "js_group": "Hemodialysis_twice_in_week_prior",
+        "overrides": "creatinine",
+        "forced_value": 353.6
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "creatinine",
+      "js_name": "Creatinine",
+      "label": "Creatinine",
+      "widget": "quantity",
+      "required": false,
+      "default": null,
+      "base_unit": "mcmol/L",
+      "display_unit": "mcmol/L",
+      "units": [
+        {
+          "code": "mcmol/L",
+          "label": "mcmol/L",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 88.4,
+        "max": 353.6
+      },
+      "messages": {
+        "min": "The minimum value for Creatinine is 88.4 mcmol/L.",
+        "max": "The maximum value for Creatinine is 353.6 mcmol/L."
+      },
+      "dimension": "creatinine",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Creatinine is 88.4 mcmol/L. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Creatinine is 353.6 mcmol/L. If you are specifying a value with a different unit, change the unit selector first."
+      ],
+      "required_when": {
+        "field": "hemodialysis_twice_in_week_prior",
+        "equals": [
+          0
+        ]
+      }
+    },
+    {
+      "key": "bilirubin",
+      "js_name": "Bilirubin",
+      "label": "Bilirubin",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mcmol/L",
+      "display_unit": "mcmol/L",
+      "units": [
+        {
+          "code": "mcmol/L",
+          "label": "mcmol/L",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 17.0
+      },
+      "messages": {
+        "min": "The minimum value for Bilirubin is 17 mcmol/L."
+      },
+      "dimension": "creatinine",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Bilirubin is 17 mcmol/L. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "inr",
+      "js_name": "INR",
+      "label": "INR",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "ratio",
+      "display_unit": "ratio",
+      "units": [
+        {
+          "code": "ratio",
+          "label": "ratio",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 1.0,
+        "max": 100.0
+      },
+      "messages": {
+        "min": "The minimum value for INR is 1 ratio.",
+        "max": "The maximum value for INR is 100 ratio."
+      },
+      "dimension": "fraction",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for INR is 1 ratio. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for INR is 100 ratio. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "creatinine_effective",
+        "expr": "(353.6) if (hemodialysis_twice_in_week_prior == 1) else (creatinine)",
+        "note": "Hemodialysis twice in week prior forces creatinine to 353.6"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "meld_score",
+        "js_name": "MELD_Score",
+        "label": "MELD Score",
+        "expr": "10 * ((0.957 * ln(creatinine_effective/88.4)) + (0.378 * ln(bilirubin/17.1)) + (1.12 * ln(inr))) + 6.43",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 0,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "MELD_Score = 10 * ((0.957 * ln(Creatinine/88.4)) + (0.378 * ln(Bilirubin/17.1)) + (1.12 * ln(INR))) + 6.43",
+    "notes": [
+      "The Model of End-stage Liver Disease, or MELD Score is used to estimate relative disease severity and likely survival of patients awaiting liver transplantation.",
+      "The MELDNa equations use Creatinine values between 88.4 and 353.6 mcmol/L, Bilirubin values of 17.1 mcmol/L or greater, and INR values of 1 or greater. Input values outside these ranges are internally converted to either the maximum or minimum values required by the equation.",
+      "Children under the age of 12 should be assessed by the PELD Score.",
+      "If a patient has had 2 or more hemodialysis treatments or 24 hours of CVVHD in the week prior to the time of the scoring, Creatinine will be set to 353.6 mcmol/L, the maximum creatinine level allowed in the model.",
+      "If the patient is between 12 and 17 years old, and has either a urea cycle disorder, organic acidemia or hepatoblastoma, the MELD Scoreshould be reported as 30.",
+      "For patients with hepatocellular carcinoma, the PELD/MELD score is increased according to an algorithm established by UNOS (United Network for Organ Sharing.)",
+      "Additional information about the MELD and PELD scores is at the UNOS website, http://optn.transplant.hrsa.gov/resources/professionalResources.asp?index=8"
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Kamath PS, Kim WR; Advanced Liver Disease Study Group. The model for end-stage liver Kamath PS, Kim WR; Advanced Liver Disease Study Group. The model for end-stage liver disease (MELD). Hepatology. 2007; 45:797.[PubMed 17326206]",
+        "pubmed_id": "17326206",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17326206/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 3
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "MELD Score (SI units).pdf",
+      "source_sha256": "c8ed224d09684a301e702abf8c3e22bc7514f5613c9c330c7ed568fa92babfb8",
+      "extractor": "pdf",
+      "form_name": "MELD_SI",
+      "identity": {
+        "doc_id": "70017",
+        "title": "MELD Score (SI units)",
+        "form_name": "MELD_SI",
+        "filename_title": "MELD Score (SI units)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('MELD Score (SI units)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (meldscoresiunits)",
+          "title_vs_form": "differs (meldscoresiunits vs meldsi) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf114",
+      "title": "MELD Score (SI units)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 93.8,
+    "checks_passed": 15,
+    "checks_total": 16,
+    "missing": [
+      "unit options on every field"
+    ]
+  }
+}

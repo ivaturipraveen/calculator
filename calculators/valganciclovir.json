@@ -1,0 +1,335 @@
+{
+  "schema_version": "1.0",
+  "slug": "valganciclovir",
+  "title": "ValGANciclovir",
+  "subtitle": null,
+  "category": "Pediatrics",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "form",
+      "label": "Dosage Form",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "form",
+        "id_const": "ID_FORM"
+      },
+      "label_source": "printed form (qualified name)"
+    },
+    {
+      "key": "height",
+      "label": "Height",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 15.0,
+        "max": 229.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "height",
+        "id_const": "ID_HEIGHT"
+      },
+      "label_source": "printed form",
+      "help": [
+        "Height must be between 15 and 229."
+      ]
+    },
+    {
+      "key": "weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 2.5,
+        "max": 100.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "weight",
+        "id_const": "ID_WEIGHT"
+      },
+      "label_source": "printed form",
+      "help": [
+        "Weight must be between 2.5 and 100."
+      ]
+    },
+    {
+      "key": "sr_cr",
+      "label": "Serum Creatinine",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "SrCr",
+        "id_const": "ID_SRCR"
+      },
+      "label_source": "printed form (word match)"
+    },
+    {
+      "key": "id_gender",
+      "label": "Gender",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "ID_GENDER",
+        "id_const": "ID_GENDER"
+      },
+      "label_source": "printed form (word match)",
+      "options": [
+        {
+          "label": "MALE",
+          "value": "MALE"
+        },
+        {
+          "label": "FEMALE",
+          "value": "FEMALE"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "id_k_age_m",
+      "label": "Age band (male)",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "ID_K_AGE_M",
+        "id_const": "ID_K_AGE_M"
+      },
+      "visible_when": {
+        "field": "id_gender",
+        "equals": [
+          "MALE"
+        ]
+      },
+      "options": [
+        {
+          "label": "Patients <1 year AND Birth weight = Low birth weight for gestational age",
+          "value": 0.33
+        },
+        {
+          "label": "Patients <1 year AND Birth weight = Appropriate birth weight for gestational age",
+          "value": 0.45
+        },
+        {
+          "label": "All Patients ≥1 year to <2 years",
+          "value": 0.45
+        },
+        {
+          "label": "Males ≥2 to <13 years",
+          "value": 0.55
+        },
+        {
+          "label": "Males ≥13 to ≤16 years",
+          "value": 0.7
+        }
+      ],
+      "options_source": "printed formula"
+    },
+    {
+      "key": "id_k_age_f",
+      "label": "Age band (female)",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "ID_K_AGE_F",
+        "id_const": "ID_K_AGE_F"
+      },
+      "visible_when": {
+        "field": "id_gender",
+        "equals": [
+          "FEMALE"
+        ]
+      },
+      "options": [
+        {
+          "label": "Patients <1 year AND Birth weight = Low birth weight for gestational age",
+          "value": 0.33
+        },
+        {
+          "label": "Patients <1 year AND Birth weight = Appropriate birth weight for gestational age",
+          "value": 0.45
+        },
+        {
+          "label": "All Patients ≥1 year to <2 years",
+          "value": 0.45
+        },
+        {
+          "label": "Females ≥2 years to ≤16 years",
+          "value": 0.55
+        }
+      ],
+      "options_source": "printed formula"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "clcr_max",
+        "expr": "150.0",
+        "note": "module constant"
+      },
+      {
+        "key": "body_surface_area",
+        "expr": "sqrt(height * weight / 3600)"
+      },
+      {
+        "key": "k",
+        "expr": "(id_k_age_m) if (id_gender == 'MALE') else (id_k_age_f)"
+      },
+      {
+        "key": "clcr",
+        "expr": "k * height / sr_cr"
+      },
+      {
+        "key": "clcr_v2",
+        "expr": "(150) if (clcr > clcr_max) else (clcr)"
+      },
+      {
+        "key": "dose_mg",
+        "expr": "7 * body_surface_area * clcr_v2"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "output_dose_mg",
+        "label": "Dose (mg)",
+        "expr": "(((450) if ((round(dose_mg / 10) * 10) >= 405 and (round(dose_mg / 10) * 10) <= 495) else ((900) if ((round(dose_mg / 10) * 10) >= 810) else (round(dose_mg / 10) * 10)))) if ((form > 1) and (not (dose_mg < 5)) and (not (dose_mg >= 5 and dose_mg < 20)) and (not (dose_mg > 900))) else (0)",
+        "decimals": 0,
+        "base_unit": "mg",
+        "kind": "number",
+        "label_source": "printed form (position)",
+        "unit_source": "formula_prose"
+      },
+      {
+        "key": "output_dose_ml",
+        "label": "Dose (mL)",
+        "expr": "((((450) if ((round(dose_mg / 10) * 10) >= 405 and (round(dose_mg / 10) * 10) <= 495) else ((900) if ((round(dose_mg / 10) * 10) >= 810) else (round(dose_mg / 10) * 10))) / 50)) if ((form > 1) and (not (dose_mg < 5)) and (not (dose_mg >= 5 and dose_mg < 20)) and (not (dose_mg > 900)) and (form > 1)) else (0)",
+        "decimals": 1,
+        "base_unit": "mL",
+        "kind": "number",
+        "label_source": "printed form (position)",
+        "unit_source": "formula_prose"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 0,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "BSA = sqrt [(height * weight) / 3600]\nBSA is calculated in m2\nsqrt = square root\nHeight input in cm\nWeight input in kg\nCrCl = (k * height) / SCr\nCrCl is calculated in mL/minute/1.73 m2\nHeight input in cm\nSCr = Serum creatinine input in mg/dL\nk is as follows:\nPatients <1 year AND Birth weight = Low birth weight for gestational age\nk = 0.33\nPatients <1 year AND Birth weight = Appropriate birth weight for gestational age\nk = 0.45\nAll Patients ≥1 year to <2 years\nk = 0.45\nFemales ≥2 years to ≤16 years\nk = 0.55\nMales ≥2 to <13 years\nk = 0.55\nMales ≥13 to ≤16 years\nk = 0.7\nNote: If the calculated ClCr is >150 mL/minute/1.73 m2, then a maximum value of 150\nmL/minute/1.73 m2 is used to calculate the dose.\nDose (mg) = 7 * BSA * CrCl\nDose (mg) is calculated in mg\nNote: Calculated dose must be ≥5 mg for an output to be generated.\nNote: When Oral solution (50 mg/mL) is selected as the dosage form AND the calculated dose\nis ≥5 mg and <20 mg, the answer is rounded to the nearest 5 mg increment.\nis ≥5 mg and <20 mg, the answer is rounded to the nearest 5 mg increment.\nNote: When Oral solution (50 mg/mL) is selected as the dosage form AND the calculated dose\nis ≥20 mg, the answer is rounded to the nearest 10 mg increment.\nNote: When Tablet is selected as the dosage form, a recommended dose is only generated if\nthe calculated dose is within 10% of the available tablet dosage strength. The calculated dose\nis then rounded to the nearest increment of 450 mg (eg, 450 mg or 900 mg) with a maximum\nvalue of 900 mg.\nDose (mL) = Dose (mg) / 50\nDose (mL) is calculated in mL\nDose (mg) is input in mg\nNote: Dose (mL) is rounded to the nearest 0.1 mL when the calculated dose is <20 mg and 0.2\nmL when the calculated dose is ≥20 mg.",
+    "notes": [
+      "When the oral solution is chosen as the dosage form, the dose in mg is rounded to the nearest 5 mg (for calculated doses ≥5 mg and <20 mg) or 10 mg (for calculated doses ≥20 mg) increment. The preferred dosage form for pediatric patients is the oral solution; however, valganciclovir tablets may used so long as the calculated dose is within 10% of the available tablet strength (450 mg)."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again. This calculation is intended to be used in pediatric patients ≤16 years; for children >16 years, refer to adult dosing.",
+    "stated_limits": [
+      {
+        "name": "ClCr",
+        "applies_to": "clcr_max",
+        "max": 150.0
+      }
+    ],
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 2
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "ValGANciclovir.pdf",
+      "source_sha256": "8860317eb931047eb391d044f87d4302f91ec245d977de28348db7cd4c2bf2d7",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "ValGANciclovir",
+        "form_name": null,
+        "filename_title": "ValGANciclovir",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('ValGANciclovir')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (valganciclovir)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf174",
+      "title": "ValGANciclovir",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 92.3,
+    "checks_passed": 12,
+    "checks_total": 13,
+    "missing": [
+      "unit options on every field"
+    ]
+  }
+}

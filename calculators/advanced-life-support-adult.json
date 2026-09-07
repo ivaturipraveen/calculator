@@ -1,0 +1,882 @@
+{
+  "schema_version": "1.0",
+  "slug": "advanced-life-support-adult",
+  "title": "Advanced Life Support: Adult",
+  "subtitle": null,
+  "category": "Emergency Medicine / Dosing Reference",
+  "renderer": "dose_table",
+  "engine": "dose_table",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "weight",
+      "label": "Weight",
+      "type": "select",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "options": [],
+      "label_source": "printed form",
+      "base_unit": "kg",
+      "unit_source": "formula_prose",
+      "help": [
+        "Weight must be a valid value."
+      ],
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "display_unit": "kg",
+      "dimension": "mass",
+      "units_source": "corpus unit registry"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": null,
+  "tables": {
+    "drugs": [
+      {
+        "name": "Adenosine",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 3,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": false,
+                "amt": 6,
+                "unit": "mg",
+                "decimals": 1,
+                "note": "Rapid IV/IO push over 1–2 seconds into the line closest to the heart, immediately followed by a rapid 20 mL NS flush and limb elevation."
+              },
+              {
+                "phase": "Repeat",
+                "perKg": false,
+                "amt": 12,
+                "unit": "mg",
+                "decimals": 1,
+                "note": "May repeat once 1–2 minutes after the initial dose if needed."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Amiodarone (AFib/AFlutter/Stable VT)",
+        "routes": [
+          {
+            "label": "IV",
+            "conc": 50,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": false,
+                "amt": 150,
+                "unit": "mg",
+                "decimals": 1,
+                "note": "Dilute in 100 mL D5W or NS; infuse over 10 minutes."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Amiodarone (VF/Pulseless VT)",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 50,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": false,
+                "amt": 300,
+                "unit": "mg",
+                "decimals": 1,
+                "note": "Rapid bolus over 1–2 seconds during ongoing CPR; dilute in 20–30 mL D5W if time allows."
+              },
+              {
+                "phase": "Repeat",
+                "perKg": false,
+                "amt": 150,
+                "unit": "mg",
+                "decimals": 1,
+                "note": "May repeat once for refractory VF/pulseless VT."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Atropine (Bradycardia)",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 0.1,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": false,
+                "amt": [
+                  0.5,
+                  1
+                ],
+                "unit": "mg",
+                "decimals": 2,
+                "note": "Repeat every 3–5 minutes as needed; maximum total dose 3 mg."
+              }
+            ]
+          },
+          {
+            "label": "ETT",
+            "conc": 0.1,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": false,
+                "amt": [
+                  1,
+                  2
+                ],
+                "unit": "mg",
+                "decimals": 2,
+                "note": "Dilute in 5–10 mL NS or sterile water; follow with several quick insufflations."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Calcium Chloride (10%)",
+        "routes": [
+          {
+            "label": "IV",
+            "conc": 100,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": false,
+                "amt": [
+                  500,
+                  1000
+                ],
+                "unit": "mg",
+                "decimals": 0,
+                "note": "For hyperkalemia, hypocalcemia, hypermagnesemia, or calcium channel blocker toxicity."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Cardioversion (synchronized) — AFib",
+        "routes": [
+          {
+            "label": "Monophasic device",
+            "energyOnly": true,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": false,
+                "amt": 200,
+                "unit": "J",
+                "decimals": 0,
+                "note": "Synchronized cardioversion; sedate whenever possible."
+              }
+            ]
+          },
+          {
+            "label": "Biphasic device",
+            "energyOnly": true,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": false,
+                "amt": [
+                  120,
+                  200
+                ],
+                "unit": "J",
+                "decimals": 0,
+                "note": "Device-specific; increase stepwise if unsuccessful; sedate whenever possible."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Cardioversion (synchronized) — AFlutter/SVT",
+        "routes": [
+          {
+            "label": "Monophasic device",
+            "energyOnly": true,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": false,
+                "amt": 200,
+                "unit": "J",
+                "decimals": 0,
+                "note": "Synchronized cardioversion; sedate whenever possible."
+              }
+            ]
+          },
+          {
+            "label": "Biphasic device",
+            "energyOnly": true,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": false,
+                "amt": [
+                  50,
+                  100
+                ],
+                "unit": "J",
+                "decimals": 0,
+                "note": "Increase stepwise (100, 200, then 360 J); sedate whenever possible."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Defibrillation (VF/Pulseless VT)",
+        "routes": [
+          {
+            "label": "Monophasic device",
+            "energyOnly": true,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": false,
+                "amt": 360,
+                "unit": "J",
+                "decimals": 0,
+                "note": "Repeat at the same dose; may also use for polymorphic VT (e.g., torsade de pointes)."
+              }
+            ]
+          },
+          {
+            "label": "Biphasic device",
+            "energyOnly": true,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": false,
+                "amt": [
+                  120,
+                  200
+                ],
+                "unit": "J",
+                "decimals": 0,
+                "note": "Repeat at the same or a higher dose; device-specific; may also use for polymorphic VT."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Dextrose (50%)",
+        "routes": [
+          {
+            "label": "IV",
+            "conc": 0.5,
+            "concUnit": "g/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": false,
+                "amt": 25,
+                "unit": "g",
+                "decimals": 1,
+                "note": "For hypoglycemia; administer as a bolus over 1–2 minutes."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "DOBUTamine",
+        "routes": [
+          {
+            "label": "Infusion",
+            "conc": 2,
+            "concUnit": "mg/mL",
+            "concFactor": 1000,
+            "doses": [
+              {
+                "phase": "Infusion Rate",
+                "perKg": true,
+                "amt": [
+                  2.5,
+                  20
+                ],
+                "unit": "mcg",
+                "rate": true,
+                "decimals": 1,
+                "note": "Titrate to effect; maximum dose 40 mcg/kg/minute."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "DOPamine",
+        "routes": [
+          {
+            "label": "Infusion",
+            "conc": 1.6,
+            "concUnit": "mg/mL",
+            "concFactor": 1000,
+            "doses": [
+              {
+                "phase": "Infusion Rate",
+                "perKg": true,
+                "amt": [
+                  2.5,
+                  20
+                ],
+                "unit": "mcg",
+                "rate": true,
+                "decimals": 1,
+                "note": "May initiate at 10–15 mcg/kg/minute for severe hypotension; titrate to response. Maximum 50 mcg/kg/minute — doses >20 mcg/kg/minute may not add benefit and may increase tachyarrhythmia risk."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "EPINEPHrine (infusion)",
+        "routes": [
+          {
+            "label": "Infusion",
+            "conc": 2,
+            "concUnit": "mcg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Infusion Rate",
+                "perKg": false,
+                "amt": [
+                  2,
+                  10
+                ],
+                "unit": "mcg",
+                "rate": true,
+                "decimals": 1,
+                "note": "Titrate to response."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "EPINEPHrine (1:1,000)",
+        "routes": [
+          {
+            "label": "ETT",
+            "conc": 1,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": false,
+                "amt": [
+                  2,
+                  2.5
+                ],
+                "unit": "mg",
+                "decimals": 2,
+                "note": "Dilute in 5–10 mL NS or sterile water; follow with several quick insufflations. This dose is 2–2.5 times the recommended IV dose; IV/IO routes preferred. Repeat every 3–5 minutes as needed."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "EPINEPHrine (1:10,000)",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 0.1,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": false,
+                "amt": 1,
+                "unit": "mg",
+                "decimals": 2,
+                "note": "Administer as a rapid bolus; repeat every 3–5 minutes as needed."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Lidocaine",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 10,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": true,
+                "amt": [
+                  1,
+                  1.5
+                ],
+                "unit": "mg",
+                "max": 300,
+                "decimals": 1,
+                "note": "Administer by rapid bolus."
+              },
+              {
+                "phase": "Repeat",
+                "perKg": true,
+                "amt": [
+                  0.5,
+                  0.75
+                ],
+                "unit": "mg",
+                "max": 150,
+                "decimals": 1,
+                "note": "May repeat every 5–10 minutes; maximum cumulative dose 3 mg/kg."
+              }
+            ]
+          },
+          {
+            "label": "ETT",
+            "conc": 10,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": true,
+                "amt": [
+                  2,
+                  3.75
+                ],
+                "unit": "mg",
+                "max": 750,
+                "decimals": 1,
+                "note": "Administer by rapid bolus."
+              }
+            ]
+          },
+          {
+            "label": "Infusion",
+            "conc": 4,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Infusion Rate",
+                "perKg": false,
+                "amt": [
+                  1,
+                  4
+                ],
+                "unit": "mg",
+                "rate": true,
+                "decimals": 1,
+                "note": "Monitor serum concentrations closely; reduced dose recommended with hepatic impairment."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Magnesium Sulfate",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 500,
+            "concUnit": "mg/mL",
+            "concFactor": 0.001,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": false,
+                "amt": [
+                  1,
+                  2
+                ],
+                "unit": "g",
+                "decimals": 2,
+                "note": "For torsade de pointes or suspected hypomagnesemia; dilute and infuse over 5–60 minutes if not in cardiac arrest."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Naloxone",
+        "routes": [
+          {
+            "label": "IV/IM/SubQ/IO",
+            "conc": 1,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": false,
+                "amt": [
+                  0.04,
+                  2
+                ],
+                "unit": "mg",
+                "decimals": 2,
+                "note": "Titrate to reverse respiratory depression; opioid-dependent patients should receive the lower end of the range, with repeat dosing or escalation as needed."
+              }
+            ]
+          },
+          {
+            "label": "Intranasal",
+            "conc": 1,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": false,
+                "amt": 2,
+                "unit": "mg",
+                "decimals": 2,
+                "note": "Administer via mucosal atomization device (MAD), dose divided equally between nostrils; if MAD unavailable, may spray directly into nares (results in significant drug loss)."
+              }
+            ]
+          },
+          {
+            "label": "ETT",
+            "conc": 1,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial/Repeat",
+                "perKg": false,
+                "amt": [
+                  0.08,
+                  5
+                ],
+                "unit": "mg",
+                "decimals": 2,
+                "note": "Dilute in 10 mL NS or sterile water; follow with several quick insufflations."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Norepinephrine",
+        "routes": [
+          {
+            "label": "Infusion",
+            "conc": 16,
+            "concUnit": "mcg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Infusion Rate",
+                "perKg": true,
+                "amt": [
+                  0.1,
+                  0.5
+                ],
+                "unit": "mcg",
+                "rate": true,
+                "decimals": 2,
+                "note": "Titrate to response for shock/hypotension."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Procainamide",
+        "routes": [
+          {
+            "label": "Infusion",
+            "conc": 8,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Maintenance Infusion",
+                "perKg": false,
+                "amt": [
+                  1,
+                  4
+                ],
+                "unit": "mg",
+                "rate": true,
+                "decimals": 2,
+                "note": "Maintenance infusion after loading dose."
+              }
+            ]
+          },
+          {
+            "label": "IV (loading)",
+            "conc": 100,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": true,
+                "amt": 17,
+                "unit": "mg",
+                "max": 1500,
+                "decimals": 1,
+                "note": "Infuse no faster than 20–50 mg/minute; stop if hypotension develops, QRS widens >50%, or the maximum dose is reached."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Sodium Bicarbonate",
+        "routes": [
+          {
+            "label": "IV",
+            "conc": 1,
+            "concUnit": "mEq/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": true,
+                "amt": 1,
+                "unit": "mEq",
+                "max": 200,
+                "decimals": 1,
+                "note": "For known/suspected hyperkalemia, tricyclic antidepressant overdose, or severe metabolic acidosis; not routinely recommended in cardiac arrest."
+              },
+              {
+                "phase": "Repeat",
+                "perKg": true,
+                "amt": 0.5,
+                "unit": "mEq",
+                "max": 100,
+                "decimals": 1,
+                "note": "Repeat every 10 minutes as guided by arterial blood gases; dose is often rounded to the nearest 50 or 100 mEq."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Sotalol",
+        "routes": [
+          {
+            "label": "IV",
+            "conc": 15,
+            "concUnit": "mg/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": true,
+                "amt": 1.5,
+                "unit": "mg",
+                "max": 150,
+                "decimals": 1,
+                "note": "Infuse slowly over 5 minutes."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Vasopressin",
+        "routes": [
+          {
+            "label": "IV/IO",
+            "conc": 20,
+            "concUnit": "units/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": false,
+                "amt": 40,
+                "unit": "units",
+                "decimals": 0,
+                "note": "May be used to replace the first or second dose of epinephrine in cardiac arrest."
+              }
+            ]
+          },
+          {
+            "label": "ETT",
+            "conc": 20,
+            "concUnit": "units/mL",
+            "concFactor": 1,
+            "doses": [
+              {
+                "phase": "Initial",
+                "perKg": false,
+                "amt": 40,
+                "unit": "units",
+                "decimals": 0,
+                "note": "Dilute and administer via ETT if IV/IO access is unavailable."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": "In general, the formulas used to populate the table are:\nDose = Weight * Weight-Based Dose\n• Dose is calculated in units that correspond to the Weight-Based Dose (eg, mg, g,\nmg/minute)\n• Weight is input in kg\n• Weight-Based Dose units are drug-specific\n• Weight-Based Dose units are drug-specific\nNote: A dosage range may be provided; each portion of the range is calculated using the\nabove formula. Some agents have fixed-dose recommendations which are not\naffected by the weight input by the user.\nVolume = Dose / Concentration\n• Volume is calculated in units that correspond to the Dose and Concentration\nWhen the dose is provided as a rate (eg, mcg/minute), the volume to be administered will\nalso be calculated as a rate according to the following formula:\nInfuse Rate = (Dose / Concentration) / Time\n• Infuse Rate is calculated in units that correspond to the Dose, Concentration,\nand Time of administration\nNote: A range of volumes or rates may be provided; each portion of the range is\ncalculated using the above formula(s).",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "American Heart Association. Adult bradycardia algorithm. https://cpr.heart.org/en/resuscitation- science/cpr-and-ecc-guidelines/algorithms. Published 2020. Accessed January 25, 2021.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Field JM, Hazinski MF, Sayre MR, et al. Part 1: Executive Summary: 2010 American Heart Association Guidelines for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Circulation. 2010;122 (Suppl 3):640-56. [PubMed 20956217]",
+        "pubmed_id": "20956217",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20956217/"
+      },
+      {
+        "text": "Hollenberg SM, Ahrens TS, Annane D, et al. Practice Parameters for Hemodynamic Support of Sepsis in Adult Patients: 2004 update. Crit Care Med. 2004;32(9):1928-48. [PubMed15343024]",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Neumar RW, Shuster M, Callaway CW, et al. Part 1: Executive Summary: 2015 American Heart Association Guidelines Update for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care. Circulation. 2015;132(18 Suppl 2):S315-S367. [PubMed26472989]",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Panchal AR, Bartos JA, Cabanas JG, et al; Adult Basic and Advanced Life Support Writing Group.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Part 3: Adult Basic and Advanced Life Support: 2020 American Heart Association Guidelines for Cardiopulmonary Resuscitation and Emergency Cardiovascular Care. Circulation. 2020;142(16 Suppl 2):S366-S468. [PubMed 33081529]",
+        "pubmed_id": "33081529",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/33081529/"
+      }
+    ],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": null,
+    "stated_limits": [
+      {
+        "name": "Weight",
+        "applies_to": null,
+        "min": 20.0
+      }
+    ],
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 1
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Advanced Life Support- Adult.pdf",
+      "source_sha256": "4e7e056c7b0be419b09440dbc3f9d1acbbb751948a2757ebc489333b90bc7803",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "3504222",
+        "title": "Advanced Life Support: Adult",
+        "form_name": null,
+        "filename_title": "Advanced Life Support- Adult",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Advanced Life Support: Adult')",
+          "doc_id": "present (3504222)",
+          "title_vs_filename": "MATCH (advancedlifesupportadult)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "als_adult",
+      "title": "Advanced Life Support: Adult",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "inputs_from_printed_form_only",
+        "severity": "medium",
+        "detail": "1 field(s) recovered from the printed form; the calculation itself is not in the PDF"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 5,
+    "checks_total": 5,
+    "missing": []
+  }
+}

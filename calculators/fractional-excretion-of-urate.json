@@ -1,0 +1,200 @@
+{
+  "schema_version": "1.0",
+  "slug": "fractional-excretion-of-urate",
+  "title": "Fractional Excretion of Urate",
+  "subtitle": null,
+  "category": "Renal Function",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "urine_urate",
+      "js_name": "Urine_Urate",
+      "label": "Urine Urate",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/dL",
+      "display_unit": "mg/dL",
+      "units": [
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "creatinine",
+      "label_source": "printed form"
+    },
+    {
+      "key": "serum_urate",
+      "js_name": "Serum_Urate",
+      "label": "Serum Urate",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/dL",
+      "display_unit": "mg/dL",
+      "units": [
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "creatinine",
+      "label_source": "printed form"
+    },
+    {
+      "key": "urine_cr",
+      "js_name": "Urine_Cr",
+      "label": "Urine Cr",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/dL",
+      "display_unit": "mg/dL",
+      "units": [
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "creatinine",
+      "label_source": "printed form"
+    },
+    {
+      "key": "serum_cr",
+      "js_name": "Serum_Cr",
+      "label": "Serum Cr",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/dL",
+      "display_unit": "mg/dL",
+      "units": [
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "creatinine",
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "fe_urate",
+        "js_name": "FE_Urate",
+        "label": "FE Urate",
+        "expr": "(urine_urate / serum_urate) / (urine_cr / serum_cr) * 100",
+        "base_unit": "%",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "FE_Urate = (Urine_Urate / Serum_Urate) / (Urine_Cr / Serum_Cr) * 100",
+    "notes": [
+      "In the article below, FE Urate in 72 controls was 7.57 +/- 1.85%.",
+      "Data for 100 gout patients showed a FE Urate of 4.59 +/- 1.19%."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Perez-Ruiz F, Calabozo M, Erauskin GG, et.al. Renal underexcretion of uric acid is present in patients with apparent high urinary uric acid output. Arthritis Rheum. 2002 Dec 15;47(6):610-3.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "[PubMed 12522834]",
+        "pubmed_id": "12522834",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12522834/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Fractional Excretion of Urate.pdf",
+      "source_sha256": "1a1c6c681202a1d89e4d97cc3da93cd4c0265450de556fe4d4b032a60f0fa048",
+      "extractor": "pdf",
+      "form_name": "FractExcUrate",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Fractional Excretion of Urate",
+        "form_name": "FractExcUrate",
+        "filename_title": "Fractional Excretion of Urate",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Fractional Excretion of Urate')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (fractionalexcretionofurate)",
+          "title_vs_form": "differs (fractionalexcretionofurate vs fractexcurate) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf89",
+      "title": "Fractional Excretion of Urate",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 87.5,
+    "checks_passed": 14,
+    "checks_total": 16,
+    "missing": [
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

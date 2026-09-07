@@ -1,0 +1,189 @@
+{
+  "schema_version": "1.0",
+  "slug": "dose-driven-iv-drip-rate-calculator",
+  "title": "Dose Driven IV-Drip Rate Calculator",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "desired_dose",
+      "js_name": "Desired_Dose",
+      "label": "Desired Dose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/kg/min",
+      "display_unit": "mg/kg/min",
+      "units": [
+        {
+          "code": "mg/kg/min",
+          "label": "mg/kg/min",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "weight",
+      "js_name": "Weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "display_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "mass",
+      "label_source": "printed form"
+    },
+    {
+      "key": "drug_in_bag",
+      "js_name": "Drug_In_Bag",
+      "label": "Drug In Bag",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg",
+      "display_unit": "mg",
+      "units": [
+        {
+          "code": "mg",
+          "label": "mg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "mass",
+      "label_source": "printed form"
+    },
+    {
+      "key": "bag_volume",
+      "js_name": "Bag_Volume",
+      "label": "Bag Volume",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mL",
+      "display_unit": "mL",
+      "units": [
+        {
+          "code": "mL",
+          "label": "mL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "volume",
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "iv_drip_rate",
+        "js_name": "IV_Drip_Rate",
+        "label": "IV Drip Rate",
+        "expr": "(60 * desired_dose * weight * bag_volume) / drug_in_bag",
+        "base_unit": "mL/hr",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "IV_Drip_Rate = (60 * Desired_Dose * Weight * Bag_Volume) / Drug_In_Bag",
+    "notes": [
+      "In this calculator, mcg is the abbreviation for micrograms.",
+      "When first accessed, the calulator assumes an IV Drip Rate in mL/hr, Weight in kg, and Bag Volume in mL. These, the Desired Dose rate, and Drug In Bag may be freely interchanged."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 267797 v22.4]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Dose Driven IV-Drip Rate Calculator.pdf",
+      "source_sha256": "b64c330fa8d0cde8c19e9c822405c55ac9b6a771df0ad08b598db24ff6234f4a",
+      "extractor": "pdf",
+      "form_name": "DoseDrivenDripRate",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Dose Driven IV-Drip Rate Calculator",
+        "form_name": "DoseDrivenDripRate",
+        "filename_title": "Dose Driven IV-Drip Rate Calculator",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Dose Driven IV-Drip Rate Calculator')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (dosedrivenivdripratecalculator)",
+          "title_vs_form": "differs (dosedrivenivdripratecalculator vs dosedrivendriprate) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf74",
+      "title": "Dose Driven IV-Drip Rate Calculator",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 86.7,
+    "checks_passed": 13,
+    "checks_total": 15,
+    "missing": [
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

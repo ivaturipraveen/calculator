@@ -1,0 +1,224 @@
+{
+  "schema_version": "1.0",
+  "slug": "timi-risk-score-ua-nstemi",
+  "title": "TIMI Risk Score (UA/NSTEMI)",
+  "subtitle": null,
+  "category": "Cardiology / Scoring System",
+  "renderer": "score",
+  "engine": "score",
+  "status": "draft",
+  "version": 1,
+  "inputs": [],
+  "compute": {
+    "engine": "score",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": {
+    "groups": [
+      {
+        "key": "ungrouped",
+        "label": "(ungrouped)",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_0_0",
+            "label": "Age ≥65",
+            "points": 1
+          },
+          {
+            "key": "opt_0_1",
+            "label": "3 or more CAD risk factors",
+            "points": 1
+          },
+          {
+            "key": "opt_0_2",
+            "label": "Known CAD with more than 50% stenosis",
+            "points": 1
+          },
+          {
+            "key": "opt_0_3",
+            "label": "Aspirin use in the past 7 days",
+            "points": 1
+          },
+          {
+            "key": "opt_0_4",
+            "label": "Severe angina in the preceeding 24 hours",
+            "points": 1
+          },
+          {
+            "key": "opt_0_5",
+            "label": "Elevated cardiac markers",
+            "points": 1
+          },
+          {
+            "key": "opt_0_6",
+            "label": "ST deviation greater than 0.5 mm",
+            "points": 1
+          }
+        ]
+      }
+    ],
+    "bands": [
+      {
+        "min": 0,
+        "max": 1,
+        "label": "3% ** 5%",
+        "raw": "0 to 1 Point: 3% ** 5%"
+      },
+      {
+        "min": 2,
+        "max": 2,
+        "label": "3% ** 8%",
+        "raw": "2 Points: 3% ** 8%"
+      },
+      {
+        "min": 3,
+        "max": 3,
+        "label": "5% ** 13%",
+        "raw": "3 Points: 5% ** 13%"
+      },
+      {
+        "min": 4,
+        "max": 4,
+        "label": "7% ** 20%",
+        "raw": "4 Points: 7% ** 20%"
+      },
+      {
+        "min": 5,
+        "max": 5,
+        "label": "12% ** 26%",
+        "raw": "5 Points: 12% ** 26%"
+      },
+      {
+        "min": 6,
+        "max": 7,
+        "label": "19% ** 41%",
+        "raw": "6 to 7 Points: 19% ** 41%"
+      }
+    ],
+    "total": {
+      "key": "total_score",
+      "label": "Total Criteria Point Count",
+      "unit": "points",
+      "min": 1.0,
+      "max": 1.0
+    },
+    "interpretation": {
+      "key": "interpretation",
+      "label": "TIMI Score and 2 week Death / MI Risk ** Death / MI / Urgent Revasc Risk Interpretation",
+      "printed_rows": [
+        "TIMI Score and 2 week Death / MI Risk ** Death / MI / Urgent Revasc Risk Interpretation"
+      ]
+    }
+  },
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [
+      "Entry criteria:UA or NSTEMII defined as ischemic pain at rest within past 24H, with evidence of CAD (ST segment deviation or +marker).",
+      "CAD risk factors included hypertension, family history of CAD, elevated cholesterol, diabetes, and smoking."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Antman EM, Cohen M, Bernink PJ, et al. The TIMI risk score for unstable angina/non-ST elevation MI: A method for prognostication and therapeutic decision making. JAMA. 2000 Aug 16;284(7):835-42.[PubMed 10938172]",
+        "pubmed_id": "10938172",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10938172/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": [
+      {
+        "label": "3% **",
+        "value": 5.0,
+        "unit": "%"
+      },
+      {
+        "label": "3% **",
+        "value": 5.0,
+        "unit": "%"
+      },
+      {
+        "label": "3% **",
+        "value": 8.0,
+        "unit": "%"
+      },
+      {
+        "label": "5% **",
+        "value": 13.0,
+        "unit": "%"
+      },
+      {
+        "label": "7% **",
+        "value": 20.0,
+        "unit": "%"
+      },
+      {
+        "label": "12% **",
+        "value": 26.0,
+        "unit": "%"
+      },
+      {
+        "label": "6 to 7 Points: 19% **",
+        "value": 41.0,
+        "unit": "%"
+      }
+    ],
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "TIMI Risk Score (UA-NSTEMI).pdf",
+      "source_sha256": "9eff7e75a11272eebf23a87090d853e19b84655bb22ddffc8d7b96ebf27355dd",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "TIMI Risk Score (UA/NSTEMI)",
+        "form_name": null,
+        "filename_title": "TIMI Risk Score (UA-NSTEMI)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('TIMI Risk Score (UA/NSTEMI)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (timiriskscoreuanstemi)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf161",
+      "title": "TIMI Risk Score (UA/NSTEMI)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 9,
+    "checks_total": 9,
+    "missing": []
+  }
+}

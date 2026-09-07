@@ -1,0 +1,291 @@
+{
+  "schema_version": "1.0",
+  "slug": "cha2ds2-vasc-score",
+  "title": "CHA2DS2-VASc Score",
+  "subtitle": null,
+  "category": "Scoring System",
+  "renderer": "score",
+  "engine": "score",
+  "status": "draft",
+  "version": 1,
+  "inputs": [],
+  "compute": {
+    "engine": "score",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": {
+    "groups": [
+      {
+        "key": "clinical features",
+        "label": "Clinical Features",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_0_0",
+            "label": "Congestive heart failure / LV dysfunction",
+            "points": 1
+          },
+          {
+            "key": "opt_0_1",
+            "label": "Hypertension",
+            "points": 1
+          },
+          {
+            "key": "opt_0_2",
+            "label": "Diabetes Mellitus",
+            "points": 1
+          },
+          {
+            "key": "opt_0_3",
+            "label": "History of stroke, TIA or thromboembolism",
+            "points": 2
+          },
+          {
+            "key": "opt_0_4",
+            "label": "Vascular disease (history of MI, PVD or aortic atherosclerosis)",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "key": "age",
+        "label": "Age",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_1_0",
+            "label": "65-74 years old",
+            "points": 1
+          },
+          {
+            "key": "opt_1_1",
+            "label": "≥75 years old",
+            "points": 2
+          }
+        ]
+      },
+      {
+        "key": "sex",
+        "label": "Sex",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_2_0",
+            "label": "Female",
+            "points": 1
+          },
+          {
+            "key": "opt_2_1",
+            "label": "Male",
+            "points": 0
+          }
+        ]
+      }
+    ],
+    "bands": [
+      {
+        "min": 0,
+        "max": 0,
+        "label": "0% per year",
+        "raw": "0 points: 0% per year"
+      },
+      {
+        "min": 1,
+        "max": 1,
+        "label": "1.3% per year",
+        "raw": "1 point: 1.3% per year"
+      },
+      {
+        "min": 2,
+        "max": 2,
+        "label": "2.2% per year",
+        "raw": "2 points: 2.2% per year"
+      },
+      {
+        "min": 3,
+        "max": 3,
+        "label": "3.2% per year",
+        "raw": "3 points: 3.2% per year"
+      },
+      {
+        "min": 4,
+        "max": 4,
+        "label": "4% per year",
+        "raw": "4 points: 4% per year"
+      },
+      {
+        "min": 5,
+        "max": 5,
+        "label": "6.7% per year",
+        "raw": "5 points: 6.7% per year"
+      },
+      {
+        "min": 6,
+        "max": 6,
+        "label": "9.8% per year",
+        "raw": "6 points: 9.8% per year"
+      },
+      {
+        "min": 7,
+        "max": 7,
+        "label": "9.6% per year",
+        "raw": "7 points: 9.6% per year"
+      },
+      {
+        "min": 8,
+        "max": 8,
+        "label": "6.7% per year",
+        "raw": "8 points: 6.7% per year"
+      },
+      {
+        "min": 9,
+        "max": 9,
+        "label": "15.2% per year",
+        "raw": "9 points: 15.2% per year"
+      }
+    ],
+    "total": {
+      "key": "total_score",
+      "label": "Total Criteria Point Count",
+      "unit": "points",
+      "min": 2.0,
+      "max": 5.0
+    },
+    "interpretation": {
+      "key": "interpretation",
+      "label": "Adjusted Stroke Rate",
+      "printed_rows": [
+        "Adjusted Stroke Rate"
+      ]
+    }
+  },
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [
+      "The Lip-Halperin article seeks to improve stroke risk stratification of the CHADS(2) score by adding more points for age >=75 and Vascular disease.",
+      "The article suggests aspirin or no treatment for a score of 0, and oral anticoagulation when the score is 2 or greater.",
+      "The adjusted stroke risk figures are found in the AHA/ACC/HRS Guideline listed below."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Cairns JA. ACP journal club. CHA2DS2-VASc had better discrimination than CHADS2 for predicting risk for thromboembolism in atrial fibrillation. Ann Intern Med. 2011 May 17;154(10):JC5- 13. doi: 10.1059/0003-4819-154-10-201105170-02013.[PubMed 21576531]",
+        "pubmed_id": "21576531",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21576531/"
+      },
+      {
+        "text": "Olesen JB, Lip GY, Hansen ML, et al. Validation of risk stratification schemes for predicting stroke and thromboembolism in patients with atrial fibrillation: nationwide cohort study. BMJ. 2011 Jan 31;342:d124. doi: 10.1136/bmj.d124. [PubMed 21282258]",
+        "pubmed_id": "21282258",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21282258/"
+      },
+      {
+        "text": "31;342:d124. doi: 10.1136/bmj.d124. [PubMed 21282258]",
+        "pubmed_id": "21282258",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21282258/"
+      },
+      {
+        "text": "January CT, Wann LS, Alpert JS, et al. 2014 AHA/ACC/HRS Guideline for the Management of Patients With Atrial Fibrillation: A Report of the American College of Cardiology/American Heart Association Task Force on Practice Guidelines and the Heart Rhythm Society. J Am Coll Cardiol. 2014 Mar 28. pii: S0735-1097(14)01740-9. [PubMed 24685669]",
+        "pubmed_id": "24685669",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/24685669/"
+      },
+      {
+        "text": "Lip GY, Halperin JL. Improving stroke risk stratification in atrial fibrillation. Am J Med. 2010 Jun;123(6):484-8. Review. [PubMed 20569748]",
+        "pubmed_id": "20569748",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20569748/"
+      },
+      {
+        "text": "Gage BF, Andrade A. ACP Journal Club. Various risk stratification schemes predict ischemic stroke and bleeding in atrial fibrillation. Ann Intern Med. 2012 Oct 16;157(8):JC4-13. doi:",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "10.7326/0003-4819-157-8-201210160-02013. [PubMed 23070515]",
+        "pubmed_id": "23070515",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23070515/"
+      },
+      {
+        "text": "Friberg L, Rosenqvist M, Lip GY. Evaluation of risk stratification schemes for ischaemic stroke and bleeding in 182 678 patients with atrial fibrillation: the Swedish Atrial Fibrillation cohort study. Eur Heart J. 2012 Jun;33(12):1500-10. doi: 10.1093/eurheartj/ehr488. Epub 2012 Jan 13. [PubMed 22246443]",
+        "pubmed_id": "22246443",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22246443/"
+      },
+      {
+        "text": "Shah SJ, Eckman MH, Aspberg S, et al. Effect of Variation in Published Stroke Rates on the Net Clinical Benefit of Anticoagulation for Atrial Fibrillation. Ann Intern Med. 2018 Oct 16;169(8):517- 527. [PubMed 30264130]",
+        "pubmed_id": "30264130",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/30264130/"
+      },
+      {
+        "text": "Mayer M, Alper BS, Leff L. Stroke Rate Variation and Anticoagulation Benefit in Atrial Fibrillation.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Ann Intern Med. 2019 Jun 4;170(11):817-818. [PubMed 31158857]",
+        "pubmed_id": "31158857",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/31158857/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "CHA2DS2-VASc Score.pdf",
+      "source_sha256": "37b8729e0ffe6eb83e0c666380a353e0a6314154d2f9a88030b8c5328cf0f421",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "CHA2DS2-VASc Score",
+        "form_name": null,
+        "filename_title": "CHA2DS2-VASc Score",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('CHA2DS2-VASc Score')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (cha2ds2vascscore)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "chadsvasc",
+      "title": "CHA2DS2-VASc Score",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 9,
+    "checks_total": 9,
+    "missing": []
+  }
+}

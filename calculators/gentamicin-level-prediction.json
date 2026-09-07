@@ -1,0 +1,472 @@
+{
+  "schema_version": "1.0",
+  "slug": "gentamicin-level-prediction",
+  "title": "Gentamicin Level Prediction",
+  "subtitle": null,
+  "category": "Pharmacokinetics",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "distribution_factor",
+      "js_name": "Distribution_Factor",
+      "label": "Distribution Factor",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "options": [
+        {
+          "label": "0.25 L/kg",
+          "index": 0,
+          "value": 0.25
+        },
+        {
+          "label": "0.30 L/kg",
+          "index": 1,
+          "value": 0.3
+        },
+        {
+          "label": "0.35 L/kg",
+          "index": 2,
+          "value": 0.35
+        }
+      ],
+      "options_source": "pdf_script+printed_form",
+      "variant_variables": null,
+      "source": {
+        "kind": "radio_group",
+        "js_group": "Distribution_Factor"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "sex",
+      "js_name": "Sex",
+      "label": "Sex",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "options": [
+        {
+          "label": "Female",
+          "index": 0,
+          "value": 0,
+          "constants": {
+            "IBW_Sex": 45.5,
+            "CrCl_Sex": 0.85
+          }
+        },
+        {
+          "label": "Male",
+          "index": 1,
+          "value": 1,
+          "constants": {
+            "IBW_Sex": 50.0,
+            "CrCl_Sex": 1.0
+          }
+        }
+      ],
+      "options_source": "pdf_script+printed_form",
+      "variant_variables": [
+        "IBW_Sex",
+        "CrCl_Sex"
+      ],
+      "source": {
+        "kind": "radio_group",
+        "js_group": "Sex"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "age",
+      "js_name": "Age",
+      "label": "Age",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "yr",
+      "display_unit": "yr",
+      "units": [
+        {
+          "code": "yr",
+          "label": "yr",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "time_age",
+      "label_source": "printed form"
+    },
+    {
+      "key": "height",
+      "js_name": "Height",
+      "label": "Height",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "in",
+      "display_unit": "in",
+      "units": [
+        {
+          "code": "in",
+          "label": "in",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "length",
+      "label_source": "printed form"
+    },
+    {
+      "key": "weight",
+      "js_name": "Weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "display_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "mass",
+      "label_source": "printed form"
+    },
+    {
+      "key": "serum_creat",
+      "js_name": "Serum_Creat",
+      "label": "Serum Creat",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/dL",
+      "display_unit": "mg/dL",
+      "units": [
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "creatinine",
+      "label_source": "printed form"
+    },
+    {
+      "key": "dose",
+      "js_name": "Dose",
+      "label": "Dose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg",
+      "display_unit": "mg",
+      "units": [
+        {
+          "code": "mg",
+          "label": "mg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "mass",
+      "label_source": "printed form"
+    },
+    {
+      "key": "dose_interval",
+      "js_name": "Dose_Interval",
+      "label": "Dose Interval",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "hr",
+      "display_unit": "hr",
+      "units": [
+        {
+          "code": "hr",
+          "label": "hr",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "time",
+      "label_source": "printed form"
+    },
+    {
+      "key": "infusion_time",
+      "js_name": "Infusion_Time",
+      "label": "Infusion Time",
+      "widget": "quantity",
+      "required": true,
+      "default": 0.5,
+      "base_unit": "hr",
+      "display_unit": "hr",
+      "units": [
+        {
+          "code": "hr",
+          "label": "hr",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "time",
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "weight_crcl",
+        "js_name": "Weight_CrCl",
+        "expr": "(ibw) if (weight >= ibw) else (weight)"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "ibw",
+        "js_name": "IBW",
+        "label": "IBW",
+        "expr": "abs(height > 60) * (2.3 * (height - 60)) + IBW_Sex",
+        "base_unit": "kg",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "dw",
+        "js_name": "DW",
+        "label": "DW",
+        "expr": "(weight) if (weight < ibw) else (abs(weight > (1.2 * ibw)) * (0.4 * (weight - ibw)) + ibw)",
+        "base_unit": "kg",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "crcl",
+        "js_name": "CrCl",
+        "label": "CrCl",
+        "expr": "((140 - age) * (weight_crcl / (serum_creat * 72))) * CrCl_Sex",
+        "base_unit": "mL/min",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "ke",
+        "js_name": "Ke",
+        "label": "Ke",
+        "expr": "(0.00293 * crcl) + 0.014",
+        "base_unit": "hr-1",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "half_life",
+        "js_name": "Half_Life",
+        "label": "Half Life",
+        "expr": "0.693 / ke",
+        "base_unit": "hr",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "vd",
+        "js_name": "VD",
+        "label": "VD",
+        "expr": "dw * distribution_factor",
+        "base_unit": "L",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "predicted_peak",
+        "js_name": "Predicted_Peak",
+        "label": "Predicted Peak",
+        "expr": "(dose * (1 - exp(-ke * infusion_time))) / (ke * vd * infusion_time * (1 - exp(-ke * dose_interval)))",
+        "base_unit": "mg/L",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "predicted_trough",
+        "js_name": "Predicted_Trough",
+        "label": "Predicted Trough",
+        "expr": "predicted_peak * exp(-ke * (dose_interval - infusion_time))",
+        "base_unit": "mg/L",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": {
+    "variants": {
+      "sex": {
+        "variables": [
+          "IBW_Sex",
+          "CrCl_Sex"
+        ],
+        "options": [
+          {
+            "value": 0,
+            "label": "Female",
+            "constants": {
+              "IBW_Sex": 45.5,
+              "CrCl_Sex": 0.85
+            }
+          },
+          {
+            "value": 1,
+            "label": "Male",
+            "constants": {
+              "IBW_Sex": 50.0,
+              "CrCl_Sex": 1.0
+            }
+          }
+        ]
+      }
+    }
+  },
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "IBW = (1 if the following expression is true, 0 if false)(Height > 60) * (2.3 * (Height - 60)) + IBW_Sex\nDW = (1 if the following expression is true, 0 if false)(Weight > (1.2 * IBW)) * (0.4 * (Weight - IBW)) + IBW\nCrCl = ((140 - Age) * (Weight_CrCl / (Serum_Creat * 72))) * CrCl_Sex\nKe = (0.00293 * CrCl) + 0.014\nHalf_Life = 0.693 / Ke\nVD = DW * Distribution_Factor\nPredicted_Peak = (Dose * (1 - e(-Ke*Infusion_Time))) / (Ke * VD * Infusion_Time * (1 - e(- Ke*Dose_Interval)))\nPredicted_Trough = Predicted_Peak * e(-Ke*(Dose_Interval-Infusion_Time))",
+    "notes": [
+      "In this calculator, mcg is the abbreviation for micrograms.",
+      "The default unit of measure for weight is kilograms. Please verify that the correct unit of measure has been selected.",
+      "There is some evidence that for patients 65 years of age or older with a serum creatinine value less than 1 mg/dL, the serum creatinine value should be rounded to 1 mg/dL for use in calculating creatinine clearance. See references below.",
+      "This calculator is not appropriate for dialysis patients or for pediatric patients.",
+      "IBW represents the calculated ideal body weight.",
+      "Dosing weight (DW) is set to the IBW unless:",
+      "The actual Weight is 20 percent or more above IBW. In that case, DW is calculated using the formula DW = IBW + (0.4 * (Weight - IBW).",
+      "The actual Weight is less than the IBW. In that case, DW is set to the actual Weight.",
+      "Volume of distribution (VD) is calculated by multipling the DW by the Distribution Factor you select.",
+      "The Cockcroft-Gault equation is used to estimate creatinine clearance. This equation uses IBW unless the actual weight is less than the IBW. In that case, the actual weight is employed.",
+      "Ke is the elimination constant for this drug. Drug Half Life is inversely proportional to Ke.",
+      "Helpful Tips Suggested Peak and Trough Goals for Gentamicin Use Use Peak Trough Synergy 5 mg/L 1 mg/L Endocarditis 5 mg/L 1 mg/L UTI 6 mg/L 1 mg/L Abdominal Infection 7 mg/L 1 mg/L Cystitis 7 mg/L 1 mg/L Osteomyelitis 7 mg/L 1 mg/L Pyelonephritis 7 mg/L 1 mg/L Sepsis 7 mg/L 1 mg/L Soft Tissue Infection 7 mg/L 1 mg/L Wound Infection 7 mg/L 1 mg/L Pneumonia 9 mg/L 1 mg/L Cystic Fibrosis 11 mg/L 1.5 mg/L"
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Matthews SJ. Aminoglycosides. In: Schumacher GE, ed. Therapeutic Drug Monitoring. Norwalk, CT: Appleton & Lange; 1995:237-294.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Turnheim K. Drug dosage in the elderly. Is it rational? Drugs Aging. 1998 Nov;13(5):357-79.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Review.[PubMed 9829164]",
+        "pubmed_id": "9829164",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9829164/"
+      },
+      {
+        "text": "Beers MH, Ouslander JG, Rollingher I, et al. Explicit criteria for determining inappropriate medication use in nursing home residents. Arch Intern Med. 1991 Sep;151(9):1825-32. Review.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "[PubMed 1888249]",
+        "pubmed_id": "1888249",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/1888249/"
+      },
+      {
+        "text": "Chutka DS, Evans JM, Fleming KC, et al. Symposium on geriatrics--Part I: Drug prescribing for elderly patients. Mayo Clin Proc. 1995 Jul;70(7):685-93. Review. [PubMed 7791396]",
+        "pubmed_id": "7791396",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/7791396/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Gentamicin Level Prediction.pdf",
+      "source_sha256": "6a8ce8ba52031fc3a483a91a2d6be1f99abeaa50a7047995d9dcdb62c5720031",
+      "extractor": "pdf",
+      "form_name": "GentamicinLevelPrediction",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Gentamicin Level Prediction",
+        "form_name": "GentamicinLevelPrediction",
+        "filename_title": "Gentamicin Level Prediction",
+        "confidence": 1.0,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Gentamicin Level Prediction')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (gentamicinlevelprediction)",
+          "title_vs_form": "MATCH (gentamicinlevelprediction)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf92",
+      "title": "Gentamicin Level Prediction",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 81.2,
+    "checks_passed": 13,
+    "checks_total": 16,
+    "missing": [
+      "unit options on every field",
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

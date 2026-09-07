@@ -1,0 +1,942 @@
+{
+  "schema_version": "1.0",
+  "slug": "apache-ii-scoring-system-by-diagnosis",
+  "title": "APACHE II Scoring System by Diagnosis",
+  "subtitle": null,
+  "category": "Critical Care / Scoring System",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "post_emerg_surg",
+      "js_name": "Post_Emerg_Surg",
+      "label": "Post Emerg Surg",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "options": [
+        {
+          "label": "No",
+          "index": 0,
+          "value": 0.0
+        },
+        {
+          "label": "Yes",
+          "index": 1,
+          "value": 0.603
+        }
+      ],
+      "options_source": "pdf_script+printed_form",
+      "variant_variables": null,
+      "source": {
+        "kind": "radio_group",
+        "js_group": "Post_Emerg_Surg"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "admit_dx",
+      "js_name": "Admit_Dx",
+      "label": "Admit Dx",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "Nonoperative patients::",
+      "display_unit": "Nonoperative patients::",
+      "units": [
+        {
+          "code": "Nonoperative patients::",
+          "label": "Nonoperative patients::",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options_incomplete": true
+    },
+    {
+      "key": "rectal_temp",
+      "js_name": "Rectal_Temp",
+      "label": "Rectal Temp",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "display_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "36-38.4°C [96.8-101.2°F]",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "map",
+      "js_name": "MAP",
+      "label": "MAP",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "70-109 mmHg (0)",
+      "display_unit": "70-109 mmHg (0)",
+      "units": [
+        {
+          "code": "70-109 mmHg (0)",
+          "label": "70-109 mmHg (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "70-109 mmHg",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "hr",
+      "js_name": "HR",
+      "label": "HR",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "70-109 beats/min (0)",
+      "display_unit": "70-109 beats/min (0)",
+      "units": [
+        {
+          "code": "70-109 beats/min (0)",
+          "label": "70-109 beats/min (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form (word match)",
+      "options": [
+        {
+          "label": "70-109 beats/min",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "rr",
+      "js_name": "RR",
+      "label": "RR",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "12-24 breaths/min (0)",
+      "display_unit": "12-24 breaths/min (0)",
+      "units": [
+        {
+          "code": "12-24 breaths/min (0)",
+          "label": "12-24 breaths/min (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "12-24 breaths/min",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "aa_gradient_or_po2",
+      "js_name": "Aa_Gradient_or_PO2",
+      "label": "Aa Gradient or PO2",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "Pull down to select (0)",
+      "display_unit": "Pull down to select (0)",
+      "units": [
+        {
+          "code": "Pull down to select (0)",
+          "label": "Pull down to select (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "Pull down to select",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "ph_or_hco3",
+      "js_name": "pH_or_HCO3",
+      "label": "pH or HCO3",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "Pull down to select (0)",
+      "display_unit": "Pull down to select (0)",
+      "units": [
+        {
+          "code": "Pull down to select (0)",
+          "label": "Pull down to select (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "Pull down to select",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "na",
+      "js_name": "Na",
+      "label": "Na",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "130-149 mEq/L (0)",
+      "display_unit": "130-149 mEq/L (0)",
+      "units": [
+        {
+          "code": "130-149 mEq/L (0)",
+          "label": "130-149 mEq/L (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "130-149 mEq/L",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "k",
+      "js_name": "K",
+      "label": "K",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "3.5-5.4 mEq/L (0)",
+      "display_unit": "3.5-5.4 mEq/L (0)",
+      "units": [
+        {
+          "code": "3.5-5.4 mEq/L (0)",
+          "label": "3.5-5.4 mEq/L (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "3.5-5.4 mEq/L",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "creat",
+      "js_name": "Creat",
+      "label": "Creat",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "0.6-1.4 mg/dL (0)",
+      "display_unit": "0.6-1.4 mg/dL (0)",
+      "units": [
+        {
+          "code": "0.6-1.4 mg/dL (0)",
+          "label": "0.6-1.4 mg/dL (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "0.6-1.4 mg/dL",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "hct",
+      "js_name": "Hct",
+      "label": "Hct",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "30-45.9 percent (0)",
+      "display_unit": "30-45.9 percent (0)",
+      "units": [
+        {
+          "code": "30-45.9 percent (0)",
+          "label": "30-45.9 percent (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "30-45.9 percent",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "wbc",
+      "js_name": "WBC",
+      "label": "WBC",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "display_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "3-14.9 x10(3) cells/mm3",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "glasgow",
+      "js_name": "Glasgow",
+      "label": "Glasgow",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "15 (0)",
+      "display_unit": "15 (0)",
+      "units": [
+        {
+          "code": "15 (0)",
+          "label": "15 (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "15",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "age",
+      "js_name": "Age",
+      "label": "Age",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "≤44 years (0)",
+      "display_unit": "≤44 years (0)",
+      "units": [
+        {
+          "code": "≤44 years (0)",
+          "label": "≤44 years (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "≤44 years",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "chronic_dx",
+      "js_name": "Chronic_Dx",
+      "label": "Chronic Dx",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "No (0)",
+      "display_unit": "No (0)",
+      "units": [
+        {
+          "code": "No (0)",
+          "label": "No (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "No",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "score",
+        "js_name": "Score",
+        "label": "Score",
+        "expr": "rectal_temp + map + hr + rr + aa_gradient_or_po2 + ph_or_hco3 + na + k + creat + hct + wbc + glasgow + age + chronic_dx",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "log_or",
+        "js_name": "Log_OR",
+        "label": "Log OR",
+        "expr": "-3.517 + (score * 0.146) + post_emerg_surg + admit_dx",
+        "base_unit": "number",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "odds_ratio",
+        "js_name": "Odds_Ratio",
+        "label": "Odds Ratio",
+        "expr": "exp(log_or)",
+        "base_unit": "ratio",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "mortality",
+        "js_name": "Mortality",
+        "label": "Mortality",
+        "expr": "100 * odds_ratio / ( 1 + odds_ratio )",
+        "base_unit": "%",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": {
+    "admit_dx": [
+      {
+        "type": "top",
+        "label": "Nonoperative patients:",
+        "val": 0
+      },
+      {
+        "type": "group",
+        "label": "Respiratory insufficiency from:"
+      },
+      {
+        "type": "opt",
+        "label": "Asthma/allergy",
+        "val": -2.108
+      },
+      {
+        "type": "opt",
+        "label": "COPD",
+        "val": -0.367
+      },
+      {
+        "type": "opt",
+        "label": "Pulmonary edema (noncardiogenic)",
+        "val": -0.251
+      },
+      {
+        "type": "opt",
+        "label": "Postrespiratory arrest",
+        "val": -0.168
+      },
+      {
+        "type": "opt",
+        "label": "Aspiration/poisoning/toxic",
+        "val": -0.142
+      },
+      {
+        "type": "opt",
+        "label": "Pulmonary embolus",
+        "val": -0.128
+      },
+      {
+        "type": "opt",
+        "label": "Infection",
+        "val": 0
+      },
+      {
+        "type": "opt",
+        "label": "Neoplasm",
+        "val": 0.891
+      },
+      {
+        "type": "group",
+        "label": "Cardiovascular insufficiency from:"
+      },
+      {
+        "type": "opt",
+        "label": "Hypertension",
+        "val": -1.798
+      },
+      {
+        "type": "opt",
+        "label": "Rhythm disturbance",
+        "val": -1.368
+      },
+      {
+        "type": "opt",
+        "label": "Congestive heart failure",
+        "val": -0.424
+      },
+      {
+        "type": "opt",
+        "label": "Hemorrhagic shock/hypovolemia",
+        "val": 0.493
+      },
+      {
+        "type": "opt",
+        "label": "Coronary artery disease",
+        "val": -0.191
+      },
+      {
+        "type": "opt",
+        "label": "Sepsis",
+        "val": 0.113
+      },
+      {
+        "type": "opt",
+        "label": "Postcardiac arrest",
+        "val": 0.393
+      },
+      {
+        "type": "opt",
+        "label": "Cardiogenic shock",
+        "val": -0.259
+      },
+      {
+        "type": "opt",
+        "label": "Dissecting thoracic/abdominal aneurysm",
+        "val": 0.731
+      },
+      {
+        "type": "group",
+        "label": "Trauma"
+      },
+      {
+        "type": "opt",
+        "label": "Multiple trauma",
+        "val": -1.228
+      },
+      {
+        "type": "opt",
+        "label": "Head trauma",
+        "val": -0.517
+      },
+      {
+        "type": "group",
+        "label": "Neurologic"
+      },
+      {
+        "type": "opt",
+        "label": "Seizure disorder",
+        "val": -0.584
+      },
+      {
+        "type": "opt",
+        "label": "ICH/SDH/SAH",
+        "val": 0.723
+      },
+      {
+        "type": "group",
+        "label": "Other"
+      },
+      {
+        "type": "opt",
+        "label": "Drug overdose",
+        "val": -3.353
+      },
+      {
+        "type": "opt",
+        "label": "Diabetic ketoacidosis",
+        "val": -1.507
+      },
+      {
+        "type": "opt",
+        "label": "GI bleeding",
+        "val": 0.334
+      },
+      {
+        "type": "group",
+        "label": "If not above, select system (nonoperative):"
+      },
+      {
+        "type": "opt",
+        "label": "Metabolic/renal",
+        "val": -0.685
+      },
+      {
+        "type": "opt",
+        "label": "Respiratory",
+        "val": -0.89
+      },
+      {
+        "type": "opt",
+        "label": "Neurologic",
+        "val": -0.759
+      },
+      {
+        "type": "opt",
+        "label": "Cardiovascular",
+        "val": 0.47
+      },
+      {
+        "type": "opt",
+        "label": "Gastrointestinal",
+        "val": 0.501
+      },
+      {
+        "type": "top",
+        "label": "Postoperative patients:",
+        "val": 0
+      },
+      {
+        "type": "group",
+        "label": "Postoperative diagnoses"
+      },
+      {
+        "type": "opt",
+        "label": "Multiple trauma",
+        "val": -1.684
+      },
+      {
+        "type": "opt",
+        "label": "Chronic cardiovascular disease",
+        "val": -1.376
+      },
+      {
+        "type": "opt",
+        "label": "Peripheral vascular surgery",
+        "val": -1.315
+      },
+      {
+        "type": "opt",
+        "label": "Heart valve surgery",
+        "val": -1.261
+      },
+      {
+        "type": "opt",
+        "label": "Craniotomy for neoplasm",
+        "val": -1.245
+      },
+      {
+        "type": "opt",
+        "label": "Renal surgery for neoplasm",
+        "val": -1.204
+      },
+      {
+        "type": "opt",
+        "label": "Renal transplant",
+        "val": -1.042
+      },
+      {
+        "type": "opt",
+        "label": "Head trauma",
+        "val": -0.955
+      },
+      {
+        "type": "opt",
+        "label": "Thoracic surgery for neoplasm",
+        "val": -0.802
+      },
+      {
+        "type": "opt",
+        "label": "Craniotomy for ICH/SDH/SAH",
+        "val": -0.788
+      },
+      {
+        "type": "opt",
+        "label": "Spinal cord surgery",
+        "val": -0.699
+      },
+      {
+        "type": "opt",
+        "label": "Hemorrhagic shock",
+        "val": -0.682
+      },
+      {
+        "type": "opt",
+        "label": "GI bleeding",
+        "val": -0.617
+      },
+      {
+        "type": "opt",
+        "label": "GI surgery for neoplasm",
+        "val": -0.248
+      },
+      {
+        "type": "opt",
+        "label": "Respiratory insufficiency, postoperative",
+        "val": -0.14
+      },
+      {
+        "type": "opt",
+        "label": "GI perforation/obstruction",
+        "val": 0.06
+      },
+      {
+        "type": "group",
+        "label": "If not above, select system (postoperative):"
+      },
+      {
+        "type": "opt",
+        "label": "Neurologic",
+        "val": -1.15
+      },
+      {
+        "type": "opt",
+        "label": "Cardiovascular",
+        "val": -0.797
+      },
+      {
+        "type": "opt",
+        "label": "Respiratory",
+        "val": -0.61
+      },
+      {
+        "type": "opt",
+        "label": "Gastrointestinal",
+        "val": -0.613
+      },
+      {
+        "type": "opt",
+        "label": "Metabolic/renal",
+        "val": -0.196
+      }
+    ]
+  },
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "Score = Rectal_Temp + MAP + HR + RR + Aa_Gradient_or_PO2 + pH_or_HCO3 + Na + K + Creat + Hct + WBC + Glasgow + Age + Chronic_Dx\nLog_OR = -3.517 + (Score * 0.146) + Post_Emerg_Surg + Admit_Dx\nOdds_Ratio = e(Log_OR)\nMortality = 100 * Odds_Ratio / ( 1 + Odds_Ratio )",
+    "notes": [
+      "For postoperative patients admitted to the ICU for sepsis or postarrest, use the corresponding weights for nonoperative patients.",
+      "Chronic Health Problems: 1) Biopsy-proved liver cirrhosis 2) New York Heart Association Class IV 3)",
+      "Severe COPD (eg. Hypercapnia, home O2, pulmonary Hypertension) 4) Chronic dialysis or 5)",
+      "Immunocompromised."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Knaus WA, et al. APACHE II: a severity of disease classification system. Crit Care Med. 1985 Oct;13(10):818-29.[PubMed 3928249]",
+        "pubmed_id": "3928249",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3928249/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": [
+      "Nonoperative patients::"
+    ]
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "APACHE II Scoring System by Diagnosis.pdf",
+      "source_sha256": "ddc903e0919523e2d91358e219c0bd3ef00703a8914bceeafebd2e5e87b65aa3",
+      "extractor": "pdf",
+      "form_name": "ApacheScoreDx",
+      "identity": {
+        "doc_id": "70017",
+        "title": "APACHE II Scoring System by Diagnosis",
+        "form_name": "ApacheScoreDx",
+        "filename_title": "APACHE II Scoring System by Diagnosis",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('APACHE II Scoring System by Diagnosis')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (apacheiiscoringsystembydiagnosis)",
+          "title_vs_form": "differs (apacheiiscoringsystembydiagnosis vs apachescoredx) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf26",
+      "title": "APACHE II Scoring System by Diagnosis",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "option_list_incomplete",
+        "severity": "high",
+        "detail": "1 field(s) have no option list and 14 carry only the printed default; the full lists exist only in the live app"
+      },
+      {
+        "kind": "most_controls_frozen",
+        "severity": "critical",
+        "detail": "14 of the 16 controls on this form offer a single choice, because the source PDF prints only the option each dropdown opened on -- so the result barely moves, or does not move at all, with the patient; use the source calculator until the full option lists are available",
+        "fields": [
+          "rectal_temp",
+          "map",
+          "hr",
+          "rr",
+          "aa_gradient_or_po2",
+          "ph_or_hco3",
+          "na",
+          "k",
+          "creat",
+          "hct",
+          "wbc",
+          "glasgow",
+          "age",
+          "chronic_dx"
+        ]
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 75.0,
+    "checks_passed": 12,
+    "checks_total": 16,
+    "missing": [
+      "unit options on every field",
+      "validation bounds",
+      "field help text",
+      "complete option lists"
+    ]
+  }
+}

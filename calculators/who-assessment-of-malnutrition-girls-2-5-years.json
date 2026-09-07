@@ -1,0 +1,1157 @@
+{
+  "schema_version": "1.0",
+  "slug": "who-assessment-of-malnutrition-girls-2-5-years",
+  "title": "WHO Assessment of Malnutrition (Girls; 2 - 5 Years)",
+  "subtitle": null,
+  "category": "Pediatrics / Growth Chart",
+  "renderer": "lms",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "age",
+      "js_name": "Age",
+      "label": "Age",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mo",
+      "display_unit": "mo",
+      "units": [
+        {
+          "code": "mo",
+          "label": "mo",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 24.0,
+        "max": 60.0
+      },
+      "messages": {
+        "min": "The minimum value for Age is 24 mo.",
+        "max": "The maximum value for Age is 60 mo."
+      },
+      "dimension": "time_age",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Age is 24 mo. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Age is 60 mo. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "height",
+      "js_name": "Height",
+      "label": "Height",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "cm",
+      "display_unit": "cm",
+      "units": [
+        {
+          "code": "cm",
+          "label": "cm",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 65.0,
+        "max": 120.0
+      },
+      "messages": {
+        "min": "The minimum value for Height is 65 cm.",
+        "max": "The maximum value for Height is 120 cm."
+      },
+      "dimension": "length",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Height is 65 cm. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Height is 120 cm. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "weight",
+      "js_name": "Weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "display_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 7.0,
+        "max": 25.0
+      },
+      "messages": {
+        "min": "The minimum value for Weight is 7 kg."
+      },
+      "dimension": "mass",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Weight is 7 kg. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Weight is 25 kg. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    }
+  ],
+  "compute": {
+    "engine": "lookup+expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "z_score_height",
+        "js_name": "Z_Score_Height",
+        "label": "Z Score Height",
+        "expr": "(pow((height / M_1), L_1) - 1) / (L_1 * S_1)",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "z_score_weight_for_height",
+        "js_name": "Z_Score_Weight_for_Height",
+        "label": "Z Score Weight for Height",
+        "expr": "(pow((weight / M_2), L_2) - 1) / (L_2 * S_2)",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "height_percentile",
+        "js_name": "Height_Percentile",
+        "label": "Height Percentile",
+        "expr": "z_to_percentile(z_score_height)",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "weight_for_height_percentile",
+        "js_name": "Weight_for_Height_Percentile",
+        "label": "Weight for Height Percentile",
+        "expr": "z_to_percentile(z_score_weight_for_height)",
+        "units": null,
+        "label_source": "printed form",
+        "unit_rejected": "Assessment of Stunting",
+        "base_unit": null
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": {
+    "lookups": [
+      {
+        "key": "Age",
+        "operator": "<",
+        "columns": [
+          "L_1",
+          "M_1",
+          "S_1"
+        ],
+        "row_count": 37,
+        "rows": [
+          {
+            "threshold": 25.0,
+            "L_1": 1.0,
+            "M_1": 85.7153,
+            "S_1": 0.03764
+          },
+          {
+            "threshold": 26.0,
+            "L_1": 1.0,
+            "M_1": 86.5904,
+            "S_1": 0.03786
+          },
+          {
+            "threshold": 27.0,
+            "L_1": 1.0,
+            "M_1": 87.4462,
+            "S_1": 0.03808
+          },
+          {
+            "threshold": 28.0,
+            "L_1": 1.0,
+            "M_1": 88.283,
+            "S_1": 0.0383
+          },
+          {
+            "threshold": 29.0,
+            "L_1": 1.0,
+            "M_1": 89.1004,
+            "S_1": 0.03851
+          },
+          {
+            "threshold": 30.0,
+            "L_1": 1.0,
+            "M_1": 89.8991,
+            "S_1": 0.03872
+          },
+          {
+            "threshold": 31.0,
+            "L_1": 1.0,
+            "M_1": 90.6797,
+            "S_1": 0.03893
+          },
+          {
+            "threshold": 32.0,
+            "L_1": 1.0,
+            "M_1": 91.443,
+            "S_1": 0.03913
+          },
+          {
+            "threshold": 33.0,
+            "L_1": 1.0,
+            "M_1": 92.1906,
+            "S_1": 0.03933
+          },
+          {
+            "threshold": 34.0,
+            "L_1": 1.0,
+            "M_1": 92.9239,
+            "S_1": 0.03952
+          },
+          {
+            "threshold": 35.0,
+            "L_1": 1.0,
+            "M_1": 93.6444,
+            "S_1": 0.03971
+          },
+          {
+            "threshold": 36.0,
+            "L_1": 1.0,
+            "M_1": 94.3533,
+            "S_1": 0.03989
+          },
+          {
+            "threshold": 37.0,
+            "L_1": 1.0,
+            "M_1": 95.0515,
+            "S_1": 0.04006
+          },
+          {
+            "threshold": 38.0,
+            "L_1": 1.0,
+            "M_1": 95.7399,
+            "S_1": 0.04024
+          },
+          {
+            "threshold": 39.0,
+            "L_1": 1.0,
+            "M_1": 96.4187,
+            "S_1": 0.04041
+          },
+          {
+            "threshold": 40.0,
+            "L_1": 1.0,
+            "M_1": 97.0885,
+            "S_1": 0.04057
+          },
+          {
+            "threshold": 41.0,
+            "L_1": 1.0,
+            "M_1": 97.7493,
+            "S_1": 0.04073
+          },
+          {
+            "threshold": 42.0,
+            "L_1": 1.0,
+            "M_1": 98.4015,
+            "S_1": 0.04089
+          },
+          {
+            "threshold": 43.0,
+            "L_1": 1.0,
+            "M_1": 99.0448,
+            "S_1": 0.04105
+          },
+          {
+            "threshold": 44.0,
+            "L_1": 1.0,
+            "M_1": 99.6795,
+            "S_1": 0.0412
+          },
+          {
+            "threshold": 45.0,
+            "L_1": 1.0,
+            "M_1": 100.3058,
+            "S_1": 0.04135
+          },
+          {
+            "threshold": 46.0,
+            "L_1": 1.0,
+            "M_1": 100.9238,
+            "S_1": 0.0415
+          },
+          {
+            "threshold": 47.0,
+            "L_1": 1.0,
+            "M_1": 101.5337,
+            "S_1": 0.04164
+          },
+          {
+            "threshold": 48.0,
+            "L_1": 1.0,
+            "M_1": 102.136,
+            "S_1": 0.04179
+          },
+          {
+            "threshold": 49.0,
+            "L_1": 1.0,
+            "M_1": 102.7312,
+            "S_1": 0.04193
+          },
+          {
+            "threshold": 50.0,
+            "L_1": 1.0,
+            "M_1": 103.3197,
+            "S_1": 0.04206
+          },
+          {
+            "threshold": 51.0,
+            "L_1": 1.0,
+            "M_1": 103.9021,
+            "S_1": 0.0422
+          },
+          {
+            "threshold": 52.0,
+            "L_1": 1.0,
+            "M_1": 104.4786,
+            "S_1": 0.04233
+          },
+          {
+            "threshold": 53.0,
+            "L_1": 1.0,
+            "M_1": 105.0494,
+            "S_1": 0.04246
+          },
+          {
+            "threshold": 54.0,
+            "L_1": 1.0,
+            "M_1": 105.6148,
+            "S_1": 0.04259
+          },
+          {
+            "threshold": 55.0,
+            "L_1": 1.0,
+            "M_1": 106.1748,
+            "S_1": 0.04272
+          },
+          {
+            "threshold": 56.0,
+            "L_1": 1.0,
+            "M_1": 106.7295,
+            "S_1": 0.04285
+          },
+          {
+            "threshold": 57.0,
+            "L_1": 1.0,
+            "M_1": 107.2788,
+            "S_1": 0.04298
+          },
+          {
+            "threshold": 58.0,
+            "L_1": 1.0,
+            "M_1": 107.8227,
+            "S_1": 0.0431
+          },
+          {
+            "threshold": 59.0,
+            "L_1": 1.0,
+            "M_1": 108.3613,
+            "S_1": 0.04322
+          },
+          {
+            "threshold": 60.0,
+            "L_1": 1.0,
+            "M_1": 108.8948,
+            "S_1": 0.04334
+          },
+          {
+            "threshold": 61.0,
+            "L_1": 1.0,
+            "M_1": 109.4233,
+            "S_1": 0.04347
+          }
+        ],
+        "fallback": null,
+        "suffix": "_1"
+      },
+      {
+        "key": "Height",
+        "operator": "<",
+        "columns": [
+          "L_2",
+          "M_2",
+          "S_2"
+        ],
+        "row_count": 111,
+        "rows": [
+          {
+            "threshold": 65.5,
+            "L_2": -0.3833,
+            "M_2": 7.2402,
+            "S_2": 0.09113
+          },
+          {
+            "threshold": 66.0,
+            "L_2": -0.3833,
+            "M_2": 7.3523,
+            "S_2": 0.09109
+          },
+          {
+            "threshold": 66.5,
+            "L_2": -0.3833,
+            "M_2": 7.463,
+            "S_2": 0.09104
+          },
+          {
+            "threshold": 67.0,
+            "L_2": -0.3833,
+            "M_2": 7.5724,
+            "S_2": 0.09099
+          },
+          {
+            "threshold": 67.5,
+            "L_2": -0.3833,
+            "M_2": 7.6806,
+            "S_2": 0.09094
+          },
+          {
+            "threshold": 68.0,
+            "L_2": -0.3833,
+            "M_2": 7.7874,
+            "S_2": 0.09088
+          },
+          {
+            "threshold": 68.5,
+            "L_2": -0.3833,
+            "M_2": 7.893,
+            "S_2": 0.09083
+          },
+          {
+            "threshold": 69.0,
+            "L_2": -0.3833,
+            "M_2": 7.9976,
+            "S_2": 0.09077
+          },
+          {
+            "threshold": 69.5,
+            "L_2": -0.3833,
+            "M_2": 8.1012,
+            "S_2": 0.09071
+          },
+          {
+            "threshold": 70.0,
+            "L_2": -0.3833,
+            "M_2": 8.2039,
+            "S_2": 0.09065
+          },
+          {
+            "threshold": 70.5,
+            "L_2": -0.3833,
+            "M_2": 8.3058,
+            "S_2": 0.09059
+          },
+          {
+            "threshold": 71.0,
+            "L_2": -0.3833,
+            "M_2": 8.4071,
+            "S_2": 0.09053
+          },
+          {
+            "threshold": 71.5,
+            "L_2": -0.3833,
+            "M_2": 8.5078,
+            "S_2": 0.09047
+          },
+          {
+            "threshold": 72.0,
+            "L_2": -0.3833,
+            "M_2": 8.6078,
+            "S_2": 0.09041
+          },
+          {
+            "threshold": 72.5,
+            "L_2": -0.3833,
+            "M_2": 8.707,
+            "S_2": 0.09035
+          },
+          {
+            "threshold": 73.0,
+            "L_2": -0.3833,
+            "M_2": 8.8053,
+            "S_2": 0.09028
+          },
+          {
+            "threshold": 73.5,
+            "L_2": -0.3833,
+            "M_2": 8.9025,
+            "S_2": 0.09022
+          },
+          {
+            "threshold": 74.0,
+            "L_2": -0.3833,
+            "M_2": 8.9983,
+            "S_2": 0.09016
+          },
+          {
+            "threshold": 74.5,
+            "L_2": -0.3833,
+            "M_2": 9.0928,
+            "S_2": 0.09009
+          },
+          {
+            "threshold": 75.0,
+            "L_2": -0.3833,
+            "M_2": 9.1862,
+            "S_2": 0.09003
+          },
+          {
+            "threshold": 75.5,
+            "L_2": -0.3833,
+            "M_2": 9.2786,
+            "S_2": 0.08996
+          },
+          {
+            "threshold": 76.0,
+            "L_2": -0.3833,
+            "M_2": 9.3703,
+            "S_2": 0.08989
+          },
+          {
+            "threshold": 76.5,
+            "L_2": -0.3833,
+            "M_2": 9.4617,
+            "S_2": 0.08983
+          },
+          {
+            "threshold": 77.0,
+            "L_2": -0.3833,
+            "M_2": 9.5533,
+            "S_2": 0.08976
+          },
+          {
+            "threshold": 77.5,
+            "L_2": -0.3833,
+            "M_2": 9.6456,
+            "S_2": 0.08969
+          },
+          {
+            "threshold": 78.0,
+            "L_2": -0.3833,
+            "M_2": 9.739,
+            "S_2": 0.08963
+          },
+          {
+            "threshold": 78.5,
+            "L_2": -0.3833,
+            "M_2": 9.8338,
+            "S_2": 0.08956
+          },
+          {
+            "threshold": 79.0,
+            "L_2": -0.3833,
+            "M_2": 9.9303,
+            "S_2": 0.0895
+          },
+          {
+            "threshold": 79.5,
+            "L_2": -0.3833,
+            "M_2": 10.0289,
+            "S_2": 0.08943
+          },
+          {
+            "threshold": 80.0,
+            "L_2": -0.3833,
+            "M_2": 10.1298,
+            "S_2": 0.08937
+          },
+          {
+            "threshold": 80.5,
+            "L_2": -0.3833,
+            "M_2": 10.2332,
+            "S_2": 0.08932
+          },
+          {
+            "threshold": 81.0,
+            "L_2": -0.3833,
+            "M_2": 10.3393,
+            "S_2": 0.08926
+          },
+          {
+            "threshold": 81.5,
+            "L_2": -0.3833,
+            "M_2": 10.4477,
+            "S_2": 0.08921
+          },
+          {
+            "threshold": 82.0,
+            "L_2": -0.3833,
+            "M_2": 10.5586,
+            "S_2": 0.08916
+          },
+          {
+            "threshold": 82.5,
+            "L_2": -0.3833,
+            "M_2": 10.6719,
+            "S_2": 0.08912
+          },
+          {
+            "threshold": 83.0,
+            "L_2": -0.3833,
+            "M_2": 10.7874,
+            "S_2": 0.08908
+          },
+          {
+            "threshold": 83.5,
+            "L_2": -0.3833,
+            "M_2": 10.9051,
+            "S_2": 0.08905
+          },
+          {
+            "threshold": 84.0,
+            "L_2": -0.3833,
+            "M_2": 11.0248,
+            "S_2": 0.08902
+          },
+          {
+            "threshold": 84.5,
+            "L_2": -0.3833,
+            "M_2": 11.1462,
+            "S_2": 0.08899
+          },
+          {
+            "threshold": 85.0,
+            "L_2": -0.3833,
+            "M_2": 11.2691,
+            "S_2": 0.08897
+          },
+          {
+            "threshold": 85.5,
+            "L_2": -0.3833,
+            "M_2": 11.3934,
+            "S_2": 0.08896
+          },
+          {
+            "threshold": 86.0,
+            "L_2": -0.3833,
+            "M_2": 11.5186,
+            "S_2": 0.08895
+          },
+          {
+            "threshold": 86.5,
+            "L_2": -0.3833,
+            "M_2": 11.6444,
+            "S_2": 0.08895
+          },
+          {
+            "threshold": 87.0,
+            "L_2": -0.3833,
+            "M_2": 11.7705,
+            "S_2": 0.08895
+          },
+          {
+            "threshold": 87.5,
+            "L_2": -0.3833,
+            "M_2": 11.8965,
+            "S_2": 0.08896
+          },
+          {
+            "threshold": 88.0,
+            "L_2": -0.3833,
+            "M_2": 12.0223,
+            "S_2": 0.08897
+          },
+          {
+            "threshold": 88.5,
+            "L_2": -0.3833,
+            "M_2": 12.1478,
+            "S_2": 0.08899
+          },
+          {
+            "threshold": 89.0,
+            "L_2": -0.3833,
+            "M_2": 12.2729,
+            "S_2": 0.08901
+          },
+          {
+            "threshold": 89.5,
+            "L_2": -0.3833,
+            "M_2": 12.3976,
+            "S_2": 0.08904
+          },
+          {
+            "threshold": 90.0,
+            "L_2": -0.3833,
+            "M_2": 12.522,
+            "S_2": 0.08907
+          },
+          {
+            "threshold": 90.5,
+            "L_2": -0.3833,
+            "M_2": 12.6461,
+            "S_2": 0.08911
+          },
+          {
+            "threshold": 91.0,
+            "L_2": -0.3833,
+            "M_2": 12.77,
+            "S_2": 0.08915
+          },
+          {
+            "threshold": 91.5,
+            "L_2": -0.3833,
+            "M_2": 12.8939,
+            "S_2": 0.0892
+          },
+          {
+            "threshold": 92.0,
+            "L_2": -0.3833,
+            "M_2": 13.0177,
+            "S_2": 0.08925
+          },
+          {
+            "threshold": 92.5,
+            "L_2": -0.3833,
+            "M_2": 13.1415,
+            "S_2": 0.08931
+          },
+          {
+            "threshold": 93.0,
+            "L_2": -0.3833,
+            "M_2": 13.2654,
+            "S_2": 0.08937
+          },
+          {
+            "threshold": 93.5,
+            "L_2": -0.3833,
+            "M_2": 13.3896,
+            "S_2": 0.08944
+          },
+          {
+            "threshold": 94.0,
+            "L_2": -0.3833,
+            "M_2": 13.5142,
+            "S_2": 0.08951
+          },
+          {
+            "threshold": 94.5,
+            "L_2": -0.3833,
+            "M_2": 13.6393,
+            "S_2": 0.08959
+          },
+          {
+            "threshold": 95.0,
+            "L_2": -0.3833,
+            "M_2": 13.765,
+            "S_2": 0.08967
+          },
+          {
+            "threshold": 95.5,
+            "L_2": -0.3833,
+            "M_2": 13.8914,
+            "S_2": 0.08975
+          },
+          {
+            "threshold": 96.0,
+            "L_2": -0.3833,
+            "M_2": 14.0186,
+            "S_2": 0.08984
+          },
+          {
+            "threshold": 96.5,
+            "L_2": -0.3833,
+            "M_2": 14.1466,
+            "S_2": 0.08994
+          },
+          {
+            "threshold": 97.0,
+            "L_2": -0.3833,
+            "M_2": 14.2757,
+            "S_2": 0.09004
+          },
+          {
+            "threshold": 97.5,
+            "L_2": -0.3833,
+            "M_2": 14.4059,
+            "S_2": 0.09015
+          },
+          {
+            "threshold": 98.0,
+            "L_2": -0.3833,
+            "M_2": 14.5376,
+            "S_2": 0.09026
+          },
+          {
+            "threshold": 98.5,
+            "L_2": -0.3833,
+            "M_2": 14.671,
+            "S_2": 0.09037
+          },
+          {
+            "threshold": 99.0,
+            "L_2": -0.3833,
+            "M_2": 14.8062,
+            "S_2": 0.09049
+          },
+          {
+            "threshold": 99.5,
+            "L_2": -0.3833,
+            "M_2": 14.9434,
+            "S_2": 0.09062
+          },
+          {
+            "threshold": 100.0,
+            "L_2": -0.3833,
+            "M_2": 15.0828,
+            "S_2": 0.09075
+          },
+          {
+            "threshold": 100.5,
+            "L_2": -0.3833,
+            "M_2": 15.2246,
+            "S_2": 0.09088
+          },
+          {
+            "threshold": 101.0,
+            "L_2": -0.3833,
+            "M_2": 15.3687,
+            "S_2": 0.09102
+          },
+          {
+            "threshold": 101.5,
+            "L_2": -0.3833,
+            "M_2": 15.5154,
+            "S_2": 0.09116
+          },
+          {
+            "threshold": 102.0,
+            "L_2": -0.3833,
+            "M_2": 15.6646,
+            "S_2": 0.09131
+          },
+          {
+            "threshold": 102.5,
+            "L_2": -0.3833,
+            "M_2": 15.8164,
+            "S_2": 0.09146
+          },
+          {
+            "threshold": 103.0,
+            "L_2": -0.3833,
+            "M_2": 15.9707,
+            "S_2": 0.09161
+          },
+          {
+            "threshold": 103.5,
+            "L_2": -0.3833,
+            "M_2": 16.1276,
+            "S_2": 0.09177
+          },
+          {
+            "threshold": 104.0,
+            "L_2": -0.3833,
+            "M_2": 16.287,
+            "S_2": 0.09193
+          },
+          {
+            "threshold": 104.5,
+            "L_2": -0.3833,
+            "M_2": 16.4488,
+            "S_2": 0.09209
+          },
+          {
+            "threshold": 105.0,
+            "L_2": -0.3833,
+            "M_2": 16.6131,
+            "S_2": 0.09226
+          },
+          {
+            "threshold": 105.5,
+            "L_2": -0.3833,
+            "M_2": 16.78,
+            "S_2": 0.09243
+          },
+          {
+            "threshold": 106.0,
+            "L_2": -0.3833,
+            "M_2": 16.9496,
+            "S_2": 0.09261
+          },
+          {
+            "threshold": 106.5,
+            "L_2": -0.3833,
+            "M_2": 17.122,
+            "S_2": 0.09278
+          },
+          {
+            "threshold": 107.0,
+            "L_2": -0.3833,
+            "M_2": 17.2973,
+            "S_2": 0.09296
+          },
+          {
+            "threshold": 107.5,
+            "L_2": -0.3833,
+            "M_2": 17.4755,
+            "S_2": 0.09315
+          },
+          {
+            "threshold": 108.0,
+            "L_2": -0.3833,
+            "M_2": 17.6567,
+            "S_2": 0.09333
+          },
+          {
+            "threshold": 108.5,
+            "L_2": -0.3833,
+            "M_2": 17.8407,
+            "S_2": 0.09352
+          },
+          {
+            "threshold": 109.0,
+            "L_2": -0.3833,
+            "M_2": 18.0277,
+            "S_2": 0.09371
+          },
+          {
+            "threshold": 109.5,
+            "L_2": -0.3833,
+            "M_2": 18.2174,
+            "S_2": 0.0939
+          },
+          {
+            "threshold": 110.0,
+            "L_2": -0.3833,
+            "M_2": 18.4096,
+            "S_2": 0.09409
+          },
+          {
+            "threshold": 110.5,
+            "L_2": -0.3833,
+            "M_2": 18.6043,
+            "S_2": 0.09428
+          },
+          {
+            "threshold": 111.0,
+            "L_2": -0.3833,
+            "M_2": 18.8015,
+            "S_2": 0.09448
+          },
+          {
+            "threshold": 111.5,
+            "L_2": -0.3833,
+            "M_2": 19.0009,
+            "S_2": 0.09467
+          },
+          {
+            "threshold": 112.0,
+            "L_2": -0.3833,
+            "M_2": 19.2024,
+            "S_2": 0.09487
+          },
+          {
+            "threshold": 112.5,
+            "L_2": -0.3833,
+            "M_2": 19.406,
+            "S_2": 0.09507
+          },
+          {
+            "threshold": 113.0,
+            "L_2": -0.3833,
+            "M_2": 19.6116,
+            "S_2": 0.09527
+          },
+          {
+            "threshold": 113.5,
+            "L_2": -0.3833,
+            "M_2": 19.819,
+            "S_2": 0.09546
+          },
+          {
+            "threshold": 114.0,
+            "L_2": -0.3833,
+            "M_2": 20.028,
+            "S_2": 0.09566
+          },
+          {
+            "threshold": 114.5,
+            "L_2": -0.3833,
+            "M_2": 20.2385,
+            "S_2": 0.09586
+          },
+          {
+            "threshold": 115.0,
+            "L_2": -0.3833,
+            "M_2": 20.4502,
+            "S_2": 0.09606
+          },
+          {
+            "threshold": 115.5,
+            "L_2": -0.3833,
+            "M_2": 20.6629,
+            "S_2": 0.09626
+          },
+          {
+            "threshold": 116.0,
+            "L_2": -0.3833,
+            "M_2": 20.8766,
+            "S_2": 0.09646
+          },
+          {
+            "threshold": 116.5,
+            "L_2": -0.3833,
+            "M_2": 21.0909,
+            "S_2": 0.09666
+          },
+          {
+            "threshold": 117.0,
+            "L_2": -0.3833,
+            "M_2": 21.3059,
+            "S_2": 0.09686
+          },
+          {
+            "threshold": 117.5,
+            "L_2": -0.3833,
+            "M_2": 21.5213,
+            "S_2": 0.09707
+          },
+          {
+            "threshold": 118.0,
+            "L_2": -0.3833,
+            "M_2": 21.737,
+            "S_2": 0.09727
+          },
+          {
+            "threshold": 118.5,
+            "L_2": -0.3833,
+            "M_2": 21.9529,
+            "S_2": 0.09747
+          },
+          {
+            "threshold": 119.0,
+            "L_2": -0.3833,
+            "M_2": 22.169,
+            "S_2": 0.09767
+          },
+          {
+            "threshold": 119.5,
+            "L_2": -0.3833,
+            "M_2": 22.3851,
+            "S_2": 0.09788
+          },
+          {
+            "threshold": 120.0,
+            "L_2": -0.3833,
+            "M_2": 22.6012,
+            "S_2": 0.09808
+          },
+          {
+            "threshold": 120.5,
+            "L_2": -0.3833,
+            "M_2": 22.8173,
+            "S_2": 0.09828
+          }
+        ],
+        "fallback": null,
+        "suffix": "_2"
+      }
+    ],
+    "lookup": null
+  },
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "Z_Score_Height = ((Height/M)L - 1) / (L * S)\nZ_Score_Weight_for_Height = ((Weight/M)L - 1) / (L * S)\nHeight_Percentile = ZtoPercentile(Z_Score_Height)\nWeight_for_Height_Percentile = ZtoPercentile(Z_Score_Weight_for_Height)",
+    "notes": [
+      "Moderate malnutrition is defined as moderate stunting or wasting.",
+      "Severe malnutrition is defined as severe stunting or severe wasting, or edematous malnutrition.",
+      "Patients with edematous malnutrition (Kwashiorkor) should be considered to have severe malnutrition even if stunting or wasting z-scores are not in the severe range.",
+      "At the extremes (>97th percentile or <3rd percentile), small differences in percentiles represent clinically important differences. At these extremes, the Z-score is a more precise reflection of how far the measurement deviates from the mean and is a useful tool for tracking changes.",
+      "LMS data used in this calculator are shown in the data table below.",
+      "For all LMS tables, the row in the table corresponding to the patient-specific value is found in the first column of the table; values to be used for L (the Box-Cox power), M (the median), and S (the generalized coefficient of variation) in the equation for Z-score are retrieved.",
+      "Z-scores may be used to do a table lookup for the corresponding percentile in the Normal table percentiles for Z-score table (below). Numbers along the left side (Y-axis) of the table represent the first number and first decimal place of the Z-score, while the numbers along the top (X-axis) of the table represent the second decimal position of the Z-score.",
+      "Helpful Tips LMS Parameters for Girls: Height for Age Age [months] Power [L] Median [M] Variation [S]"
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "LMS Parameters for Girls: Height for Age. World Health Organization 2008, Child Growth Standards: Methods and development.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "LMS Parameters for Girls: Weight for Height. World Health Organization 2008, Child Growth Standards: Methods and development.",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 3
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "WHO Assessment of Malnutrition (Girls; 2 - 5 Years).pdf",
+      "source_sha256": "2df2316459011dae1b76368a5cb655e4d7f67b5524f3772544a5d1c79694abc8",
+      "extractor": "pdf",
+      "form_name": "WHOGrowthGirls",
+      "identity": {
+        "doc_id": "70017",
+        "title": "WHO Assessment of Malnutrition (Girls; 2 - 5 Years)",
+        "form_name": "WHOGrowthGirls",
+        "filename_title": "WHO Assessment of Malnutrition (Girls; 2 - 5 Years)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('WHO Assessment of Malnutrition (Girls; 2 - 5 Years)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (whoassessmentofmalnutritiongirls25years)",
+          "title_vs_form": "differs (whoassessmentofmalnutritiongirls25years vs whogrowthgirls) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf182",
+      "title": "WHO Assessment of Malnutrition (Girls; 2 - 5 Years)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 16,
+    "checks_total": 16,
+    "missing": []
+  }
+}

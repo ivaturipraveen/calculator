@@ -1,0 +1,400 @@
+{
+  "schema_version": "1.0",
+  "slug": "calvert-formula-carboplatin-dosing",
+  "title": "Calvert Formula (CARBOplatin Dosing)",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "calvert_auc",
+      "label": "Desired AUC",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/mL*min",
+      "units": null,
+      "constraints": {
+        "min": 1.5,
+        "max": 7.5
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "calvert_auc",
+        "id_const": "ID_AUC"
+      },
+      "unit_source": "formula_prose",
+      "help": [
+        "Desired AUC must be between 1.5 and 7.5."
+      ]
+    },
+    {
+      "key": "calvert_gfr",
+      "label": "GFR",
+      "widget": "quantity",
+      "required": false,
+      "default": null,
+      "base_unit": "mL/min",
+      "units": null,
+      "constraints": {
+        "min": 5.0,
+        "max": 150.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "calvert_gfr",
+        "id_const": "ID_GFR"
+      },
+      "unit_source": "formula_prose",
+      "help": [
+        "GFR must be between 5 and 150."
+      ],
+      "required_when": {
+        "field": "gfr_known",
+        "equals": [
+          "Yes"
+        ]
+      }
+    },
+    {
+      "key": "gfr_known",
+      "label": "GFR Known",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "gfrKnown",
+        "id_const": "ID_GFR_KNOWN"
+      },
+      "options": [
+        {
+          "label": "Yes",
+          "value": "Yes"
+        },
+        {
+          "label": "No",
+          "value": "No"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "max_cr_cl_input",
+      "label": "Max CrCl",
+      "widget": "quantity",
+      "required": false,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "maxCrClInput",
+        "id_const": "ID_MAX_CRCL"
+      },
+      "required_when": {
+        "field": "gfr_known",
+        "equals": [
+          "No"
+        ]
+      }
+    },
+    {
+      "key": "gfr_equation",
+      "label": "GFR equation",
+      "widget": "select",
+      "required": false,
+      "default": "Cockcroft-Gault",
+      "constraints": {},
+      "options": [
+        {
+          "label": "Cockcroft-Gault",
+          "value": "Cockcroft-Gault"
+        },
+        {
+          "label": "Jelliffe",
+          "value": "Jelliffe"
+        }
+      ],
+      "help": [
+        "Used only when GFR is not known. Jelliffe reports mL/min/1.73m²."
+      ],
+      "source": {
+        "kind": "borrowed_from_sibling",
+        "slug": "creatinine-clearance-by-cockcroft-gault-age-16-years"
+      },
+      "visible_when": {
+        "field": "gfr_known",
+        "equals": [
+          "No"
+        ]
+      }
+    },
+    {
+      "key": "gfr_age",
+      "js_name": "Age",
+      "label": "Age (for GFR estimate)",
+      "widget": "quantity",
+      "required": false,
+      "default": null,
+      "base_unit": "years",
+      "display_unit": "years",
+      "units": [
+        {
+          "code": "years",
+          "label": "years",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 16.0,
+        "max": 120.0
+      },
+      "messages": null,
+      "dimension": "time_age",
+      "label_source": "printed form",
+      "source": {
+        "kind": "borrowed_from_sibling",
+        "slug": "creatinine-clearance-by-cockcroft-gault-age-16-years",
+        "original_key": "age"
+      },
+      "visible_when": {
+        "field": "gfr_known",
+        "equals": [
+          "No"
+        ]
+      }
+    },
+    {
+      "key": "gfr_weight",
+      "js_name": "Weight",
+      "label": "Weight (for GFR estimate)",
+      "widget": "quantity",
+      "required": false,
+      "default": null,
+      "base_unit": "kg",
+      "display_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "constraints": {
+        "min": 25.0,
+        "max": 250.0
+      },
+      "messages": null,
+      "label_source": "printed form",
+      "source": {
+        "kind": "borrowed_from_sibling",
+        "slug": "creatinine-clearance-by-cockcroft-gault-age-16-years",
+        "original_key": "weight"
+      },
+      "visible_when": {
+        "field": "gfr_known",
+        "equals": [
+          "No"
+        ]
+      },
+      "dimension": "mass",
+      "units_source": "corpus unit registry"
+    },
+    {
+      "key": "gfr_srcr",
+      "js_name": "Serum_creatinine",
+      "label": "Serum creatinine (for GFR estimate)",
+      "widget": "quantity",
+      "required": false,
+      "default": null,
+      "base_unit": "mg/dL",
+      "display_unit": "mg/dL",
+      "units": [
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 0.3,
+        "max": 30.0
+      },
+      "messages": null,
+      "dimension": "creatinine",
+      "label_source": "printed form",
+      "source": {
+        "kind": "borrowed_from_sibling",
+        "slug": "creatinine-clearance-by-cockcroft-gault-age-16-years",
+        "original_key": "serum_creatinine"
+      },
+      "visible_when": {
+        "field": "gfr_known",
+        "equals": [
+          "No"
+        ]
+      }
+    },
+    {
+      "key": "gfr_sex",
+      "label": "Sex (for GFR estimate)",
+      "widget": "select",
+      "required": false,
+      "constraints": {},
+      "options": [
+        {
+          "label": "Female",
+          "value": 0
+        },
+        {
+          "label": "Male",
+          "value": 1
+        }
+      ],
+      "source": {
+        "kind": "borrowed_from_sibling",
+        "slug": "creatinine-clearance-by-cockcroft-gault-age-16-years"
+      },
+      "visible_when": {
+        "field": "gfr_known",
+        "equals": [
+          "No"
+        ]
+      }
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "dosage",
+        "expr": "calvert_auc * (25 + gfr_used)"
+      },
+      {
+        "key": "gfr_used",
+        "expr": "calvert_gfr if (gfr_known == 'Yes') else (min((((0.85 if gfr_sex == 0 else 1) * ((140 - gfr_age) / (gfr_srcr)) * (gfr_weight / 72)) if (gfr_equation == 'Cockcroft-Gault') else ((0.9 if gfr_sex == 0 else 1) * (98 - (0.8 * (gfr_age - 20))) / gfr_srcr)), max_cr_cl_input) if (max_cr_cl_input > 0) else (((0.85 if gfr_sex == 0 else 1) * ((140 - gfr_age) / (gfr_srcr)) * (gfr_weight / 72)) if (gfr_equation == 'Cockcroft-Gault') else ((0.9 if gfr_sex == 0 else 1) * (98 - (0.8 * (gfr_age - 20))) / gfr_srcr)))",
+        "note": "the GFR the dose is built on; the estimate is borrowed from creatinine-clearance-by-cockcroft-gault-age-16-years / creatinine-clearance-by-jelliffe"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "calvert_gfroutput",
+        "label": "Calvert GFR",
+        "expr": "gfr_used",
+        "decimals": 2,
+        "base_unit": null,
+        "kind": "text"
+      },
+      {
+        "key": "calvert_dosage",
+        "label": "Carboplatin Dosage",
+        "expr": "dosage",
+        "decimals": 0,
+        "base_unit": "mg",
+        "kind": "number",
+        "label_source": "printed form (shared word)",
+        "unit_source": "formula_prose"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 0,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Carboplatin Dosage:\nCarboplatin Dosage = Desired AUC * (GFR + 25)\n• Carboplatin Dosage is calculated in mg\n• Desired AUC is input in mg/mL*min\n• GFR is input in mL/min\no If GFR Known is \"No\", GFR is calculated as described\nGlomerular Filtration Rate (GFR):\nDosing recommendations in the manufacturer's labeling are based on an actual glomerular\nfiltration rate (GFR) measurement. However, in clinical practice, the Cockcroft-Gault\nformula is frequently used to estimate GFR. The Jelliffe formula is also commonly\nused; however, both methods can underestimate or overestimate the GFR and result in\nunder- or overdosing carboplatin. When calculating the carboplatin dose using the\nCalvert formula and an estimated GFR, the laboratory method used to measure serum\ncreatinine may impact dosing. Compared to other methods used, standardized Isotope\nDilution Mass Spectrometry (IDMS) may underestimate serum creatinine values in\npatients with low creatinine values (eg, ≤0.7 mg/dL) and may overestimate GFR in\npatients with normal renal function. This could result in higher calculated carboplatin\ndoses and increased toxicities. If using IDMS, the Food and Drug Administration\n(FDA) recommends that clinicians considering capping estimated GFRs at a\nmaximum of 125 mL/min to avoid potential toxicity.\nNote: In most situations, the use of the patient's ideal body weight (IBW) is recommended\nfor estimating renal function, except when the patient's actual body weight (ABW) is\nless than ideal. Use of actual body weight (ABW) in obese patients (and possibly\npatients with ascites) may significantly overestimate renal function. Some clinicians\nprefer to use an adjusted body weight in such cases [eg, IBW + 0.4 (ABW - IBW)]; the\nadjustment factor may vary based on practitioner and/or institutional preference.\nCockcroft-Gault Method:\nMales: CrCl = [(140 - Age) * Weight] / (72 * Creatinine)\nFemales: CrCl = {[(140 - Age) * Weight] / (72 * Creatinine)} * 0.85\n• CrCl = creatinine clearance; calculated in mL/minute\n• Age is input in years\n• Weight is input in kg\n• Creatinine is input in mg/dL\nJelliffe Method:\nMales: CrCl = {98 - [0.8 * (Age - 20)]} / (Creatinine)\nFemales: CrCl = {[(98 - [0.8 * (Age - 20)] / (Creatinine)} * 0.9\n• CrCl = creatinine clearance; calculated in mL/minute/1.73 m2\n• Age is input in years\n• Creatinine is input in mg/dL",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again. The target AUC usually ranges from 1.5 to 7.5 mg/mL x minutes, with 5 to 7.5 being the most common. An AUC of 2 is used primarily in weekly dosing and an AUC of 4 is used frequently in elderly patients. Higher target AUCs can lead to toxicity, specifically thrombocytopenia and neutropenia.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 2
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Calvert Formula (CARBOplatin Dosing).pdf",
+      "source_sha256": "c8a1e5b65f64bfdc52bde8f106f474766c91c593f08eef332dcc50ca367d9a52",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Calvert Formula (CARBOplatin Dosing)",
+        "form_name": null,
+        "filename_title": "Calvert Formula (CARBOplatin Dosing)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Calvert Formula (CARBOplatin Dosing)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (calvertformulacarboplatindosing)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf38",
+      "title": "Calvert Formula (Carboplatin Dosing)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "gfr_estimation_borrowed",
+        "severity": "medium",
+        "detail": "when GFR is not known it is estimated with the Cockcroft-Gault or Jelliffe equation taken from this corpus's own calculators, because the shared library the PDF calls is not in the PDF; confirm against the live app before relying on it"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 84.6,
+    "checks_passed": 11,
+    "checks_total": 13,
+    "missing": [
+      "notes",
+      "unit options on every field"
+    ]
+  }
+}

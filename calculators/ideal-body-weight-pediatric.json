@@ -1,0 +1,179 @@
+{
+  "schema_version": "1.0",
+  "slug": "ideal-body-weight-pediatric",
+  "title": "Ideal Body Weight: Pediatric",
+  "subtitle": null,
+  "category": "Anthropometrics",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "height",
+      "label": "Height",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "cm",
+      "units": [
+        {
+          "code": "cm",
+          "label": "cm",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "in",
+          "label": "in",
+          "factor": 2.54,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "constraints": {
+        "min": 30.0,
+        "max": 152.4
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "height",
+        "id_const": "ID_HEIGHT"
+      },
+      "label_source": "printed form",
+      "help": [
+        "height must be a valid value."
+      ],
+      "display_unit": "cm",
+      "units_source": "unit selector 'height_unit_list' + corpus registry"
+    },
+    {
+      "key": "ibw_unit_list",
+      "label": "IBW Unit",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "ibwUnitList",
+        "id_const": "ID_IBW_UNITS"
+      },
+      "options": [
+        {
+          "label": "kg",
+          "value": "kg"
+        },
+        {
+          "label": "lbs",
+          "value": "lbs"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "result",
+        "expr": "(pow(height, 2) * 1.65) / 1000"
+      },
+      {
+        "key": "result_v2",
+        "expr": "((result / 0.45359237)) if (ibw_unit_list != 'kg') else (result)"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "ibw",
+        "label": "IBW",
+        "expr": "result_v2",
+        "decimals": 1,
+        "base_unit": null,
+        "kind": "number",
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "IBW = [(height2) x 1.65] ÷ 1000\nIBW = ideal body weight in kg\nHeight measured in cm\nThis formula is intended for patients younger than 18 years old and with a height ≤60 inches (152\ncm).",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Traub SL and Kichen L, \"Estimating Ideal Body Mass in Children,\" Am J Hosp Pharm, 1983, 40(1):107-10.[PubMed 6823980]",
+        "pubmed_id": "6823980",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/6823980/"
+      }
+    ],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 1
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Ideal Body Weight- Pediatric.pdf",
+      "source_sha256": "e0b51c00889ecd1061b07322e3e61d4d556c3c951892f5af1b2544f61d8f5109",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Ideal Body Weight: Pediatric",
+        "form_name": null,
+        "filename_title": "Ideal Body Weight- Pediatric",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Ideal Body Weight: Pediatric')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (idealbodyweightpediatric)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf104",
+      "title": "Ideal Body Weight: Pediatric",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 85.7,
+    "checks_passed": 12,
+    "checks_total": 14,
+    "missing": [
+      "notes",
+      "unit options on every field"
+    ]
+  }
+}

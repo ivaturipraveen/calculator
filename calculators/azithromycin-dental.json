@@ -1,0 +1,216 @@
+{
+  "schema_version": "1.0",
+  "slug": "azithromycin-dental",
+  "title": "Azithromycin (Dental)",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "dosage_form",
+      "label": "Dosage form",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "Dose in mg",
+      "units": [
+        {
+          "code": "Dose in mg",
+          "label": "Dose in mg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "dosageForm",
+        "id_const": "ID_FORM"
+      },
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "dose",
+      "label": "Dose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/kg",
+      "units": null,
+      "constraints": {
+        "min": 10.0,
+        "max": 15.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "dose",
+        "id_const": "ID_DOSE"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Dose must be between 10 and 15."
+      ]
+    },
+    {
+      "key": "weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "constraints": {
+        "min": 1.0,
+        "max": 200.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "weight",
+        "id_const": "ID_WEIGHT"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Weight must be between 1 and 200."
+      ],
+      "display_unit": "kg",
+      "dimension": "mass",
+      "units_source": "corpus unit registry"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "output_dose",
+        "expr": "weight * dose"
+      },
+      {
+        "key": "output_dose_v2",
+        "expr": "(500) if (output_dose > 500) else (output_dose)"
+      },
+      {
+        "key": "output_dose_m_l",
+        "expr": "output_dose_v2 / dosage_form"
+      },
+      {
+        "key": "output_dose_m_l_v2",
+        "expr": "round(output_dose_m_l / .5) * .5"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "output",
+        "label": "Dose in mg",
+        "expr": "output_dose_v2",
+        "decimals": 0,
+        "base_unit": null,
+        "kind": "number",
+        "label_source": "printed form (position)"
+      },
+      {
+        "key": "output_m_l",
+        "label": "Dose in mL",
+        "expr": "output_dose_m_l_v2",
+        "decimals": 1,
+        "base_unit": null,
+        "kind": "number",
+        "label_source": "printed form (position)"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 0,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Dose in mg:\nDose in mg = Dose * Weight\n• Dose is input in mg/kg\n• Weight is input in kg\nDose in mL:\nDose in mL = (Dose * Weight) / Concentration\n• Dose is input in mg/kg\n• Weight is input in kg\n• Concentration is input in mg/mL",
+    "notes": [
+      "Tablet answers rounded to closest dosage based on available dosage forms (250 mg and 500 mg tablets); oral suspension answers rounded to the nearest whole number (mg), 0.5 mL, and 0.1 tsp."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 2
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Azithromycin (Dental).pdf",
+      "source_sha256": "f9eba7db5e9d6461209fcf20fe3b8ce568eb275fd7dfc56bf5f89aec8084eb8e",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Azithromycin (Dental)",
+        "form_name": null,
+        "filename_title": "Azithromycin (Dental)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Azithromycin (Dental)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (azithromycindental)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf29",
+      "title": "Azithromycin (Dental Prophylaxis)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 92.3,
+    "checks_passed": 12,
+    "checks_total": 13,
+    "missing": [
+      "unit options on every field"
+    ]
+  }
+}

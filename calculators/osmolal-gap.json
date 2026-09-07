@@ -1,0 +1,270 @@
+{
+  "schema_version": "1.0",
+  "slug": "osmolal-gap",
+  "title": "Osmolal Gap",
+  "subtitle": null,
+  "category": "Lab / Electrolytes",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "serum_na",
+      "js_name": "Serum_Na",
+      "label": "Serum Na",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq/L",
+      "display_unit": "mEq/L",
+      "units": [
+        {
+          "code": "mEq/L",
+          "label": "mEq/L",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 50.0,
+        "max": 200.0
+      },
+      "messages": {
+        "min": "The minimum value for Serum Na is 50 mEq/L.",
+        "max": "The maximum value for Serum Na is 200 mEq/L."
+      },
+      "dimension": null,
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Serum Na is 50 mEq/L. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Serum Na is 200 mEq/L. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "serum_glucose",
+      "js_name": "Serum_glucose",
+      "label": "Serum glucose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/dL",
+      "display_unit": "mg/dL",
+      "units": [
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 0.0,
+        "max": 1500.0
+      },
+      "messages": {
+        "min": "The minimum value for Serum glucose is 0 mg/dL.",
+        "max": "The maximum value for Serum glucose is 1500 mg/dL."
+      },
+      "dimension": "creatinine",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Serum glucose is 0 mg/dL. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Serum glucose is 1500 mg/dL. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "serum_bun",
+      "js_name": "Serum_BUN",
+      "label": "Serum BUN",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/dL",
+      "display_unit": "mg/dL",
+      "units": [
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 0.0,
+        "max": 150.0
+      },
+      "messages": null,
+      "dimension": "creatinine",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Serum BUN is 0 mg/dL. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Serum BUN is 150 mg/dL. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "serum_ethanol",
+      "js_name": "Serum_ethanol",
+      "label": "Serum ethanol",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/dL",
+      "display_unit": "mg/dL",
+      "units": [
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 0.0,
+        "max": 2000.0
+      },
+      "messages": {
+        "min": "The minimum value for Serum ethanol is 0 mg/dL.",
+        "max": "The maximum value for Serum ethanol is clrResults(); Serum_ethanol = 0; doCalc = false; alert(\"The maximum value for Serum ethanol is 2000 mg/dL."
+      },
+      "dimension": "creatinine",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Serum ethanol is 0 mg/dL. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Serum ethanol is 2000 mg/dL. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "measured_osm",
+      "js_name": "Measured_Osm",
+      "label": "Measured Osm",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mOsm/kg",
+      "display_unit": "mOsm/kg",
+      "units": [
+        {
+          "code": "mOsm/kg",
+          "label": "mOsm/kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "calculated_osm",
+        "js_name": "Calculated_Osm",
+        "label": "Calculated Osm",
+        "expr": "(serum_na * 2) + (serum_glucose / 18) + (serum_bun / 2.8) + (serum_ethanol / 3.7)",
+        "base_unit": "mOsm/kg",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "osmolal_gap",
+        "js_name": "Osmolal_gap",
+        "label": "Osmolal gap",
+        "expr": "measured_osm - calculated_osm",
+        "base_unit": "mOsm/kg",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "Calculated_Osm = (Serum_Na * 2) + (Serum_glucose / 18) + (Serum_BUN / 2.8) + (Serum_ethanol / 3.7)\nOsmolal_gap = Measured_Osm - Calculated_Osm",
+    "notes": [
+      "In this calculator, mcg is the abbreviation for micrograms.",
+      "BUN: blood urea nitrogen; Osm: osmolality.",
+      "BUN: blood urea nitrogen; Osm: osmolality.",
+      "The plasma osmolality is determined by the concentration of the different solutes in the plasma.",
+      "In normal subjects, sodium salts (chloride and bicarbonate), glucose, and urea are the primary circulating solutes.",
+      "The calculated plasma osmolality normally is between 270 and 290 mOsm/kg H2O and the Osmolal gap is normally <10 mOsm/kg H2O. You can calculate the Osmolal gap from the formulas depicted."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Bhagat CI, Garcia-Webb P, Fletcher E, et al. Calculated vs measured plasma osmolalities revisited. Clin Chem. 1984 Oct;30(10):1703-5.[PubMed 6537784]",
+        "pubmed_id": "6537784",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/6537784/"
+      },
+      {
+        "text": "Purssell RA, Pudek M, Brubacher J, et al. Derivation and validation of a formula to calculate the contribution of ethanol to the osmolal gap. Ann Emerg Med. 2001; 38:653. [PubMed 11719745]",
+        "pubmed_id": "11719745",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11719745/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 4
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Osmolal Gap.pdf",
+      "source_sha256": "28189a5433065d79d3f2ec0af98f947c96bd796f0b19e949f28a2eb534782502",
+      "extractor": "pdf",
+      "form_name": "OsmolalGap",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Osmolal Gap",
+        "form_name": "OsmolalGap",
+        "filename_title": "Osmolal Gap",
+        "confidence": 1.0,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Osmolal Gap')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (osmolalgap)",
+          "title_vs_form": "MATCH (osmolalgap)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf129",
+      "title": "Osmolal Gap",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 16,
+    "checks_total": 16,
+    "missing": []
+  }
+}

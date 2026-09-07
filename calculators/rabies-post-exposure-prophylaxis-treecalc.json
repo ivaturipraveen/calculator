@@ -1,0 +1,157 @@
+{
+  "schema_version": "1.0",
+  "slug": "rabies-post-exposure-prophylaxis-treecalc",
+  "title": "Rabies Post Exposure Prophylaxis TreeCalc®",
+  "subtitle": null,
+  "category": "Clinical Calculator",
+  "renderer": "tree",
+  "engine": "tree",
+  "status": "draft",
+  "version": 1,
+  "inputs": [],
+  "compute": {
+    "engine": "tree",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": null,
+  "tables": {
+    "nodes": {
+      "q1": {
+        "q": "Was there contact with saliva or brain tissue of a mammal through an open wound or mucus membrane, or was there exposure to a bat?",
+        "yes": "q2",
+        "no": "end_not_required_1"
+      },
+      "q2": {
+        "q": "Was the animal wild, such as a bat, fox, racoon or skunk?",
+        "yes": "q3",
+        "no": "q2b"
+      },
+      "q2b": {
+        "q": "Is the animal a dog, cat, or ferret that appears healthy and is available for 10 days of observation?",
+        "yes": "end_observe",
+        "no": "end_administer_domestic",
+        "reconstructed": true
+      },
+      "q3": {
+        "q": "Was the animal brain available for rabies testing?",
+        "yes": "q4",
+        "no": "end_administer_notest"
+      },
+      "q4": {
+        "q": "Was the direct fluorescent antibody test positive",
+        "yes": "end_administer_dfa",
+        "no": "end_not_required_dfa"
+      }
+    },
+    "outcomes": {
+      "end_not_required_1": {
+        "text": "Post Exposure Prophylaxis not required",
+        "tone": "good"
+      },
+      "end_administer_dfa": {
+        "text": "Administer Post Exposure Prophylaxis",
+        "tone": "bad"
+      },
+      "end_observe": {
+        "text": "Post Exposure Prophylaxis not required",
+        "detail": "Observe the healthy dog, cat, or ferret for 10 days. Begin prophylaxis only if the animal develops clinical signs of rabies during that period.",
+        "tone": "good",
+        "reconstructed": true
+      },
+      "end_administer_domestic": {
+        "text": "Administer Post Exposure Prophylaxis",
+        "detail": "The dog, cat, or ferret is rabid, suspected rabid, or unavailable/unknown for 10-day observation; consult public health officials.",
+        "tone": "bad",
+        "reconstructed": true
+      },
+      "end_administer_notest": {
+        "text": "Administer Post Exposure Prophylaxis",
+        "detail": "The animal's brain was not available for testing. Per CDC guidance, a wild carnivore (or other mammal capable of transmitting rabies) that exposes a person is regarded as rabid unless the animal is proven negative by laboratory testing.",
+        "tone": "bad",
+        "reconstructed": true
+      },
+      "end_not_required_dfa": {
+        "text": "Post Exposure Prophylaxis not required",
+        "detail": "A negative direct fluorescent antibody (DFA) test result means the animal's saliva can be assumed to contain no rabies virus. If prophylaxis was already started, it may be discontinued.",
+        "tone": "good",
+        "reconstructed": true
+      }
+    }
+  },
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Centers for Disease Control and Prevention. Human Rabies Prevention, U.S. MMWR. 1999; 48 (No.RR-1).",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer. MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": [
+      "The decision tree must restart when this preference is changed."
+    ],
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Rabies Post Exposure Prophylaxis TreeCalc®.pdf",
+      "source_sha256": "befd1d0370a4a0b90d885815b8c049e5eb8d3f9d1ee99e6b8e0f55dcd8b13719",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Rabies Post Exposure Prophylaxis TreeCalc®",
+        "form_name": null,
+        "filename_title": "Rabies Post Exposure Prophylaxis TreeCalc®",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Rabies Post Exposure Prophylaxis TreeCalc®')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (rabiespostexposureprophylaxistreecalc)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf144",
+      "title": "Rabies Post Exposure Prophylaxis TreeCalc®",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "tree_nodes_needed",
+        "severity": "high",
+        "detail": "decision-tree nodes are not in the print view; source them from the mockup implementation"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 7,
+    "checks_total": 7,
+    "missing": []
+  }
+}

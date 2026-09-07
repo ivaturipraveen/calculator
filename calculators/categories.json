@@ -1,0 +1,145 @@
+{
+  "count": 35,
+  "categories": [
+    {
+      "name": "Anthropometrics",
+      "calculators": 16
+    },
+    {
+      "name": "Cardiology",
+      "calculators": 2
+    },
+    {
+      "name": "Cardiology / Dosing Calculator",
+      "calculators": 2
+    },
+    {
+      "name": "Cardiology / Scoring System",
+      "calculators": 6
+    },
+    {
+      "name": "Clinical Calculator",
+      "calculators": 3
+    },
+    {
+      "name": "Critical Care / Scoring System",
+      "calculators": 3
+    },
+    {
+      "name": "Dosing / Weight-Based Calculations",
+      "calculators": 1
+    },
+    {
+      "name": "Drug Dosing / Infusion",
+      "calculators": 40
+    },
+    {
+      "name": "Emergency Medicine / Dosing Reference",
+      "calculators": 3
+    },
+    {
+      "name": "Endocrinology / Risk Score",
+      "calculators": 3
+    },
+    {
+      "name": "Hematology",
+      "calculators": 1
+    },
+    {
+      "name": "Hematology / Scoring System",
+      "calculators": 2
+    },
+    {
+      "name": "Hepatology",
+      "calculators": 5
+    },
+    {
+      "name": "Hepatology / Scoring System",
+      "calculators": 2
+    },
+    {
+      "name": "Infectious Disease / Scoring System",
+      "calculators": 3
+    },
+    {
+      "name": "Lab / Electrolytes",
+      "calculators": 13
+    },
+    {
+      "name": "Neurology",
+      "calculators": 1
+    },
+    {
+      "name": "Neurology / Scoring System",
+      "calculators": 1
+    },
+    {
+      "name": "Obstetrics",
+      "calculators": 1
+    },
+    {
+      "name": "Obstetrics / Scoring System",
+      "calculators": 1
+    },
+    {
+      "name": "Pain Management",
+      "calculators": 1
+    },
+    {
+      "name": "Pain Management / Compounding",
+      "calculators": 1
+    },
+    {
+      "name": "Pediatrics",
+      "calculators": 2
+    },
+    {
+      "name": "Pediatrics / Growth Chart",
+      "calculators": 17
+    },
+    {
+      "name": "Pediatrics / Obstetrics",
+      "calculators": 1
+    },
+    {
+      "name": "Pharmacokinetics",
+      "calculators": 7
+    },
+    {
+      "name": "Pulmonology",
+      "calculators": 2
+    },
+    {
+      "name": "Pulmonology / Scoring System",
+      "calculators": 1
+    },
+    {
+      "name": "Renal Function",
+      "calculators": 15
+    },
+    {
+      "name": "Renal Function / Electrolytes",
+      "calculators": 1
+    },
+    {
+      "name": "Scoring System",
+      "calculators": 5
+    },
+    {
+      "name": "Toxicology",
+      "calculators": 2
+    },
+    {
+      "name": "Toxicology / Assessment Tool",
+      "calculators": 1
+    },
+    {
+      "name": "Toxicology / Dosing Calculator",
+      "calculators": 1
+    },
+    {
+      "name": "Unit Conversion",
+      "calculators": 13
+    }
+  ]
+}

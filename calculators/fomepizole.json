@@ -1,0 +1,177 @@
+{
+  "schema_version": "1.0",
+  "slug": "fomepizole",
+  "title": "Fomepizole",
+  "subtitle": null,
+  "category": "Toxicology",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "weight",
+        "id_const": "ID_WEIGHT"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Weight must be at least 0."
+      ],
+      "display_unit": "kg",
+      "dimension": "mass",
+      "units_source": "corpus unit registry"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "ld",
+        "expr": "round((15 * weight) * 10)/10"
+      },
+      {
+        "key": "fmd",
+        "expr": "round((10 *weight) * 10)/10"
+      },
+      {
+        "key": "smd",
+        "expr": "round((15 * weight) * 10)/10"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "ld",
+        "label": "Loading Dose (LD)",
+        "expr": "ld",
+        "decimals": null,
+        "base_unit": "mg",
+        "kind": "number",
+        "label_source": "printed form",
+        "unit_source": "formula_prose"
+      },
+      {
+        "key": "first_md",
+        "label": "1st Maintenance Dose (MD) (4 doses)",
+        "expr": "fmd",
+        "decimals": null,
+        "base_unit": null,
+        "kind": "number",
+        "label_source": "printed form (position)"
+      },
+      {
+        "key": "fifth_md",
+        "label": "5th Maintenance Dose (MD)",
+        "expr": "smd",
+        "decimals": null,
+        "base_unit": "mg",
+        "kind": "number",
+        "label_source": "printed form (position)",
+        "unit_source": "formula_prose"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": "Loading Dose:\nLoading Dose (LD) = (Weight * 15)\n• Loading Dose (LD) is calculated in mg\n• Weight is input in kg\nMaintenance Dose:\n1st Maintenance Dose (MD) (4 doses) = (Weight * 10)\n• 1st Maintenance Dose (MD) is calculated in mg\n• Weight is input in kg\n5th Maintenance Dose (MD) = (Weight * 15)\n• 5th Maintenance Dose (MD) is calculated in mg\n• Weight is input in kg",
+    "notes": [
+      "This calculator calculates the recommended weight-based doses of fomepizole for patients experiencing methanol or ethylene glycol toxicity. The calculated dose(s) may not be applicable for other indications. Consider consultation with a poison center or clinical toxicologist to determine optimal patient-specific care."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Antizol (fomepizole) [product monograph]. St-Laurent, Quebec, Canada: Paladin Labs Inc; October 2017.",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 1
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Fomepizole.pdf",
+      "source_sha256": "69ab8c873f53f5b8976f631f62a454d91922b59e5d6fed70569bb4819e2c3068",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Fomepizole",
+        "form_name": null,
+        "filename_title": "Fomepizole",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Fomepizole')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (fomepizole)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf86",
+      "title": "Fomepizole",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 92.9,
+    "checks_passed": 13,
+    "checks_total": 14,
+    "missing": [
+      "unit options on every field"
+    ]
+  }
+}

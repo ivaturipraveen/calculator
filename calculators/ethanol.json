@@ -1,0 +1,320 @@
+{
+  "schema_version": "1.0",
+  "slug": "ethanol",
+  "title": "Ethanol",
+  "subtitle": null,
+  "category": "Toxicology",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "output_units",
+      "label": "Output Units",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "outputUnits",
+        "id_const": "ID_UNITS"
+      },
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "mg; mg/hr",
+          "value": "mg"
+        },
+        {
+          "label": "mL; mL/hr",
+          "value": "mL"
+        }
+      ],
+      "options_source": "printed formula cases"
+    },
+    {
+      "key": "weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "constraints": {
+        "min": 1.0,
+        "max": 200.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "weight",
+        "id_const": "ID_WEIGHT"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Weight must be between 1 and 200."
+      ],
+      "display_unit": "kg",
+      "dimension": "mass",
+      "units_source": "corpus unit registry"
+    },
+    {
+      "key": "hemodialysis",
+      "label": "Hemodialysis",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "hemodialysis",
+        "id_const": "ID_HEMODIALYSIS"
+      },
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "Yes",
+          "value": "Yes"
+        },
+        {
+          "label": "No",
+          "value": "No"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "chronic_drinker",
+      "label": "Chronic Drinker",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "chronicDrinker",
+        "id_const": "ID_DRINKER"
+      },
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "Yes",
+          "value": "Yes"
+        },
+        {
+          "label": "No",
+          "value": "No"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "route",
+      "label": "Route",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "route",
+        "id_const": "ID_ROUTE"
+      },
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "Oral",
+          "value": "Oral"
+        },
+        {
+          "label": "IV",
+          "value": "IV"
+        }
+      ],
+      "options_source": "printed formula cases"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "md",
+        "expr": "0"
+      },
+      {
+        "key": "infusion",
+        "expr": "0"
+      },
+      {
+        "key": "dose_min_v2",
+        "expr": "(600 * weight) if (output_units == 'mg') else ((0.78 * weight) if (route == 'Oral') else (7.6 * weight))"
+      },
+      {
+        "key": "dose_max_v2",
+        "expr": "(700 * weight) if (output_units == 'mg') else ((0.9 * weight) if (route == 'Oral') else (8.9 * weight))"
+      },
+      {
+        "key": "md_v2",
+        "expr": "((257 * weight) if (hemodialysis == 'Yes' and chronic_drinker == 'Yes') else ((169 * weight) if (hemodialysis == 'Yes') else ((154 * weight) if (chronic_drinker == 'Yes') else (66 * weight)))) if (output_units == 'mg') else (md)"
+      },
+      {
+        "key": "infusion_v2",
+        "expr": "(infusion) if (output_units == 'mg') else (((0.33 * weight) if (hemodialysis == 'Yes' and chronic_drinker == 'Yes') else ((0.22 * weight) if (hemodialysis == 'Yes') else ((0.2 * weight) if (chronic_drinker == 'Yes') else (0.09 * weight)))) if (route == 'Oral') else ((3.26 * weight) if (hemodialysis == 'Yes' and chronic_drinker == 'Yes') else ((2.13 * weight) if (hemodialysis == 'Yes') else ((1.96 * weight) if (chronic_drinker == 'Yes') else (0.83 * weight)))))"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "initial_dose_min",
+        "label": "Initial Dose (min)",
+        "expr": "dose_min_v2",
+        "decimals": 1,
+        "base_unit": "mg",
+        "kind": "number",
+        "label_source": "printed form",
+        "unit_source": "formula_prose"
+      },
+      {
+        "key": "initial_dose_max",
+        "label": "Initial Dose (max)",
+        "expr": "dose_max_v2",
+        "decimals": 1,
+        "base_unit": "mg",
+        "kind": "number",
+        "label_source": "printed form",
+        "unit_source": "formula_prose"
+      },
+      {
+        "key": "md",
+        "label": "Maintenance Dose (MD)",
+        "expr": "md_v2",
+        "decimals": 1,
+        "base_unit": "mg/hr",
+        "kind": "number",
+        "label_source": "printed form",
+        "unit_source": "formula_prose"
+      },
+      {
+        "key": "infustion_rate",
+        "label": "Infustion Rate",
+        "expr": "infusion_v2",
+        "decimals": 1,
+        "base_unit": null,
+        "kind": "number"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Initial Dose:\nWhen Route is Oral or IV and Output Units is mg; mg/hr:\nInitial Dose (min) = Weight * 600\n• Initial Dose (min) is calculated in mg\n• Weight is input in kg\nInitial Dose (max) = Weight * 700\n• Initial Dose (max) is calculated in mg\n• Weight is input in kg\nWhen Route is Oral and Output Units is mL; mL/hr:\nInitial Dose (min) = Weight * 0.78\n• Initial Dose (min) is calculated in mL of a 98% solution\n• Weight is input in kg\nInitial Dose (max) = Weight * 0.9\n• Initial Dose (max) is calculated in mL of a 98% solution\n• Weight is input in kg\nWhen Route is IV and Output Units is mL; mL/hr:\nInitial Dose (min) = Weight * 7.6\n• Initial Dose (min) is calculated in mL of a 10% solution\n• Weight is input in kg\nInitial Dose (max) = Weight * 8.9\n• Initial Dose (max) is calculated in mL of a 10% solution\n• Weight is input in kg\nMaintenance Dose:\nWhen Route is Oral or IV and Output Units is mg; mg/hr:\nMaintenance Dose (MD) = Weight * Dose\n• Maintenance Dose (MD) is calculated in mg/hr\n• Weight is input in kg\n• Dose is input in mg/kg/hr and is dependent on hemodialysis status and alcohol status:\no When Hemodialysis is Yes and\n• Chronic Drinker is Yes, Dose = 257\n• Chronic Drinker is No, Dose = 169\no When Hemodialysis is No and\n• Chronic Drinker is Yes, Dose = 154\n• Chronic Drinker is No, Dose = 66\nWhen Route is Oral and Output Units is mL; mL/hr:\nMaintenance Dose (MD) = Weight * Dose\n• Maintenance Dose (MD) is calculated in mL/hr of a 98% solution\n• Weight is input in kg\n• Dose is input in mL/kg/hr of a 98% solution and is dependent on hemodialysis status and alcohol status:\no When Hemodialysis is Yes and\n• Chronic Drinker is Yes, Dose = 0.33\n• Chronic Drinker is No, Dose = 0.22\no When Hemodialysis is No and\n• Chronic Drinker is Yes, Dose = 0.20\n• Chronic Drinker is No, Dose = 0.09\nWhen Route is IV and Output Units is mL; mL/hr:\nMaintenance Dose (MD) = Weight * Dose\n• Maintenance Dose (MD) is calculated in mL/hr of a 10% solution\n• Weight is input in kg\n• Dose is input in mL/kg/hr of a 10% solution and is dependent on hemodialysis status and alcohol status:\no When Hemodialysis is Yes and\n• Chronic Drinker is Yes, Dose = 3.26\n• Chronic Drinker is No, Dose = 2.13\no When Hemodialysis is No and\n• Chronic Drinker is Yes, Dose = 1.96\n• Chronic Drinker is No, Dose = 0.83",
+    "notes": [],
+    "conditional_notes": [
+      "Note: Oral dose based on a 98% solution; further dilution to ≤ 20% is required.",
+      "Note: Infusion rate based on a 10% solution."
+    ],
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Barceloux DG, Bond GR, Krenzelok EP, et al. American Academy of Clinical Toxicology Practice Guidelines on the Treatment of Methanol Poisoning. Ad Hoc Committee. J Toxicol Clin Toxicol.2002;40(4):415-446.[PubMed 12216995]",
+        "pubmed_id": "12216995",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12216995/"
+      },
+      {
+        "text": "Barceloux DG, Krenzelok EP, Olson K, et al. American Academy of Clinical Toxicology Practice Guidelines on the Treatment of Ethylene Glycol Poisoning. Ad Hoc Committee. J Toxicol Clin Toxicol.1999;37(5):537-560.[PubMed 10497633]",
+        "pubmed_id": "10497633",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10497633/"
+      }
+    ],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 1
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Ethanol.pdf",
+      "source_sha256": "403ef6f83ffa03f445e7bf9345d5227c73b91c89b6484d01179e29ceff49355a",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Ethanol",
+        "form_name": null,
+        "filename_title": "Ethanol",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Ethanol')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (ethanol)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf84",
+      "title": "Ethanol",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 85.7,
+    "checks_passed": 12,
+    "checks_total": 14,
+    "missing": [
+      "notes",
+      "unit options on every field"
+    ]
+  }
+}

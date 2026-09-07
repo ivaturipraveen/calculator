@@ -1,0 +1,248 @@
+{
+  "schema_version": "1.0",
+  "slug": "equianalgesic-dose-estimation-opioids",
+  "title": "Equianalgesic Dose Estimation (Opioids)",
+  "subtitle": null,
+  "category": "Pain Management",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "to",
+      "label": "To",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "Dose",
+      "units": [
+        {
+          "code": "Dose",
+          "label": "Dose",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "to",
+        "id_const": "ID_TO"
+      },
+      "dimension": null,
+      "label_source": "printed form",
+      "options_incomplete": true,
+      "options_known_value": "FentanylParenteral"
+    },
+    {
+      "key": "of",
+      "label": "Of",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "of",
+        "id_const": "ID_OF"
+      },
+      "label_source": "printed form",
+      "options_incomplete": true,
+      "options_known_value": "FentanylParenteral"
+    },
+    {
+      "key": "amount",
+      "label": "Convert from",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "amount",
+        "id_const": "ID_AMOUNT"
+      },
+      "label_source": "printed form (position)"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "dose",
+        "expr": "amount / of * to"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "dosage",
+        "label": "Dose",
+        "expr": "(dose) if ((retval == 0)) else (0)",
+        "decimals": 1,
+        "base_unit": null,
+        "kind": "number",
+        "label_source": "printed form (position)"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": null,
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Anderson R, Saiers JH, Abram S, et al. Accuracy in Equianalgesic Dosing: Conversion Dilemmas.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "J Pain Symptom Manage. 2001;21(5):397-406. doi:10.1016/s0885-3924(01)00271-8[PubMed 11369161]",
+        "pubmed_id": "11369161",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11369161/"
+      },
+      {
+        "text": "Beaver WT, Feise GA. A comparison of the analgesic effect of intramuscular nalbuphine and morphine in patients with postoperative pain. J Pharmacol Exp Ther. 1978;204(2):487-496.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "[PubMed 340643]",
+        "pubmed_id": "340643",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/340643/"
+      },
+      {
+        "text": "Centers for Disease Control and Prevention (CDC). Opioid oral morphine milligram equivalent (MME) conversion factors. https://medicaid-documents.dhhs.utah.gov/Documents/files/Opioid- Morphine-EQ-Conversion-Factors.pdf. Accessed July 28, 2025.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Dowell D, Ragan KR, Jones CM, Baldwin GT, Chou R. CDC clinical practice guideline for prescribing opioids for pain - United States, 2022. MMWR Recomm Rep. 2022;71(3):1-95. doi:10.15585/mmwr.rr7103a1[PubMed 36327391]",
+        "pubmed_id": "36327391",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36327391/"
+      },
+      {
+        "text": "doi:10.15585/mmwr.rr7103a1[PubMed 36327391]",
+        "pubmed_id": "36327391",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36327391/"
+      },
+      {
+        "text": "Fine PG, Portenoy RK; Ad Hoc Expert Panel on Evidence Review and Guidelines for Opioid Rotation. Establishing \"best practices\" for opioid rotation: conclusions of an expert panel. J Pain Symptom Manage. 2009;38(3):418-425. doi:10.1016/j.jpainsymman.2009.06.002[PubMed 19735902]",
+        "pubmed_id": "19735902",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19735902/"
+      },
+      {
+        "text": "Knotkova H, Fine PG, Portenoy RK. Opioid rotation: the science and the limitations of the equianalgesic dose table. J Pain Symptom Manage. 2009;38(3):426-439. doi:10.1016/j.jpainsymman.2009.06.001.[PubMed 19735903]",
+        "pubmed_id": "19735903",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19735903/"
+      },
+      {
+        "text": "Levy MH. Pharmacologic Treatment of Cancer Pain. N Engl J Med.1996;335(15):1124-1132. doi:10.1056/NEJM199610103351507[PubMed 8813044]",
+        "pubmed_id": "8813044",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/8813044/"
+      },
+      {
+        "text": "Pereira J, Lawlor P, Vigano A, et al. Equianalgesic Dose Ratios for Opioids: A Critical Review and Proposals for Long-Term Dosing. J Pain Symptom Manage. 2001;22(2):672-687. doi:10.1016/s0885-3924(01)00294-9[PubMed 11495714]",
+        "pubmed_id": "11495714",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11495714/"
+      },
+      {
+        "text": "Treillet E, Laurent S, Hadjiat Y. Practical management of opioid rotation and equianalgesia. J Pain Res. 2018;11:2587-2601. doi:10.2147/JPR.S170269[PubMed 30464578]",
+        "pubmed_id": "30464578",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/30464578/"
+      },
+      {
+        "text": "Wen RY, Atayee RS, Edmonds KP. A comparison of institutional opioid equianalgesia tools: a national study. J Palliat Med. 2022;25(11):1686-1691. doi:10.1089/jpm.2021.0678[PubMed 35559657]",
+        "pubmed_id": "35559657",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35559657/"
+      },
+      {
+        "text": "Zacny JP, Conley K, Marks S. Comparing the subjective, psychomotor and physiological effects of intravenous nalbuphine and morphine in healthy volunteers. J Pharmacol Exp Ther. 1997;280(3):1159-1169.[PubMed 9067299]",
+        "pubmed_id": "9067299",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9067299/"
+      },
+      {
+        "text": "Zeng Z, Lu J, Shu C, et al. A comparision of nalbuphine with morphine for analgesic effects and safety : meta-analysis of randomized controlled trials. Sci Rep. 2015;5:10927. doi:10.1038/srep10927[PubMed 26039709]",
+        "pubmed_id": "26039709",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26039709/"
+      }
+    ],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again. Equianalgesic doses are only approximations and substantial interpatient variability exists, including incomplete cross-tolerance when switching between opioids. An empiric 25% to 50% reduction of the calculated equianalgesic dose of the new opioid is recommended to reduce the risk of adverse effects and unintentional overdose. Dose reductions closer to the upper end of this range (ie, 50%) may be appropriate in patients on relatively high opioid doses, or with advanced age or reduced end-organ function (eg, kidney or liver dysfunction); dose reductions closer to the lower end of this range (ie, 25%) may be appropriate in patients on relatively low opioid doses (Fine 2009). Equianalgesic ratios may change according to the direction of the switch; the risk of negative consequences associated with this difference may increase as opioid dosage increases (Anderson 2001; Pereira 2001; Treillet 2018). Other patient-specific factors, such as duration of opioid therapy, genetic polymorphisms, concomitant medications, and presence of hyperalgesia must also be considered. Additionally, the elimination half-life of the opioid must be accounted for, as clinical changes associated with switching from an opioid with a long be accounted for, as clinical changes associated with switching from an opioid with a long half-life may be delayed. Following conversion, monitor closely and adjust dosage if needed to achieve patient-centered goals; breakthrough pain relief with immediate-release opioid formulations may be required (Fine 2009; Knotkova 2009; Pereira 2001; Treillet 2018). Approximate equianalgesic dosesa a Select opioids are intentionally excluded from this calculator due to lack of data, variability in reported conversion factors, or requirement of complex clinical decision making. Refer to individual drug monographs for further information. b Not recommended for routine use for pain management. c Refer to Fentanyl monograph for conversion information for transdermal formulations d Refer to Hydrocodone monograph for conversion information for extended-release formulations Opioid Dose Oral Parenteral Butorphanol -- 2 mg Codeineb 200 mg 120 mg Fentanylc -- 100 mcg (0.1 mg) Hydrocodone immediate released 30 mg -- Hydromorphone 6 mg 1.2 mg Morphine 30 mg 10 mg Nalbuphine -- 10 mg Oxycodone 20 mg -- Oxymorphone 10 mg 1 mg Tapentadol 100 mg --",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": [
+      "The drug selections for “Of” and “To” cannot be the same",
+      "To use the calculator, determine the total daily dose of the opioid to convert from, enter this dose in the “Convert from” text box, and select this opioid name/route in the “Of” drop-down menu. Then, select the opioid to convert to in the “To” drop-down menu and click “Calculate” to determine the approximate equianalgesic daily dose of the new opioid."
+    ],
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Equianalgesic Dose Estimation (Opioids).pdf",
+      "source_sha256": "a9a422f907ca20286fee4d2bbe65ee3b53dfe732df6fc3d12f6761a8db195468",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Equianalgesic Dose Estimation (Opioids)",
+        "form_name": null,
+        "filename_title": "Equianalgesic Dose Estimation (Opioids)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Equianalgesic Dose Estimation (Opioids)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (equianalgesicdoseestimationopioids)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf82",
+      "title": "Equianalgesic Dose Estimation (Opioids)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 64.3,
+    "checks_passed": 9,
+    "checks_total": 14,
+    "missing": [
+      "printed equation text",
+      "notes",
+      "unit options on every field",
+      "field help text",
+      "complete option lists"
+    ]
+  }
+}

@@ -1,0 +1,258 @@
+{
+  "schema_version": "1.0",
+  "slug": "phenytoin-drug-level-adjusted",
+  "title": "Phenytoin Drug Level, Adjusted",
+  "subtitle": null,
+  "category": "Neurology",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "patient_population",
+      "js_name": "Patient_Population",
+      "label": "Patient population",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "options": [
+        {
+          "label": "General medicine, critical care, or neurology (all without ESRD)",
+          "index": 0,
+          "value": 0.275,
+          "label_source": "printed form"
+        },
+        {
+          "label": "ESRD on hemodialysis",
+          "index": 1,
+          "value": 0.2,
+          "label_source": "printed form"
+        },
+        {
+          "label": "Hypoalbuminemia (<3 g/dL) (hospitalized; non-critically ill)",
+          "index": 2,
+          "value": 0.25,
+          "label_source": "printed form"
+        }
+      ],
+      "options_source": "pdf_script+printed_form",
+      "variant_variables": null,
+      "source": {
+        "kind": "radio_group",
+        "js_group": "Patient_Population"
+      },
+      "label_source": "printed form",
+      "help": [
+        "For this patient population the serum albumin must be less than 3 g/dL"
+      ]
+    },
+    {
+      "key": "phenytoin_measured",
+      "js_name": "Phenytoin_Measured",
+      "label": "Phenytoin measured (total)",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "display_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "serum_albumin",
+      "js_name": "Serum_Albumin",
+      "label": "Serum albumin",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "g/dL",
+      "display_unit": "g/dL",
+      "units": [
+        {
+          "code": "g/dL",
+          "label": "g/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "help": [
+        "For this patient population the serum albumin must be less than 3 g/dL"
+      ]
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "adjusted_free_phenytoin",
+        "js_name": "Adjusted_Free_Phenytoin",
+        "label": "Adjusted free phenytoin",
+        "expr": "phenytoin_measured / ((patient_population * serum_albumin) + 0.1) * 0.1",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "adjusted_total_phenytoin",
+        "js_name": "Adjusted_Total_Phenytoin",
+        "label": "Adjusted total phenytoin",
+        "expr": "phenytoin_measured /((patient_population * serum_albumin) + 0.1)",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": null,
+    "notes": [
+      "In this calculator, mcg is the abbreviation for micrograms.",
+      "Free phenytoin concentrations are preferred in patients with renal dysfunction, hepatic dysfunction, hypoalbuminemia, and those who are critically ill. If free phenytoin concentrations are unavailable, predictive equations may be used in adult patients to estimate free phenytoin levels and help guide dosage adjustments, along with the assessment of patient response and tolerability. Overall predictive performance of the equations varies (Cheng 2016; Kiang 2016).",
+      "Equations for predicting free phenytoin (from total phenytoin) after adapting for clinical variables:",
+      "For general medicine, critical care, or neurology (all without ESRD)",
+      "Cheng revised Winter-Tozer equation (Cheng 2016): Adjusted free phenytoin = (Measured total phenytoin divided by [(0.275 x albumin) + 0.1]) x 0.1 For ESRD on hemodialysis Soriano revised Winter-Tozer equation (Soriano 2017): Adjusted free phenytoin = (Measured total phenytoin divided by [(0.2 x albumin) + 0.1]) x 0.1 For hypoalbuminemia (serum albumin <3 g/dL; hospitalized, non-critically ill patients) (Khan 2017):",
+      "Anderson revised Winter-Tozer equation (Anderson 1997): Adjusted free phenytoin = (Measured total phenytoin divided by [(0.25 x albumin) + 0.1]) x 0.1 Equations for predicting adjusted total phenytoin (from total phenytoin) after adapting for clinical variables:",
+      "For general medicine, critical care, or neurology (all without ESRD)",
+      "Cheng revised Winter-Tozer equation (Cheng 2016): Adjusted total phenytoin = (Measured total phenytoin divided by [(0.275 x albumin) + 0.1])",
+      "For ESRD on hemodialysis Soriano revised Winter-Tozer equation (Soriano 2017): Adjusted total phenytoin = (Measured total phenytoin divided by [(0.2 x albumin) + 0.1])",
+      "For hypoalbuminemia (serum albumin <3 g/dL; hospitalized, non-critically ill patients) (Khan 2017):",
+      "Anderson revised Winter-Tozer equation (Anderson 1997): Adjusted total phenytoin = (Measured total phenytoin divided by [(0.25 x albumin) + 0.1])",
+      "The calculator uses equations derived from assays performed at 25°C.",
+      "ESRD: end stage renal disease."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Anderson GD, Pak C, Doane KW, et al. Revised Winter-Tozer equation for normalized phenytoin concentrations in trauma and elderly patients with hypoalbuminemia. Ann Pharmacother. 1997 Mar;31(3):279-84.[PubMed 9066931]",
+        "pubmed_id": "9066931",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9066931/"
+      },
+      {
+        "text": "Cheng W, Kiang TK, Bring P, Ensom MH. Predictive Performance of the Winter-Tozer and Derivative Equations for Estimating Free Phenytoin Concentration. Can J Hosp Pharm. 2016 Jul- Aug;69(4):269-79. [PubMed 27621486]",
+        "pubmed_id": "27621486",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27621486/"
+      },
+      {
+        "text": "Soriano VV, Tesoro EP, Kane SP. Characterization of Free Phenytoin Concentrations in End-Stage Renal Disease Using the Winter-Tozer Equation. Ann Pharmacother. 2017 Aug;51(8):669-674.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "[PubMed 28470115]",
+        "pubmed_id": "28470115",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28470115/"
+      },
+      {
+        "text": "Kiang TK, Ensom MH. A comprehensive review on the predictive performance of the Sheiner- Tozer and derivative equations for the correction of phenytoin concentrations. Ann Pharmacother. 2016;50(4):311-325. [PubMed 26825643]",
+        "pubmed_id": "26825643",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26825643/"
+      },
+      {
+        "text": "Khan AM, Marvanova M. Prediction accuracy of Winter-Tozer equations to estimate free phenytoin concentrations in non-critically ill hospitalized patients. Consult Pharm. 2017;32(8):461-467.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "[PubMed 29029667]",
+        "pubmed_id": "29029667",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/29029667/"
+      },
+      {
+        "text": "Martin E, Tozer TN, Sheiner LB, Riegelman S. The clinical pharmacokinetics of phenytoin. J Pharmacokinet Biopharm. 1977 Dec;5(6):579-96. [PubMed 599408]",
+        "pubmed_id": "599408",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/599408/"
+      },
+      {
+        "text": "Dasgupta A, Dennen DA, Dean R, McLawhon RW. Prediction of free phenytoin levels based on [total phenytoin]/[albumin] ratios. Potential errors with hypoalbuminemia. Am J Clin Pathol. 1991 Feb;95(2):253-6. [PubMed 1992618]",
+        "pubmed_id": "1992618",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/1992618/"
+      },
+      {
+        "text": "Kiang TK, Ensom MH. A Comprehensive Review on the Predictive Performance of the Sheiner- Tozer and Derivative Equations for the Correction of Phenytoin Concentrations. Ann Pharmacother. 2016 Apr;50(4):311-25. [PubMed 26825643]",
+        "pubmed_id": "26825643",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/26825643/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 273737 v24.3]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 2
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Phenytoin Drug Level, Adjusted.pdf",
+      "source_sha256": "3f3ac664e8d0b56630dd7c21653bc9fe08da9e24556d2c398383d5962f153029",
+      "extractor": "pdf",
+      "form_name": "PhenytoinAdjusted",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Phenytoin Drug Level, Adjusted",
+        "form_name": "PhenytoinAdjusted",
+        "filename_title": "Phenytoin Drug Level, Adjusted",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Phenytoin Drug Level, Adjusted')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (phenytoindrugleveladjusted)",
+          "title_vs_form": "differs (phenytoindrugleveladjusted vs phenytoinadjusted) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf138",
+      "title": "Phenytoin Drug Level, Adjusted",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "radio_labels_uncertain",
+        "severity": "medium",
+        "field": "patient_population",
+        "detail": "printed option labels and script branches did not line up exactly; confirm the label/value pairing"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 81.2,
+    "checks_passed": 13,
+    "checks_total": 16,
+    "missing": [
+      "printed equation text",
+      "unit options on every field",
+      "validation bounds"
+    ]
+  }
+}

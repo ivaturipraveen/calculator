@@ -1,0 +1,222 @@
+{
+  "schema_version": "1.0",
+  "slug": "acetylcysteine",
+  "title": "Acetylcysteine",
+  "subtitle": null,
+  "category": "Toxicology / Dosing Calculator",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "route",
+      "label": "Route",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "Output Unit",
+      "units": [
+        {
+          "code": "Output Unit",
+          "label": "Output Unit",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "route",
+        "id_const": "ID_ROUTE"
+      },
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "constraints": {
+        "min": 0.0,
+        "exclusive_min": true
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "weight",
+        "id_const": "ID_WEIGHT"
+      },
+      "label_source": "printed form",
+      "help": [
+        "Weight must be greater than 0"
+      ],
+      "unit_source": "formula_prose",
+      "display_unit": "kg",
+      "units_source": "unit selector 'weight_unit_list' + corpus registry"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "max_fifth_md",
+        "expr": "10000.0",
+        "note": "module constant"
+      },
+      {
+        "key": "max_first_md",
+        "expr": "5000.0",
+        "note": "module constant"
+      },
+      {
+        "key": "max_ld",
+        "expr": "15000.0",
+        "note": "module constant"
+      },
+      {
+        "key": "max_oral_md",
+        "expr": "7500.0",
+        "note": "module constant"
+      },
+      {
+        "key": "oral",
+        "expr": "'Oral'",
+        "note": "module constant"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "ld",
+        "label": "Loading Dose (LD)",
+        "expr": "((round((((((max_ld) if (((roundToNearest5((round((150 * weight), 2)))) if (weight < 5) else ((round(((round((150 * weight), 2))) / 10) * 10))) > max_ld) else ((roundToNearest5((round((150 * weight), 2)))) if (weight < 5) else ((round(((round((150 * weight), 2))) / 10) * 10)))) / 1000)) if (getOutputUnit() == 'g') else ((max_ld) if (((roundToNearest5((round((150 * weight), 2)))) if (weight < 5) else ((round(((round((150 * weight), 2))) / 10) * 10))) > max_ld) else ((roundToNearest5((round((150 * weight), 2)))) if (weight < 5) else ((round(((round((150 * weight), 2))) / 10) * 10))))), 2))) if ((not (route == oral))) else (((round((((((max_ld) if (((roundToNearest5((round((weight * 140), 2)))) if (weight < 5) else ((round(((round((weight * 140), 2))) / 10) * 10))) > max_ld) else ((roundToNearest5((round((weight * 140), 2)))) if (weight < 5) else ((round(((round((weight * 140), 2))) / 10) * 10)))) / 1000)) if (getOutputUnit() == 'g') else ((max_ld) if (((roundToNearest5((round((weight * 140), 2)))) if (weight < 5) else ((round(((round((weight * 140), 2))) / 10) * 10))) > max_ld) else ((roundToNearest5((round((weight * 140), 2)))) if (weight < 5) else ((round(((round((weight * 140), 2))) / 10) * 10))))), 2))) if ((route == oral)) else (0))",
+        "decimals": null,
+        "base_unit": "mg",
+        "kind": "text",
+        "label_source": "printed form",
+        "unit_source": "formula_prose"
+      },
+      {
+        "key": "md",
+        "label": "Maintenance Dose (MD)",
+        "expr": "((round((((((max_oral_md) if (((roundToNearest5((round((weight * 70), 2)))) if (weight < 5) else ((round(((round((weight * 70), 2))) / 10) * 10))) > max_oral_md) else ((roundToNearest5((round((weight * 70), 2)))) if (weight < 5) else ((round(((round((weight * 70), 2))) / 10) * 10)))) / 1000)) if (getOutputUnit() == 'g') else ((max_oral_md) if (((roundToNearest5((round((weight * 70), 2)))) if (weight < 5) else ((round(((round((weight * 70), 2))) / 10) * 10))) > max_oral_md) else ((roundToNearest5((round((weight * 70), 2)))) if (weight < 5) else ((round(((round((weight * 70), 2))) / 10) * 10))))), 2))) if ((route == oral) and (1 == 1)) else (0)",
+        "decimals": null,
+        "base_unit": "mg",
+        "kind": "text",
+        "label_source": "printed form",
+        "unit_source": "formula_prose"
+      },
+      {
+        "key": "first_md",
+        "label": "First Md",
+        "expr": "((round((((((max_first_md) if (((roundToNearest5((round((50 * weight), 2)))) if (weight < 5) else ((round(((round((50 * weight), 2))) / 10) * 10))) > max_first_md) else ((roundToNearest5((round((50 * weight), 2)))) if (weight < 5) else ((round(((round((50 * weight), 2))) / 10) * 10)))) / 1000)) if (getOutputUnit() == 'g') else ((max_first_md) if (((roundToNearest5((round((50 * weight), 2)))) if (weight < 5) else ((round(((round((50 * weight), 2))) / 10) * 10))) > max_first_md) else ((roundToNearest5((round((50 * weight), 2)))) if (weight < 5) else ((round(((round((50 * weight), 2))) / 10) * 10))))), 2))) if ((not (route == oral)) and (1 == 1)) else (0)",
+        "decimals": null,
+        "base_unit": null,
+        "kind": "text"
+      },
+      {
+        "key": "fifth_md",
+        "label": "Fifth Md",
+        "expr": "((round((((((max_fifth_md) if (((roundToNearest5((round((100 * weight), 2)))) if (weight < 5) else ((round(((round((100 * weight), 2))) / 10) * 10))) > max_fifth_md) else ((roundToNearest5((round((100 * weight), 2)))) if (weight < 5) else ((round(((round((100 * weight), 2))) / 10) * 10)))) / 1000)) if (getOutputUnit() == 'g') else ((max_fifth_md) if (((roundToNearest5((round((100 * weight), 2)))) if (weight < 5) else ((round(((round((100 * weight), 2))) / 10) * 10))) > max_fifth_md) else ((roundToNearest5((round((100 * weight), 2)))) if (weight < 5) else ((round(((round((100 * weight), 2))) / 10) * 10))))), 2))) if ((not (route == oral)) and (1 == 1)) else (0)",
+        "decimals": null,
+        "base_unit": null,
+        "kind": "text"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": "Loading Dose:\nWhen Route is Oral:\nLoading Dose (LD) = 140 * Weight\n• Loading Dose (LD) is calculated in mg\n• Weight is input in kg\nWhen Route is IV:\nLoading Dose (LD) = 150 * Weight\n• Loading Dose (LD) is calculated in mg\n• Weight is input in kg\nMaintenance Doses:\nWhen Route is Oral:\nMaintenance Dose (MD) = 70 * Weight\n• Maintenance Dose (MD) is calculated in mg\n• Weight is input in kg\nWhen Route is IV:\n1st Maintenance Dose (MD) = 50 * Weight\n• 1st Maintenance Dose (MD) is calculated in mg\n• Weight is input in kg\n2nd Maintenance Dose (MD) = 100 * Weight\n• 2nd Maintenance Dose (MD) is calculated in mg\n• Weight is input in kg",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Acetadote (acetylcysteine) [prescribing information]. Nashville, TN: Cumberland Pharmaceuticals Inc; October 2019.",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 2
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Acetylcysteine.pdf",
+      "source_sha256": "baeb6b5dcb3b68088080636e894867f45c3f7cb03c652911fb14df8bfb135596",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Acetylcysteine",
+        "form_name": null,
+        "filename_title": "Acetylcysteine",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Acetylcysteine')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (acetylcysteine)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "acetylcysteine",
+      "title": "Acetylcysteine",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 85.7,
+    "checks_passed": 12,
+    "checks_total": 14,
+    "missing": [
+      "notes",
+      "unit options on every field"
+    ]
+  }
+}

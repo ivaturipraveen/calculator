@@ -1,0 +1,356 @@
+{
+  "schema_version": "1.0",
+  "slug": "qt-interval-correction-ekg-multi-equation",
+  "title": "QT Interval Correction (EKG, Multi-Equation)",
+  "subtitle": null,
+  "category": "Cardiology",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "heart_rate_measure_unit_mode",
+      "js_name": "Heart_Rate_Measure_unit",
+      "widget": "select",
+      "label": "Heart Rate Measure entry mode",
+      "required": true,
+      "default": 0,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "options": [
+        {
+          "label": "Heart rate (BPM)",
+          "value": 0
+        },
+        {
+          "label": "Mode 2",
+          "value": 1
+        }
+      ],
+      "options_source": "pdf_script_unit_mode",
+      "options_incomplete": true,
+      "source": {
+        "kind": "unit_mode",
+        "field": "heart_rate_measure"
+      }
+    },
+    {
+      "key": "qt_interval",
+      "js_name": "QT_Interval",
+      "label": "QT Interval",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "millisec",
+      "display_unit": "millisec",
+      "units": [
+        {
+          "code": "millisec",
+          "label": "millisec",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 100.0,
+        "max": 1000.0
+      },
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "heart_rate_measure",
+      "js_name": "Heart_Rate_Measure",
+      "label": "Heart Rate Measure",
+      "widget": "quantity",
+      "required": true,
+      "default": 355.0,
+      "base_unit": "Heart rate (BPM)",
+      "display_unit": "Heart rate (BPM)",
+      "units": [
+        {
+          "code": "Heart rate (BPM)",
+          "label": "Heart rate (BPM)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 1.0,
+        "max": 500.0,
+        "source": "alert text"
+      },
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Heart rate is 1 BPM",
+        "The maximum value for Heart rate is 500 BPM"
+      ],
+      "constraints_by_mode": [
+        {
+          "subject": "Heart rate",
+          "unit": "BPM",
+          "min": 1.0,
+          "max": 500.0
+        },
+        {
+          "subject": "RR interval",
+          "unit": "millisec",
+          "min": 120.0,
+          "max": 6000.0
+        }
+      ]
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "heart_rate",
+        "js_name": "Heart_rate",
+        "expr": "(60000 / rr_interval) if (heart_rate_measure_unit_mode == 1) else ((heart_rate_measure) if (heart_rate_measure_unit_mode == 0) else (60000 / rr_interval))"
+      },
+      {
+        "key": "rr_interval",
+        "js_name": "RR_interval",
+        "expr": "(heart_rate_measure) if (heart_rate_measure_unit_mode == 1) else ((60000 / heart_rate) if (heart_rate_measure_unit_mode == 0) else (60000 / heart_rate))"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "heart_rate",
+        "js_name": "Heart_Rate",
+        "label": "Heart Rate",
+        "expr": "heart_rate",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "rr_interval",
+        "js_name": "RR_Interval",
+        "label": "RR Interval",
+        "expr": "rr_interval",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "qt_interval_corrected_bazett",
+        "js_name": "QT_Interval_Corrected_Bazett",
+        "label": "QT Interval Corrected Bazett",
+        "expr": "qt_interval / sqrt(rr_interval/1000)",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "qt_interval_corrected_fridericia",
+        "js_name": "QT_Interval_Corrected_Fridericia",
+        "label": "QT Interval Corrected Fridericia",
+        "expr": "qt_interval / pow((rr_interval/1000), 1/3)",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "qt_interval_corrected_framingham",
+        "js_name": "QT_Interval_Corrected_Framingham",
+        "label": "QT Interval Corrected Framingham",
+        "expr": "qt_interval + (0.154 * (1000 - rr_interval))",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "qt_interval_corrected_hodges",
+        "js_name": "QT_Interval_Corrected_Hodges",
+        "label": "QT Interval Corrected Hodges",
+        "expr": "qt_interval + (1.75 * (heart_rate - 60))",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 0,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "QT_Interval_Corrected_Bazett = QT_Interval / sqr(RR_interval/1000)\nQT_Interval_Corrected_Fridericia = QT_Interval / (RR_interval/1000)1/3\nQT_Interval_Corrected_Framingham = QT_Interval + (0.154 * (1000 - RR_interval))\nQT_Interval_Corrected_Hodges = QT_Interval + (1.75 * (Heart_rate - 60))",
+    "notes": [
+      "Heart Rate Measure may be entered as either:",
+      "The EKG RR interval in milliseconds of the beat prior to the QT interval.",
+      "The EKG heart rate in beats per minute.",
+      "EKG: electrocardiogram; BPM: beats per minute."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Bazett HC. An analysis of the time relationships of electrocardiograms. Heart. 1920; 7:355.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Fridericia L. Die systolendauer im Elektrokardiogramm bei normalen menschen und bei herzkranken. Acta Med Scand. 1920; 53:469.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Sagie A, Larson MG, Goldberg RJ, et al. An improved method for adjusting the QT interval for heart rate (the Framingham Heart Study). Am J Cardiol. 1992; 70:797.[PubMed 1519533]",
+        "pubmed_id": "1519533",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/1519533/"
+      },
+      {
+        "text": "Hodges MS, Salerno D, Erlinen D. Bazett's QT correction reviewed: evidence that a linear QT correction for heart rate is better. J Am Coll Cardiol. 1983; 1:694. [PubMed 6826970]",
+        "pubmed_id": "6826970",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/6826970/"
+      },
+      {
+        "text": "Vandenberk B, Vandael E, Robyns T, et al. Which QT Correction Formulae to Use for QT Monitoring? J Am Heart Assoc. 2016; 5:e003264. [PubMed 27317349]",
+        "pubmed_id": "27317349",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27317349/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 271550 v23.3]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": [
+      {
+        "title": "Reference QT intervals for females",
+        "column_header": "Formula",
+        "columns": [
+          "Lower limit of normal (millisec)",
+          "Upper limit of normal (millisec)"
+        ],
+        "rows": [
+          {
+            "label": "Bazett",
+            "values": [
+              355.0,
+              482.0
+            ]
+          },
+          {
+            "label": "Fridericia",
+            "values": [
+              348.0,
+              468.0
+            ]
+          },
+          {
+            "label": "Framingham",
+            "values": [
+              351.0,
+              467.0
+            ]
+          },
+          {
+            "label": "Hodges",
+            "values": [
+              348.0,
+              465.0
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Reference QT intervals for males",
+        "column_header": "Formula",
+        "columns": [
+          "Lower limit of normal (millisec)",
+          "Upper limit of normal (millisec)"
+        ],
+        "rows": [
+          {
+            "label": "Bazett",
+            "values": [
+              346.0,
+              472.0
+            ]
+          },
+          {
+            "label": "Fridericia",
+            "values": [
+              349.0,
+              448.0
+            ]
+          },
+          {
+            "label": "Framingham",
+            "values": [
+              350.0,
+              449.0
+            ]
+          },
+          {
+            "label": "Hodges",
+            "values": [
+              351.0,
+              446.0
+            ]
+          }
+        ]
+      }
+    ],
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 1
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "QT Interval Correction (EKG, Multi-Equation).pdf",
+      "source_sha256": "107a4048c7758b4c69bc60184dba7ed516dcb1564bcbc601be2fffdcdf281552",
+      "extractor": "pdf",
+      "form_name": "QTIntervalCorrectionMulti",
+      "identity": {
+        "doc_id": "70017",
+        "title": "QT Interval Correction (EKG, Multi-Equation)",
+        "form_name": "QTIntervalCorrectionMulti",
+        "filename_title": "QT Interval Correction (EKG, Multi-Equation)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('QT Interval Correction (EKG, Multi-Equation)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (qtintervalcorrectionekgmultiequation)",
+          "title_vs_form": "differs (qtintervalcorrectionekgmultiequation vs qtintervalcorrectionmulti) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf143",
+      "title": "QT Interval Correction (EKG, Multi-Equation)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 87.5,
+    "checks_passed": 14,
+    "checks_total": 16,
+    "missing": [
+      "unit options on every field",
+      "complete option lists"
+    ]
+  }
+}

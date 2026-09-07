@@ -1,0 +1,270 @@
+{
+  "schema_version": "1.0",
+  "slug": "absolute-neutrophil-count",
+  "title": "Absolute Neutrophil Count",
+  "subtitle": null,
+  "category": "Hematology",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "wbc_count",
+      "js_name": "WBC_count",
+      "label": "WBC count",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "cells/microL",
+      "display_unit": "cells/microL",
+      "units": [
+        {
+          "code": "cells/microL",
+          "label": "cells/microL",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "x10(3)/microL",
+          "label": "x10(3)/microL",
+          "factor": 1000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "x10(6)/microL",
+          "label": "x10(6)/microL",
+          "factor": 1000000,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "pmns",
+      "js_name": "PMNs",
+      "label": "PMNs",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "percent",
+      "display_unit": "percent",
+      "units": [
+        {
+          "code": "fraction",
+          "label": "fraction",
+          "factor": 100.0,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "percent",
+          "label": "percent",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 0.0,
+        "max": 100.0
+      },
+      "messages": {
+        "min": "The minimum value for PMNs is 0 percent."
+      },
+      "dimension": "fraction",
+      "units_rebased_to": "percent",
+      "label_source": "printed form",
+      "help": [
+        "PMNs plus Bands must be less than 100%",
+        "The minimum value for PMNs is 0 percent. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for PMNs is 100 percent. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "bands",
+      "js_name": "Bands",
+      "label": "Bands",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "percent",
+      "display_unit": "percent",
+      "units": [
+        {
+          "code": "fraction",
+          "label": "fraction",
+          "factor": 100.0,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "percent",
+          "label": "percent",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 0.0,
+        "max": 100.0
+      },
+      "messages": {
+        "min": "The minimum value for Bands is 0 percent.",
+        "max": "The maximum value for Bands is 100 percent."
+      },
+      "dimension": "fraction",
+      "label_source": "printed form",
+      "help": [
+        "PMNs plus Bands must be less than 100%",
+        "The minimum value for Bands is 0 percent. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Bands is 100 percent. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "value",
+        "js_name": "value",
+        "expr": "('') if (pmns+bands>100) else ('')"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "anc",
+        "js_name": "ANC",
+        "label": "ANC",
+        "expr": "wbc_count * ((pmns/100) + (bands/100))",
+        "base_unit": "cells/microL",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 0,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "ANC = WBC_count * ((PMNs/100) + (Bands/100))",
+    "notes": [
+      "ANC: absolute neutrophil count WBC: white blood cell PMN: polymorphonuclear cell"
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Al-Gwaiz LA, Babay HH. The diagnostic value of absolute neutrophil count, band count and morphologic changes of neutrophils in predicting bacterial infections. Med Princ Pract. 2007;16(5):344-7.[PubMed 17709921]",
+        "pubmed_id": "17709921",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17709921/"
+      },
+      {
+        "text": "Rodgers G, Young, N. The Bethesda handbook of clinical hematology. 4th edition, Philadelphia, Wolters Kluwer, 2019.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Hillman RS, Ault KA, Leporrier M, Rinder HM. Hematology in clinical practice. 5th edition, New York. McGraw-Hill Medical, 2011.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "LaGow B, et al. PDR lab advisor. 1st edition, Montvale, Thompson PDR, 2001.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Pagana, KD. Mosby's manual of diagnostic and laboratory tests. 6th edition, St. Louis, Elsevier, 2018.",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 2
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Absolute Neutrophil Count.pdf",
+      "source_sha256": "99e147794e345b313db52ab810a1f7f79d32b2513d73acf8e7686c7137201a3b",
+      "extractor": "pdf",
+      "form_name": "AbsNeutrophileCnt",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Absolute Neutrophil Count",
+        "form_name": "AbsNeutrophileCnt",
+        "filename_title": "Absolute Neutrophil Count",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Absolute Neutrophil Count')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (absoluteneutrophilcount)",
+          "title_vs_form": "differs (absoluteneutrophilcount vs absneutrophilecnt) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf3",
+      "title": "Absolute Neutrophil Count",
+      "matched": true
+    },
+    "unit_registry_stems": [
+      "PDF3_PCT",
+      "PDF3_WBC"
+    ],
+    "conflicts": [
+      {
+        "kind": "base_unit_disagreement",
+        "severity": "medium",
+        "field": "wbc_count",
+        "pdf": "cells/microL",
+        "html": "/mcL"
+      },
+      {
+        "kind": "base_unit_disagreement",
+        "severity": "medium",
+        "field": "pmns",
+        "pdf": "percent",
+        "html": "fraction"
+      },
+      {
+        "kind": "base_unit_disagreement",
+        "severity": "medium",
+        "field": "bands",
+        "pdf": "percent",
+        "html": "fraction"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 16,
+    "checks_total": 16,
+    "missing": []
+  }
+}

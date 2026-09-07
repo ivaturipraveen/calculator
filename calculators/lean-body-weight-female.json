@@ -1,0 +1,168 @@
+{
+  "schema_version": "1.0",
+  "slug": "lean-body-weight-female",
+  "title": "Lean Body Weight (Female)",
+  "subtitle": null,
+  "category": "Anthropometrics",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "total_body_weight",
+      "js_name": "Total_Body_Weight",
+      "label": "Total Body Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "display_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 47.0
+      },
+      "messages": {
+        "min": "The minimum value for Total Body Weight is 47 kg."
+      },
+      "dimension": "mass",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Total Body Weight is 47 kg. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "height",
+      "js_name": "Height",
+      "label": "Height",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "cm",
+      "display_unit": "cm",
+      "units": [
+        {
+          "code": "cm",
+          "label": "cm",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 122.0,
+        "max": 213.0
+      },
+      "messages": {
+        "min": "The minimum value for Height is 122 cm.",
+        "max": "The maximum value for Height is 213 cm."
+      },
+      "dimension": "length",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Height is 122 cm. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Height is 213 cm. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "bmi",
+        "js_name": "BMI",
+        "expr": "total_body_weight / ((height / 100)*(height / 100))"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "lbw",
+        "js_name": "LBW",
+        "label": "LBW",
+        "expr": "(9270 * total_body_weight) / (8780 + (244 * bmi))",
+        "base_unit": "kg",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "BMI = Total_Body_Weight / sq(Height / 100)\nLBW = (9270 * Total_Body_Weight) / (8780 + (244 * BMI))",
+    "notes": [
+      "This equation was developed using data from individuals weighing between 40.7 to 216.5 kg (BMI: 17.1 to 69.9 kg/m2). It was validated in patients weighing between 47.6 and 131.7 kg (BMI: 18.7 to 38.4 kg/m2)."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Janmahasatian S, Duffull SB, Ash S, et al. Quantification of lean bodyweight. Clin Pharmacokinet. 2005;44(10):1051-65.[PubMed 16176118]",
+        "pubmed_id": "16176118",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16176118/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 2
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Lean Body Weight (Female).pdf",
+      "source_sha256": "13787d5def009ed8f79e6773d5a45231dd6e82463de6e6fcdbd8a2fe6650a901",
+      "extractor": "pdf",
+      "form_name": "LeanBodyWgtF",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Lean Body Weight (Female)",
+        "form_name": "LeanBodyWgtF",
+        "filename_title": "Lean Body Weight (Female)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Lean Body Weight (Female)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (leanbodyweightfemale)",
+          "title_vs_form": "differs (leanbodyweightfemale vs leanbodywgtf) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf107",
+      "title": "Lean Body Weight (Female)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 16,
+    "checks_total": 16,
+    "missing": []
+  }
+}

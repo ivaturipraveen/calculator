@@ -1,0 +1,220 @@
+{
+  "schema_version": "1.0",
+  "slug": "water-deficit-in-hypernatremia",
+  "title": "Water Deficit in Hypernatremia",
+  "subtitle": null,
+  "category": "Lab / Electrolytes",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "age_sex_factor",
+      "js_name": "Age_Sex_Factor",
+      "label": "Age Sex Factor",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "options": [
+        {
+          "label": "Male <65 years old",
+          "index": 0,
+          "value": 0.6
+        },
+        {
+          "label": "Male ≥65 years old",
+          "index": 1,
+          "value": 0.5
+        },
+        {
+          "label": "Female <18 years old",
+          "index": 2,
+          "value": 0.6
+        },
+        {
+          "label": "Female 18-65 years old",
+          "index": 3,
+          "value": 0.5
+        },
+        {
+          "label": "Female ≥65 years old",
+          "index": 4,
+          "value": 0.45
+        }
+      ],
+      "options_source": "pdf_script+printed_form",
+      "variant_variables": null,
+      "source": {
+        "kind": "radio_group",
+        "js_group": "Age_Sex_Factor"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "desired_na",
+      "js_name": "Desired_Na",
+      "label": "Desired Na",
+      "widget": "quantity",
+      "required": true,
+      "default": 140.0,
+      "base_unit": "mEq/L",
+      "display_unit": "mEq/L",
+      "units": [
+        {
+          "code": "mEq/L",
+          "label": "mEq/L",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "normal_weight",
+      "js_name": "Normal_Weight",
+      "label": "Normal Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "display_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "mass",
+      "label_source": "printed form"
+    },
+    {
+      "key": "serum_na",
+      "js_name": "Serum_Na",
+      "label": "Serum Na",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq/L",
+      "display_unit": "mEq/L",
+      "units": [
+        {
+          "code": "mEq/L",
+          "label": "mEq/L",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "wdef",
+        "js_name": "WDef",
+        "label": "WDef",
+        "expr": "(age_sex_factor * normal_weight) * (serum_na - desired_na) / desired_na",
+        "base_unit": "L",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "WDef = (Age_Sex_Factor * Normal_Weight) * (Serum_Na - Desired_Na) / Desired_Na",
+    "notes": [
+      "Equation parameters such as Age Sex Factor, have two or more discrete values that may be used in the calculation. The numbers in the parentheses, e.g. (0.6), represent the values that will be used.",
+      "The default unit of measure for weight is kilograms. Please verify that the correct unit of measure has been selected.",
+      "The term Age Sex Factor * Normal Weight represents the normal total body water (TBW).",
+      "Normal TBW is gender and age specific as seen in the 0.6, 0.5 and 0.45 factors above."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Adrogue HJ, Madias NE. Hypernatremia. N Engl J Med. 2000 May 18;342(20):1493-9.[PubMed 10816188]",
+        "pubmed_id": "10816188",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10816188/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Water Deficit in Hypernatremia.pdf",
+      "source_sha256": "8dc1bf928f3cc5a45ec0eaa3f5955719a7c1977a4e87e5eee9fbcf1a7f0776a2",
+      "extractor": "pdf",
+      "form_name": "WaterDeficit",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Water Deficit in Hypernatremia",
+        "form_name": "WaterDeficit",
+        "filename_title": "Water Deficit in Hypernatremia",
+        "confidence": 0.97,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Water Deficit in Hypernatremia')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (waterdeficitinhypernatremia)",
+          "title_vs_form": "PARTIAL (waterdeficitinhypernatremia ~ waterdeficit)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf177",
+      "title": "Water Deficit in Hypernatremia",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 81.2,
+    "checks_passed": 13,
+    "checks_total": 16,
+    "missing": [
+      "unit options on every field",
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

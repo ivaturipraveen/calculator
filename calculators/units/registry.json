@@ -1,0 +1,628 @@
+{
+  "count": 12,
+  "dimensions": [
+    {
+      "id": "dim_000",
+      "dimension": "fraction",
+      "base_unit": "fractionO2",
+      "units": [
+        {
+          "code": "%O2",
+          "label": "%O2",
+          "factor": 0.01,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "%",
+          "label": "%",
+          "factor": 0.01,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "fractionO2",
+          "label": "fractionO2",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "fraction",
+          "label": "fraction",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "litresO2",
+          "label": "litresO2",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "used_by_count": 1,
+      "used_by": [
+        "a-a-gradient"
+      ]
+    },
+    {
+      "id": "dim_001",
+      "dimension": "ratio",
+      "base_unit": "fraction",
+      "units": [
+        {
+          "code": "%",
+          "label": "%",
+          "factor": 0.01,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "fraction",
+          "label": "fraction",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "percent",
+          "label": "percent",
+          "factor": 0.01,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "rate",
+          "label": "rate",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "ratio",
+          "label": "ratio",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "used_by_count": 2,
+      "used_by": [
+        "a-a-gradient",
+        "absolute-neutrophil-count"
+      ]
+    },
+    {
+      "id": "dim_002",
+      "dimension": null,
+      "base_unit": "/mcL",
+      "units": [
+        {
+          "code": "/mcL",
+          "label": "/mcL",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "/microL",
+          "label": "/microL",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "10E+9/L",
+          "label": "10E+9/L",
+          "factor": 1000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "10^3/microL",
+          "label": "10^3/microL",
+          "factor": 1000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "Mill/mcl",
+          "label": "Mill/mcl",
+          "factor": 1000000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "Thous/mcL",
+          "label": "Thous/mcL",
+          "factor": 1000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "X10E+09/L",
+          "label": "X10E+09/L",
+          "factor": 1000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "X10E+12/L",
+          "label": "X10E+12/L",
+          "factor": 1000000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "cells/mcL",
+          "label": "cells/mcL",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "cells/microL",
+          "label": "cells/microL",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "m/cmm",
+          "label": "m/cmm",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "thou/mcL",
+          "label": "thou/mcL",
+          "factor": 1000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "x10(12)/L",
+          "label": "x10(12)/L",
+          "factor": 1000000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "x10(3)/mcL",
+          "label": "x10(3)/mcL",
+          "factor": 1000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "x10(3)/microL",
+          "label": "x10(3)/microL",
+          "factor": 1000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "x10(6)/L",
+          "label": "x10(6)/L",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "x10(6)/mcL",
+          "label": "x10(6)/mcL",
+          "factor": 1000000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "x10(6)/microL",
+          "label": "x10(6)/microL",
+          "factor": 1000000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "x10(9)/L",
+          "label": "x10(9)/L",
+          "factor": 1000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "x1000/mm3",
+          "label": "x1000/mm3",
+          "factor": 1000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "x10^12/L",
+          "label": "x10^12/L",
+          "factor": 1000000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "x10^3/mcL",
+          "label": "x10^3/mcL",
+          "factor": 1000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "x10^3/microL",
+          "label": "x10^3/microL",
+          "factor": 1000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "x10^6/L",
+          "label": "x10^6/L",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "x10^6/mcL",
+          "label": "x10^6/mcL",
+          "factor": 1000000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "x10^6/microL",
+          "label": "x10^6/microL",
+          "factor": 1000000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "x10^9/L",
+          "label": "x10^9/L",
+          "factor": 1000,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "used_by_count": 1,
+      "used_by": [
+        "absolute-neutrophil-count"
+      ]
+    },
+    {
+      "id": "dim_003",
+      "dimension": "time",
+      "base_unit": "Hours",
+      "units": [
+        {
+          "code": "Days",
+          "label": "Days",
+          "factor": 24,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "Hours",
+          "label": "Hours",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "used_by_count": 1,
+      "used_by": [
+        "acetaminophen-toxicity-assessment"
+      ]
+    },
+    {
+      "id": "dim_004",
+      "dimension": "temperature",
+      "base_unit": null,
+      "units": [
+        {
+          "code": "Degrees C",
+          "label": "Degrees C",
+          "factor": null,
+          "offset": null,
+          "resolved": false
+        },
+        {
+          "code": "Degrees F",
+          "label": "Degrees F",
+          "factor": null,
+          "offset": null,
+          "resolved": false
+        },
+        {
+          "code": "degC",
+          "label": "degC",
+          "factor": null,
+          "offset": null,
+          "resolved": false
+        },
+        {
+          "code": "degF",
+          "label": "degF",
+          "factor": null,
+          "offset": null,
+          "resolved": false
+        }
+      ],
+      "used_by_count": 1,
+      "used_by": [
+        "a-a-gradient"
+      ]
+    },
+    {
+      "id": "dim_005",
+      "dimension": "pressure",
+      "base_unit": "mmHg",
+      "units": [
+        {
+          "code": "Pascal",
+          "label": "Pascal",
+          "factor": 0.00750062,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "cmH2O",
+          "label": "cmH2O",
+          "factor": 0.735559,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "mmHg",
+          "label": "mmHg",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "torr",
+          "label": "torr",
+          "factor": 0.999999857533699,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "used_by_count": 1,
+      "used_by": [
+        "a-a-gradient"
+      ]
+    },
+    {
+      "id": "dim_006",
+      "dimension": "length",
+      "base_unit": "in",
+      "units": [
+        {
+          "code": "cm",
+          "label": "cm",
+          "factor": 0.39370078740157477,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "in",
+          "label": "in",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "used_by_count": 1,
+      "used_by": [
+        "adjusted-body-weight"
+      ]
+    },
+    {
+      "id": "dim_007",
+      "dimension": "time",
+      "base_unit": "hrs",
+      "units": [
+        {
+          "code": "days",
+          "label": "days",
+          "factor": 24,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "day",
+          "label": "day",
+          "factor": 24,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "hrs",
+          "label": "hrs",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "hr",
+          "label": "hr",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "minutes",
+          "label": "minutes",
+          "factor": 0.016666666666666666,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "min",
+          "label": "min",
+          "factor": 0.016666666666666666,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "seconds",
+          "label": "seconds",
+          "factor": 0.0002777777777777778,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "sec",
+          "label": "sec",
+          "factor": 0.0002777777777777778,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "used_by_count": 1,
+      "used_by": [
+        "tobramycin-level-prediction"
+      ]
+    },
+    {
+      "id": "dim_008",
+      "dimension": "length",
+      "base_unit": "meters",
+      "units": [
+        {
+          "code": "feet",
+          "label": "feet",
+          "factor": 0.3048,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "kilometre",
+          "label": "kilometre",
+          "factor": 1000,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "meters",
+          "label": "meters",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "mile",
+          "label": "mile",
+          "factor": 1609.344,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "m",
+          "label": "m",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "used_by_count": 1,
+      "used_by": [
+        "a-a-gradient"
+      ]
+    },
+    {
+      "id": "dim_009",
+      "dimension": "mass",
+      "base_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "used_by_count": 1,
+      "used_by": [
+        "adjusted-body-weight"
+      ]
+    },
+    {
+      "id": "dim_010",
+      "dimension": null,
+      "base_unit": "mcg/mL",
+      "units": [
+        {
+          "code": "mcg/mL",
+          "label": "mcg/mL",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "mcmol/L",
+          "label": "mcmol/L",
+          "factor": 0.1510574018126888,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "mg/L",
+          "label": "mg/L",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 10,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "used_by_count": 1,
+      "used_by": [
+        "acetaminophen-toxicity-assessment"
+      ]
+    },
+    {
+      "id": "dim_011",
+      "dimension": "time_age",
+      "base_unit": "yr",
+      "units": [
+        {
+          "code": "mo",
+          "label": "mo",
+          "factor": 0.08333333333333333,
+          "offset": 0.0,
+          "resolved": true
+        },
+        {
+          "code": "yr",
+          "label": "yr",
+          "factor": 1,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "used_by_count": 1,
+      "used_by": [
+        "a-a-gradient"
+      ]
+    }
+  ]
+}

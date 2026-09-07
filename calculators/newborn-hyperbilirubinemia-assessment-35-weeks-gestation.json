@@ -1,0 +1,441 @@
+{
+  "schema_version": "1.0",
+  "slug": "newborn-hyperbilirubinemia-assessment-35-weeks-gestation",
+  "title": "Newborn hyperbilirubinemia assessment (≥35 weeks gestation)",
+  "subtitle": null,
+  "category": "Pediatrics / Obstetrics",
+  "renderer": "dose_table",
+  "engine": "dose_table",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "total_bilirubin_level",
+      "label": "Total bilirubin level",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "unit": "mg/dL",
+      "base_unit": "mg/dL",
+      "label_source": "printed form",
+      "units": [
+        {
+          "code": "mcg/mL",
+          "label": "mcg/mL",
+          "factor": 0.1,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "mcmol/L",
+          "label": "mcmol/L",
+          "factor": 0.015105740181268881,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "display_unit": "mg/dL",
+      "dimension": null,
+      "units_source": "corpus unit registry"
+    },
+    {
+      "key": "newborn_s_age",
+      "label": "Newborn’s age",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "unit": "hr",
+      "base_unit": "hr",
+      "label_source": "printed form",
+      "units": [
+        {
+          "code": "days",
+          "label": "days",
+          "factor": 24.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "hr",
+          "label": "hr",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "minutes",
+          "label": "minutes",
+          "factor": 0.016666666666666666,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "seconds",
+          "label": "seconds",
+          "factor": 0.0002777777777777778,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "display_unit": "hr",
+      "dimension": "time",
+      "units_source": "corpus unit registry"
+    },
+    {
+      "key": "gestational_age_weeks_completed",
+      "label": "Gestational age (weeks completed)",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "unit": "wks",
+      "base_unit": "wks",
+      "label_source": "printed form"
+    },
+    {
+      "key": "clinical_instability_within_24_hours",
+      "label": "Clinical instability within 24 hours",
+      "type": "select",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "options": [
+        {
+          "label": "Yes",
+          "value": 0
+        },
+        {
+          "label": "No",
+          "value": 1
+        }
+      ],
+      "label_source": "printed form",
+      "widget": "select",
+      "units": null,
+      "base_unit": null,
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "concern_for_sepsis",
+      "label": "Concern for sepsis",
+      "type": "select",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "options": [
+        {
+          "label": "Yes",
+          "value": 0
+        },
+        {
+          "label": "No",
+          "value": 1
+        }
+      ],
+      "label_source": "printed form",
+      "widget": "select",
+      "units": null,
+      "base_unit": null,
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "hemolytic_condition",
+      "label": "Hemolytic condition",
+      "type": "select",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "options": [
+        {
+          "label": "Yes",
+          "value": 0
+        },
+        {
+          "label": "No",
+          "value": 1
+        },
+        {
+          "label": "Unknown",
+          "value": 2
+        }
+      ],
+      "label_source": "printed form",
+      "widget": "select",
+      "units": null,
+      "base_unit": null,
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "serum_albumin_less_than_3_0_g_dl",
+      "label": "Serum albumin less than 3.0 g/dL",
+      "type": "select",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "options": [
+        {
+          "label": "Yes",
+          "value": 0
+        },
+        {
+          "label": "No",
+          "value": 1
+        },
+        {
+          "label": "Unknown",
+          "value": 2
+        }
+      ],
+      "widget": "select",
+      "units": null,
+      "base_unit": null,
+      "options_source": "pdf_script_comparisons"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": null,
+  "tables": {
+    "thresholds": [
+      {
+        "h": 12,
+        "noRisk": {
+          "photo": 8.5,
+          "escalate": 14.4,
+          "exchange": 16.4
+        },
+        "anyRisk": {
+          "photo": 6.9,
+          "escalate": 12.6,
+          "exchange": 14.6
+        }
+      },
+      {
+        "h": 24,
+        "noRisk": {
+          "photo": 10.6,
+          "escalate": 15.9,
+          "exchange": 17.9
+        },
+        "anyRisk": {
+          "photo": 8.9,
+          "escalate": 14.1,
+          "exchange": 16.1
+        }
+      },
+      {
+        "h": 48,
+        "noRisk": {
+          "photo": 14.2,
+          "escalate": 18.7,
+          "exchange": 20.7
+        },
+        "anyRisk": {
+          "photo": 12.2,
+          "escalate": 16.5,
+          "exchange": 18.5
+        }
+      },
+      {
+        "h": 72,
+        "noRisk": {
+          "photo": 16.8,
+          "escalate": 20.9,
+          "exchange": 22.9
+        },
+        "anyRisk": {
+          "photo": 14.6,
+          "escalate": 18.1,
+          "exchange": 20.1
+        }
+      },
+      {
+        "h": 96,
+        "noRisk": {
+          "photo": 18.6,
+          "escalate": 22.5,
+          "exchange": 24.5
+        },
+        "anyRisk": {
+          "photo": 16.2,
+          "escalate": 19.1,
+          "exchange": 21.1
+        }
+      },
+      {
+        "h": 120,
+        "noRisk": {
+          "photo": 18.7,
+          "escalate": 22.7,
+          "exchange": 24.7
+        },
+        "anyRisk": {
+          "photo": 16.3,
+          "escalate": 19.3,
+          "exchange": 21.3
+        }
+      },
+      {
+        "h": 168,
+        "noRisk": {
+          "photo": 18.9,
+          "escalate": 23.1,
+          "exchange": 25.1
+        },
+        "anyRisk": {
+          "photo": 16.5,
+          "escalate": 19.7,
+          "exchange": 21.7
+        }
+      },
+      {
+        "h": 240,
+        "noRisk": {
+          "photo": 19.2,
+          "escalate": 23.7,
+          "exchange": 25.7
+        },
+        "anyRisk": {
+          "photo": 16.9,
+          "escalate": 20.3,
+          "exchange": 22.3
+        }
+      },
+      {
+        "h": 336,
+        "noRisk": {
+          "photo": 19.6,
+          "escalate": 24.3,
+          "exchange": 26.3
+        },
+        "anyRisk": {
+          "photo": 17.4,
+          "escalate": 20.9,
+          "exchange": 22.9
+        }
+      }
+    ]
+  },
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [
+      "Results are not available for newborn infants <12 hours old or >14 days old. This calculator should not be used for preterm neonates <35 weeks gestation.",
+      "For newborns <96 hours old, enter the postnatal age in hours.",
+      "Concern for bacterial or viral sepsis is based upon signs and symptoms.",
+      "Examples of hemolytic conditions include isoimmune hemolytic disease and G6PD deficiency.",
+      "The 2022 American Academy of Pediatrics (AAP) clinical practice guideline nomograms[1] are used in determining when phototherapy or exchange transfusion should be initiated and when care should be escalated. When phototherapy is used, the AAP recommends using intensive phototherapy, defined as irradiance ≥30 microW/cm2 per nm in the blue-green spectrum (wavelength between 430 and 490 nM).",
+      "If testing was performed with a transcutaneous bilirubin (TcB) device, high valuea should be confirmed with a TSB level. Management decisions of high levels should be guided by TSB values.",
+      "The calculator results based on the AAP nomograms provide risk-based guidance for intervention for neonatal hyperbilirubinemia. They rely on the clinician’s judgment in addition to the bilirubin level and other factors listed above.",
+      "G6PD: glucose-6-phosphate dehydrogenase; TSB: total serum or plasma bilirubin."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Kemper AR, Newman TB, Slaughter JL, et al. Clinical Practice Guideline Revision: Management of Hyperbilirubinemia in the Newborn Infant 35 or More Weeks of Gestation. Pediatrics. 2022; 150.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "[PubMed 35927462]",
+        "pubmed_id": "35927462",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35927462/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2023 Foundation Internet Services, LLC [Build 269494 v23.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": [
+      "Risk factors for neurotoxicity"
+    ]
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Newborn hyperbilirubinemia assessment (≥35 weeks gestation).pdf",
+      "source_sha256": "81d74301472dec342389c7d1e4c50823a68f6105fa59f3c3eb53643885074ac7",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Newborn hyperbilirubinemia assessment (≥35 weeks gestation)",
+        "form_name": null,
+        "filename_title": "Newborn hyperbilirubinemia assessment (≥35 weeks gestation)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Newborn hyperbilirubinemia assessment (≥35 weeks gestation)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (newbornhyperbilirubinemiaassessmentgt35weeksgestation)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf122",
+      "title": "Newborn hyperbilirubinemia assessment (≥35 weeks gestation)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "inputs_from_printed_form_only",
+        "severity": "medium",
+        "detail": "7 field(s) recovered from the printed form; the calculation itself is not in the PDF"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 7,
+    "checks_total": 7,
+    "missing": []
+  }
+}

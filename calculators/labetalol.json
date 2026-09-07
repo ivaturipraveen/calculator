@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0",
+  "slug": "labetalol",
+  "title": "Labetalol",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "id_dose",
+      "label": "Dose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/min",
+      "units": null,
+      "constraints": {
+        "min": 0.03,
+        "max": 8.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "idDose",
+        "id_const": "ID_DOSE"
+      },
+      "unit_source": "formula_prose",
+      "help": [
+        "Dose must be at least 0.03 mg/min."
+      ]
+    },
+    {
+      "key": "id_drug_amount",
+      "label": "Drug Amount",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg",
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "idDrugAmount",
+        "id_const": "ID_DRUG_AMOUNT"
+      },
+      "label_source": "printed form (word match)",
+      "unit_source": "formula_prose"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "infuse_rate",
+        "expr": "(id_dose * 15000) / id_drug_amount"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "id_infusion_rate",
+        "label": "Infuse Rate",
+        "expr": "infuse_rate",
+        "decimals": 1,
+        "base_unit": "mL/hr",
+        "kind": "number",
+        "label_source": "printed form (position)",
+        "unit_source": "formula_prose"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Infuse Rate:\nInfuse Rate = (Dose * 60) / (Drug Amount / 250)\n• Infuse Rate is calculated in mL/hr\n• Dose is input in mg/min\n• Drug Amount is input in mg",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": [
+      {
+        "label": "Infusate Volume",
+        "value": 250.0,
+        "unit": "mL"
+      }
+    ],
+    "form_sections": null
+  },
+  "help": {
+    "general": [
+      "Dose should be between 0.03 and 8 mg/min"
+    ],
+    "fields_with_help": 1
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Labetalol.pdf",
+      "source_sha256": "19b94d1c6af993bbdfca0f6e58f6f14d7c2cbfd131d7ac4929b8e9f5d04a4b80",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Labetalol",
+        "form_name": null,
+        "filename_title": "Labetalol",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Labetalol')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (labetalol)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf106",
+      "title": "Labetalol",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 84.6,
+    "checks_passed": 11,
+    "checks_total": 13,
+    "missing": [
+      "notes",
+      "unit options on every field"
+    ]
+  }
+}

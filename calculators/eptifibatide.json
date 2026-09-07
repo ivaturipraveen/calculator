@@ -1,0 +1,239 @@
+{
+  "schema_version": "1.0",
+  "slug": "eptifibatide",
+  "title": "Eptifibatide",
+  "subtitle": null,
+  "category": "Cardiology / Dosing Calculator",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "cr_cl",
+      "label": "Clcr",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mL/min",
+      "units": null,
+      "constraints": {
+        "min": 10.0,
+        "max": 150.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "CrCl",
+        "id_const": "ID_CRCL"
+      },
+      "unit_source": "formula_prose",
+      "help": [
+        "Clcr must be between 10 and 150."
+      ]
+    },
+    {
+      "key": "weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "constraints": {
+        "min": 37.0,
+        "max": 200.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "weight",
+        "id_const": "ID_WEIGHT"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Weight must be between 37 and 200."
+      ],
+      "display_unit": "kg",
+      "dimension": "mass",
+      "units_source": "corpus unit registry"
+    },
+    {
+      "key": "bolus_conc",
+      "label": "Bolus Conc.",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/mL",
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "bolusConc",
+        "id_const": "ID_BOLUS_CONC"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "options_incomplete": true,
+      "options_known_value": "0_75"
+    },
+    {
+      "key": "infusion_conc",
+      "label": "Infusion Conc.",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/mL",
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "infusionConc",
+        "id_const": "ID_INFUSION_CONC"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "options_incomplete": true,
+      "options_known_value": "0_75"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "crcl_warn",
+        "expr": "50.0",
+        "note": "module constant"
+      },
+      {
+        "key": "weight_warn",
+        "expr": "121.0",
+        "note": "module constant"
+      },
+      {
+        "key": "bolus",
+        "expr": "(22.6 / bolus_conc) if (weight > weight_warn) else ((180 * weight) / (1000 * bolus_conc))"
+      },
+      {
+        "key": "rate",
+        "expr": "((15 / infusion_conc) if (cr_cl >= crcl_warn) else (7.5 / infusion_conc)) if (weight > weight_warn) else ((((60 * weight) / (1000 * infusion_conc)) * 2) if (cr_cl >= crcl_warn) else ((60 * weight) / (1000 * infusion_conc)))"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "bolus",
+        "label": "Bolus",
+        "expr": "bolus",
+        "decimals": 1,
+        "base_unit": "mL",
+        "kind": "number",
+        "label_source": "printed form",
+        "unit_source": "formula_prose"
+      },
+      {
+        "key": "rate",
+        "label": "Infuse Rate",
+        "expr": "rate",
+        "decimals": 1,
+        "base_unit": "mL/hr",
+        "kind": "number",
+        "label_source": "printed form (qualified name)",
+        "unit_source": "formula_prose"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Bolus:\nBolus = (180 * Weight) / Bolus Conc.\n• Bolus is calculated in mL\n• Weight is input in kg\n• Bolus Conc. is input in mg/mL\nInfuse Rate:\nWhen CrCl is ≥50 mL/min:\nInfuse Rate = [(2 * Weight * 60) / 1000] / Infusion Conc.\n• Infuse Rate is calculated in mL/hr\n• CrCl is input in mL/min\n• Weight is input in kg\n• Weight is input in kg\n• Infusion Conc. is input in mg/mL\nWhen CrCl is <50 mL/min:\nInfuse Rate = [(Weight * 60) / 1000] / Infusion Conc.\n• Infuse Rate is calculated in mL/hr\n• CrCl is input in mL/min\n• Weight is input in kg\n• Infusion Conc. is input in mg/mL",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Integrilin (eptifibatide) [prescribing information]. Whitehouse Station, NJ: Merck Sharp & Dohme Corp; August 2014.",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 2
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Eptifibatide.pdf",
+      "source_sha256": "0b8e40cd6725ccac1d846d6261153f573e0b710e634a4683ae305601aa08b298",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Eptifibatide",
+        "form_name": null,
+        "filename_title": "Eptifibatide",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Eptifibatide')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (eptifibatide)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf81",
+      "title": "Eptifibatide",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 78.6,
+    "checks_passed": 11,
+    "checks_total": 14,
+    "missing": [
+      "notes",
+      "unit options on every field",
+      "complete option lists"
+    ]
+  }
+}
