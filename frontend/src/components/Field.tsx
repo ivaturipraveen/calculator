@@ -149,7 +149,7 @@ export function Field({ field, value, unit, error, onValue, onUnit }: Props) {
               </select>
             )}
             {!field.unit.selectable && field.unit.display && (
-              <span className="unit-static" aria-hidden="true">
+              <span className="unit-static" title={field.unit.display ?? undefined} aria-hidden="true">
                 {field.unit.display}
               </span>
             )}

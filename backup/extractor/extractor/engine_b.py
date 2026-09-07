@@ -575,7 +575,8 @@ def parse(js_raw: str) -> EngineBScript:
         r"\1 \2; ",
         body,
     )
-    body_nc = jsblock.drop_lhs_call_prose(_strip_comments(body))
+    body_nc = jsblock.drop_lhs_call_prose(
+        _strip_comments(jsblock.drop_doubled_string_tail(body)))
     out.raw_body = body_nc
     module_nc = _strip_comments(js)
     out.helpers = simple_functions(module_nc)

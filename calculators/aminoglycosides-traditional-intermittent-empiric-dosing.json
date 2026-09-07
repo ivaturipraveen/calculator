@@ -277,16 +277,8 @@
       "widget": "quantity",
       "required": true,
       "default": null,
-      "base_unit": "Suggested Interval (tau)",
-      "units": [
-        {
-          "code": "Suggested Interval (tau)",
-          "label": "Suggested Interval (tau)",
-          "factor": 1.0,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "units": null,
       "constraints": {},
       "messages": null,
       "source": {

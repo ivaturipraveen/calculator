@@ -155,6 +155,7 @@ describe("formula calculator", () => {
     });
 
     await userEvent.selectOptions(screen.getByLabelText(/^Sex/), "1");
+    await pressCalculate();
     await waitFor(() => expect(screen.getByText(/^68$|^68\.06$/)).toBeInTheDocument(), {
       timeout: 8000,
     });
@@ -216,13 +217,15 @@ describe("growth chart", () => {
 
     // The lead result is the hero; the rest are rows. Either can hold it.
     const percentile = () =>
-      Array.from(document.querySelectorAll(".value-row, .hero"))
+      Array.from(document.querySelectorAll(".value-row, .hero, .result-card"))
         .find((c) => /weight percentile/i.test(c.textContent ?? ""))
-        ?.querySelector(".value-row__value, .hero__value")?.textContent ?? "";
+        ?.querySelector(".value-row__value, .hero__value, .result-card__value")
+        ?.textContent ?? "";
 
     await waitFor(() => expect(percentile()).toMatch(/^47\.4/), { timeout: 8000 });
 
     await userEvent.selectOptions(screen.getByLabelText(/^Sex/), "2");
+    await pressCalculate();
     await waitFor(() => expect(percentile()).toMatch(/^21\.6|^21\.7/), { timeout: 8000 });
   });
 });
@@ -323,9 +326,15 @@ describe("reference data", () => {
     await pressCalculate();
 
     // 60 / 1.70^2 = 20.76 kg/m2
-    await waitFor(() => expect(document.querySelector(".hero__value")).toHaveTextContent(/20\.8|20\.76/), {
-      timeout: 8000,
-    });
+    await waitFor(
+      () =>
+        expect(
+          [...document.querySelectorAll(".input--result, .hero__value, .result-card__value")]
+            .map((e) => e.textContent)
+            .join(" "),
+        ).toMatch(/20\.8|20\.76/),
+      { timeout: 8000 },
+    );
 
     const table = await screen.findByRole("table");
     expect(within(table).getByText("L")).toBeInTheDocument();
@@ -436,6 +445,7 @@ describe("tables react to the inputs", () => {
     });
 
     await typeInto(/^Weight/, "70");
+    await pressCalculate();
     await waitFor(() => expect(doseFor(/Norepinephrine/i)).toMatch(/7–35 mcg/), {
       timeout: 8000,
     });
@@ -457,6 +467,7 @@ describe("tables react to the inputs", () => {
     await waitFor(() => expect(current()).toMatch(/^181/), { timeout: 8000 });
 
     await typeInto(/^Age/, "10");
+    await pressCalculate();
     // 10 years -> 120 months -> the 121-month row.
     await waitFor(() => expect(current()).toMatch(/^121/), { timeout: 8000 });
 
@@ -487,6 +498,7 @@ describe("tables react to the inputs", () => {
 
     // Half the concentration, double every rate in the table.
     await typeInto(/^Concentration/, "500");
+    await pressCalculate();
     await waitFor(() => expect(rowFor("10")).toMatch(/84/), { timeout: 8000 });
   });
 });
@@ -594,6 +606,7 @@ describe("branches the extraction had lost", () => {
     await screen.findByText(/^54\.6$/, {}, { timeout: 5000 });
 
     await userEvent.selectOptions(screen.getByLabelText(/^route/i), "IV");
+    await pressCalculate();
     // 70 kg x 7.6 mL/kg of a 10% solution -- ten times the volume.
     await screen.findByText(/^532(\.0+)?$/, {}, { timeout: 5000 });
   });
@@ -731,10 +744,14 @@ describe("bugs the UI hit that the API alone did not", () => {
       { timeout: 5000 },
     );
     // 2025-08-01 to 2026-03-15 is 226 days -- 32 weeks.
-    await waitFor(
-      () => expect(document.querySelector(".hero__value")?.textContent).toMatch(/^32/),
-      { timeout: 5000 },
-    );
+    // Gestational Age returns eight values, so they are cards rather than one
+    // headline and seven rows.
+    const gestation = () =>
+      Array.from(document.querySelectorAll(".result-card, .hero, .value-row"))
+        .find((c) => /lmpweeks|gestation by lmp/i.test(c.textContent ?? ""))
+        ?.querySelector(".result-card__value, .hero__value, .value-row__value")
+        ?.textContent ?? "";
+    await waitFor(() => expect(gestation()).toMatch(/^32/), { timeout: 5000 });
     // And an estimated date of confinement reads as a date, not as 1778198400000.
     expect(screen.queryByText(/17781984\d+/)).toBeNull();
     expect(screen.getAllByText(/\b20(2[5-9])\b/).length).toBeGreaterThan(0);
@@ -775,7 +792,12 @@ describe("the form does not answer with values nobody entered", () => {
       // still visible, as the document's value, without being submitted
       expect(el.placeholder).not.toBe("");
     }
-    expect(document.querySelector(".hero")?.textContent ?? "").toMatch(/—|to go|calculating/);
+    // Nothing computed yet: the result boxes are empty and the page says what
+    // is still needed.
+    expect(
+      [...document.querySelectorAll(".input--result")].every((e) => !e.textContent?.trim()),
+    ).toBe(true);
+    expect(document.body.textContent ?? "").toMatch(/fields to go|press Calculate/);
   });
 
   it("keeps a default that means something", async () => {
@@ -785,5 +807,116 @@ describe("the form does not answer with values nobody entered", () => {
     // something to make a clinician type.
     const el = document.getElementById("f-codeine") as HTMLInputElement;
     expect(el.value).toBe("0");
+  });
+});
+
+describe("an answer never quietly disagrees with the boxes above it", () => {
+  it("marks the result out of date when a value changes, and does not recompute", async () => {
+    mountCalculator("creatinine-clearance-by-cockcroft-gault-age-16-years");
+    await screen.findByRole("heading", { name: /Cockcroft-Gault/i });
+
+    await typeInto(/^Age/, "70");
+    await typeInto(/^Weight/, "70");
+    await typeInto(/Serum creatinine/i, "1");
+    await userEvent.selectOptions(await screen.findByLabelText(/^Sex/), "0.85");
+    await pressCalculate();
+    await waitFor(() => expect(screen.getByText(/^58$|^57\.85$/)).toBeInTheDocument(), {
+      timeout: 8000,
+    });
+
+    // Changing a value must not move the number on its own -- that is the
+    // behaviour that made the same edit act differently depending on whether an
+    // answer already existed.
+    await userEvent.selectOptions(screen.getByLabelText(/^Sex/), "1");
+    await screen.findAllByText(/out of date/i);
+    expect(document.querySelector(".field__control--stale")).not.toBeNull();
+    // The figure stays on screen while it is marked, rather than vanishing.
+    expect(screen.getByText(/^58$|^57\.85$/)).toBeInTheDocument();
+
+    // And the button is the way to a current one.
+    await pressCalculate();
+    await waitFor(() => expect(screen.getByText(/^68$|^68\.06$/)).toBeInTheDocument(), {
+      timeout: 8000,
+    });
+    expect(screen.queryByText(/out of date/i)).toBeNull();
+  });
+
+  it("a decision tree is never gated, because answering is the interaction", async () => {
+    mountCalculator("rabies-post-exposure-prophylaxis-treecalc");
+    await screen.findByRole("heading", { name: /rabies/i });
+    // No Calculate button at all, and the first question is already asked.
+    expect(screen.queryByRole("button", { name: /^(re)?calculate$/i })).toBeNull();
+    await screen.findByText(/contact with saliva/i, {}, { timeout: 8000 });
+  });
+});
+
+describe("a panel of results has no headline", () => {
+  it("gives every result its own card when there are more than three", async () => {
+    mountCalculator("Aminoglycosides: Traditional Intermittent, Empiric Dosing");
+    await screen.findByRole("heading", { level: 1, name: /aminoglycosides/i });
+
+    // Twelve outputs: an ideal body weight, a dosing weight, a clearance, an
+    // elimination constant, a half-life, a volume of distribution... none of
+    // them "the" answer, so none is enlarged and none is a grey row.
+    await waitFor(() =>
+      expect(document.querySelectorAll(".result-card").length).toBeGreaterThan(3),
+    );
+    expect(document.querySelector(".hero")).toBeNull();
+    expect(document.querySelector(".value-row")).toBeNull();
+  });
+
+  it("lays three or fewer out as boxes in the same grid as the inputs", async () => {
+    mountCalculator("A-a Gradient");
+    await screen.findByRole("heading", { level: 1, name: /A-a Gradient/i });
+    // Two outputs, shaped like the fields that feed them, so the form reads as
+    // one thing: what you enter, the button, what comes back.
+    expect(document.querySelectorAll(".input--result").length).toBe(2);
+    expect(document.querySelector(".result-card")).toBeNull();
+  });
+});
+
+describe("a field says whether its unit can be changed", () => {
+  it("gives a switchable unit a caret and a fixed one none", async () => {
+    mountCalculator("A-a Gradient");
+    await screen.findByRole("heading", { level: 1, name: /A-a Gradient/i });
+
+    // Age is yr or mo, so it must be a real control -- a `background`
+    // shorthand further down the cascade was resetting `background-image` and
+    // wiping the caret off every one of these, leaving no way to tell a field
+    // with four units from one with a fixed unit.
+    const unit = document.querySelector("#f-age")?.parentElement?.querySelector("select");
+    expect(unit).not.toBeNull();
+    expect(unit!.tagName).toBe("SELECT");
+    expect(unit!.options.length).toBeGreaterThan(1);
+    expect(unit).toHaveClass("unit-select");
+  });
+});
+
+describe("nothing is called out of date before it exists", () => {
+  it("says nothing about staleness until an answer has been asked for", async () => {
+    mountCalculator("A-a Gradient");
+    await screen.findByRole("heading", { level: 1, name: /A-a Gradient/i });
+
+    // Typing into a fresh form is not "the values have changed since this
+    // answer was worked out" -- there is no answer yet.
+    await typeInto(/^Age/, "23");
+    await typeInto(/patient temp/i, "34");
+    await new Promise((r) => setTimeout(r, 400));
+    expect(screen.queryByText(/values have changed/i)).toBeNull();
+    expect(document.querySelector(".field__control--stale")).toBeNull();
+
+    // It appears only once there is something to be out of date.
+    await typeInto(/elevation/i, "0");
+    await typeInto(/percent inspired/i, "21");
+    await typeInto(/p CO2/i, "40");
+    await typeInto(/resp quot/i, "0.8");
+    await typeInto(/p aO2/i, "90");
+    await pressCalculate();
+    await waitFor(() => expect(document.querySelector(".input--result")?.textContent).toBeTruthy(), {
+      timeout: 8000,
+    });
+
+    await typeInto(/^Age/, "40");
+    await screen.findByText(/values have changed/i);
   });
 });

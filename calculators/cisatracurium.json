@@ -101,16 +101,8 @@
       "widget": "quantity",
       "required": true,
       "default": null,
-      "base_unit": "Infuse Rate",
-      "units": [
-        {
-          "code": "Infuse Rate",
-          "label": "Infuse Rate",
-          "factor": 1.0,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "units": null,
       "constraints": {
         "min": 0.0,
         "exclusive_min": true

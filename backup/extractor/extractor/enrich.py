@@ -658,7 +658,12 @@ def output_units_from_js(js: str) -> list[str]:
 # "• Infusion Rate is calculated in mL/hour" / "• Dose is input in mg/minute"
 FORMULA_UNIT = re.compile(
     r"[•\-\*]?\s*(.+?)\s+is\s+(?:calculated|input|expressed|entered|reported)\s+in\s+"
-    r"([^\n•]{1,28})",
+    # Read to the end of the clause, not to a fixed 28 characters. The cap was
+    # there to stop a whole sentence being taken for a unit, but it cut
+    # "g, mcg, mEq, mg, mmol, or units" to "...or un" -- text that reads as a
+    # unit and is wrong. `tidy_units` decides what is a unit; this only has to
+    # avoid mangling what it hands over.
+    r"([^\n•]{1,70}?)\s*(?:[.;]|$)",
     re.I,
 )
 

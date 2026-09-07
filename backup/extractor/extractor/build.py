@@ -765,6 +765,98 @@ def options_from_printed_cases(inputs: list[dict], equation: str) -> int:
     return changed
 
 
+# Words that only appear in a sentence, never in a unit.
+_NOT_A_UNIT = re.compile(
+    r"\b(after|before|from|when|using|select|pull|down|patient|patients|must|"
+    r"value|start|end|the|of|is|are|or|and|suggested|available|avail|nearest)\b",
+    re.I,
+)
+# `Heart rate (BPM)`, `Avail. Conc. (mL)` -- a label with the unit in brackets.
+# The bracketed part must contain a letter: APACHE prints "70-109 mmHg (0)",
+# where the (0) is the criterion's point value, not the unit.
+_UNIT_IN_BRACKETS = re.compile(
+    r"^[^()]{2,40}\((?=[^)]*[A-Za-zµ%°])([A-Za-z%µ/·°.\d]{1,12})\)\s*$")
+# The leading token of a phrase that begins with a real unit: "hrs after the
+# start of infusion" is `hrs`, and the rest is guidance.
+_UNIT_HEAD = re.compile(r"^([A-Za-zµ%°]{1,12}\d?(?:\s*/\s*[A-Za-z0-9µ%°.]{1,12}){0,3})\b")
+
+
+def tidy_units(inputs: list[dict], outputs: list[dict] | None = None) -> int:
+    """Keep a unit that is a unit; move a sentence to where a sentence belongs.
+
+    The bounds and the printed form both hand back trailing text, and some of it
+    is prose: the aminoglycoside interval adjustment carried a unit reading
+    "hrs after the start of infusion", which the form then clipped mid-word in
+    the little box beside the number. The unit is `hrs`. The rest is guidance,
+    so it goes to the field's help rather than being thrown away.
+
+    Anything that is really a label -- an output's name, an option, "Pull down
+    to select (0)" -- is not a unit at all and is dropped.
+    """
+    labels = {squash(i.get("label") or "") for i in inputs}
+    labels |= {squash(o.get("label") or "") for o in (outputs or [])}
+    labels |= {squash(o.get("label") or "")
+               for i in inputs for o in (i.get("options") or [])}
+    labels.discard("")
+    fixed = 0
+
+    def clean(raw: str) -> tuple[str | None, str | None]:
+        """Return (unit, guidance-to-keep)."""
+        text = (raw or "").strip().rstrip(":.")
+        if not text:
+            return None, None
+        if len(text) <= 12 and not _NOT_A_UNIT.search(text) and squash(text) not in labels:
+            return text, None                      # already a unit
+        if squash(text) in labels:
+            return None, None                      # a label, not a unit
+        m = _UNIT_IN_BRACKETS.match(text)
+        if m:
+            return m.group(1), None                # "Heart rate (BPM)" -> BPM
+        if text[:1].isdigit() or text[:1] in "≤≥<>":
+            return None, None                      # "70-109 mmHg (0)" is a range
+        # "g, mcg, mEq, mg, mmol, or units" is the list of units this field
+        # ACCEPTS, not the unit it is in. Taking its first token said grams.
+        if re.search(r",\s*\S", text):
+            return None, text
+        if _NOT_A_UNIT.search(text):
+            head = _UNIT_HEAD.match(text)
+            # A unit is a symbol or a short word -- hrs, mL, mcg, mmHg, minute.
+            # An English word longer than that is prose that happened to come
+            # first: "Nonoperative patients" is not a unit called Nonoperative.
+            if (head and not _NOT_A_UNIT.match(head.group(1))
+                    and not (head.group(1).isalpha() and len(head.group(1)) > 6)):
+                return head.group(1), text         # "hrs after ..." -> hrs + note
+            return None, text
+        return (text, None) if len(text) <= 20 else (None, text)
+
+    for inp in inputs:
+        for slot in ("base_unit", "display_unit"):
+            raw = inp.get(slot)
+            if not isinstance(raw, str) or not raw.strip():
+                continue
+            unit, note = clean(raw)
+            if unit == raw.strip().rstrip(":."):
+                continue
+            fixed += 1
+            inp[slot] = unit
+            if note:
+                # Nothing the document said is lost -- it moves to the guidance
+                # the field already shows on request.
+                help_ = inp.setdefault("help", []) or []
+                # Never re-case it: `G` and `g` are different prefixes, and this
+                # text is full of unit symbols.
+                if not any(note.lower() in (h or "").lower() for h in help_):
+                    help_.append(note)
+                inp["help"] = help_
+        # A unit list is only usable if its codes are units too.
+        if inp.get("units"):
+            keep = [u for u in inp["units"] if clean(str(u.get("code") or ""))[0]]
+            if len(keep) != len(inp["units"]):
+                inp["units"] = keep or None
+                fixed += 1
+    return fixed
+
+
 def _label_for(key: str, printed: dict, others: set[str] = frozenset()) -> str:
     """Match a snake key to a printed form label, else title-case the key.
 
@@ -2333,6 +2425,7 @@ def build_spec(
             _f["base_unit"] = None
             _f.setdefault("options_source", "pdf_script_comparisons")
 
+    tidy_units(inputs, compute.get("outputs"))
     options_from_printed_cases(inputs, info.get("equation") or "")
     _apply_coefficient_ladders(inputs, compute, info.get("equation") or "")
 

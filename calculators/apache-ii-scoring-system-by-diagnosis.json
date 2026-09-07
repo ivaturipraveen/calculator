@@ -46,22 +46,17 @@
       "widget": "select",
       "required": true,
       "default": null,
-      "base_unit": "Nonoperative patients::",
-      "display_unit": "Nonoperative patients::",
-      "units": [
-        {
-          "code": "Nonoperative patients::",
-          "label": "Nonoperative patients::",
-          "factor": 1.0,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "display_unit": null,
+      "units": null,
       "constraints": {},
       "messages": null,
       "dimension": null,
       "label_source": "printed form",
-      "options_incomplete": true
+      "options_incomplete": true,
+      "help": [
+        "Nonoperative patients"
+      ]
     },
     {
       "key": "rectal_temp",
@@ -93,17 +88,9 @@
       "widget": "select",
       "required": true,
       "default": null,
-      "base_unit": "70-109 mmHg (0)",
-      "display_unit": "70-109 mmHg (0)",
-      "units": [
-        {
-          "code": "70-109 mmHg (0)",
-          "label": "70-109 mmHg (0)",
-          "factor": 1.0,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "display_unit": null,
+      "units": null,
       "constraints": {},
       "messages": null,
       "dimension": null,
@@ -125,17 +112,9 @@
       "widget": "select",
       "required": true,
       "default": null,
-      "base_unit": "70-109 beats/min (0)",
-      "display_unit": "70-109 beats/min (0)",
-      "units": [
-        {
-          "code": "70-109 beats/min (0)",
-          "label": "70-109 beats/min (0)",
-          "factor": 1.0,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "display_unit": null,
+      "units": null,
       "constraints": {},
       "messages": null,
       "dimension": null,
@@ -157,17 +136,9 @@
       "widget": "select",
       "required": true,
       "default": null,
-      "base_unit": "12-24 breaths/min (0)",
-      "display_unit": "12-24 breaths/min (0)",
-      "units": [
-        {
-          "code": "12-24 breaths/min (0)",
-          "label": "12-24 breaths/min (0)",
-          "factor": 1.0,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "display_unit": null,
+      "units": null,
       "constraints": {},
       "messages": null,
       "dimension": null,
@@ -189,17 +160,9 @@
       "widget": "select",
       "required": true,
       "default": null,
-      "base_unit": "Pull down to select (0)",
-      "display_unit": "Pull down to select (0)",
-      "units": [
-        {
-          "code": "Pull down to select (0)",
-          "label": "Pull down to select (0)",
-          "factor": 1.0,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "display_unit": null,
+      "units": null,
       "constraints": {},
       "messages": null,
       "dimension": null,
@@ -212,7 +175,10 @@
         }
       ],
       "options_source": "pdf_printed_default_only",
-      "options_incomplete": true
+      "options_incomplete": true,
+      "help": [
+        "Pull down to select (0)"
+      ]
     },
     {
       "key": "ph_or_hco3",
@@ -221,17 +187,9 @@
       "widget": "select",
       "required": true,
       "default": null,
-      "base_unit": "Pull down to select (0)",
-      "display_unit": "Pull down to select (0)",
-      "units": [
-        {
-          "code": "Pull down to select (0)",
-          "label": "Pull down to select (0)",
-          "factor": 1.0,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "display_unit": null,
+      "units": null,
       "constraints": {},
       "messages": null,
       "dimension": null,
@@ -244,7 +202,10 @@
         }
       ],
       "options_source": "pdf_printed_default_only",
-      "options_incomplete": true
+      "options_incomplete": true,
+      "help": [
+        "Pull down to select (0)"
+      ]
     },
     {
       "key": "na",
@@ -253,17 +214,9 @@
       "widget": "select",
       "required": true,
       "default": null,
-      "base_unit": "130-149 mEq/L (0)",
-      "display_unit": "130-149 mEq/L (0)",
-      "units": [
-        {
-          "code": "130-149 mEq/L (0)",
-          "label": "130-149 mEq/L (0)",
-          "factor": 1.0,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "display_unit": null,
+      "units": null,
       "constraints": {},
       "messages": null,
       "dimension": null,
@@ -285,17 +238,9 @@
       "widget": "select",
       "required": true,
       "default": null,
-      "base_unit": "3.5-5.4 mEq/L (0)",
-      "display_unit": "3.5-5.4 mEq/L (0)",
-      "units": [
-        {
-          "code": "3.5-5.4 mEq/L (0)",
-          "label": "3.5-5.4 mEq/L (0)",
-          "factor": 1.0,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "display_unit": null,
+      "units": null,
       "constraints": {},
       "messages": null,
       "dimension": null,
@@ -317,17 +262,9 @@
       "widget": "select",
       "required": true,
       "default": null,
-      "base_unit": "0.6-1.4 mg/dL (0)",
-      "display_unit": "0.6-1.4 mg/dL (0)",
-      "units": [
-        {
-          "code": "0.6-1.4 mg/dL (0)",
-          "label": "0.6-1.4 mg/dL (0)",
-          "factor": 1.0,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "display_unit": null,
+      "units": null,
       "constraints": {},
       "messages": null,
       "dimension": null,
@@ -349,17 +286,9 @@
       "widget": "select",
       "required": true,
       "default": null,
-      "base_unit": "30-45.9 percent (0)",
-      "display_unit": "30-45.9 percent (0)",
-      "units": [
-        {
-          "code": "30-45.9 percent (0)",
-          "label": "30-45.9 percent (0)",
-          "factor": 1.0,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "display_unit": null,
+      "units": null,
       "constraints": {},
       "messages": null,
       "dimension": null,
@@ -436,17 +365,9 @@
       "widget": "select",
       "required": true,
       "default": null,
-      "base_unit": "≤44 years (0)",
-      "display_unit": "≤44 years (0)",
-      "units": [
-        {
-          "code": "≤44 years (0)",
-          "label": "≤44 years (0)",
-          "factor": 1.0,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "display_unit": null,
+      "units": null,
       "constraints": {},
       "messages": null,
       "dimension": null,
@@ -929,13 +850,12 @@
   },
   "tests": [],
   "completeness": {
-    "score": 75.0,
-    "checks_passed": 12,
+    "score": 81.2,
+    "checks_passed": 13,
     "checks_total": 16,
     "missing": [
       "unit options on every field",
       "validation bounds",
-      "field help text",
       "complete option lists"
     ]
   }

@@ -62,16 +62,8 @@
       "widget": "quantity",
       "required": true,
       "default": null,
-      "base_unit": "Infusion Rate",
-      "units": [
-        {
-          "code": "Infusion Rate",
-          "label": "Infusion Rate",
-          "factor": 1.0,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "units": null,
       "constraints": {
         "min": 0.0
       },

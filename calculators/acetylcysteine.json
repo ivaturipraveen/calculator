@@ -41,12 +41,12 @@
       "widget": "quantity",
       "required": true,
       "default": null,
-      "base_unit": "kg",
+      "base_unit": "lbs",
       "units": [
         {
           "code": "kg",
           "label": "kg",
-          "factor": 1.0,
+          "factor": 2.2046226218487757,
           "offset": 0.0,
           "resolved": true,
           "source": "corpus unit registry"
@@ -54,7 +54,7 @@
         {
           "code": "lbs",
           "label": "lbs",
-          "factor": 0.45359237,
+          "factor": 1.0,
           "offset": 0.0,
           "resolved": true,
           "source": "corpus unit registry"
@@ -75,7 +75,7 @@
         "Weight must be greater than 0"
       ],
       "unit_source": "formula_prose",
-      "display_unit": "kg",
+      "display_unit": "lbs",
       "units_source": "unit selector 'weight_unit_list' + corpus registry"
     }
   ],

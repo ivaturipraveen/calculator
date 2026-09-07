@@ -69,17 +69,9 @@
       "widget": "quantity",
       "required": true,
       "default": 355.0,
-      "base_unit": "Heart rate (BPM)",
-      "display_unit": "Heart rate (BPM)",
-      "units": [
-        {
-          "code": "Heart rate (BPM)",
-          "label": "Heart rate (BPM)",
-          "factor": 1.0,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "display_unit": null,
+      "units": null,
       "constraints": {
         "min": 1.0,
         "max": 500.0,

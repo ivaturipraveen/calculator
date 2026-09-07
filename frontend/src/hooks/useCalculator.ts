@@ -16,6 +16,8 @@ export interface CalcState {
   pending: boolean;
   /** Whether the clinician has asked for an answer yet. */
   submitted: boolean;
+  /** An answer is on screen, but the inputs have moved on since it was worked out. */
+  stale: boolean;
   /** True once every value the chosen path needs is present. */
   complete: boolean;
   calculate: () => void;
@@ -82,15 +84,21 @@ export function useCalculator(schema: CalculatorSchema): CalcState {
   const [pending, setPending] = useState(false);
   // Every source document says "once all the inputs are entered, click the
   // Calculate button". Computing the moment the last box is filled skips the
-  // step where a clinician looks over what they typed -- so the first answer is
-  // asked for. After that the page stays live, because a titration table or a
-  // growth centile that does not follow the value you just changed is worse
-  // than useless.
-  // A decision tree has no form to fill in -- answering its questions IS the
-  // interaction -- so it must not sit waiting for a button before it will ask
-  // the first one.
+  // step where a clinician looks over what they typed -- so the answer is asked
+  // for, every time. Gating only the FIRST one and then recomputing silently
+  // meant the same edit behaved differently depending on state nobody could
+  // see: type a weight and nothing happens, type it again and the number moves.
+  //
+  // So an edit after an answer marks that answer STALE rather than replacing
+  // it. The figure stays on screen -- losing the number you were reading
+  // because you touched a box is its own kind of wrong -- but it is greyed and
+  // labelled, and the button is the way to a new one.
+  //
+  // A decision tree has no form to fill in: answering its questions IS the
+  // interaction, so it is never gated.
   const gated = schema.renderer !== "tree";
   const [submitted, setSubmitted] = useState(!gated);
+  const [stale, setStale] = useState(false);
 
   useEffect(() => {
     setValues(initialValues);
@@ -102,6 +110,7 @@ export function useCalculator(schema: CalculatorSchema): CalcState {
     setPairReversed(false);
     setResult(null);
     setSubmitted(!gated);
+    setStale(false);
   }, [initialValues, initialUnits, gated]);
 
   const abortRef = useRef<AbortController | null>(null);
@@ -154,10 +163,14 @@ export function useCalculator(schema: CalculatorSchema): CalcState {
 
   useEffect(() => {
     if (!complete) {
-      setResult(null);
+      // Once an answer exists, emptying a box to retype it must not delete it.
+      // Clearing on every incomplete keystroke meant the figure vanished the
+      // moment you selected a value to change -- and then there was nothing
+      // left to mark out of date. Only Reset clears.
+      if (!submitted) setResult(null);
       return;
     }
-    if (!submitted) return;
+    if (!submitted || stale) return;
     const controller = new AbortController();
     abortRef.current?.abort();
     abortRef.current = controller;
@@ -196,7 +209,7 @@ export function useCalculator(schema: CalculatorSchema): CalcState {
       window.clearTimeout(timer);
       controller.abort();
     };
-  }, [request, complete, submitted, schema.slug, schema.renderer]);
+  }, [request, complete, submitted, stale, schema.slug, schema.renderer]);
 
   const errorsByField = useMemo(() => {
     const out: Record<string, string> = {};
@@ -204,15 +217,29 @@ export function useCalculator(schema: CalculatorSchema): CalcState {
     return out;
   }, [result]);
 
-  const setValue = useCallback((key: string, value: string) => {
-    setValues((prev) => ({ ...prev, [key]: value }));
-  }, []);
+  // Touching anything the answer was built from makes the answer out of date.
+  const touch = useCallback(() => {
+    if (gated) setStale(true);
+  }, [gated]);
 
-  const setUnit = useCallback((key: string, code: string) => {
-    setUnits((prev) => ({ ...prev, [key]: code }));
-  }, []);
+  const setValue = useCallback(
+    (key: string, value: string) => {
+      touch();
+      setValues((prev) => ({ ...prev, [key]: value }));
+    },
+    [touch],
+  );
+
+  const setUnit = useCallback(
+    (key: string, code: string) => {
+      touch();
+      setUnits((prev) => ({ ...prev, [key]: code }));
+    },
+    [touch],
+  );
 
   const setSelection = useCallback((group: string, option: string, multiple: boolean) => {
+    touch();
     setSelections((prev) => {
       if (!multiple) return { ...prev, [group]: option };
       const current = Array.isArray(prev[group]) ? (prev[group] as string[]) : [];
@@ -223,16 +250,20 @@ export function useCalculator(schema: CalculatorSchema): CalcState {
           : [...current, option],
       };
     });
-  }, []);
+  }, [touch]);
 
   const answer = useCallback((choice: "yes" | "no") => {
     setAnswers((prev) => [...prev, choice]);
   }, []);
 
-  const calculate = useCallback(() => setSubmitted(true), []);
+  const calculate = useCallback(() => {
+    setSubmitted(true);
+    setStale(false);
+  }, []);
 
   const reset = useCallback(() => {
     setSubmitted(!gated);
+    setStale(false);
     setValues(initialValues);
     setUnits(initialUnits);
     setSelections({});
@@ -241,11 +272,16 @@ export function useCalculator(schema: CalculatorSchema): CalcState {
     setPairReversed(false);
     setResult(null);
     setSubmitted(!gated);
+    setStale(false);
   }, [initialValues, initialUnits, gated]);
 
   return {
     schema,
     submitted,
+    // Only an answer that EXISTS can be out of date. Marking the form stale
+    // from the first keystroke told the reader their answer had moved on when
+    // they had not yet asked for one.
+    stale: stale && submitted && result !== null,
     complete,
     calculate,
     values,
