@@ -146,14 +146,6 @@ export function CatalogPage({
                 <div className="calc-card__meta">
                   <span className="tag">{RENDERER_LABEL[c.renderer] ?? c.renderer}</span>
                   {c.category && <span className="calc-card__cat">{c.category}</span>}
-                  {c.limited && (
-                    <span
-                      className="calc-card__limited"
-                      title="The source document did not carry everything this calculator needs"
-                    >
-                      limited
-                    </span>
-                  )}
                 </div>
               </Link>
             ))}

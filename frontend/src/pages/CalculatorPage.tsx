@@ -150,12 +150,6 @@ function CalculatorView({ schema }: { schema: CalculatorSchema }) {
             </div>
           )}
 
-          {calc.stale && (
-            <div className="stale-note" role="status">
-              The values have changed since this answer was worked out.
-            </div>
-          )}
-
           {work.map((s) => (
             <div id={s.id} key={s.id}>
               <SectionRenderer section={s} calc={calc} />

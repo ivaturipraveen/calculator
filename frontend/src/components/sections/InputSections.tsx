@@ -75,27 +75,33 @@ export function ScoreGroupsSection({
                 {g.label}
                 {multiple && <span className="criterion__any">choose any that apply</span>}
               </legend>
-              <div className="choice-list">
-                {g.options.map((o) => (
-                  <label className="choice" key={o.key}>
-                    <input
-                      type={multiple ? "checkbox" : "radio"}
-                      name={g.key}
-                      checked={chosen.includes(o.key)}
-                      onChange={() => calc.setSelection(g.key, o.key, multiple)}
-                    />
-                    <span className="choice__text">{o.label}</span>
-                    <span className="choice__points">
-                      {o.points > 0 ? `+${o.points}` : o.points}
-                    </span>
-                  </label>
-                ))}
-              </div>
-              {error && (
-                <div className="field__error" role="alert" style={{ marginTop: 8 }}>
-                  {error}
+              {/* The border/background live here, not on the fieldset -- a
+                  <legend> straddles its fieldset's own border by native
+                  browser default, which on the bordered desktop card cut the
+                  heading text in half across the top edge. */}
+              <div className="criterion__body">
+                <div className="choice-list">
+                  {g.options.map((o) => (
+                    <label className="choice" key={o.key}>
+                      <input
+                        type={multiple ? "checkbox" : "radio"}
+                        name={g.key}
+                        checked={chosen.includes(o.key)}
+                        onChange={() => calc.setSelection(g.key, o.key, multiple)}
+                      />
+                      <span className="choice__text">{o.label}</span>
+                      <span className="choice__points">
+                        {o.points > 0 ? `+${o.points}` : o.points}
+                      </span>
+                    </label>
+                  ))}
                 </div>
-              )}
+                {error && (
+                  <div className="field__error" role="alert" style={{ marginTop: 8 }}>
+                    {error}
+                  </div>
+                )}
+              </div>
             </fieldset>
           );
         })}
@@ -150,6 +156,9 @@ export function ConverterSection({
               inputMode="decimal"
               value={calc.pairValue}
               onChange={(e) => calc.setPairValue(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "e" || e.key === "E") e.preventDefault();
+              }}
             />
             <button
               type="button"

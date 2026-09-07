@@ -158,17 +158,6 @@ export function Sidebar({
                   }
                 >
                   <span className="calc-item__name">{c.title}</span>
-                  {/* Only the exception is marked. "Live" on all 179 rows is
-                      a badge that carries no information and 179 green dots to
-                      read past. */}
-                  {c.limited && (
-                    <span
-                      className="badge badge--limited"
-                      title="The source document did not carry everything this calculator needs"
-                    >
-                      Limited
-                    </span>
-                  )}
                   <span className="chev" aria-hidden="true">
                     ›
                   </span>

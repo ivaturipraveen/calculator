@@ -671,21 +671,6 @@ describe("the answer can be checked against what produced it", () => {
   });
 });
 
-describe("a calculator the source left unusable is marked before it is opened", () => {
-  it("flags it on the catalogue card", async () => {
-    render(
-      <MemoryRouter initialEntries={["/?q=APACHE"]}>
-        <App />
-      </MemoryRouter>,
-    );
-    // The card on the catalogue, not the row in the index beside it.
-    const main = await screen.findByRole("main");
-    const links = await within(main).findAllByRole("link", { name: /APACHE II/i });
-    const card = links[0].closest(".calc-card") as HTMLElement;
-    expect(within(card).getByText(/limited/i)).toBeInTheDocument();
-  });
-});
-
 describe("a calculator whose name contains a slash", () => {
   // "ACC/AHA 2013" encodes to %2F, which the server decodes back to "/" before
   // routing -- so a plain {slug} path parameter saw two segments and returned
@@ -897,12 +882,10 @@ describe("nothing is called out of date before it exists", () => {
     mountCalculator("A-a Gradient");
     await screen.findByRole("heading", { level: 1, name: /A-a Gradient/i });
 
-    // Typing into a fresh form is not "the values have changed since this
-    // answer was worked out" -- there is no answer yet.
+    // Typing into a fresh form is not staleness -- there is no answer yet.
     await typeInto(/^Age/, "23");
     await typeInto(/patient temp/i, "34");
     await new Promise((r) => setTimeout(r, 400));
-    expect(screen.queryByText(/values have changed/i)).toBeNull();
     expect(document.querySelector(".field__control--stale")).toBeNull();
 
     // It appears only once there is something to be out of date.
@@ -917,6 +900,6 @@ describe("nothing is called out of date before it exists", () => {
     });
 
     await typeInto(/^Age/, "40");
-    await screen.findByText(/values have changed/i);
+    await waitFor(() => expect(document.querySelector(".field__control--stale")).not.toBeNull());
   });
 });

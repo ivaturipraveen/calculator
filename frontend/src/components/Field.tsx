@@ -133,6 +133,18 @@ export function Field({ field, value, unit, error, onValue, onUnit }: Props) {
               aria-invalid={error ? true : undefined}
               aria-describedby={describedBy || undefined}
               onChange={(e) => onValue(e.target.value)}
+              onKeyDown={
+                field.widget === "date"
+                  ? undefined
+                  : (e) => {
+                      // A native number input otherwise accepts "e"/"E" as
+                      // scientific notation -- typing "1e5" into a weight or
+                      // dose field silently becomes 100000 with nothing on
+                      // screen to catch it. There is no clinical reading
+                      // where exponential notation is the intended input.
+                      if (e.key === "e" || e.key === "E") e.preventDefault();
+                    }
+              }
             />
             {field.unit.selectable && (
               <select
