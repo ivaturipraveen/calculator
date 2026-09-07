@@ -17,57 +17,86 @@ export function ResultsSection({
   calc: CalcState;
 }) {
   const byKey = new Map((calc.result?.outputs ?? []).map((o) => [o.key, o]));
-  // The headline is the result the calculator is named for, which the server
-  // picks -- not simply the one that happened to be written first. Adjusted
-  // Body Weight led with "%IBW" until it did.
-  const lead =
-    section.outputs.find((o) => o.key === section.primary) ?? section.outputs[0];
-  const rest = section.outputs.filter((o) => o.key !== lead?.key);
-  const leadValue = lead ? byKey.get(lead.key) : undefined;
 
-  // The first result is the one the calculator is named for, so it is stated
-  // once at full size and the others follow as a list. Giving five results the
-  // same weight makes the reader find the one they wanted.
+  // A calculator that produces a PANEL of values has no headline. The
+  // aminoglycoside work-up hands back an ideal body weight, a dosing weight, a
+  // clearance, an elimination constant, a half-life and a volume of
+  // distribution: six things a clinician reads together, none of them the
+  // answer. Picking one to enlarge and demoting the rest to grey rows buries
+  // five of the six. Above three, they are all cards.
+  if (section.outputs.length > 3) {
+    return (
+      <div className="result-cards">
+        {section.outputs.map((o) => {
+          const got = byKey.get(o.key);
+          return (
+            <div
+              key={o.key}
+              className={[
+                "result-card",
+                got ? "" : "result-card--pending",
+                got && calc.stale ? "result-card--stale" : "",
+              ].filter(Boolean).join(" ")}
+            >
+              <span className="result-card__label">{o.label}</span>
+              <span className="result-card__value">
+                {got ? formatValue(got) : "—"}
+                {got && o.unit && !isDate(got) && (
+                  <span className="result-card__unit">{o.unit}</span>
+                )}
+              </span>
+            </div>
+          );
+        })}
+        {calc.stale && (
+          <p className="result-cards__stale">
+            These were worked out from earlier values.
+          </p>
+        )}
+      </div>
+    );
+  }
+
+  // Three or fewer: boxes of the same shape as the inputs, in the same grid.
+  // The reference design reads a calculator as one form -- what you enter, the
+  // button, what comes back -- rather than as a form and then a separate
+  // coloured card, and it lines the answer up under the field that fed it.
   return (
-    <>
-      {lead && (
-        <div className={leadValue ? "hero" : "hero hero--pending"}>
-          <div className="hero__label">{lead.label}</div>
-          {leadValue ? (
-            <div className="hero__value">
-              {formatValue(leadValue)}
-              {lead.unit && !isDate(leadValue) && (
-                <span className="hero__unit">{lead.unit}</span>
-              )}
-            </div>
-          ) : (
-            <div className="hero__value">
-              —
-              <span className="hero__pending">{remainingText(calc)}</span>
-            </div>
-          )}
-        </div>
-      )}
-
-      {rest.length > 0 && (
-        <div className="value-list">
-          {rest.map((o) => {
-            const got = byKey.get(o.key);
-            return (
-              <div className={got ? "value-row" : "value-row value-row--pending"} key={o.key}>
-                <span className="value-row__label">{o.label}</span>
-                <span className="value-row__value">
-                  {got ? formatValue(got) : "—"}
-                  {got && o.unit && !isDate(got) && (
-                    <span className="value-row__unit">{o.unit}</span>
-                  )}
+    <Panel title={section.title || "Result"}>
+      <div className="field-grid">
+        {section.outputs.map((o) => {
+          const got = byKey.get(o.key);
+          const stale = got && calc.stale;
+          return (
+            <div className="field" key={o.key}>
+              <div className="field__top">
+                <span className="field__label field__label--out">
+                  {o.label}
+                  {stale ? <span className="field__stale">out of date</span> : null}
                 </span>
               </div>
-            );
-          })}
-        </div>
+              <div
+                className={
+                  stale ? "field__control field__control--stale" : "field__control"
+                }
+              >
+                <output className="input input--result" htmlFor={o.key}>
+                  {got ? formatValue(got) : ""}
+                </output>
+                {o.unit && !(got && isDate(got)) ? (
+                  <span className="unit-static" title={o.unit}>
+                    {o.unit}
+                  </span>
+                ) : null}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+      {!calc.result && (
+        <p className="result-hint">{remainingText(calc)}</p>
       )}
-    </>
+    </Panel>
   );
 }
 
@@ -84,8 +113,17 @@ export function ScoreResultSection({
 
   return (
     <>
-      <div className={total === null ? "hero hero--pending" : "hero"}>
-        <div className="hero__label">{section.total?.label ?? "Total score"}</div>
+      <div
+        className={[
+          "hero",
+          total === null ? "hero--pending" : "",
+          total !== null && calc.stale ? "hero--stale" : "",
+        ].filter(Boolean).join(" ")}
+      >
+        <div className="hero__label">
+          {section.total?.label ?? "Total score"}
+          {total !== null && calc.stale && <span className="hero__stale">out of date</span>}
+        </div>
         <div className="score-total">
           <span className="score-total__value">
             {total === null ? "—" : formatNumber(total, 0)}

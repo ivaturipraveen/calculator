@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
+import { Chevron } from "./Chevron";
 
 const KEY = "calc-info-width";
 const MIN = 300;
@@ -71,7 +72,7 @@ export function InfoPane({ title, children }: { title: string; children: ReactNo
           aria-label="Show formula and references"
           title="Show formula and references"
         >
-          ◂
+          <Chevron dir="left" />
         </button>
       </div>
     );
@@ -96,7 +97,7 @@ export function InfoPane({ title, children }: { title: string; children: ReactNo
             aria-label="Hide formula and references"
             title="Hide"
           >
-            ▸
+            <Chevron dir="right" size={16} />
           </button>
         </div>
         {children}

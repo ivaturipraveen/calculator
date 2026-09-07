@@ -233,13 +233,21 @@
       {
         "key": "dose_mg",
         "expr": "7 * body_surface_area * clcr_v2"
+      },
+      {
+        "key": "dose_mg_v2",
+        "expr": "(('') if (dose_mg < 5) else ((round(dose_mg / 5) * 5) if (dose_mg >= 5 and dose_mg < 20) else ((900) if (dose_mg > 900) else (round(dose_mg / 10) * 10)))) if (form > 1) else ((450) if (dose_mg >= 405 and dose_mg <= 495) else ((900) if (dose_mg >= 810) else (dose_mg)))"
+      },
+      {
+        "key": "dose_m_l",
+        "expr": "dose_mg_v2 / 50"
       }
     ],
     "outputs": [
       {
         "key": "output_dose_mg",
         "label": "Dose (mg)",
-        "expr": "(((450) if ((round(dose_mg / 10) * 10) >= 405 and (round(dose_mg / 10) * 10) <= 495) else ((900) if ((round(dose_mg / 10) * 10) >= 810) else (round(dose_mg / 10) * 10)))) if ((form > 1) and (not (dose_mg < 5)) and (not (dose_mg >= 5 and dose_mg < 20)) and (not (dose_mg > 900))) else (0)",
+        "expr": "dose_mg_v2",
         "decimals": 0,
         "base_unit": "mg",
         "kind": "number",
@@ -249,7 +257,7 @@
       {
         "key": "output_dose_ml",
         "label": "Dose (mL)",
-        "expr": "((((450) if ((round(dose_mg / 10) * 10) >= 405 and (round(dose_mg / 10) * 10) <= 495) else ((900) if ((round(dose_mg / 10) * 10) >= 810) else (round(dose_mg / 10) * 10))) / 50)) if ((form > 1) and (not (dose_mg < 5)) and (not (dose_mg >= 5 and dose_mg < 20)) and (not (dose_mg > 900)) and (form > 1)) else (0)",
+        "expr": "(dose_m_l) if ((form > 1)) else (0)",
         "decimals": 1,
         "base_unit": "mL",
         "kind": "number",

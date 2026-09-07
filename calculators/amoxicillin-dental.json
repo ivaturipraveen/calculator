@@ -15,16 +15,8 @@
       "widget": "quantity",
       "required": true,
       "default": null,
-      "base_unit": "Dose in mg",
-      "units": [
-        {
-          "code": "Dose in mg",
-          "label": "Dose in mg",
-          "factor": 1.0,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "units": null,
       "constraints": {},
       "messages": null,
       "source": {

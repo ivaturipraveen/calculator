@@ -106,16 +106,8 @@
       "widget": "quantity",
       "required": true,
       "default": null,
-      "base_unit": "Avail. Conc. (mL)",
-      "units": [
-        {
-          "code": "Avail. Conc. (mL)",
-          "label": "Avail. Conc. (mL)",
-          "factor": 1.0,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "units": null,
       "constraints": {},
       "messages": null,
       "source": {
@@ -196,7 +188,7 @@
         "decimals": 1,
         "kind": "number",
         "unit_source": "formula_prose",
-        "unit_rejected": "the units selected for Input",
+        "unit_rejected": "the units selected for Input Dose",
         "base_unit": null
       },
       {

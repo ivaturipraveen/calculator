@@ -339,13 +339,14 @@ h2.serif,
 }
 
 .category-filter::after {
-  content: "▾";
+  content: "";
   position: absolute;
   right: 13px;
   top: 50%;
   translate: 0 -50%;
-  color: var(--amber-deep);
-  font-size: var(--t-xs);
+  width: 10px;
+  height: 7px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7'%3E%3Cpath d='M1 1.5l4 4 4-4' fill='none' stroke='%23C08F31' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center;
   pointer-events: none;
 }
 
@@ -552,13 +553,13 @@ h2.serif,
 
 .source-line {
   margin: 0 0 22px;
-  font-family: var(--mono);
-  font-size: var(--t-xs);
+  font-size: var(--t-sm);
   color: var(--ink-faint);
 }
 
 .source-line span {
   color: var(--ink-soft);
+  font-weight: 500;
 }
 
 .detail-actions {
@@ -601,7 +602,8 @@ h2.serif,
   overscroll-behavior: contain;
   padding: 24px 26px 60px;
   background: var(--paper);
-  border-left: 1px solid var(--line);
+  /* No border here: the resize handle to its left already draws the line, and
+     the two together read as a double rule. */
   font-size: var(--t-base);
   line-height: 1.62;
   color: var(--ink);
@@ -938,15 +940,17 @@ h2.serif,
   min-height: 18px;
 }
 
+/* The reference design's labels are dark and readable; ours were 11.5px in the
+   faintest grey on the palette, which is most of why the page looked washed. */
 .field__label {
   display: flex;
   align-items: baseline;
   gap: 5px;
   min-width: 0;
-  font-size: var(--t-xs);
+  font-size: var(--t-base);
   font-weight: 500;
-  letter-spacing: 0.01em;
-  color: var(--ink-soft);
+  letter-spacing: -0.002em;
+  color: var(--ink);
 }
 
 .field__req {
@@ -972,7 +976,7 @@ h2.serif,
   padding: 1px 7px;
   border-radius: var(--r-sm);
   background: var(--surface-sunken);
-  color: var(--text-faint);
+  color: var(--ink-soft);
   font-size: var(--t-xs);
   font-weight: 500;
   font-variant-numeric: tabular-nums;
@@ -1060,12 +1064,23 @@ h2.serif,
   box-shadow: none;
 }
 
+/* `background-color`, never the `background` shorthand: the shorthand resets
+   `background-image` too, and it was silently wiping the caret off every unit
+   dropdown -- so a field with four units looked exactly like one with a fixed
+   unit, and there was no way to tell which could be changed. */
 .field__control > .unit-select,
 .field__control > .unit-static {
   border: 0;
-  border-left: 1px solid var(--border);
+  border-left: 1px solid var(--line);
   border-radius: 0 var(--r-md) var(--r-md) 0;
-  background: var(--surface-sunken);
+  background-color: color-mix(in oklab, var(--surface-sunken) 78%, var(--line));
+}
+
+/* A unit that cannot be changed says so by having no caret and no hover: it is
+   a label on the box, not a control. */
+.field__control > .unit-static {
+  color: var(--ink-soft);
+  cursor: default;
 }
 
 /* Every value a clinician reads digit by digit is set in the monospace: a
@@ -1108,26 +1123,38 @@ h2.serif,
 .select {
   appearance: none;
   font-family: var(--sans);
-  padding-right: 32px;
-  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
-    linear-gradient(135deg, currentColor 50%, transparent 50%);
-  background-position: calc(100% - 17px) 20px, calc(100% - 12px) 20px;
-  background-size: 5px 5px, 5px 5px;
+  padding-right: 34px;
+  /* The same mark on every dropdown in the app, so "this opens" is one thing
+     the reader learns once. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0h12L6 8z' fill='%238A6A2E'/%3E%3C/svg%3E");
+  background-position: right 12px center;
   background-repeat: no-repeat;
   cursor: pointer;
 }
 
+/* One width for every unit, so the number boxes line up across the grid --
+   but a unit that genuinely needs more room gets it rather than being clipped
+   mid-word. TPN measures in "mL 15% Solution". */
+/* A solid caret in a darker well, so the unit reads as the button it is. */
 .unit-select {
   flex: 0 0 auto;
-  width: 88px;
-  min-width: 88px;
-  max-width: 88px;
-  padding: 0 22px 0 10px;
-  background-color: var(--surface-sunken);
-  background-position: calc(100% - 13px) 17px, calc(100% - 9px) 17px;
+  width: auto;
+  min-width: 92px;
+  max-width: 150px;
+  padding: 0 30px 0 12px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0h12L6 8z' fill='%238A6A2E'/%3E%3C/svg%3E");
+  background-color: color-mix(in oklab, var(--surface-sunken) 78%, var(--line));
+  background-position: right 11px center;
+  background-repeat: no-repeat;
   font-family: var(--sans);
-  font-size: var(--t-xs);
+  font-size: var(--t-base);
+  font-weight: 600;
   color: var(--ink-soft);
+  cursor: pointer;
+}
+
+.unit-select:hover {
+  background-color: color-mix(in oklab, var(--amber-tint) 60%, var(--surface-sunken));
 }
 
 /* A field with only one unit still shows it, but as a label rather than a
@@ -1136,12 +1163,16 @@ h2.serif,
   flex: none;
   display: grid;
   place-items: center;
-  width: 88px;
-  padding: 0 11px;
-  background: var(--surface-sunken);
-  font-size: var(--t-xs);
+  min-width: 92px;
+  max-width: 150px;
+  padding: 0 12px;
+  background: color-mix(in oklab, var(--surface-sunken) 78%, var(--line));
+  font-size: var(--t-base);
+  line-height: 1.25;
   color: var(--ink-soft);
-  white-space: nowrap;
+  text-align: center;
+  /* Wrap rather than clip: a unit read half-way is a unit misread. */
+  overflow-wrap: anywhere;
 }
 
 .field__error {
@@ -1194,24 +1225,27 @@ h2.serif,
 .criterion__label {
   display: flex;
   align-items: baseline;
+  flex-wrap: wrap;
   gap: 8px;
   padding: 0;
-  margin: 0 0 10px;
+  margin: 0 0 12px;
   font-size: var(--t-md);
   font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
 }
 
 .choice-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
 }
 
 .choice {
   display: flex;
   align-items: flex-start;
-  gap: 11px;
-  padding: 10px 12px;
+  gap: 12px;
+  padding: 11px 13px;
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   background: var(--surface-2);
@@ -1241,7 +1275,8 @@ h2.serif,
 .choice__text {
   flex: 1;
   font-size: var(--t-base);
-  line-height: 1.45;
+  line-height: 1.5;
+  color: var(--ink);
 }
 
 .choice__points {
@@ -1273,15 +1308,15 @@ h2.serif,
   .criteria {
     display: block;
     columns: 2;
-    column-gap: 16px;
-    padding: 16px 20px;
+    column-gap: 22px;
+    padding: 18px 20px 6px;
   }
 
   .criterion {
     break-inside: avoid;
-    margin: 0 0 14px;
-    padding: 13px 15px;
-    border: 1px solid var(--border);
+    margin: 0 0 18px;
+    padding: 15px 16px;
+    border: 1px solid var(--line);
     border-radius: var(--r-md);
     background: var(--surface-2);
   }
@@ -1377,6 +1412,7 @@ h2.serif,
 .value-list {
   display: flex;
   flex-direction: column;
+  margin-bottom: 4px;
   gap: 1px;
   background: var(--border);
   border-radius: var(--r-md);
@@ -1568,7 +1604,18 @@ h2.serif,
 
 .table-wrap {
   overflow-x: auto;
+  overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
+  /* A hint that there is more table to the right, rather than a column that
+     simply stops at the card edge. */
+  background:
+    linear-gradient(to right, var(--white) 30%, transparent),
+    linear-gradient(to left, var(--white) 30%, transparent) 100% 0,
+    radial-gradient(farthest-side at 0 50%, rgb(38 41 45 / 0.10), transparent),
+    radial-gradient(farthest-side at 100% 50%, rgb(38 41 45 / 0.10), transparent) 100% 0;
+  background-repeat: no-repeat;
+  background-size: 34px 100%, 34px 100%, 12px 100%, 12px 100%;
+  background-attachment: local, local, scroll, scroll;
 }
 
 table.data {
@@ -1579,10 +1626,22 @@ table.data {
 
 table.data th,
 table.data td {
-  padding: 10px 15px;
+  padding: 11px 16px;
   text-align: left;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--card-line);
   white-space: nowrap;
+}
+
+/* Line the table's outer columns up with the panel's own padding, so a table
+   in a flush panel does not start 20px to the left of everything above it. */
+table.data th:first-child,
+table.data td:first-child {
+  padding-left: 20px;
+}
+
+table.data th:last-child,
+table.data td:last-child {
+  padding-right: 20px;
 }
 
 table.data tbody tr:last-child td {
@@ -1610,6 +1669,12 @@ table.data th.num {
   font-size: var(--t-sm);
 }
 
+/* Alternate shading: a wide row of numbers is hard to track across without it,
+   and these tables run to 200-odd rows. */
+table.data tbody tr:nth-child(even) {
+  background: color-mix(in oklab, var(--surface-sunken) 45%, var(--white));
+}
+
 table.data tbody tr:hover {
   background: var(--surface-sunken);
 }
@@ -1622,7 +1687,8 @@ table.data tbody tr.row-cont td:first-child {
   color: var(--text-faint);
 }
 
-table.data tbody tr.is-current {
+table.data tbody tr.is-current,
+table.data tbody tr.is-current:nth-child(even) {
   background: var(--accent-soft);
   box-shadow: inset 3px 0 0 var(--accent);
 }
@@ -1755,7 +1821,7 @@ table.data tbody tr.is-current td {
   background: var(--accent);
   border-color: var(--accent);
   color: var(--on-accent);
-  box-shadow: var(--shadow-accent);
+  box-shadow: 0 4px 12px color-mix(in oklab, var(--amber) 26%, transparent);
 }
 
 .btn--primary:hover {
@@ -1854,9 +1920,8 @@ table.data tbody tr.is-current td {
   padding: 11px 15px;
   margin: 5px 0;
   border-radius: var(--r-md);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
-  background: var(--surface-sunken);
+  border: 1px solid var(--line);
+  background: var(--white);
   font-family: var(--mono);
   font-size: var(--t-sm);
   line-height: 1.6;
@@ -1868,7 +1933,7 @@ table.data tbody tr.is-current td {
 
 /* Consecutive equation lines are one block, not a stack of separate cards. */
 .formula__eq + .formula__eq {
-  margin-top: -5px;
+  margin-top: -6px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-top-color: transparent;
@@ -1995,27 +2060,50 @@ details.disclosure > summary:hover {
 
 /* The three columns collapse in order of how much they can be spared: the
    reference column first (it is reading, not doing), then the index. */
+/* Three columns is a lot of furniture. As the window narrows, the two that are
+   scaffolding give room back to the calculator before it is squeezed. */
+@media (max-width: 1400px) {
+  .index-pane {
+    width: 256px;
+  }
+}
+
 @media (max-width: 1280px) {
+  .index-pane {
+    width: 232px;
+  }
+
   .info-pane {
-    width: 360px !important;
-    min-width: 320px;
+    width: 340px !important;
+    min-width: 300px;
   }
 
   .detail-inner {
-    padding: 26px 28px 64px;
+    padding: 26px 26px 64px;
   }
 }
 
 @media (max-width: 1060px) {
+  /* Below this the page stops being three columns and becomes two: the index,
+     and the calculator with its reference material following underneath. The
+     page scrolls as a whole from here down, so the columns stop scrolling
+     independently. */
+  .app {
+    flex-wrap: wrap;
+    overflow-y: auto;
+  }
+
   .info-resizer,
   .info-reopen {
     display: none;
   }
 
-  /* Below this the page stops being three columns and becomes two: the index,
-     and the calculator with its reference material following underneath. */
-  .app {
-    flex-wrap: wrap;
+  .index-pane {
+    width: 248px;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    max-height: 100vh;
   }
 
   .detail-pane {
@@ -2027,21 +2115,15 @@ details.disclosure > summary:hover {
     flex: 1 1 100%;
     width: auto !important;
     max-width: none;
-    border-left: 0;
     border-top: 1px solid var(--line);
     overflow: visible;
-    padding: 22px 28px 60px;
+    padding: 22px 26px 60px;
   }
 
-  .app {
-    overflow-y: auto;
-  }
-
-  .index-pane {
-    position: sticky;
-    top: 0;
-    align-self: flex-start;
-    max-height: 100%;
+  /* Two columns of reference material rather than one very long one, now that
+     it has the full page width. */
+  .info-pane .panel {
+    break-inside: avoid;
   }
 }
 
@@ -2112,7 +2194,36 @@ details.disclosure > summary:hover {
 
   table.data th,
   table.data td {
-    padding: 9px 12px;
+    padding: 10px 12px;
+  }
+
+  table.data th:first-child,
+  table.data td:first-child {
+    padding-left: 16px;
+  }
+
+  table.data th:last-child,
+  table.data td:last-child {
+    padding-right: 16px;
+  }
+
+  .panel__head,
+  .panel__body {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .criteria {
+    padding: 0;
+  }
+
+  .detail-actions {
+    flex-wrap: wrap;
+  }
+
+  .btn-calculate {
+    flex: 1;
+    justify-content: center;
   }
 }
 
@@ -2386,8 +2497,220 @@ details.disclosure > summary:hover {
   cursor: default;
 }
 
+/* Room between the answer and the button that produced it. */
 .detail-actions {
   align-items: center;
   gap: 10px;
-  margin: 2px 0 20px;
+  margin: 22px 0 26px;
+}
+
+/* An answer that no longer matches the boxes above it.
+ *
+ * The figure stays -- losing the number you were reading because you touched a
+ * field is its own kind of wrong -- but it is dimmed and it says so, and the
+ * only way to a current one is the button. Silently recomputing was worse: the
+ * same edit moved the number sometimes and not others. */
+.hero--stale {
+  background: var(--surface-sunken);
+  border-color: var(--line);
+  border-style: dashed;
+}
+
+.hero--stale .hero__value {
+  color: var(--ink-faint);
+}
+
+.hero__stale {
+  margin-left: 8px;
+  padding: 1px 7px;
+  border-radius: var(--r-pill);
+  background: var(--warn-soft);
+  border: 1px solid var(--warn-border);
+  color: var(--warn);
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.stale-note {
+  margin-bottom: 16px;
+  padding: 9px 13px;
+  border: 1px solid var(--warn-border);
+  border-radius: var(--r-md);
+  background: var(--warn-soft);
+  color: var(--warn);
+  font-size: var(--t-sm);
+}
+
+/* The button is where the reader has to go next, so it says so. */
+.btn-calculate.is-stale:not(:disabled) {
+  animation: calc-nudge 1.6s ease-in-out 2;
+}
+
+@keyframes calc-nudge {
+  0%, 100% { box-shadow: 0 0 0 0 transparent; }
+  50% { box-shadow: 0 0 0 4px color-mix(in oklab, var(--amber) 30%, transparent); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-calculate.is-stale:not(:disabled) { animation: none; }
+}
+
+/* A panel of results, each in its own card.
+ *
+ * Used when a calculator returns more than three: an aminoglycoside work-up
+ * hands back an ideal body weight, a dosing weight, a clearance, an
+ * elimination constant, a half-life and a volume of distribution. None is
+ * "the" answer -- they are read together -- so none is enlarged and none is
+ * demoted to a grey row. Label left, figure right, in the monospace that
+ * carries every number on the page. */
+.result-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.result-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 15px 20px;
+  border: 1px solid var(--amber);
+  border-radius: var(--r-lg);
+  background: var(--amber-tint);
+}
+
+.result-card__label {
+  font-size: var(--t-sm);
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  min-width: 0;
+}
+
+.result-card__value {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex: none;
+  font-family: var(--mono);
+  font-size: 23px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--amber-deep);
+  overflow-wrap: anywhere;
+}
+
+.result-card__unit {
+  font-family: var(--mono);
+  font-size: var(--t-sm);
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+/* Nothing entered yet, or entered and moved on from: same treatment as the
+   single-answer card, so the two never disagree about what stale looks like. */
+.result-card--pending {
+  background: var(--paper);
+  border-color: var(--line);
+  border-style: dashed;
+}
+
+.result-card--pending .result-card__value {
+  color: var(--ink-faint);
+  font-size: var(--t-lg);
+}
+
+.result-card--stale {
+  background: var(--surface-sunken);
+  border-color: var(--line);
+  border-style: dashed;
+}
+
+.result-card--stale .result-card__value {
+  color: var(--ink-faint);
+}
+
+.result-cards__stale {
+  margin: 0;
+  font-size: var(--t-sm);
+  color: var(--warn);
+}
+
+@media (max-width: 560px) {
+  .result-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}
+
+/* ------------------------------------------------------- result as a field */
+
+/* The answer, in a box the same shape as the ones that fed it. The reference
+   design reads a calculator as one form -- what you enter, the button, what
+   comes back -- so the result lines up under the field it came from rather
+   than sitting in a separate coloured card below. */
+.field__label--out {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--ink);
+}
+
+.input--result {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  height: 38px;
+  padding: 0 11px;
+  border: 0;
+  background: transparent;
+  font-family: var(--mono);
+  font-size: var(--t-md);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--amber-deep);
+  overflow-wrap: anywhere;
+}
+
+/* A result box is read, not typed into, so it does not offer a cursor or a
+   focus ring -- but it keeps the field's frame so the column still lines up. */
+.field__control:has(.input--result) {
+  background: color-mix(in oklab, var(--amber-tint) 45%, var(--white));
+  border-color: var(--accent-border);
+}
+
+.field__control--stale {
+  background: var(--surface-sunken) !important;
+  border-style: dashed;
+}
+
+.field__control--stale .input--result {
+  color: var(--ink-faint);
+}
+
+.field__stale {
+  padding: 1px 7px;
+  border-radius: var(--r-pill);
+  background: var(--warn-soft);
+  border: 1px solid var(--warn-border);
+  color: var(--warn);
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.result-hint {
+  margin: 12px 0 0;
+  font-size: var(--t-sm);
+  color: var(--ink-faint);
 }

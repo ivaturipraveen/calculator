@@ -15,7 +15,7 @@
       "widget": "quantity",
       "required": true,
       "default": null,
-      "base_unit": "g, mcg, mEq, mg, mmol, or un",
+      "base_unit": null,
       "units": null,
       "constraints": {
         "min": 0.0
@@ -27,7 +27,10 @@
         "id_const": "ID_DOSE"
       },
       "label_source": "printed form",
-      "unit_source": "formula_prose"
+      "unit_source": "formula_prose",
+      "help": [
+        "g, mcg, mEq, mg, mmol, or units"
+      ]
     },
     {
       "key": "drug_amount",
@@ -35,7 +38,7 @@
       "widget": "quantity",
       "required": true,
       "default": null,
-      "base_unit": "g, mcg, mEq, mg, mmol, or un",
+      "base_unit": null,
       "units": null,
       "constraints": {
         "min": 0.0
@@ -47,7 +50,10 @@
         "id_const": "ID_AMOUNT"
       },
       "label_source": "printed form",
-      "unit_source": "formula_prose"
+      "unit_source": "formula_prose",
+      "help": [
+        "g, mcg, mEq, mg, mmol, or units"
+      ]
     },
     {
       "key": "per",
@@ -190,13 +196,12 @@
   },
   "tests": [],
   "completeness": {
-    "score": 76.9,
-    "checks_passed": 10,
+    "score": 84.6,
+    "checks_passed": 11,
     "checks_total": 13,
     "missing": [
       "notes",
-      "unit options on every field",
-      "field help text"
+      "unit options on every field"
     ]
   }
 }

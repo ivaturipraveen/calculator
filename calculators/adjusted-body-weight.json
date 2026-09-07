@@ -54,23 +54,8 @@
       "widget": "quantity",
       "required": true,
       "default": null,
-      "base_unit": "kg",
-      "units": [
-        {
-          "code": "kg",
-          "label": "kg",
-          "factor": 1,
-          "offset": 0.0,
-          "resolved": true
-        },
-        {
-          "code": "lbs",
-          "label": "lbs",
-          "factor": 0.45359237,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "units": null,
       "constraints": {
         "min": 22.0,
         "max": 182.0

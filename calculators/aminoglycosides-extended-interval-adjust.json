@@ -66,8 +66,41 @@
       "widget": "quantity",
       "required": true,
       "default": null,
-      "base_unit": "hrs after the start of infusion",
-      "units": null,
+      "base_unit": "hrs",
+      "units": [
+        {
+          "code": "days",
+          "label": "days",
+          "factor": 24.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "hrs",
+          "label": "hrs",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "minutes",
+          "label": "minutes",
+          "factor": 0.016666666666666666,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "seconds",
+          "label": "seconds",
+          "factor": 0.0002777777777777778,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
       "constraints": {
         "min": 6.0,
         "max": 15.0
@@ -81,7 +114,10 @@
       "label_source": "printed form",
       "help": [
         "Timing of Level must be between 6 and 15 hrs after the start of infusion."
-      ]
+      ],
+      "display_unit": "hrs",
+      "dimension": "time",
+      "units_source": "corpus unit registry"
     },
     {
       "key": "drug_conc",

@@ -175,6 +175,22 @@ CASES: list[tuple[str, dict, dict, str]] = [
       "units_output_final": "", "units_weight": "", "units_epoprostenol_conc": ""},
      {"output_iv_rate": 0.833},
      "reservoir volume / hours between changes"),
+
+    # Valganciclovir's dose chain, recovered once the doubled string literal
+    # that broke the brace balance was repaired. 150 cm / 45 kg / SCr 0.6 with
+    # the >=13y male coefficient: BSA 1.369, CrCl 175 capped to 150, so
+    # 7 x 1.369 x 150 = 1438 mg -- which the source caps at the licensed 900 mg
+    # maximum rather than refusing, as it had been doing.
+    ("valganciclovir",
+     {"id_gender": "MALE", "height": 150, "weight": 45, "sr_cr": 0.6,
+      "form": 2, "id_k_age_m": 0.7},
+     {"output_dose_mg": 900, "output_dose_ml": 18},
+     "caps at the 900 mg maximum instead of refusing above it"),
+    ("valganciclovir",
+     {"id_gender": "MALE", "height": 110, "weight": 20, "sr_cr": 0.8,
+      "form": 1, "id_k_age_m": 0.55},
+     {"output_dose_mg": 450},
+     "rounds to the available 450 mg tablet strength"),
 ]
 
 TOL = 0.02        # relative

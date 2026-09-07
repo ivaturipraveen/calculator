@@ -4,20 +4,9 @@ import { api } from "../api/client";
 import type { CalculatorSchema } from "../api/types";
 import { useCalculator } from "../hooks/useCalculator";
 import type { CalcState } from "../hooks/useCalculator";
-import { INFO_KINDS, SectionRenderer } from "../components/sections/SectionRenderer";
+import { INFO_KINDS, RESULT_KINDS, SectionRenderer } from "../components/sections/SectionRenderer";
 import { InfoPane } from "../components/InfoPane";
 import { formatValue } from "../lib/format";
-
-const RENDERER_LABEL: Record<string, string> = {
-  formula: "Formula",
-  score: "Score",
-  lms: "Growth chart",
-  convert: "Converter",
-  titration_table: "Infusion",
-  dose_table: "Dose table",
-  mmed: "Opioid equivalence",
-  tree: "Decision tree",
-};
 
 export function CalculatorPage() {
   // The URL carries the calculator's printed name, not its slug: a link a
@@ -81,7 +70,13 @@ function CalculatorView({ schema }: { schema: CalculatorSchema }) {
   // notes, its references, its disclaimer -- is the right, open, all of it, all
   // the time. Folded into `<details>` on the same column it was material nobody
   // opened, which for a disclaimer is the same as not carrying it.
-  const work = schema.sections.filter((s) => !INFO_KINDS.has(s.kind));
+  // What you enter, the button, what comes back -- in that order, the way the
+  // reference design has it. The answer used to sit above the button that
+  // produced it.
+  const work = schema.sections.filter(
+    (s) => !INFO_KINDS.has(s.kind) && !RESULT_KINDS.has(s.kind),
+  );
+  const answer = schema.sections.filter((s) => RESULT_KINDS.has(s.kind));
   const reference = schema.sections.filter((s) => INFO_KINDS.has(s.kind));
   const general = schema.help?.general ?? [];
   const headline =
@@ -100,17 +95,13 @@ function CalculatorView({ schema }: { schema: CalculatorSchema }) {
     <>
       <main className="detail-pane">
         <div className="detail-inner">
-          <div className="eyebrow-row">
-            {schema.category && <span className="eyebrow">{schema.category}</span>}
-            <span className="eyebrow eyebrow--type">
-              {RENDERER_LABEL[schema.renderer] ?? schema.renderer}
-            </span>
-            {calc.pending && (
+          {calc.pending && (
+            <div className="eyebrow-row">
               <span className="eyebrow eyebrow--live">
                 calculating <span className="spinner-dot" />
               </span>
-            )}
-          </div>
+            </div>
+          )}
 
           <h1>{schema.title}</h1>
           {schema.subtitle && <p className="subtitle">{schema.subtitle}</p>}
@@ -159,6 +150,12 @@ function CalculatorView({ schema }: { schema: CalculatorSchema }) {
             </div>
           )}
 
+          {calc.stale && (
+            <div className="stale-note" role="status">
+              The values have changed since this answer was worked out.
+            </div>
+          )}
+
           {work.map((s) => (
             <div id={s.id} key={s.id}>
               <SectionRenderer section={s} calc={calc} />
@@ -168,7 +165,7 @@ function CalculatorView({ schema }: { schema: CalculatorSchema }) {
           <div className="detail-actions">
             {schema.renderer !== "tree" && (
               <button
-                className="btn-calculate"
+                className={calc.stale ? "btn-calculate is-stale" : "btn-calculate"}
                 onClick={calc.calculate}
                 disabled={!calc.complete}
                 title={calc.complete ? undefined : "Fill in every required value first"}
@@ -181,6 +178,12 @@ function CalculatorView({ schema }: { schema: CalculatorSchema }) {
             </button>
             {headline && <CopyResult schema={schema} calc={calc} />}
           </div>
+
+          {answer.map((s) => (
+            <div id={s.id} key={s.id}>
+              <SectionRenderer section={s} calc={calc} />
+            </div>
+          ))}
 
           <ValuesUsed schema={schema} calc={calc} />
         </div>

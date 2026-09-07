@@ -781,6 +781,33 @@ STRING_CONST = re.compile(
 )
 
 
+# `note =\nnote + '\n\nnote + '\nDose rounded...'` -- the assignment's tail drawn
+# twice, the second copy landing INSIDE the string the first one opened.
+_DOUBLED_TAIL = re.compile(r"(?<![\w.$])(\w+)\s*\+\s*(['\"])\s*\1\s*\+\s*\2")
+
+
+def drop_doubled_string_tail(text: str) -> str:
+    """Repair a fragment the PDF drew twice inside a string literal.
+
+    Valganciclovir's oral-solution branch ends:
+
+        note =
+        note + '
+
+        note + '
+        Dose rounded to the nearest 10 mg increment...';
+
+    `note + '` appears twice. The quote count goes odd, so everything after it
+    parses as string content and the braces stop balancing -- which left the
+    calculator's dose output built from the wrong branch entirely, guarded by
+    the conditions of the other one, and answering 0 mg to a patient who should
+    have had 900. The doubled tail is never the program: an assignment does not
+    open two string literals in a row with nothing between them.
+    """
+    out = _DOUBLED_TAIL.sub(r"\1 + \2", text or "")
+    return out
+
+
 # `Dose(mcg) = Weight * Bolus Dose` -- the left of an assignment is never a
 # call in JavaScript, so this line is prose.
 _LHS_CALL = re.compile(r"(?<![\w.$])[A-Za-z_]\w*\s*\([^()]{0,60}\)\s*=(?!=)")

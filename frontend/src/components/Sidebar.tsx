@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { Chevron } from "./Chevron";
 import type { CalculatorSummary, CatalogMeta } from "../api/types";
 
 /**
@@ -71,7 +72,7 @@ export function Sidebar({
           aria-label="Show the calculator index"
           title="Show the calculator index"
         >
-          ▸
+          <Chevron dir="right" />
         </button>
       </div>
     );
@@ -88,7 +89,7 @@ export function Sidebar({
             aria-label="Hide the calculator index"
             title="Hide the calculator index"
           >
-            ◂
+            <Chevron dir="left" />
           </button>
         </div>
 
@@ -157,12 +158,16 @@ export function Sidebar({
                   }
                 >
                   <span className="calc-item__name">{c.title}</span>
-                  {c.limited ? (
-                    <span className="badge badge--limited" title="The source document did not carry everything this calculator needs">
+                  {/* Only the exception is marked. "Live" on all 179 rows is
+                      a badge that carries no information and 179 green dots to
+                      read past. */}
+                  {c.limited && (
+                    <span
+                      className="badge badge--limited"
+                      title="The source document did not carry everything this calculator needs"
+                    >
                       Limited
                     </span>
-                  ) : (
-                    <span className="badge badge--live">Live</span>
                   )}
                   <span className="chev" aria-hidden="true">
                     ›

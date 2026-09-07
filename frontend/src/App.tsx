@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import { api } from "./api/client";
 import { Sidebar } from "./components/Sidebar";
 import type { CalculatorSummary, CatalogMeta } from "./api/types";
@@ -76,13 +76,6 @@ export default function App() {
     <div className={collapsed ? "shell shell--index-closed" : "shell"}>
       <Topbar theme={theme} onTheme={setTheme} count={items?.length ?? null} />
 
-      <div className="disclaimer-banner">
-        <b>⚠ Not a medical device.</b> Every calculator here is extracted from its
-        source document and carries that document's own disclaimer. Check each
-        value and formula against your institution's approved references before
-        relying on it for patient care.
-      </div>
-
       {failed ? (
         <div className="app">
           <main className="detail-pane">
@@ -122,14 +115,8 @@ function Topbar({
   onTheme: (t: Theme) => void;
   count: number | null;
 }) {
-  const navigate = useNavigate();
-  const [draft, setDraft] = useState("");
-
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (draft.trim()) navigate(`/?q=${encodeURIComponent(draft.trim())}`);
-  };
-
+  // No search box here: the index down the left filters as you type, is always
+  // on screen, and is faster than a box that navigates away to a list.
   const cycle = () => onTheme(theme === "system" ? "light" : theme === "light" ? "dark" : "system");
 
   return (
@@ -143,19 +130,6 @@ function Topbar({
           <small>Clinical reference</small>
         </span>
       </Link>
-
-      <form className="topbar__search" onSubmit={submit} role="search">
-        <span className="search__icon" aria-hidden="true">
-          ⌕
-        </span>
-        <input
-          type="search"
-          value={draft}
-          placeholder={count ? `Search ${count} calculators…` : "Search calculators…"}
-          aria-label="Search calculators"
-          onChange={(e) => setDraft(e.target.value)}
-        />
-      </form>
 
       <div className="spacer" />
 

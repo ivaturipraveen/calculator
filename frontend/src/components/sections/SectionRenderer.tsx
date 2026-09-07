@@ -72,6 +72,16 @@ export function SectionRenderer({ section, calc }: { section: Section; calc: Cal
  * working. These go in the reference column, open, all of them: a disclaimer
  * folded behind a summary is a disclaimer nobody read.
  */
+/**
+ * The answer, which the reference design lays out as boxes of the same shape as
+ * the inputs -- so a form reads as one thing: what you enter, the button, what
+ * comes back.
+ */
+export const RESULT_KINDS = new Set<Section["kind"]>([
+  "results",
+  "score_result",
+]);
+
 export const INFO_KINDS = new Set<Section["kind"]>([
   "formula",
   "notes",

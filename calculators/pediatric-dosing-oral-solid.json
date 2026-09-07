@@ -127,7 +127,7 @@
         "decimals": 1,
         "kind": "number",
         "unit_source": "formula_prose",
-        "unit_rejected": "the units selected for Input",
+        "unit_rejected": "the units selected for Input Dose",
         "base_unit": null
       },
       {

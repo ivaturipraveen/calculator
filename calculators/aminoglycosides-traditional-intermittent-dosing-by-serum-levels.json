@@ -193,16 +193,8 @@
       "widget": "quantity",
       "required": true,
       "default": null,
-      "base_unit": "Suggested Dose (MD)",
-      "units": [
-        {
-          "code": "Suggested Dose (MD)",
-          "label": "Suggested Dose (MD)",
-          "factor": 1.0,
-          "offset": 0.0,
-          "resolved": true
-        }
-      ],
+      "base_unit": null,
+      "units": null,
       "constraints": {},
       "messages": null,
       "source": {
