@@ -916,25 +916,26 @@ h2.serif,
 
 .field-grid {
   display: grid;
-  /* Three columns at a desktop width, not four: a clinical form is read down
-     a column, and four narrow ones turn a weight and its unit into a squeeze. */
-  grid-template-columns: repeat(auto-fit, minmax(252px, 1fr));
-  gap: 18px 18px;
+  /* Wide enough that a value and its unit are never a squeeze. A clinical form
+     is read down a column, so the columns are few and roomy rather than many
+     and narrow. */
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+  gap: 20px 22px;
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 6px;
   min-width: 0;
 }
 
 /* The question on the left, what constrains it on the right, on one line. */
 .field__top {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 8px;
-  min-height: 20px;
+  min-height: 18px;
 }
 
 .field__label {
@@ -956,7 +957,7 @@ h2.serif,
 
 .field__aside {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   gap: 6px;
   margin-left: auto;
   flex: none;
@@ -1118,9 +1119,9 @@ h2.serif,
 
 .unit-select {
   flex: 0 0 auto;
-  width: auto;
-  min-width: 62px;
-  max-width: 120px;
+  width: 88px;
+  min-width: 88px;
+  max-width: 88px;
   padding: 0 22px 0 10px;
   background-color: var(--surface-sunken);
   background-position: calc(100% - 13px) 17px, calc(100% - 9px) 17px;
@@ -1135,7 +1136,7 @@ h2.serif,
   flex: none;
   display: grid;
   place-items: center;
-  min-width: 62px;
+  width: 88px;
   padding: 0 11px;
   background: var(--surface-sunken);
   font-size: var(--t-xs);
@@ -2349,4 +2350,44 @@ details.disclosure > summary:hover {
   font-size: var(--t-sm);
   line-height: 1.6;
   color: var(--ink-soft);
+}
+
+
+/* The action the source document tells the clinician to take. Every one of
+   them says "once all the inputs are entered, click the Calculate button", and
+   answering the instant the last box is filled skips the moment they look over
+   what they typed. After the first press the page stays live, so a titration
+   table follows the value being changed. */
+.btn-calculate {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 22px;
+  border: 1px solid var(--amber);
+  border-radius: var(--r-md);
+  background: var(--amber);
+  color: #fff;
+  font-family: var(--sans);
+  font-size: var(--t-md);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease;
+}
+
+.btn-calculate:hover:not(:disabled) {
+  background: var(--amber-deep);
+  border-color: var(--amber-deep);
+}
+
+.btn-calculate:disabled {
+  background: var(--surface-sunken);
+  border-color: var(--line);
+  color: var(--ink-faint);
+  cursor: default;
+}
+
+.detail-actions {
+  align-items: center;
+  gap: 10px;
+  margin: 2px 0 20px;
 }

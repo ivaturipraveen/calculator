@@ -166,6 +166,16 @@ function CalculatorView({ schema }: { schema: CalculatorSchema }) {
           ))}
 
           <div className="detail-actions">
+            {schema.renderer !== "tree" && (
+              <button
+                className="btn-calculate"
+                onClick={calc.calculate}
+                disabled={!calc.complete}
+                title={calc.complete ? undefined : "Fill in every required value first"}
+              >
+                {calc.submitted ? "Recalculate" : "Calculate"}
+              </button>
+            )}
             <button className="btn-reset" onClick={calc.reset}>
               ↺ Reset
             </button>

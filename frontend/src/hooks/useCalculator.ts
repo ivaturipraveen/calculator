@@ -14,6 +14,11 @@ export interface CalcState {
   pairReversed: boolean;
   result: CalculateResponse | null;
   pending: boolean;
+  /** Whether the clinician has asked for an answer yet. */
+  submitted: boolean;
+  /** True once every value the chosen path needs is present. */
+  complete: boolean;
+  calculate: () => void;
   errorsByField: Record<string, string>;
   setValue: (key: string, value: string) => void;
   setUnit: (key: string, code: string) => void;
@@ -75,6 +80,17 @@ export function useCalculator(schema: CalculatorSchema): CalcState {
   const [pairReversed, setPairReversed] = useState(false);
   const [result, setResult] = useState<CalculateResponse | null>(null);
   const [pending, setPending] = useState(false);
+  // Every source document says "once all the inputs are entered, click the
+  // Calculate button". Computing the moment the last box is filled skips the
+  // step where a clinician looks over what they typed -- so the first answer is
+  // asked for. After that the page stays live, because a titration table or a
+  // growth centile that does not follow the value you just changed is worse
+  // than useless.
+  // A decision tree has no form to fill in -- answering its questions IS the
+  // interaction -- so it must not sit waiting for a button before it will ask
+  // the first one.
+  const gated = schema.renderer !== "tree";
+  const [submitted, setSubmitted] = useState(!gated);
 
   useEffect(() => {
     setValues(initialValues);
@@ -85,7 +101,8 @@ export function useCalculator(schema: CalculatorSchema): CalcState {
     setPairValue("1");
     setPairReversed(false);
     setResult(null);
-  }, [initialValues, initialUnits]);
+    setSubmitted(!gated);
+  }, [initialValues, initialUnits, gated]);
 
   const abortRef = useRef<AbortController | null>(null);
 
@@ -140,6 +157,7 @@ export function useCalculator(schema: CalculatorSchema): CalcState {
       setResult(null);
       return;
     }
+    if (!submitted) return;
     const controller = new AbortController();
     abortRef.current?.abort();
     abortRef.current = controller;
@@ -178,7 +196,7 @@ export function useCalculator(schema: CalculatorSchema): CalcState {
       window.clearTimeout(timer);
       controller.abort();
     };
-  }, [request, complete, schema.slug, schema.renderer]);
+  }, [request, complete, submitted, schema.slug, schema.renderer]);
 
   const errorsByField = useMemo(() => {
     const out: Record<string, string> = {};
@@ -211,7 +229,10 @@ export function useCalculator(schema: CalculatorSchema): CalcState {
     setAnswers((prev) => [...prev, choice]);
   }, []);
 
+  const calculate = useCallback(() => setSubmitted(true), []);
+
   const reset = useCallback(() => {
+    setSubmitted(!gated);
     setValues(initialValues);
     setUnits(initialUnits);
     setSelections({});
@@ -219,10 +240,14 @@ export function useCalculator(schema: CalculatorSchema): CalcState {
     setPairValue("1");
     setPairReversed(false);
     setResult(null);
-  }, [initialValues, initialUnits]);
+    setSubmitted(!gated);
+  }, [initialValues, initialUnits, gated]);
 
   return {
     schema,
+    submitted,
+    complete,
+    calculate,
     values,
     units,
     selections,

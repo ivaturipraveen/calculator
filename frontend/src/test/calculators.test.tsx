@@ -40,6 +40,20 @@ async function typeInto(label: RegExp | string, text: string) {
   return input;
 }
 
+/**
+ * Ask for the answer.
+ *
+ * Every source document says "once all the inputs are entered, click the
+ * Calculate button", and the page follows it: the first result is asked for,
+ * not produced the instant the last box is filled. After that the page stays
+ * live, so a table follows the value being changed.
+ */
+async function pressCalculate() {
+  const btn = await screen.findByRole("button", { name: /^(re)?calculate$/i });
+  await waitFor(() => expect(btn).not.toBeDisabled(), { timeout: 5000 });
+  await userEvent.click(btn);
+}
+
 beforeAll(async () => {
   const res = await fetch(`${API}/api/health`).catch(() => null);
   if (!res?.ok) {
@@ -133,6 +147,7 @@ describe("formula calculator", () => {
     await typeInto(/^Weight/, "70");
     await typeInto(/Serum creatinine/i, "1");
     await userEvent.selectOptions(await screen.findByLabelText(/^Sex/), "0.85");
+    await pressCalculate();
 
     // 0.85 * ((140 - 70) / 1) * (70 / 72) = 57.85 mL/min
     await waitFor(() => expect(screen.getByText(/^58$|^57\.85$/)).toBeInTheDocument(), {
@@ -153,6 +168,7 @@ describe("formula calculator", () => {
     await typeInto(/^Weight/, "70");
     await typeInto(/Serum creatinine/i, "1");
     await userEvent.selectOptions(await screen.findByLabelText(/^Sex/), "0.85");
+    await pressCalculate();
 
     const alert = await screen.findByRole("alert", {}, { timeout: 8000 });
     expect(alert).toHaveTextContent(/at least 16/i);
@@ -172,6 +188,7 @@ describe("score calculator", () => {
       seen.add(name);
       await userEvent.click(radio);
     }
+    await pressCalculate();
 
     // Scope to the total, not any "8" on the page -- the band range says 6-8 too.
     await waitFor(
@@ -195,6 +212,7 @@ describe("growth chart", () => {
     await typeInto(/^Length/, "76");
     await typeInto(/^Weight/, "9.6");
     await typeInto(/Head circumference/i, "46");
+    await pressCalculate();
 
     // The lead result is the hero; the rest are rows. Either can hold it.
     const percentile = () =>
@@ -219,6 +237,7 @@ describe("infusion calculator", () => {
     await typeInto(/^Concentration/, "1000");
     await typeInto(/Drug amount/i, "250");
     await typeInto(/Infusate volume/i, "250");
+    await pressCalculate();
 
     // 5 mcg/kg/min x 70 kg = 21,000 mcg/hr / 1000 mcg/mL = 21 mL/hr
     await waitFor(() => expect(screen.getAllByText("21").length).toBeGreaterThan(0), {
@@ -241,6 +260,7 @@ describe("infusion calculator", () => {
     await typeInto(/^Concentration/, "1000");
     await typeInto(/Drug amount/i, "250");
     await typeInto(/Infusate volume/i, "250");
+    await pressCalculate();
 
     await waitFor(() => expect(screen.getAllByText("21").length).toBeGreaterThan(0), {
       timeout: 8000,
@@ -255,6 +275,7 @@ describe("unit converter", () => {
 
     await userEvent.selectOptions(await screen.findByLabelText(/^Conversion/), "0");
     await typeInto(/^Value/, "70");
+    await pressCalculate();
 
     await waitFor(() => expect(screen.getByText(/154\.32/)).toBeInTheDocument(), { timeout: 8000 });
   });
@@ -299,6 +320,7 @@ describe("reference data", () => {
     await typeInto(/^Age/, "15");
     await typeInto(/^Height/, "170");
     await typeInto(/^Weight/, "60");
+    await pressCalculate();
 
     // 60 / 1.70^2 = 20.76 kg/m2
     await waitFor(() => expect(document.querySelector(".hero__value")).toHaveTextContent(/20\.8|20\.76/), {
@@ -365,6 +387,7 @@ describe("page furniture", () => {
     await typeInto(/^Concentration/, "1000");
     await typeInto(/Drug amount/i, "250");
     await typeInto(/Infusate volume/i, "250");
+    await pressCalculate();
 
     const copy = await screen.findByRole("button", { name: /copy result/i }, { timeout: 8000 });
     await userEvent.click(copy);
@@ -406,6 +429,7 @@ describe("tables react to the inputs", () => {
     };
 
     await typeInto(/^Weight/, "20");
+    await pressCalculate();
     // Norepinephrine is 0.1-0.5 mcg/kg/min: 20 kg -> 2-10 mcg/min
     await waitFor(() => expect(doseFor(/Norepinephrine/i)).toMatch(/2–10 mcg/), {
       timeout: 8000,
@@ -427,6 +451,7 @@ describe("tables react to the inputs", () => {
     await typeInto(/^Height/, "170");
     await typeInto(/^Weight/, "60");
     await typeInto(/^Age/, "15");
+    await pressCalculate();
 
     const current = () => document.querySelector("tr.is-current")?.textContent ?? "";
     await waitFor(() => expect(current()).toMatch(/^181/), { timeout: 8000 });
@@ -451,6 +476,7 @@ describe("tables react to the inputs", () => {
     await typeInto(/Drug amount/i, "250");
     await typeInto(/Infusate volume/i, "250");
     await typeInto(/^Concentration/, "1000");
+    await pressCalculate();
 
     const rowFor = (dose: string) =>
       Array.from(document.querySelectorAll("tbody tr")).find(
@@ -562,6 +588,7 @@ describe("branches the extraction had lost", () => {
     await userEvent.selectOptions(await screen.findByLabelText(/hemodialysis/i), "No");
     await userEvent.selectOptions(await screen.findByLabelText(/chronic drinker/i), "No");
     await typeInto(/weight/i, "70");
+    await pressCalculate();
 
     // 70 kg x 0.78 mL/kg of a 98% solution.
     await screen.findByText(/^54\.6$/, {}, { timeout: 5000 });
@@ -582,6 +609,7 @@ describe("branches the extraction had lost", () => {
     await typeInto(/drug amount/i, "500");
     await typeInto(/infusate volume/i, "50");
     await userEvent.selectOptions(await screen.findByLabelText(/bolus option/i), "yes");
+    await pressCalculate();
 
     // 70 kg x 2 mcg/kg / 10 mcg/mL.
     await screen.findByText(/^14(\.0+)?$/, {}, { timeout: 5000 });
@@ -599,6 +627,7 @@ describe("a value the chosen path never uses is not demanded", () => {
     await typeInto(/drug amount/i, "500");
     await typeInto(/infusate volume/i, "50");
     await userEvent.selectOptions(await screen.findByLabelText(/bolus option/i), "No");
+    await pressCalculate();
 
     // 1 mcg/kg/min x 70 kg x 60 / 10 mcg/mL / 1000 -- the bolus box is empty.
     await screen.findByText(/^7(\.0+)?$/, {}, { timeout: 5000 });
@@ -618,6 +647,7 @@ describe("the answer can be checked against what produced it", () => {
     await typeInto(/p CO2/i, "40");
     await typeInto(/resp quot/i, "0.8");
     await typeInto(/p aO2/i, "90");
+    await pressCalculate();
 
     const summary = await screen.findByText(/values used/i, {}, { timeout: 5000 });
     await userEvent.click(summary);
@@ -694,6 +724,7 @@ describe("bugs the UI hit that the API alone did not", () => {
     await set("biparietal_diameter", "45");
     await set("head_circumference", "160");
     await set("us_time", "2026-01-10");
+    await pressCalculate();
 
     await waitFor(
       () => expect(document.querySelectorAll(".field__error").length).toBe(0),

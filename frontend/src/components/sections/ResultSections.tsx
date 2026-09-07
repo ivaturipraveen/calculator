@@ -405,7 +405,7 @@ function remainingText(calc: CalcState): string {
   const missing = calc.schema.fields.filter(
     (f) => (calc.values[f.key] ?? "") === "" && !hidden(f, calc),
   ).length;
-  if (missing === 0) return "calculating";
+  if (missing === 0) return calc.submitted ? "calculating" : "press Calculate";
   return `${missing} field${missing === 1 ? "" : "s"} to go`;
 }
 

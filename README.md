@@ -1,16 +1,35 @@
 # Calculator — clinical calculators
 
-178 clinical calculators extracted from their source PDFs, served by an API and
+179 clinical calculators extracted from their source PDFs, served by an API and
 rendered by a web app that has no per-calculator code in it.
 
 ```
-calculators/     178 JSON specs  ← the artefact the API serves
+calculators/     179 JSON specs  ← the artefact the API serves
 backend/         FastAPI: catalogue, field schema, validation, evaluation
 frontend/        React + TypeScript client
-backup/          extractor, source PDFs, mockup, reports — everything that
-                 PRODUCES the specs, kept out of the serving path
+backup/          extractor and reports — everything that PRODUCES the specs,
+                 kept out of the serving path (source PDFs are not published)
 run.py           starts the backend and the frontend together
 ```
+
+## Rebuilding from source
+
+The source corpus is **not in this repository**: the 186 PDFs under
+`backup/source-pdfs/` are Lexicomp / Wolters Kluwer / EBMcalc exports, and the
+HTML mockup is built from them. They are third-party commercial clinical
+content, so only the specs derived from them are published here.
+
+`calculators/` is the artefact and is complete on its own — the API, the app and
+every check run without the PDFs. You only need them to re-run the extractor:
+
+```bash
+backup/source-pdfs/                       # drop the 186 PDF exports here
+backup/inpharmd-clinical-calculators-mockup_15.html   # and the mockup here
+python3 run.py --build
+```
+
+Each spec records the file it came from in `provenance.pdf.source_file`, so a
+missing PDF is named rather than silently skipped.
 
 ## Run it
 
@@ -89,7 +108,7 @@ no arithmetic at all.
 A spec is a build artefact, not a row anyone edits. Its source of truth is the
 PDF plus the extractor, so a database would become a second place the clinical
 content could change without a rebuild — and no audit of the PDF would catch
-it. 178 specs are ~30 MB, every read is by slug or a whole-catalogue filter, and
+it. 179 specs are ~30 MB, every read is by slug or a whole-catalogue filter, and
 a "migration" is re-running `build_all.py`. Put them behind a database at the
 point they need per-tenant overrides or an edit history; the shape here is
 already the shape a row would take.
@@ -98,7 +117,7 @@ already the shape a row would take.
 
 | Command | What it proves |
 |---|---|
-| `backup/extractor/validate.py` | all 178 specs evaluate |
+| `backup/extractor/validate.py` | all 179 specs evaluate |
 | `backup/extractor/invariants.py` | no dead selector, no concatenated lookup ladder, no impossible bounds |
 | `backup/extractor/clinical_checks.py` | the numbers match published reference values |
 | `backup/extractor/verify_published.py` | `calculators/` matches the build, and every spec is complete |
