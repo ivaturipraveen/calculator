@@ -1,0 +1,166 @@
+{
+  "schema_version": "1.0",
+  "slug": "unit-conversions-volume",
+  "title": "Unit Conversions: Volume",
+  "subtitle": null,
+  "category": "Unit Conversion",
+  "renderer": "convert",
+  "engine": "convert",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "from",
+      "label": "FROM:",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "to",
+      "label": "TO:",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "set_maximal_display_precision_in_decimal_points_1",
+      "label": "Set maximal display precision in decimal points: 1",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "convert",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": null,
+  "tables": {
+    "pairs": [
+      {
+        "from": "gallon",
+        "to": "L",
+        "factor": 3.785412
+      },
+      {
+        "from": "quart",
+        "to": "L",
+        "factor": 0.9463529
+      },
+      {
+        "from": "cup",
+        "to": "L",
+        "factor": 0.236588236
+      },
+      {
+        "from": "fl oz",
+        "to": "L",
+        "factor": 0.02957353
+      },
+      {
+        "from": "tablespoon",
+        "to": "L",
+        "factor": 0.0147867648
+      },
+      {
+        "from": "teaspoon",
+        "to": "L",
+        "factor": 0.0049289217
+      },
+      {
+        "from": "mL",
+        "to": "L",
+        "factor": 0.001
+      }
+    ]
+  },
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": null,
+    "notes": [
+      "To make simple unit conversions, select the starting units with the pull-down selector on the right. Then type a starting value in the top FROM input box. To convert the value, choose the new unit in the lower right selector. The converted value will appear immediately in the TO box.",
+      "Helpful Tips Conversion factors fluid ounce (US)",
+      "X 2.957352956e-2 = litre (1964) gallon (US, liquid) X 3.785411784 = litre (1964) microlitre X 1e-6 = litre (1964) millilitre X 1e-3 = litre (1964) pint (US, liquid)",
+      "X 4.731764730e-1 = litre (1964) quart (US, liquid) X 9.463529460e-1 = litre (1964) tablespoon (US)",
+      "X 1.478677e-2 = litre (1964) teaspoon (US)",
+      "X 4.928922e-3 = litre (1964)"
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer. and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Unit Conversions- Volume.pdf",
+      "source_sha256": "6d501470d6baa14429b58a30f99ad57b0885bda5414a9fde17bef077d7350e25",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Unit Conversions: Volume",
+        "form_name": "Volume",
+        "filename_title": "Unit Conversions- Volume",
+        "confidence": 0.97,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Unit Conversions: Volume')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (unitconversionsvolume)",
+          "title_vs_form": "PARTIAL (unitconversionsvolume ~ volume)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf171",
+      "title": "Unit Conversions: Volume",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "inputs_from_printed_form_only",
+        "severity": "medium",
+        "detail": "3 field(s) recovered from the printed form; the calculation itself is not in the PDF"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 6,
+    "checks_total": 6,
+    "missing": []
+  }
+}

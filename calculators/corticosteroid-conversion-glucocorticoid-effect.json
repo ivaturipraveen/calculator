@@ -1,0 +1,280 @@
+{
+  "schema_version": "1.0",
+  "slug": "corticosteroid-conversion-glucocorticoid-effect",
+  "title": "Corticosteroid Conversion (Glucocorticoid Effect)",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "convert",
+  "engine": "convert",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "from",
+      "label": "FROM:",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "to",
+      "label": "TO:",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "set_maximal_display_precision_in_decimal_points_1",
+      "label": "Set maximal display precision in decimal points: 1",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "convert",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": null,
+  "tables": {
+    "pairs": [
+      {
+        "from": "Cortisone (mg)",
+        "to": "Hydrocortisone (mg)",
+        "factor": 0.8
+      },
+      {
+        "from": "Cortisone (mg)",
+        "to": "PredniSONE (mg)",
+        "factor": 0.2
+      },
+      {
+        "from": "Cortisone (mg)",
+        "to": "PrednisoLONE (mg)",
+        "factor": 0.2
+      },
+      {
+        "from": "Cortisone (mg)",
+        "to": "MethylPREDNISolone (mg)",
+        "factor": 0.16
+      },
+      {
+        "from": "Cortisone (mg)",
+        "to": "Triamcinolone (mg)",
+        "factor": 0.16
+      },
+      {
+        "from": "Cortisone (mg)",
+        "to": "Dexamethasone (mg)",
+        "factor": 0.03
+      },
+      {
+        "from": "Cortisone (mg)",
+        "to": "Betamethasone (mg)",
+        "factor": 0.024
+      },
+      {
+        "from": "Hydrocortisone (mg)",
+        "to": "PredniSONE (mg)",
+        "factor": 0.25
+      },
+      {
+        "from": "Hydrocortisone (mg)",
+        "to": "PrednisoLONE (mg)",
+        "factor": 0.25
+      },
+      {
+        "from": "Hydrocortisone (mg)",
+        "to": "MethylPREDNISolone (mg)",
+        "factor": 0.2
+      },
+      {
+        "from": "Hydrocortisone (mg)",
+        "to": "Triamcinolone (mg)",
+        "factor": 0.2
+      },
+      {
+        "from": "Hydrocortisone (mg)",
+        "to": "Dexamethasone (mg)",
+        "factor": 0.0375
+      },
+      {
+        "from": "Hydrocortisone (mg)",
+        "to": "Betamethasone (mg)",
+        "factor": 0.03
+      },
+      {
+        "from": "PredniSONE (mg)",
+        "to": "PrednisoLONE (mg)",
+        "factor": 1
+      },
+      {
+        "from": "PredniSONE (mg)",
+        "to": "MethylPREDNISolone (mg)",
+        "factor": 0.8
+      },
+      {
+        "from": "PredniSONE (mg)",
+        "to": "Triamcinolone (mg)",
+        "factor": 0.8
+      },
+      {
+        "from": "PredniSONE (mg)",
+        "to": "Dexamethasone (mg)",
+        "factor": 0.15
+      },
+      {
+        "from": "PredniSONE (mg)",
+        "to": "Betamethasone (mg)",
+        "factor": 0.12
+      },
+      {
+        "from": "PrednisoLONE (mg)",
+        "to": "MethylPREDNISolone (mg)",
+        "factor": 0.8
+      },
+      {
+        "from": "PrednisoLONE (mg)",
+        "to": "Triamcinolone (mg)",
+        "factor": 0.8
+      },
+      {
+        "from": "PrednisoLONE (mg)",
+        "to": "Dexamethasone (mg)",
+        "factor": 0.15
+      },
+      {
+        "from": "PrednisoLONE (mg)",
+        "to": "Betamethasone (mg)",
+        "factor": 0.12
+      },
+      {
+        "from": "MethylPREDNISolone (mg)",
+        "to": "Triamcinolone (mg)",
+        "factor": 1
+      },
+      {
+        "from": "MethylPREDNISolone (mg)",
+        "to": "Dexamethasone (mg)",
+        "factor": 0.1875
+      },
+      {
+        "from": "MethylPREDNISolone (mg)",
+        "to": "Betamethasone (mg)",
+        "factor": 0.15
+      },
+      {
+        "from": "Triamcinolone (mg)",
+        "to": "Dexamethasone (mg)",
+        "factor": 0.1875
+      },
+      {
+        "from": "Triamcinolone (mg)",
+        "to": "Betamethasone (mg)",
+        "factor": 0.15
+      },
+      {
+        "from": "Dexamethasone (mg)",
+        "to": "Betamethasone (mg)",
+        "factor": 0.7999999999999999
+      }
+    ]
+  },
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": null,
+    "notes": [
+      "To make simple dose conversions, select the starting medication with the pull-down selector on the right. Then type a starting dose in the top FROM input box. To convert the dose, choose the new medication in the lower right selector. The converted dose will appear immediately in the TO box.",
+      "This calculator offers approximate equipotent dose conversions based on published medical literature.",
+      "There is no exact agreement on conversion standards for dose equivalents, so titration to clinical response is essential when converting patient medications.",
+      "Equivalent dosing for oral/IV administration; relative potency for other routes of administration may vary considerably."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Liu D, Ahmet A, Ward L, et al. A practical guide to the monitoring and management of the complications of systemic corticosteroid therapy. Allergy Asthma Clin Immunol. 2013 Aug 15;9(1):30.[PubMed 23947590]",
+        "pubmed_id": "23947590",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/23947590/"
+      },
+      {
+        "text": "Schimmer BP, Funder J. ACTH, Adrenal Steroids, and the Adrenal Cortex. In: Brunton LL, Hilal- Dandan R, Knollmann BC, eds. Goodman & Gilman's: The Pharmacological Basis of Therapeutics. 13th ed. New York, NY: McGraw-Hill Education; 2017.",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 257117 v19.2]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Corticosteroid Conversion (Glucocorticoid Effect).pdf",
+      "source_sha256": "7f3f4e556aca4ec1e31b8d319a74e672aeb5472987ee2f8bd9d588ed157ca2a3",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Corticosteroid Conversion (Glucocorticoid Effect)",
+        "form_name": "CortGluco",
+        "filename_title": "Corticosteroid Conversion (Glucocorticoid Effect)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Corticosteroid Conversion (Glucocorticoid Effect)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (corticosteroidconversionglucocorticoideffect)",
+          "title_vs_form": "differs (corticosteroidconversionglucocorticoideffect vs cortgluco) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf60",
+      "title": "Corticosteroid Conversion (Glucocorticoid Effect)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "inputs_from_printed_form_only",
+        "severity": "medium",
+        "detail": "3 field(s) recovered from the printed form; the calculation itself is not in the PDF"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 7,
+    "checks_total": 7,
+    "missing": []
+  }
+}

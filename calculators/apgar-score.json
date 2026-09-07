@@ -1,0 +1,253 @@
+{
+  "schema_version": "1.0",
+  "slug": "apgar-score",
+  "title": "Apgar Score",
+  "subtitle": null,
+  "category": "Obstetrics / Scoring System",
+  "renderer": "score",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [],
+  "compute": {
+    "engine": "score",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": {
+    "groups": [
+      {
+        "key": "strength and regularity of heart rate",
+        "label": "Strength and regularity of heart rate",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_0_0",
+            "label": "100 beats/minute or more",
+            "points": 2
+          },
+          {
+            "key": "opt_0_1",
+            "label": "Less than 100",
+            "points": 1
+          },
+          {
+            "key": "opt_0_2",
+            "label": "None",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "key": "lung maturity",
+        "label": "Lung maturity",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_1_0",
+            "label": "Regular breathing",
+            "points": 2
+          },
+          {
+            "key": "opt_1_1",
+            "label": "Irregular",
+            "points": 1
+          },
+          {
+            "key": "opt_1_2",
+            "label": "None",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "key": "muscle tone and movement",
+        "label": "Muscle tone and movement",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_2_0",
+            "label": "Active",
+            "points": 2
+          },
+          {
+            "key": "opt_2_1",
+            "label": "Moderate",
+            "points": 1
+          },
+          {
+            "key": "opt_2_2",
+            "label": "Limp",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "key": "skin color  oxygenation",
+        "label": "Skin color / oxygenation",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_3_0",
+            "label": "Pink",
+            "points": 2
+          },
+          {
+            "key": "opt_3_1",
+            "label": "Bluish extremities",
+            "points": 1
+          },
+          {
+            "key": "opt_3_2",
+            "label": "Totally blue",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "key": "reflex response to irritable stimuli",
+        "label": "Reflex response to irritable stimuli",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_4_0",
+            "label": "Crying",
+            "points": 2
+          },
+          {
+            "key": "opt_4_1",
+            "label": "Whimpering",
+            "points": 1
+          },
+          {
+            "key": "opt_4_2",
+            "label": "Silence",
+            "points": 0
+          }
+        ]
+      }
+    ],
+    "bands": [
+      {
+        "min": 7,
+        "max": 10,
+        "label": "Normal",
+        "raw": "7 to 10 Points: Normal"
+      },
+      {
+        "min": 0,
+        "max": 6,
+        "label": "Distress",
+        "raw": "0 to 6 Points: Distress"
+      }
+    ],
+    "total": {
+      "key": "total_score",
+      "label": "Total Criteria Point Count",
+      "unit": "points",
+      "min": 0.0,
+      "max": 10.0
+    },
+    "interpretation": {
+      "key": "interpretation",
+      "label": "Apgar Score",
+      "printed_rows": [
+        "Apgar Score"
+      ]
+    }
+  },
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Apgar V. A proposal of a New Method of Evaluation of the Newborn Infant. Current Researches in Anesthesia and Analgesia. 1953, 32: 260-267.[PubMed 13083014]",
+        "pubmed_id": "13083014",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/13083014/"
+      },
+      {
+        "text": "Apgar V, Holaday DA, James LS, et al. Evaluation of the newborn infant. JAMA. 1958, 168: 1985- 1988. [PubMed 13598635]",
+        "pubmed_id": "13598635",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/13598635/"
+      },
+      {
+        "text": "Casey BM, McIntire DD, Leveno KJ. The continuing value of the Apgar score for the assessment of newborn infants. N Engl J Med. 2001 Feb 15;344(7):467-71. [PubMed 11172187]",
+        "pubmed_id": "11172187",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11172187/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Apgar Score.pdf",
+      "source_sha256": "424fe31c74b5d1919c3ddfe3785de4d01eda1974c616ef7a92b1572ff80539f9",
+      "extractor": "pdf",
+      "form_name": "ApgarScore",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Apgar Score",
+        "form_name": "ApgarScore",
+        "filename_title": "Apgar Score",
+        "confidence": 1.0,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Apgar Score')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (apgarscore)",
+          "title_vs_form": "MATCH (apgarscore)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf27",
+      "title": "Apgar Score",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "reclassified_as_score",
+        "severity": "low",
+        "detail": "engine reported ebmcalc but no outputs; parsed 5 criterion groups"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 9,
+    "checks_total": 9,
+    "missing": []
+  }
+}

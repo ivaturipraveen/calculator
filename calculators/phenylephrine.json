@@ -1,0 +1,251 @@
+{
+  "schema_version": "1.0",
+  "slug": "phenylephrine",
+  "title": "Phenylephrine",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "titration_table",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "drug_amount",
+      "label": "Drug Amount",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg",
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "drugAmount",
+        "id_const": "ID_AMOUNT"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose"
+    },
+    {
+      "key": "dose",
+      "label": "Dose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mcg/min",
+      "units": null,
+      "constraints": {
+        "min": 1.0,
+        "max": 360.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "dose",
+        "id_const": "ID_DOSE"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Dose must be between 1 and 360."
+      ]
+    },
+    {
+      "key": "infusate_volume",
+      "label": "Infusate Volume",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "Infuse Rate",
+      "units": [
+        {
+          "code": "Infuse Rate",
+          "label": "Infuse Rate",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "infusateVolume",
+        "id_const": "ID_VOLUME"
+      },
+      "dimension": null,
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "concentration",
+        "expr": "drug_amount / infusate_volume"
+      },
+      {
+        "key": "rate",
+        "expr": "dose / concentration * 60 / 1000"
+      },
+      {
+        "key": "rate_v2",
+        "expr": "round(rate, 1)"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "infuse_rate",
+        "label": "Infuse Rate",
+        "expr": "rate_v2",
+        "decimals": null,
+        "base_unit": "mL/hr",
+        "kind": "number",
+        "label_source": "printed form",
+        "unit_source": "formula_prose"
+      }
+    ],
+    "row_variable": "dose"
+  },
+  "scoring": null,
+  "tables": {
+    "dose_ladder": {
+      "name": "TABLE_VALUES_COL_1",
+      "values": [
+        1.0,
+        10.0,
+        20.0,
+        30.0,
+        40.0,
+        50.0,
+        60.0,
+        70.0,
+        80.0,
+        90.0,
+        100.0,
+        110.0,
+        120.0,
+        130.0,
+        140.0,
+        150.0,
+        160.0,
+        170.0,
+        180.0,
+        190.0,
+        200.0,
+        210.0,
+        220.0,
+        230.0,
+        240.0,
+        250.0,
+        260.0,
+        270.0,
+        280.0,
+        290.0,
+        300.0,
+        310.0,
+        320.0,
+        330.0,
+        340.0,
+        350.0,
+        360.0
+      ],
+      "count": 37,
+      "step": null,
+      "truncated_in_pdf": true
+    }
+  },
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": "Infuse Rate:\nInfuse Rate = [(Dose * 60) / 1000] / (Drug Amount / Infusate Volume)\n• Infuse Rate is calculated in mL/hr\n• Dose is input in mcg/min\n• Drug Amount is input in mg\n• Infusate Volume is input in mL",
+    "notes": [],
+    "conditional_notes": [
+      "Usual\ndosage range for a 70 kg adult is 35 to 140 mcg/minute based on AHA guidelines for CPR and emergency cardiovascular care."
+    ],
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again.",
+    "stated_limits": [
+      {
+        "name": "Dose (usual range)",
+        "applies_to": null,
+        "min": 100.0,
+        "unit": "mcg/min",
+        "max": 180.0
+      },
+      {
+        "name": "Concentration",
+        "applies_to": "concentration",
+        "min": 0.02,
+        "unit": "mg/mL",
+        "max": 2.0
+      }
+    ],
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 1
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Phenylephrine.pdf",
+      "source_sha256": "e5b5c88fbf1ebdebb3551017057c00fe5391a43a944777896f5e5ae6b81926e7",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Phenylephrine",
+        "form_name": null,
+        "filename_title": "Phenylephrine",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Phenylephrine')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (phenylephrine)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf137",
+      "title": "Phenylephrine",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "dose_ladder_truncated",
+        "severity": "high",
+        "detail": "the printed dose array is cut off after 37 values (last 360.0, step None); confirm the full ladder before publishing"
+      },
+      {
+        "kind": "dead_steps_pruned",
+        "severity": "low",
+        "detail": "unreachable and unused: ['value']"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 84.6,
+    "checks_passed": 11,
+    "checks_total": 13,
+    "missing": [
+      "notes",
+      "unit options on every field"
+    ]
+  }
+}

@@ -1,0 +1,278 @@
+{
+  "schema_version": "1.0",
+  "slug": "bivalirudin",
+  "title": "Bivalirudin",
+  "subtitle": null,
+  "category": "Cardiology / Dosing Calculator",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "bolus_dose",
+      "label": "Bolus Dose",
+      "widget": "quantity",
+      "required": false,
+      "default": null,
+      "base_unit": "mg/kg",
+      "units": null,
+      "constraints": {
+        "min": 0.1,
+        "max": 1.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "bolusDose",
+        "id_const": "ID_BOLUS_DOSE"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Bolus\nDose must be at most 1."
+      ],
+      "required_when": {
+        "field": "use_bolus",
+        "equals": [
+          "Yes"
+        ]
+      }
+    },
+    {
+      "key": "infusion_dose",
+      "label": "Infusion Dose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/kg/hr",
+      "units": null,
+      "constraints": {
+        "min": 0.05,
+        "max": 3.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "infusionDose",
+        "id_const": "ID_INFUSION_DOSE"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Infusion Dose must be between 0.05 and 3."
+      ]
+    },
+    {
+      "key": "weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "constraints": {
+        "min": 43.0,
+        "max": 400.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "weight",
+        "id_const": "ID_WEIGHT"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Weight must be between 43 and 400."
+      ],
+      "display_unit": "kg",
+      "dimension": "mass",
+      "units_source": "corpus unit registry"
+    },
+    {
+      "key": "use_bolus",
+      "label": "Use Bolus",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "useBolus",
+        "id_const": "ID_USE_BOLUS"
+      },
+      "options": [
+        {
+          "label": "No",
+          "value": "No"
+        },
+        {
+          "label": "Yes",
+          "value": "Yes"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "infusion_conc",
+      "label": "Infusion Concentration",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/mL",
+      "units": null,
+      "constraints": {
+        "min": 0.05,
+        "max": 3.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "infusionConc",
+        "id_const": "ID_INFUSION_CONC"
+      },
+      "label_source": "printed form (word match)",
+      "unit_source": "formula_prose",
+      "options_incomplete": true,
+      "options_known_value": "0_5"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "infusion_mg",
+        "expr": "weight * infusion_dose"
+      },
+      {
+        "key": "infusion_ml",
+        "expr": "infusion_mg / infusion_conc"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "bolus_dose_output_mg",
+        "label": "Bolus Dose (mg)",
+        "expr": "((weight * bolus_dose)) if ((use_bolus == 'Yes')) else (0)",
+        "decimals": 1,
+        "base_unit": "mg",
+        "kind": "text",
+        "unit_source": "formula_prose"
+      },
+      {
+        "key": "bolus_dose_output_ml",
+        "label": "Bolus Dose (mL)",
+        "expr": "(((weight * bolus_dose) / 5)) if ((use_bolus == 'Yes')) else (0)",
+        "decimals": 1,
+        "base_unit": "mL",
+        "kind": "text",
+        "unit_source": "formula_prose"
+      },
+      {
+        "key": "infusion_output_mg",
+        "label": "Infusion (mg)",
+        "expr": "infusion_mg",
+        "decimals": 1,
+        "base_unit": null,
+        "kind": "number"
+      },
+      {
+        "key": "infusion_output_ml",
+        "label": "Infusion (mL)",
+        "expr": "infusion_ml",
+        "decimals": 1,
+        "base_unit": null,
+        "kind": "number"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Bolus Dose:\nWhen Bolus Dose is \"yes\":\nWhen Bolus Dose is \"yes\":\nBolus Dose (mg) = Weight * Bolus Dose\n• Bolus Dose (mg) is calculated in mg\n• Weight is input in kg\n• Bolus Dose is input in mg/kg\nBolus Dose (mL) = (Weight * Bolus Dose) / Infusion Concentration\n• Bolus Dose (mL) is calculated in mL\n• Weight is input in kg\n• Bolus Dose is input in mg/kg\n• Infusion Concentration is input in mg/mL\nInfusion Dose:\nInfusion Dose (mg/hr) = Weight * Infusion Dose\n• Infusion Dose (mg/hr) is calculated in mg/hr\n• Weight is input in kg\n• Infusion Dose is input in mg/kg/hr\nInfusion Dose (mL/hr) = (Weight * Infusion Dose) / Infusion Concentration\n• Infusion Dose (mL/hr) is calculated in mL/hr\n• Weight is input in kg\n• Infusion Dose is input in mg/kg/hr\n• Infusion Concentration is input in mg/mL",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 3
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Bivalirudin.pdf",
+      "source_sha256": "8c40ca9acf24b43fdb4559463cf4c67f6b6b5e87828bcfcf183467c04b7bc0d2",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Bivalirudin",
+        "form_name": null,
+        "filename_title": "Bivalirudin",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Bivalirudin')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (bivalirudin)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf31",
+      "title": "Bivalirudin",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 76.9,
+    "checks_passed": 10,
+    "checks_total": 13,
+    "missing": [
+      "notes",
+      "unit options on every field",
+      "complete option lists"
+    ]
+  }
+}

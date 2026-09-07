@@ -1,0 +1,750 @@
+{
+  "schema_version": "1.0",
+  "slug": "cdc-weight-for-height-boys-77-121-cm",
+  "title": "CDC Weight for Height (Boys; 77 - 121 cm)",
+  "subtitle": null,
+  "category": "Pediatrics / Growth Chart",
+  "renderer": "lms",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "height",
+      "js_name": "Height",
+      "label": "Height",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "cm",
+      "display_unit": "cm",
+      "units": [
+        {
+          "code": "cm",
+          "label": "cm",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 77.0,
+        "max": 121.99
+      },
+      "messages": {
+        "min": "The minimum value for Height is 77 cm."
+      },
+      "dimension": "length",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Height is 77 cm. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Height is 121.99 cm. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "weight",
+      "js_name": "Weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "display_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 5.0,
+        "max": 200.0
+      },
+      "messages": {
+        "min": "The minimum value for Weight is 5 kg.",
+        "max": "The maximum value for Weight is 200 kg."
+      },
+      "dimension": "mass",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Weight is 5 kg. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Weight is 200 kg. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    }
+  ],
+  "compute": {
+    "engine": "lookup+expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "z_score",
+        "js_name": "Z_Score",
+        "label": "Z Score",
+        "expr": "(pow((weight / M), L) - 1) / (L * S)",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "percentile",
+        "js_name": "Percentile",
+        "label": "Percentile",
+        "expr": "z_to_percentile(z_score)",
+        "units": null,
+        "label_source": "printed form",
+        "unit_rejected": "Percentile < 5:",
+        "base_unit": null
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": {
+    "lookups": [
+      {
+        "key": "Height",
+        "operator": "<",
+        "columns": [
+          "L",
+          "M",
+          "S"
+        ],
+        "row_count": 45,
+        "rows": [
+          {
+            "threshold": 78.0,
+            "L": -0.979897716,
+            "M": 10.38901871,
+            "S": 0.076995353
+          },
+          {
+            "threshold": 79.0,
+            "L": -0.943555181,
+            "M": 10.61724901,
+            "S": 0.076769511
+          },
+          {
+            "threshold": 80.0,
+            "L": -0.91080778,
+            "M": 10.84432907,
+            "S": 0.076564374
+          },
+          {
+            "threshold": 81.0,
+            "L": -0.882026316,
+            "M": 11.07048885,
+            "S": 0.076380766
+          },
+          {
+            "threshold": 82.0,
+            "L": -0.857561667,
+            "M": 11.29597453,
+            "S": 0.076219662
+          },
+          {
+            "threshold": 83.0,
+            "L": -0.837750377,
+            "M": 11.52104655,
+            "S": 0.07608215
+          },
+          {
+            "threshold": 84.0,
+            "L": -0.822919198,
+            "M": 11.74597768,
+            "S": 0.075969382
+          },
+          {
+            "threshold": 85.0,
+            "L": -0.813388595,
+            "M": 11.97105103,
+            "S": 0.075882537
+          },
+          {
+            "threshold": 86.0,
+            "L": -0.809475279,
+            "M": 12.19655799,
+            "S": 0.075822785
+          },
+          {
+            "threshold": 87.0,
+            "L": -0.811493792,
+            "M": 12.4227963,
+            "S": 0.075791244
+          },
+          {
+            "threshold": 88.0,
+            "L": -0.8197572,
+            "M": 12.65006791,
+            "S": 0.075788944
+          },
+          {
+            "threshold": 89.0,
+            "L": -0.834576932,
+            "M": 12.87867701,
+            "S": 0.07581679
+          },
+          {
+            "threshold": 90.0,
+            "L": -0.856261805,
+            "M": 13.10892794,
+            "S": 0.075875517
+          },
+          {
+            "threshold": 91.0,
+            "L": -0.885116299,
+            "M": 13.34112314,
+            "S": 0.075965652
+          },
+          {
+            "threshold": 92.0,
+            "L": -0.921432943,
+            "M": 13.5755615,
+            "S": 0.076087468
+          },
+          {
+            "threshold": 93.0,
+            "L": -0.965501267,
+            "M": 13.81253552,
+            "S": 0.076240931
+          },
+          {
+            "threshold": 94.0,
+            "L": -1.017588552,
+            "M": 14.05233041,
+            "S": 0.076425662
+          },
+          {
+            "threshold": 95.0,
+            "L": -1.077941994,
+            "M": 14.29522185,
+            "S": 0.07664088
+          },
+          {
+            "threshold": 96.0,
+            "L": -1.146773671,
+            "M": 14.54147499,
+            "S": 0.076885365
+          },
+          {
+            "threshold": 97.0,
+            "L": -1.224269596,
+            "M": 14.79134177,
+            "S": 0.07715739
+          },
+          {
+            "threshold": 98.0,
+            "L": -1.310558831,
+            "M": 15.04506152,
+            "S": 0.077454707
+          },
+          {
+            "threshold": 99.0,
+            "L": -1.405713355,
+            "M": 15.30285949,
+            "S": 0.077774507
+          },
+          {
+            "threshold": 100.0,
+            "L": -1.509717075,
+            "M": 15.56494815,
+            "S": 0.078113436
+          },
+          {
+            "threshold": 101.0,
+            "L": -1.622491233,
+            "M": 15.83152429,
+            "S": 0.078467542
+          },
+          {
+            "threshold": 102.0,
+            "L": -1.743825743,
+            "M": 16.10277448,
+            "S": 0.078832409
+          },
+          {
+            "threshold": 103.0,
+            "L": -1.873365511,
+            "M": 16.37887678,
+            "S": 0.079203258
+          },
+          {
+            "threshold": 104.0,
+            "L": -2.010641647,
+            "M": 16.65999867,
+            "S": 0.079574978
+          },
+          {
+            "threshold": 105.0,
+            "L": -2.154957918,
+            "M": 16.94630912,
+            "S": 0.079942558
+          },
+          {
+            "threshold": 106.0,
+            "L": -2.305458316,
+            "M": 17.23797444,
+            "S": 0.08030117
+          },
+          {
+            "threshold": 107.0,
+            "L": -2.461019713,
+            "M": 17.53517134,
+            "S": 0.080646757
+          },
+          {
+            "threshold": 108.0,
+            "L": -2.62033059,
+            "M": 17.83808212,
+            "S": 0.080976208
+          },
+          {
+            "threshold": 109.0,
+            "L": -2.781787762,
+            "M": 18.14690821,
+            "S": 0.0812881
+          },
+          {
+            "threshold": 110.0,
+            "L": -2.943638944,
+            "M": 18.46185811,
+            "S": 0.081582687
+          },
+          {
+            "threshold": 111.0,
+            "L": -3.103888502,
+            "M": 18.78315936,
+            "S": 0.081862656
+          },
+          {
+            "threshold": 112.0,
+            "L": -3.260482798,
+            "M": 19.11103983,
+            "S": 0.082132791
+          },
+          {
+            "threshold": 113.0,
+            "L": -3.411305599,
+            "M": 19.44572803,
+            "S": 0.082400213
+          },
+          {
+            "threshold": 114.0,
+            "L": -3.554288672,
+            "M": 19.78744004,
+            "S": 0.082674023
+          },
+          {
+            "threshold": 115.0,
+            "L": -3.687600863,
+            "M": 20.13635563,
+            "S": 0.082964333
+          },
+          {
+            "threshold": 116.0,
+            "L": -3.809599339,
+            "M": 20.49262111,
+            "S": 0.083282267
+          },
+          {
+            "threshold": 117.0,
+            "L": -3.919005213,
+            "M": 20.85632542,
+            "S": 0.083638758
+          },
+          {
+            "threshold": 118.0,
+            "L": -4.014882272,
+            "M": 21.2274989,
+            "S": 0.084044246
+          },
+          {
+            "threshold": 119.0,
+            "L": -4.096683061,
+            "M": 21.60610366,
+            "S": 0.084508001
+          },
+          {
+            "threshold": 120.0,
+            "L": -4.164160421,
+            "M": 21.9920407,
+            "S": 0.085038256
+          },
+          {
+            "threshold": 121.0,
+            "L": -4.217425718,
+            "M": 22.3851382,
+            "S": 0.085641503
+          },
+          {
+            "threshold": 122.0,
+            "L": -4.256802224,
+            "M": 22.78516628,
+            "S": 0.086323118
+          }
+        ],
+        "fallback": null,
+        "suffix": null
+      }
+    ],
+    "lookup": {
+      "key": "Height",
+      "operator": "<",
+      "columns": [
+        "L",
+        "M",
+        "S"
+      ],
+      "row_count": 45,
+      "rows": [
+        {
+          "threshold": 78.0,
+          "L": -0.979897716,
+          "M": 10.38901871,
+          "S": 0.076995353
+        },
+        {
+          "threshold": 79.0,
+          "L": -0.943555181,
+          "M": 10.61724901,
+          "S": 0.076769511
+        },
+        {
+          "threshold": 80.0,
+          "L": -0.91080778,
+          "M": 10.84432907,
+          "S": 0.076564374
+        },
+        {
+          "threshold": 81.0,
+          "L": -0.882026316,
+          "M": 11.07048885,
+          "S": 0.076380766
+        },
+        {
+          "threshold": 82.0,
+          "L": -0.857561667,
+          "M": 11.29597453,
+          "S": 0.076219662
+        },
+        {
+          "threshold": 83.0,
+          "L": -0.837750377,
+          "M": 11.52104655,
+          "S": 0.07608215
+        },
+        {
+          "threshold": 84.0,
+          "L": -0.822919198,
+          "M": 11.74597768,
+          "S": 0.075969382
+        },
+        {
+          "threshold": 85.0,
+          "L": -0.813388595,
+          "M": 11.97105103,
+          "S": 0.075882537
+        },
+        {
+          "threshold": 86.0,
+          "L": -0.809475279,
+          "M": 12.19655799,
+          "S": 0.075822785
+        },
+        {
+          "threshold": 87.0,
+          "L": -0.811493792,
+          "M": 12.4227963,
+          "S": 0.075791244
+        },
+        {
+          "threshold": 88.0,
+          "L": -0.8197572,
+          "M": 12.65006791,
+          "S": 0.075788944
+        },
+        {
+          "threshold": 89.0,
+          "L": -0.834576932,
+          "M": 12.87867701,
+          "S": 0.07581679
+        },
+        {
+          "threshold": 90.0,
+          "L": -0.856261805,
+          "M": 13.10892794,
+          "S": 0.075875517
+        },
+        {
+          "threshold": 91.0,
+          "L": -0.885116299,
+          "M": 13.34112314,
+          "S": 0.075965652
+        },
+        {
+          "threshold": 92.0,
+          "L": -0.921432943,
+          "M": 13.5755615,
+          "S": 0.076087468
+        },
+        {
+          "threshold": 93.0,
+          "L": -0.965501267,
+          "M": 13.81253552,
+          "S": 0.076240931
+        },
+        {
+          "threshold": 94.0,
+          "L": -1.017588552,
+          "M": 14.05233041,
+          "S": 0.076425662
+        },
+        {
+          "threshold": 95.0,
+          "L": -1.077941994,
+          "M": 14.29522185,
+          "S": 0.07664088
+        },
+        {
+          "threshold": 96.0,
+          "L": -1.146773671,
+          "M": 14.54147499,
+          "S": 0.076885365
+        },
+        {
+          "threshold": 97.0,
+          "L": -1.224269596,
+          "M": 14.79134177,
+          "S": 0.07715739
+        },
+        {
+          "threshold": 98.0,
+          "L": -1.310558831,
+          "M": 15.04506152,
+          "S": 0.077454707
+        },
+        {
+          "threshold": 99.0,
+          "L": -1.405713355,
+          "M": 15.30285949,
+          "S": 0.077774507
+        },
+        {
+          "threshold": 100.0,
+          "L": -1.509717075,
+          "M": 15.56494815,
+          "S": 0.078113436
+        },
+        {
+          "threshold": 101.0,
+          "L": -1.622491233,
+          "M": 15.83152429,
+          "S": 0.078467542
+        },
+        {
+          "threshold": 102.0,
+          "L": -1.743825743,
+          "M": 16.10277448,
+          "S": 0.078832409
+        },
+        {
+          "threshold": 103.0,
+          "L": -1.873365511,
+          "M": 16.37887678,
+          "S": 0.079203258
+        },
+        {
+          "threshold": 104.0,
+          "L": -2.010641647,
+          "M": 16.65999867,
+          "S": 0.079574978
+        },
+        {
+          "threshold": 105.0,
+          "L": -2.154957918,
+          "M": 16.94630912,
+          "S": 0.079942558
+        },
+        {
+          "threshold": 106.0,
+          "L": -2.305458316,
+          "M": 17.23797444,
+          "S": 0.08030117
+        },
+        {
+          "threshold": 107.0,
+          "L": -2.461019713,
+          "M": 17.53517134,
+          "S": 0.080646757
+        },
+        {
+          "threshold": 108.0,
+          "L": -2.62033059,
+          "M": 17.83808212,
+          "S": 0.080976208
+        },
+        {
+          "threshold": 109.0,
+          "L": -2.781787762,
+          "M": 18.14690821,
+          "S": 0.0812881
+        },
+        {
+          "threshold": 110.0,
+          "L": -2.943638944,
+          "M": 18.46185811,
+          "S": 0.081582687
+        },
+        {
+          "threshold": 111.0,
+          "L": -3.103888502,
+          "M": 18.78315936,
+          "S": 0.081862656
+        },
+        {
+          "threshold": 112.0,
+          "L": -3.260482798,
+          "M": 19.11103983,
+          "S": 0.082132791
+        },
+        {
+          "threshold": 113.0,
+          "L": -3.411305599,
+          "M": 19.44572803,
+          "S": 0.082400213
+        },
+        {
+          "threshold": 114.0,
+          "L": -3.554288672,
+          "M": 19.78744004,
+          "S": 0.082674023
+        },
+        {
+          "threshold": 115.0,
+          "L": -3.687600863,
+          "M": 20.13635563,
+          "S": 0.082964333
+        },
+        {
+          "threshold": 116.0,
+          "L": -3.809599339,
+          "M": 20.49262111,
+          "S": 0.083282267
+        },
+        {
+          "threshold": 117.0,
+          "L": -3.919005213,
+          "M": 20.85632542,
+          "S": 0.083638758
+        },
+        {
+          "threshold": 118.0,
+          "L": -4.014882272,
+          "M": 21.2274989,
+          "S": 0.084044246
+        },
+        {
+          "threshold": 119.0,
+          "L": -4.096683061,
+          "M": 21.60610366,
+          "S": 0.084508001
+        },
+        {
+          "threshold": 120.0,
+          "L": -4.164160421,
+          "M": 21.9920407,
+          "S": 0.085038256
+        },
+        {
+          "threshold": 121.0,
+          "L": -4.217425718,
+          "M": 22.3851382,
+          "S": 0.085641503
+        },
+        {
+          "threshold": 122.0,
+          "L": -4.256802224,
+          "M": 22.78516628,
+          "S": 0.086323118
+        }
+      ],
+      "fallback": null,
+      "suffix": null
+    }
+  },
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "Z_Score = ((Weight/M)L - 1) / (L * S)\nPercentile = ZtoPercentile(Z_Score)",
+    "notes": [
+      "These weight-for-stature standards are available as an alternative to BMI for assessment of over or undernutrition in children ages 2-5 years. However, health care providers should consider using the BMI-for-age charts to be consistent with current recommendations.",
+      "This calculator uses measured standing height for children ages 2 to 5 years, and is not valid for recumbent length.",
+      "At the extremes (>97th percentile or <3rd percentile), small differences in percentiles represent clinically important differences. At these extremes, the Z-score is a more precise reflection of how far the measurement deviates from the mean and is a useful tool for tracking changes.",
+      "LMS data used in this calculator are shown in the data table below.",
+      "For all LMS tables, the row in the table corresponding to the patient-specific value is found in the first column of the table; values to be used for L (the Box-Cox power), M (the median), and S (the generalized coefficient of variation) in the equation for Z-score are retrieved.",
+      "Z-scores may be used to do a table lookup for the corresponding percentile in the Normal table percentiles for Z-score table (below). Numbers along the left side (Y-axis) of the table represent the first number and first decimal place of the Z-score, while the numbers along the top (X-axis) of the table represent the second decimal position of the Z-score."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "LMS Parameters for Boys: Weight for Height. National health and nutrition survey (NHANES), CDC/National Center for Health Statistics.",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 2
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "CDC Weight for Height (Boys; 77 - 121 cm).pdf",
+      "source_sha256": "a102dfad9654461cb8f644da82eefa9903a776fb093174c82158b37e707f752c",
+      "extractor": "pdf",
+      "form_name": "CDCWeightForHeightBoys",
+      "identity": {
+        "doc_id": "70017",
+        "title": "CDC Weight for Height (Boys; 77 - 121 cm)",
+        "form_name": "CDCWeightForHeightBoys",
+        "filename_title": "CDC Weight for Height (Boys; 77 - 121 cm)",
+        "confidence": 0.97,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('CDC Weight for Height (Boys; 77 - 121 cm)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (cdcweightforheightboys77121cm)",
+          "title_vs_form": "PARTIAL (cdcweightforheightboys77121cm ~ cdcweightforheightboys)"
+        }
+      }
+    },
+    "html": {
+      "id": "cdc_weight_height_boys",
+      "title": "CDC Weight for Height (Boys; 77 - 121 cm)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 16,
+    "checks_total": 16,
+    "missing": []
+  }
+}

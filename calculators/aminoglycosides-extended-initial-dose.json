@@ -1,0 +1,414 @@
+{
+  "schema_version": "1.0",
+  "slug": "aminoglycosides-extended-initial-dose",
+  "title": "Aminoglycosides: Extended, Initial Dose",
+  "subtitle": null,
+  "category": "Pharmacokinetics",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "method",
+      "label": "Clcr Method",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "method",
+        "id_const": "ID_METHOD"
+      },
+      "label_source": "printed form (word match)",
+      "options_incomplete": true,
+      "options_known_value": "Jelliffe",
+      "options": [
+        {
+          "label": "CockcroftGault",
+          "value": "CockcroftGault"
+        },
+        {
+          "label": "Jelliffe",
+          "value": "Jelliffe"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "age",
+      "label": "Age",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "years",
+      "units": null,
+      "constraints": {
+        "min": 18.0,
+        "max": 100.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "age",
+        "id_const": "ID_AGE"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Age must be between 18 and 100."
+      ]
+    },
+    {
+      "key": "weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "constraints": {
+        "min": 40.0,
+        "max": 400.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "weight",
+        "id_const": "ID_WEIGHT"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Weight must be between 40 and 400."
+      ],
+      "display_unit": "kg",
+      "dimension": "mass",
+      "units_source": "corpus unit registry"
+    },
+    {
+      "key": "height",
+      "label": "Height",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 10.0,
+        "max": 90.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "height",
+        "id_const": "ID_HEIGHT"
+      },
+      "label_source": "printed form",
+      "help": [
+        "Height must be between 10 and 90."
+      ]
+    },
+    {
+      "key": "sr_cr",
+      "label": "SrCr",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 0.3,
+        "max": 10.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "SrCr",
+        "id_const": "ID_SRCR"
+      },
+      "label_source": "printed form",
+      "help": [
+        "SrCr must be between 0.3 and 10."
+      ]
+    },
+    {
+      "key": "gender",
+      "label": "Gender",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "gender",
+        "id_const": "ID_GENDER"
+      },
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "male",
+          "value": "male"
+        },
+        {
+          "label": "female",
+          "value": "female"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "dose",
+      "label": "Dose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "dose",
+        "id_const": "ID_DOSE"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "drug",
+      "label": "Drug",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "drug",
+        "id_const": "ID_DRUG"
+      },
+      "label_source": "printed form",
+      "options_incomplete": true,
+      "options_known_value": "Amikacin"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "ibw_v2",
+        "expr": "(50 + 2.3 * (height - 60)) if (gender == 'male') else (45.5 + 2.3 * (height - 60))"
+      },
+      {
+        "key": "abw",
+        "expr": "ibw_v2 + 0.4 * (weight - ibw_v2)"
+      },
+      {
+        "key": "wf",
+        "expr": "weight"
+      },
+      {
+        "key": "wf_v2",
+        "expr": "(ibw_v2) if (ibw_v2 < weight and weight < 1.2 * ibw_v2) else ((abw) if (weight > 1.2 * ibw_v2) else (wf))"
+      },
+      {
+        "key": "crcl_v2",
+        "expr": "(((((140 - age) * weight) / (72 * sr_cr)) * 0.85) if (gender == 'female') else (((140 - age) * weight) / (72 * sr_cr))) if (method == 'CockcroftGault') else ((((98 - 0.8 * (age -20)) / sr_cr) * 0.9) if (gender == 'female') else ((98 - 0.8 * (age -20)) / sr_cr))"
+      },
+      {
+        "key": "output_dose",
+        "expr": "wf_v2 * dose"
+      },
+      {
+        "key": "interval",
+        "expr": "'Conventional'"
+      },
+      {
+        "key": "interval_v2",
+        "expr": "(24) if (crcl_v2 >= 60) else ((36) if (crcl_v2 >= 40) else ((48) if (crcl_v2 >= 30) else (interval)))"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "output_dose",
+        "label": "Output Dose",
+        "expr": "(interval_v2) if ((interval_v2 == 'Conventional')) else (output_dose)",
+        "decimals": 0,
+        "base_unit": null,
+        "kind": "text"
+      },
+      {
+        "key": "interval",
+        "label": "Interval",
+        "expr": "interval_v2",
+        "decimals": null,
+        "base_unit": null,
+        "kind": "number"
+      },
+      {
+        "key": "cr_cl",
+        "label": "CrCl",
+        "expr": "crcl_v2",
+        "decimals": 2,
+        "base_unit": null,
+        "kind": "number"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 0,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Creatinine Clearance (Clcr)\nNote: Calculation uses actual body weight to calculate for Clcr; therefore, in obese patients (and possibly patients with ascites) Clcr may be\nsignificantly overestimated. Some clinicians may prefer to use an adjusted body weight in such cases [eg, IBW + 0.4 (ABW - IBW)]. Patients\nwith estimated Clcr ≥60 mL/minute and actual weight <130% of IBW may be candidates for once daily dosing. Use clinical judgment.\nCockcroft-Gault Method:\nMale: Clcr = [(140 - age) x weight] ÷ (72 x SrCr)\nFemale: Clcr = [(140 - age) x weight] ÷ [(72 x SrCr)] x 0.85\nClcr = estimated creatinine clearance in mL/min\nAge is input in years\nWeight is input in kg\nSrCr = serum creatinine input in mg/dL\nJelliffe Method:\nMale: Clcr = [98 - 0.8 x (age - 20)] ÷ SrCr\nFemale: Clcr = ([98 - 0.8 x (age - 20)] ÷ SrCr) x 0.90\nClcr = estimated creatinine clearance in mL/min/1.73 m2\nAge is input in years\nSrCr = serum creatinine input in mg/dL\nWeight Factor (WF):\nIdeal Body Weight (IBW):\nMale: IBW = 50 + [2.3 x (height - 60)]\nFemale: IBW = 45.5 + [2.3 x (height - 60)]\nIBW = ideal body weight in kg\nHeight measured in inches\nAdjusted Body Weight (ABW):\nABW = IBW + [0.4 x (weight - IBW)]\nWF = weight (if weight < IBW)\nWF = IBW (if IBW < weight < 120% of IBW\nWF = ABW (if weight > 120% of IBW)\nDose:\nDose (mg) = WF x Dose (mg/kg)\nInterval:\nClcr ≥60 mL/min or mL/min/1.73 m2: 24 hours\nClcr 40-59 mL/min or mL/min/1.73 m2: 36 hours\nClcr 30-39 mL/min or mL/min/1.73 m2: 48 hours\nClcr <30 mL/min or mL/min/1.73 m2: Use conventional dosing",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Ali MZ and Goetz MB, “A Meta-Analysis of the Relative Efficacy and Toxicity of Single Daily Dosing Versus Multiple Daily Dosing of Aminoglycosides,” Clin Infect Dis, 1997, 24:796-809.[PubMed 9142772]",
+        "pubmed_id": "9142772",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9142772/"
+      },
+      {
+        "text": "Anaizi N, “Once-Daily Dosing of Aminoglycosides: A Consensus Document,” Int J Clin Pharmacol Ther, 1997, 35(6):223-6.[PubMed 9208335]",
+        "pubmed_id": "9208335",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9208335/"
+      },
+      {
+        "text": "Bailey TC, Little JR, Littenberg B, et al, “A Meta-Analysis of Extended-Interval Dosing Versus Multiple Daily Dosing of Aminoglycosides,” Clin Infect Dis, 1997, 24:786-95.[PubMed 9142771]",
+        "pubmed_id": "9142771",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9142771/"
+      },
+      {
+        "text": "Barza M, Ioannidis JPA, Cappelleri JC, et al, “Single or Multiple Daily Doses of Aminoglycosides: A Meta-Analysis,” BMJ, 1996, 312:338-45.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "[PubMed 8611830]",
+        "pubmed_id": "8611830",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/8611830/"
+      },
+      {
+        "text": "Edson RS and Terrell CL, \"The Aminoglycosides,\"Mayo Clin Proc, 1999, 74(5):519-28.[PubMed 1943249]",
+        "pubmed_id": "1943249",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/1943249/"
+      },
+      {
+        "text": "Hatala R, Dinh T, and Cook DJ, “Once-Daily Aminoglycoside Dosing in Immunocompetent Adults,” Ann Intern Med, 1996, 124(8):717-25.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "[PubMed 8633831]",
+        "pubmed_id": "8633831",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/8633831/"
+      },
+      {
+        "text": "Nicolau DP, Freeman CD, Belliveau PP, et al, “Experience with a Once-Daily Aminoglycoside Program Administered to 2,184 Adult Patients,” Antimicrob Agents Chemother, 1995, 39(3):650-5.[PubMed 7793867]",
+        "pubmed_id": "7793867",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/7793867/"
+      },
+      {
+        "text": "Traynor AM, Nafziger AN, and Bertino JS, \"Aminoglycoside Dosing Weight Correction Factors for Patients of Various Body Sizes,\"Antimicrob Agents Chemother, 1995, 39(2):545-48.[PubMed 7726530]",
+        "pubmed_id": "7726530",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/7726530/"
+      },
+      {
+        "text": "Urban AW and Craig WA, “Daily Dosage of Aminoglycosides,\" Remington JS and Schwartz MN, eds, Current Clinical Topics in Infectious Urban AW and Craig WA, “Daily Dosage of Aminoglycosides,\" Remington JS and Schwartz MN, eds, Current Clinical Topics in Infectious Diseases, 17th edition, Malden, MA: Blackwell Science, 1997, 236-55.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Wallace AW, Jones M, and Bertino JS, \"Evaluation of Four Once-Daily Aminoglycosides Dosing Nomograms,\" Pharmacotherapy , 2002, 22(9):1077-83. [PubMed 12222541]",
+        "pubmed_id": "12222541",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12222541/"
+      }
+    ],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again. Aminoglycosides are antibiotics commonly used to treat serious bacterial infections. They distribute well into synovial, peritoneal, ascitic, and pleural fluids, but poorly into CNS and the vitreous humor of eye. They are eliminated rapidly by the kidneys. Traditionally, aminoglycoside antibiotics have been administered in multiple daily doses (aka, conventional dosing). An alternative approach to dosing these agents involves achieving higher peak concentrations and using an extended dosing interval. This strategy is often referred to as “extended interval dosing”, “single daily dosing”, or “once daily dosing”. The rationale behind extended interval dosing includes: Post-antibiotic effect (PAE): Aminoglycosides exhibit significant bacterial growth inhibition even after drug concentrations fall to undetectable levels. Concentration dependent killing: The bactericidal activity of aminoglycosides requires a high peak/MIC ratio. Adaptive post-exposure resistance: More frequent dosing may result in reduced bacterial uptake of aminoglycosides; thereby, increasing the MIC. Extended interval dosing may allow for the preservation of lower MICs. Reduced emergence of resistant organisms: Achieving drug concentrations 8-10x the MIC may reduce the emergence of drug resistant organisms. Impact on toxicities: The use of extended interval dosing has been shown to result in equal or less nephrotoxicity and/or ototoxicity when compared to conventional dosing. In theory, the rate of uptake of aminoglycosides into the renal cortex and vestibular and cochlear tissues is saturable. Therefore, the efficiency of aminoglycoside uptake into these tissues may be reduced when higher doses are given less frequently. The use of extended interval dosing is controversial and may not be appropriate for all patients; use clinical judgment. Settings in which conventional dosing may be more appropriate include clinical states characterized by: Rapid clearance of aminoglycosides: Patients with extensive burns (>20% of body surface area) Patients with sepsis and well-preserved renal function Patients with cystic fibrosis (Note: Extended interval dosing may be appropriate in these patients; higher doses are required) Variable pharmacokinetics: Neonates Patients with ascites Patients with anasarca Miscellaneous: Patients with enterococcal endocarditis Pregnant patients Pediatric patients Patients with severe renal disease (Clcr <30 mL/min) Neutropenic patients Patients with Gram-positive infections where the aminoglycoside is being used for synergy Patients with a history of allergy to aminoglycosides Patients with a history or signs of hearing loss or vestibular dysfunction The dosing interval should be adjusted based on a random level taken several hours after the end of the infusion using one of several interval adjustment nomograms (see Aminoglycosides: Extended Interval Dosing, Interval Adjustment).",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 4
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Aminoglycosides- Extended, Initial Dose.pdf",
+      "source_sha256": "6b08e5917dfbb5d22f8e2fa76312d87268ff391fde490e437cd584a2c8437796",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Aminoglycosides: Extended, Initial Dose",
+        "form_name": null,
+        "filename_title": "Aminoglycosides- Extended, Initial Dose",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Aminoglycosides: Extended, Initial Dose')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (aminoglycosidesextendedinitialdose)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf14",
+      "title": "Aminoglycosides: Extended, Initial Dose",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 78.6,
+    "checks_passed": 11,
+    "checks_total": 14,
+    "missing": [
+      "notes",
+      "unit options on every field",
+      "complete option lists"
+    ]
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.0",
+  "slug": "pulmonary-embolism-wells-score",
+  "title": "Pulmonary Embolism Wells Score",
+  "subtitle": null,
+  "category": "Pulmonology / Scoring System",
+  "renderer": "score",
+  "engine": "score",
+  "status": "draft",
+  "version": 1,
+  "inputs": [],
+  "compute": {
+    "engine": "score",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": {
+    "groups": [
+      {
+        "key": "ungrouped",
+        "label": "(ungrouped)",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_0_0",
+            "label": "Symptoms of DVT",
+            "points": 3
+          },
+          {
+            "key": "opt_0_1",
+            "label": "No alternative diagnosis better explains the illness",
+            "points": 3
+          },
+          {
+            "key": "opt_0_2",
+            "label": "Tachycardia with pulse > 100",
+            "points": 1.5
+          },
+          {
+            "key": "opt_0_3",
+            "label": "Immobilization (>= 3 days) or surgery in the previous four weeks",
+            "points": 1.5
+          },
+          {
+            "key": "opt_0_4",
+            "label": "Prior history of DVT or pulmonary embolism",
+            "points": 1.5
+          },
+          {
+            "key": "opt_0_5",
+            "label": "Presence of hemoptysis",
+            "points": 1
+          },
+          {
+            "key": "opt_0_6",
+            "label": "Presence of malignancy",
+            "points": 1
+          }
+        ]
+      }
+    ],
+    "bands": [
+      {
+        "min": 6,
+        "max": null,
+        "label": "High probability",
+        "raw": "Score > 6: High probability"
+      },
+      {
+        "min": 2,
+        "max": 6,
+        "label": "Moderate probability",
+        "raw": "Score >= 2 and <= 6: Moderate probability"
+      },
+      {
+        "min": null,
+        "max": 2,
+        "label": "Low Probability",
+        "raw": "Score < 2: Low Probability"
+      }
+    ],
+    "total": {
+      "key": "total_score",
+      "label": "Total Criteria Point Count",
+      "unit": "points",
+      "min": 1.0,
+      "max": 3.0
+    },
+    "interpretation": {
+      "key": "interpretation",
+      "label": "Pulmonary Embolism Risk Score Interpretation",
+      "printed_rows": [
+        "Pulmonary Embolism Risk Score Interpretation"
+      ]
+    }
+  },
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [
+      "The article referenced below also refers to a cut point of 4 points or less as PE unlikely as long as the specific D-Dimer test is negative.",
+      "Refer to the original article below for all details."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Wells PS, Anderson DR, Rodger M, et al. Derivation of a simple clinical model to categorize patients probability of pulmonary embolism: increasing the models utility with the SimpliRED D- dimer. Thromb Haemost. 2000 Mar;83(3):416-20.[PubMed 10744147]",
+        "pubmed_id": "10744147",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10744147/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Pulmonary Embolism Wells Score.pdf",
+      "source_sha256": "9b5b05aeb4c6f22b17aa64bd7e3c4b61260a41aaace5038e36b6bb163ed0647a",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Pulmonary Embolism Wells Score",
+        "form_name": null,
+        "filename_title": "Pulmonary Embolism Wells Score",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Pulmonary Embolism Wells Score')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (pulmonaryembolismwellsscore)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf141",
+      "title": "Pulmonary Embolism Wells Score",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 9,
+    "checks_total": 9,
+    "missing": []
+  }
+}

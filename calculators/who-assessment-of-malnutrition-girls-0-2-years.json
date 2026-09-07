@@ -1,0 +1,1203 @@
+{
+  "schema_version": "1.0",
+  "slug": "who-assessment-of-malnutrition-girls-0-2-years",
+  "title": "WHO Assessment of Malnutrition (Girls; 0 - 2 Years)",
+  "subtitle": null,
+  "category": "Pediatrics / Growth Chart",
+  "renderer": "lms",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "age",
+      "js_name": "Age",
+      "label": "Age",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mo",
+      "display_unit": "mo",
+      "units": [
+        {
+          "code": "mo",
+          "label": "mo",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 0.0,
+        "max": 24.0
+      },
+      "messages": {
+        "max": "The maximum value for Age is 24 mo."
+      },
+      "dimension": "time_age",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Age is 0 mo. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Age is 24 mo. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "length",
+      "js_name": "Length",
+      "label": "Length",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "cm",
+      "display_unit": "cm",
+      "units": [
+        {
+          "code": "cm",
+          "label": "cm",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 45.0,
+        "max": 110.0
+      },
+      "messages": {
+        "min": "The minimum value for Length is 45 cm."
+      },
+      "dimension": "length",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Length is 45 cm. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Length is 110 cm. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "weight",
+      "js_name": "Weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "display_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 1.0,
+        "max": 25.0
+      },
+      "messages": {
+        "min": "The minimum value for Weight is 1 kg.",
+        "max": "The maximum value for Weight is 25 kg."
+      },
+      "dimension": "mass",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Weight is 1 kg. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Weight is 25 kg. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    }
+  ],
+  "compute": {
+    "engine": "lookup+expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "z_score_length",
+        "js_name": "Z_Score_Length",
+        "label": "Z Score Length",
+        "expr": "(pow((length / M_1), L_1) - 1) / (L_1 * S_1)",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "z_score_weight_for_length",
+        "js_name": "Z_Score_Weight_for_Length",
+        "label": "Z Score Weight for Length",
+        "expr": "(pow((weight / M_2), L_2) - 1) / (L_2 * S_2)",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "length_percentile",
+        "js_name": "Length_Percentile",
+        "label": "Length Percentile",
+        "expr": "z_to_percentile(z_score_length)",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "weight_for_length_percentile",
+        "js_name": "Weight_for_Length_Percentile",
+        "label": "Weight for Length Percentile",
+        "expr": "z_to_percentile(z_score_weight_for_length)",
+        "units": null,
+        "label_source": "printed form",
+        "unit_rejected": "Z-Score > -2:",
+        "base_unit": null
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": {
+    "lookups": [
+      {
+        "key": "Age",
+        "operator": "<",
+        "columns": [
+          "L_1",
+          "M_1",
+          "S_1"
+        ],
+        "row_count": 25,
+        "rows": [
+          {
+            "threshold": 1.0,
+            "L_1": 1.0,
+            "M_1": 49.1477,
+            "S_1": 0.0379
+          },
+          {
+            "threshold": 2.0,
+            "L_1": 1.0,
+            "M_1": 53.6872,
+            "S_1": 0.0364
+          },
+          {
+            "threshold": 3.0,
+            "L_1": 1.0,
+            "M_1": 57.0673,
+            "S_1": 0.03568
+          },
+          {
+            "threshold": 4.0,
+            "L_1": 1.0,
+            "M_1": 59.8029,
+            "S_1": 0.0352
+          },
+          {
+            "threshold": 5.0,
+            "L_1": 1.0,
+            "M_1": 62.0899,
+            "S_1": 0.03486
+          },
+          {
+            "threshold": 6.0,
+            "L_1": 1.0,
+            "M_1": 64.0301,
+            "S_1": 0.03463
+          },
+          {
+            "threshold": 7.0,
+            "L_1": 1.0,
+            "M_1": 65.7311,
+            "S_1": 0.03448
+          },
+          {
+            "threshold": 8.0,
+            "L_1": 1.0,
+            "M_1": 67.2873,
+            "S_1": 0.03441
+          },
+          {
+            "threshold": 9.0,
+            "L_1": 1.0,
+            "M_1": 68.7498,
+            "S_1": 0.0344
+          },
+          {
+            "threshold": 10.0,
+            "L_1": 1.0,
+            "M_1": 70.1435,
+            "S_1": 0.03444
+          },
+          {
+            "threshold": 11.0,
+            "L_1": 1.0,
+            "M_1": 71.4818,
+            "S_1": 0.03452
+          },
+          {
+            "threshold": 12.0,
+            "L_1": 1.0,
+            "M_1": 72.771,
+            "S_1": 0.03464
+          },
+          {
+            "threshold": 13.0,
+            "L_1": 1.0,
+            "M_1": 74.015,
+            "S_1": 0.03479
+          },
+          {
+            "threshold": 14.0,
+            "L_1": 1.0,
+            "M_1": 75.2176,
+            "S_1": 0.03496
+          },
+          {
+            "threshold": 15.0,
+            "L_1": 1.0,
+            "M_1": 76.3817,
+            "S_1": 0.03514
+          },
+          {
+            "threshold": 16.0,
+            "L_1": 1.0,
+            "M_1": 77.5099,
+            "S_1": 0.03534
+          },
+          {
+            "threshold": 17.0,
+            "L_1": 1.0,
+            "M_1": 78.6055,
+            "S_1": 0.03555
+          },
+          {
+            "threshold": 18.0,
+            "L_1": 1.0,
+            "M_1": 79.671,
+            "S_1": 0.03576
+          },
+          {
+            "threshold": 19.0,
+            "L_1": 1.0,
+            "M_1": 80.7079,
+            "S_1": 0.03598
+          },
+          {
+            "threshold": 20.0,
+            "L_1": 1.0,
+            "M_1": 81.7182,
+            "S_1": 0.0362
+          },
+          {
+            "threshold": 21.0,
+            "L_1": 1.0,
+            "M_1": 82.7036,
+            "S_1": 0.03643
+          },
+          {
+            "threshold": 22.0,
+            "L_1": 1.0,
+            "M_1": 83.6654,
+            "S_1": 0.03666
+          },
+          {
+            "threshold": 23.0,
+            "L_1": 1.0,
+            "M_1": 84.604,
+            "S_1": 0.03688
+          },
+          {
+            "threshold": 24.0,
+            "L_1": 1.0,
+            "M_1": 85.5202,
+            "S_1": 0.03711
+          },
+          {
+            "threshold": 25.0,
+            "L_1": 1.0,
+            "M_1": 86.4153,
+            "S_1": 0.03734
+          }
+        ],
+        "fallback": null,
+        "suffix": "_1"
+      },
+      {
+        "key": "Length",
+        "operator": "<",
+        "columns": [
+          "L_2",
+          "M_2",
+          "S_2"
+        ],
+        "row_count": 131,
+        "rows": [
+          {
+            "threshold": 45.5,
+            "L_2": -0.3833,
+            "M_2": 2.4607,
+            "S_2": 0.09029
+          },
+          {
+            "threshold": 46.0,
+            "L_2": -0.3833,
+            "M_2": 2.5457,
+            "S_2": 0.09033
+          },
+          {
+            "threshold": 46.5,
+            "L_2": -0.3833,
+            "M_2": 2.6306,
+            "S_2": 0.09037
+          },
+          {
+            "threshold": 47.0,
+            "L_2": -0.3833,
+            "M_2": 2.7155,
+            "S_2": 0.0904
+          },
+          {
+            "threshold": 47.5,
+            "L_2": -0.3833,
+            "M_2": 2.8007,
+            "S_2": 0.09044
+          },
+          {
+            "threshold": 48.0,
+            "L_2": -0.3833,
+            "M_2": 2.8867,
+            "S_2": 0.09048
+          },
+          {
+            "threshold": 48.5,
+            "L_2": -0.3833,
+            "M_2": 2.9741,
+            "S_2": 0.09052
+          },
+          {
+            "threshold": 49.0,
+            "L_2": -0.3833,
+            "M_2": 3.0636,
+            "S_2": 0.09056
+          },
+          {
+            "threshold": 49.5,
+            "L_2": -0.3833,
+            "M_2": 3.156,
+            "S_2": 0.0906
+          },
+          {
+            "threshold": 50.0,
+            "L_2": -0.3833,
+            "M_2": 3.252,
+            "S_2": 0.09064
+          },
+          {
+            "threshold": 50.5,
+            "L_2": -0.3833,
+            "M_2": 3.3518,
+            "S_2": 0.09068
+          },
+          {
+            "threshold": 51.0,
+            "L_2": -0.3833,
+            "M_2": 3.4557,
+            "S_2": 0.09072
+          },
+          {
+            "threshold": 51.5,
+            "L_2": -0.3833,
+            "M_2": 3.5636,
+            "S_2": 0.09076
+          },
+          {
+            "threshold": 52.0,
+            "L_2": -0.3833,
+            "M_2": 3.6754,
+            "S_2": 0.0908
+          },
+          {
+            "threshold": 52.5,
+            "L_2": -0.3833,
+            "M_2": 3.7911,
+            "S_2": 0.09085
+          },
+          {
+            "threshold": 53.0,
+            "L_2": -0.3833,
+            "M_2": 3.9105,
+            "S_2": 0.09089
+          },
+          {
+            "threshold": 53.5,
+            "L_2": -0.3833,
+            "M_2": 4.0332,
+            "S_2": 0.09093
+          },
+          {
+            "threshold": 54.0,
+            "L_2": -0.3833,
+            "M_2": 4.1591,
+            "S_2": 0.09098
+          },
+          {
+            "threshold": 54.5,
+            "L_2": -0.3833,
+            "M_2": 4.2875,
+            "S_2": 0.09102
+          },
+          {
+            "threshold": 55.0,
+            "L_2": -0.3833,
+            "M_2": 4.4179,
+            "S_2": 0.09106
+          },
+          {
+            "threshold": 55.5,
+            "L_2": -0.3833,
+            "M_2": 4.5498,
+            "S_2": 0.0911
+          },
+          {
+            "threshold": 56.0,
+            "L_2": -0.3833,
+            "M_2": 4.6827,
+            "S_2": 0.09114
+          },
+          {
+            "threshold": 56.5,
+            "L_2": -0.3833,
+            "M_2": 4.8162,
+            "S_2": 0.09118
+          },
+          {
+            "threshold": 57.0,
+            "L_2": -0.3833,
+            "M_2": 4.95,
+            "S_2": 0.09121
+          },
+          {
+            "threshold": 57.5,
+            "L_2": -0.3833,
+            "M_2": 5.0837,
+            "S_2": 0.09125
+          },
+          {
+            "threshold": 58.0,
+            "L_2": -0.3833,
+            "M_2": 5.2173,
+            "S_2": 0.09128
+          },
+          {
+            "threshold": 58.5,
+            "L_2": -0.3833,
+            "M_2": 5.3507,
+            "S_2": 0.0913
+          },
+          {
+            "threshold": 59.0,
+            "L_2": -0.3833,
+            "M_2": 5.4834,
+            "S_2": 0.09132
+          },
+          {
+            "threshold": 59.5,
+            "L_2": -0.3833,
+            "M_2": 5.6151,
+            "S_2": 0.09134
+          },
+          {
+            "threshold": 60.0,
+            "L_2": -0.3833,
+            "M_2": 5.7454,
+            "S_2": 0.09135
+          },
+          {
+            "threshold": 60.5,
+            "L_2": -0.3833,
+            "M_2": 5.8742,
+            "S_2": 0.09136
+          },
+          {
+            "threshold": 61.0,
+            "L_2": -0.3833,
+            "M_2": 6.0014,
+            "S_2": 0.09137
+          },
+          {
+            "threshold": 61.5,
+            "L_2": -0.3833,
+            "M_2": 6.127,
+            "S_2": 0.09137
+          },
+          {
+            "threshold": 62.0,
+            "L_2": -0.3833,
+            "M_2": 6.2511,
+            "S_2": 0.09136
+          },
+          {
+            "threshold": 62.5,
+            "L_2": -0.3833,
+            "M_2": 6.3738,
+            "S_2": 0.09135
+          },
+          {
+            "threshold": 63.0,
+            "L_2": -0.3833,
+            "M_2": 6.4948,
+            "S_2": 0.09133
+          },
+          {
+            "threshold": 63.5,
+            "L_2": -0.3833,
+            "M_2": 6.6144,
+            "S_2": 0.09131
+          },
+          {
+            "threshold": 64.0,
+            "L_2": -0.3833,
+            "M_2": 6.7328,
+            "S_2": 0.09129
+          },
+          {
+            "threshold": 64.5,
+            "L_2": -0.3833,
+            "M_2": 6.8501,
+            "S_2": 0.09126
+          },
+          {
+            "threshold": 65.0,
+            "L_2": -0.3833,
+            "M_2": 6.9662,
+            "S_2": 0.09123
+          },
+          {
+            "threshold": 65.5,
+            "L_2": -0.3833,
+            "M_2": 7.0812,
+            "S_2": 0.09119
+          },
+          {
+            "threshold": 66.0,
+            "L_2": -0.3833,
+            "M_2": 7.195,
+            "S_2": 0.09115
+          },
+          {
+            "threshold": 66.5,
+            "L_2": -0.3833,
+            "M_2": 7.3076,
+            "S_2": 0.0911
+          },
+          {
+            "threshold": 67.0,
+            "L_2": -0.3833,
+            "M_2": 7.4189,
+            "S_2": 0.09106
+          },
+          {
+            "threshold": 67.5,
+            "L_2": -0.3833,
+            "M_2": 7.5288,
+            "S_2": 0.09101
+          },
+          {
+            "threshold": 68.0,
+            "L_2": -0.3833,
+            "M_2": 7.6375,
+            "S_2": 0.09096
+          },
+          {
+            "threshold": 68.5,
+            "L_2": -0.3833,
+            "M_2": 7.7448,
+            "S_2": 0.0909
+          },
+          {
+            "threshold": 69.0,
+            "L_2": -0.3833,
+            "M_2": 7.8509,
+            "S_2": 0.09085
+          },
+          {
+            "threshold": 69.5,
+            "L_2": -0.3833,
+            "M_2": 7.9559,
+            "S_2": 0.09079
+          },
+          {
+            "threshold": 70.0,
+            "L_2": -0.3833,
+            "M_2": 8.0599,
+            "S_2": 0.09074
+          },
+          {
+            "threshold": 70.5,
+            "L_2": -0.3833,
+            "M_2": 8.163,
+            "S_2": 0.09068
+          },
+          {
+            "threshold": 71.0,
+            "L_2": -0.3833,
+            "M_2": 8.2651,
+            "S_2": 0.09062
+          },
+          {
+            "threshold": 71.5,
+            "L_2": -0.3833,
+            "M_2": 8.3666,
+            "S_2": 0.09056
+          },
+          {
+            "threshold": 72.0,
+            "L_2": -0.3833,
+            "M_2": 8.4676,
+            "S_2": 0.0905
+          },
+          {
+            "threshold": 72.5,
+            "L_2": -0.3833,
+            "M_2": 8.5679,
+            "S_2": 0.09043
+          },
+          {
+            "threshold": 73.0,
+            "L_2": -0.3833,
+            "M_2": 8.6674,
+            "S_2": 0.09037
+          },
+          {
+            "threshold": 73.5,
+            "L_2": -0.3833,
+            "M_2": 8.7661,
+            "S_2": 0.09031
+          },
+          {
+            "threshold": 74.0,
+            "L_2": -0.3833,
+            "M_2": 8.8638,
+            "S_2": 0.09025
+          },
+          {
+            "threshold": 74.5,
+            "L_2": -0.3833,
+            "M_2": 8.9601,
+            "S_2": 0.09018
+          },
+          {
+            "threshold": 75.0,
+            "L_2": -0.3833,
+            "M_2": 9.0552,
+            "S_2": 0.09012
+          },
+          {
+            "threshold": 75.5,
+            "L_2": -0.3833,
+            "M_2": 9.149,
+            "S_2": 0.09005
+          },
+          {
+            "threshold": 76.0,
+            "L_2": -0.3833,
+            "M_2": 9.2418,
+            "S_2": 0.08999
+          },
+          {
+            "threshold": 76.5,
+            "L_2": -0.3833,
+            "M_2": 9.3337,
+            "S_2": 0.08992
+          },
+          {
+            "threshold": 77.0,
+            "L_2": -0.3833,
+            "M_2": 9.4252,
+            "S_2": 0.08985
+          },
+          {
+            "threshold": 77.5,
+            "L_2": -0.3833,
+            "M_2": 9.5166,
+            "S_2": 0.08979
+          },
+          {
+            "threshold": 78.0,
+            "L_2": -0.3833,
+            "M_2": 9.6086,
+            "S_2": 0.08972
+          },
+          {
+            "threshold": 78.5,
+            "L_2": -0.3833,
+            "M_2": 9.7015,
+            "S_2": 0.08965
+          },
+          {
+            "threshold": 79.0,
+            "L_2": -0.3833,
+            "M_2": 9.7957,
+            "S_2": 0.08959
+          },
+          {
+            "threshold": 79.5,
+            "L_2": -0.3833,
+            "M_2": 9.8915,
+            "S_2": 0.08952
+          },
+          {
+            "threshold": 80.0,
+            "L_2": -0.3833,
+            "M_2": 9.9892,
+            "S_2": 0.08946
+          },
+          {
+            "threshold": 80.5,
+            "L_2": -0.3833,
+            "M_2": 10.0891,
+            "S_2": 0.0894
+          },
+          {
+            "threshold": 81.0,
+            "L_2": -0.3833,
+            "M_2": 10.1916,
+            "S_2": 0.08934
+          },
+          {
+            "threshold": 81.5,
+            "L_2": -0.3833,
+            "M_2": 10.2965,
+            "S_2": 0.08928
+          },
+          {
+            "threshold": 82.0,
+            "L_2": -0.3833,
+            "M_2": 10.4041,
+            "S_2": 0.08923
+          },
+          {
+            "threshold": 82.5,
+            "L_2": -0.3833,
+            "M_2": 10.514,
+            "S_2": 0.08918
+          },
+          {
+            "threshold": 83.0,
+            "L_2": -0.3833,
+            "M_2": 10.6263,
+            "S_2": 0.08914
+          },
+          {
+            "threshold": 83.5,
+            "L_2": -0.3833,
+            "M_2": 10.741,
+            "S_2": 0.0891
+          },
+          {
+            "threshold": 84.0,
+            "L_2": -0.3833,
+            "M_2": 10.8578,
+            "S_2": 0.08906
+          },
+          {
+            "threshold": 84.5,
+            "L_2": -0.3833,
+            "M_2": 10.9767,
+            "S_2": 0.08903
+          },
+          {
+            "threshold": 85.0,
+            "L_2": -0.3833,
+            "M_2": 11.0974,
+            "S_2": 0.089
+          },
+          {
+            "threshold": 85.5,
+            "L_2": -0.3833,
+            "M_2": 11.2198,
+            "S_2": 0.08898
+          },
+          {
+            "threshold": 86.0,
+            "L_2": -0.3833,
+            "M_2": 11.3435,
+            "S_2": 0.08897
+          },
+          {
+            "threshold": 86.5,
+            "L_2": -0.3833,
+            "M_2": 11.4684,
+            "S_2": 0.08895
+          },
+          {
+            "threshold": 87.0,
+            "L_2": -0.3833,
+            "M_2": 11.594,
+            "S_2": 0.08895
+          },
+          {
+            "threshold": 87.5,
+            "L_2": -0.3833,
+            "M_2": 11.7201,
+            "S_2": 0.08895
+          },
+          {
+            "threshold": 88.0,
+            "L_2": -0.3833,
+            "M_2": 11.8461,
+            "S_2": 0.08895
+          },
+          {
+            "threshold": 88.5,
+            "L_2": -0.3833,
+            "M_2": 11.972,
+            "S_2": 0.08896
+          },
+          {
+            "threshold": 89.0,
+            "L_2": -0.3833,
+            "M_2": 12.0976,
+            "S_2": 0.08898
+          },
+          {
+            "threshold": 89.5,
+            "L_2": -0.3833,
+            "M_2": 12.2229,
+            "S_2": 0.089
+          },
+          {
+            "threshold": 90.0,
+            "L_2": -0.3833,
+            "M_2": 12.3477,
+            "S_2": 0.08903
+          },
+          {
+            "threshold": 90.5,
+            "L_2": -0.3833,
+            "M_2": 12.4723,
+            "S_2": 0.08906
+          },
+          {
+            "threshold": 91.0,
+            "L_2": -0.3833,
+            "M_2": 12.5965,
+            "S_2": 0.08909
+          },
+          {
+            "threshold": 91.5,
+            "L_2": -0.3833,
+            "M_2": 12.7205,
+            "S_2": 0.08913
+          },
+          {
+            "threshold": 92.0,
+            "L_2": -0.3833,
+            "M_2": 12.8443,
+            "S_2": 0.08918
+          },
+          {
+            "threshold": 92.5,
+            "L_2": -0.3833,
+            "M_2": 12.9681,
+            "S_2": 0.08923
+          },
+          {
+            "threshold": 93.0,
+            "L_2": -0.3833,
+            "M_2": 13.092,
+            "S_2": 0.08928
+          },
+          {
+            "threshold": 93.5,
+            "L_2": -0.3833,
+            "M_2": 13.2158,
+            "S_2": 0.08934
+          },
+          {
+            "threshold": 94.0,
+            "L_2": -0.3833,
+            "M_2": 13.3399,
+            "S_2": 0.08941
+          },
+          {
+            "threshold": 94.5,
+            "L_2": -0.3833,
+            "M_2": 13.4643,
+            "S_2": 0.08948
+          },
+          {
+            "threshold": 95.0,
+            "L_2": -0.3833,
+            "M_2": 13.5892,
+            "S_2": 0.08955
+          },
+          {
+            "threshold": 95.5,
+            "L_2": -0.3833,
+            "M_2": 13.7146,
+            "S_2": 0.08963
+          },
+          {
+            "threshold": 96.0,
+            "L_2": -0.3833,
+            "M_2": 13.8408,
+            "S_2": 0.08972
+          },
+          {
+            "threshold": 96.5,
+            "L_2": -0.3833,
+            "M_2": 13.9676,
+            "S_2": 0.08981
+          },
+          {
+            "threshold": 97.0,
+            "L_2": -0.3833,
+            "M_2": 14.0953,
+            "S_2": 0.0899
+          },
+          {
+            "threshold": 97.5,
+            "L_2": -0.3833,
+            "M_2": 14.2239,
+            "S_2": 0.09
+          },
+          {
+            "threshold": 98.0,
+            "L_2": -0.3833,
+            "M_2": 14.3537,
+            "S_2": 0.0901
+          },
+          {
+            "threshold": 98.5,
+            "L_2": -0.3833,
+            "M_2": 14.4848,
+            "S_2": 0.09021
+          },
+          {
+            "threshold": 99.0,
+            "L_2": -0.3833,
+            "M_2": 14.6174,
+            "S_2": 0.09033
+          },
+          {
+            "threshold": 99.5,
+            "L_2": -0.3833,
+            "M_2": 14.7519,
+            "S_2": 0.09044
+          },
+          {
+            "threshold": 100.0,
+            "L_2": -0.3833,
+            "M_2": 14.8882,
+            "S_2": 0.09057
+          },
+          {
+            "threshold": 100.5,
+            "L_2": -0.3833,
+            "M_2": 15.0267,
+            "S_2": 0.09069
+          },
+          {
+            "threshold": 101.0,
+            "L_2": -0.3833,
+            "M_2": 15.1676,
+            "S_2": 0.09083
+          },
+          {
+            "threshold": 101.5,
+            "L_2": -0.3833,
+            "M_2": 15.3108,
+            "S_2": 0.09096
+          },
+          {
+            "threshold": 102.0,
+            "L_2": -0.3833,
+            "M_2": 15.4564,
+            "S_2": 0.0911
+          },
+          {
+            "threshold": 102.5,
+            "L_2": -0.3833,
+            "M_2": 15.6046,
+            "S_2": 0.09125
+          },
+          {
+            "threshold": 103.0,
+            "L_2": -0.3833,
+            "M_2": 15.7553,
+            "S_2": 0.09139
+          },
+          {
+            "threshold": 103.5,
+            "L_2": -0.3833,
+            "M_2": 15.9087,
+            "S_2": 0.09155
+          },
+          {
+            "threshold": 104.0,
+            "L_2": -0.3833,
+            "M_2": 16.0645,
+            "S_2": 0.0917
+          },
+          {
+            "threshold": 104.5,
+            "L_2": -0.3833,
+            "M_2": 16.2229,
+            "S_2": 0.09186
+          },
+          {
+            "threshold": 105.0,
+            "L_2": -0.3833,
+            "M_2": 16.3837,
+            "S_2": 0.09203
+          },
+          {
+            "threshold": 105.5,
+            "L_2": -0.3833,
+            "M_2": 16.547,
+            "S_2": 0.09219
+          },
+          {
+            "threshold": 106.0,
+            "L_2": -0.3833,
+            "M_2": 16.7129,
+            "S_2": 0.09236
+          },
+          {
+            "threshold": 106.5,
+            "L_2": -0.3833,
+            "M_2": 16.8814,
+            "S_2": 0.09254
+          },
+          {
+            "threshold": 107.0,
+            "L_2": -0.3833,
+            "M_2": 17.0527,
+            "S_2": 0.09271
+          },
+          {
+            "threshold": 107.5,
+            "L_2": -0.3833,
+            "M_2": 17.2269,
+            "S_2": 0.09289
+          },
+          {
+            "threshold": 108.0,
+            "L_2": -0.3833,
+            "M_2": 17.4039,
+            "S_2": 0.09307
+          },
+          {
+            "threshold": 108.5,
+            "L_2": -0.3833,
+            "M_2": 17.5839,
+            "S_2": 0.09326
+          },
+          {
+            "threshold": 109.0,
+            "L_2": -0.3833,
+            "M_2": 17.7668,
+            "S_2": 0.09344
+          },
+          {
+            "threshold": 109.5,
+            "L_2": -0.3833,
+            "M_2": 17.9526,
+            "S_2": 0.09363
+          },
+          {
+            "threshold": 110.0,
+            "L_2": -0.3833,
+            "M_2": 18.1412,
+            "S_2": 0.09382
+          },
+          {
+            "threshold": 110.5,
+            "L_2": -0.3833,
+            "M_2": 18.3324,
+            "S_2": 0.09401
+          }
+        ],
+        "fallback": null,
+        "suffix": "_2"
+      }
+    ],
+    "lookup": null
+  },
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "Z_Score_Length = ((Length/M)L - 1) / (L * S)\nZ_Score_Weight_for_Length = ((Weight/M)L - 1) / (L * S)\nLength_Percentile = ZtoPercentile(Z_Score_Length)\nWeight_for_Length_Percentile = ZtoPercentile(Z_Score_Weight_for_Length)",
+    "notes": [
+      "Moderate malnutrition is defined as moderate stunting or wasting. Severe malnutrition is defined as severe stunting or severe wasting, or edematous malnutrition. Patients with edematous malnutrition (Kwashiorkor) should be considered to have severe malnutrition even if stunting or wasting z-scores are not in the severe range.",
+      "This calculator uses measured recumbent Length for infants and toddlers from birth through 24 months of age, and is not valid for standing height.",
+      "At the extremes (>97th percentile or <3rd percentile), small differences in percentiles represent clinically important differences. At these extremes, the Z-score is a more precise reflection of how far the measurement deviates from the mean and is a useful tool for tracking changes.",
+      "LMS data used in this calculator are shown in the data table below.",
+      "For all LMS tables, the row in the table corresponding to the patient-specific value is found in the first column of the table; values to be used for L (the Box-Cox power), M (the median), and S (the generalized coefficient of variation) in the equation for Z-score are retrieved.",
+      "Z-scores may be used to do a table lookup for the corresponding percentile in the Normal table percentiles for Z-score table (below). Numbers along the left side (Y-axis) of the table represent the first number and first decimal place of the Z-score, while the numbers along the top (X-axis) of the table represent the second decimal position of the Z-score.",
+      "Helpful Tips LMS Parameters for Infant Girls: Length for Age Age [months] Power [L] Median [M] Variation [S]"
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "LMS Parameters for Infant Girls: Length for Age. World Health Organization 2008, Child Growth Standards: Methods and development.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "LMS Parameters for Infant Girls: Weight for Length. World Health Organization 2008, Child Growth Standards: Methods and development.",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 3
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "WHO Assessment of Malnutrition (Girls; 0 - 2 Years).pdf",
+      "source_sha256": "74feec8aaeec4b2453f9dd7a7742c1d46ee0efd93b59398f2201ff6c151ae097",
+      "extractor": "pdf",
+      "form_name": "WHOInfantGrowthGirls",
+      "identity": {
+        "doc_id": "70017",
+        "title": "WHO Assessment of Malnutrition (Girls; 0 - 2 Years)",
+        "form_name": "WHOInfantGrowthGirls",
+        "filename_title": "WHO Assessment of Malnutrition (Girls; 0 - 2 Years)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('WHO Assessment of Malnutrition (Girls; 0 - 2 Years)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (whoassessmentofmalnutritiongirls02years)",
+          "title_vs_form": "differs (whoassessmentofmalnutritiongirls02years vs whoinfantgrowthgirls) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf181",
+      "title": "WHO Assessment of Malnutrition (Girls; 0 - 2 Years)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 16,
+    "checks_total": 16,
+    "missing": []
+  }
+}

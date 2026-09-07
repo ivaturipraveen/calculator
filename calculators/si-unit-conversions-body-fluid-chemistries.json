@@ -1,0 +1,189 @@
+{
+  "schema_version": "1.0",
+  "slug": "si-unit-conversions-body-fluid-chemistries",
+  "title": "SI Unit Conversions: Body Fluid Chemistries",
+  "subtitle": null,
+  "category": "Unit Conversion",
+  "renderer": "convert",
+  "engine": "convert",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "from",
+      "label": "FROM",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "to",
+      "label": "TO",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "set_maximal_display_precision_in_decimal_points_1",
+      "label": "Set maximal display precision in decimal points: 1",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "convert",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": null,
+  "tables": {
+    "pairs": [
+      {
+        "from": "Albumin, amniotic fluid (mg/dL)",
+        "to": "Albumin, amniotic fluid (mg/L)",
+        "factor": 10
+      },
+      {
+        "from": "Albumin, CSF (mg/dL)",
+        "to": "Albumin, CSF (mg/L)",
+        "factor": 10
+      },
+      {
+        "from": "Bilirubin, amniotic fluid (mg/dL)",
+        "to": "Bilirubin, amniotic fluid (µmol/L)",
+        "factor": 17.1
+      },
+      {
+        "from": "Chloride, sweat (mmol/L)",
+        "to": "Chloride, sweat (mEq/L)",
+        "factor": 1
+      },
+      {
+        "from": "Creatinine, amniotic fluid (mg/dL)",
+        "to": "Creatinine, amniotic fluid (µmol/L)",
+        "factor": 88.4
+      },
+      {
+        "from": "Estriol, amniotic fluid (mcg/dL)",
+        "to": "Estriol, amniotic fluid (nmol/L)",
+        "factor": 3.468
+      },
+      {
+        "from": "Glucose, CSF (mg/dL)",
+        "to": "Glucose, CSF (mmol/L)",
+        "factor": 0.05551
+      },
+      {
+        "from": "Protein total, amniotic fluid (g/dL)",
+        "to": "Protein total, amniotic fluid (g/L)",
+        "factor": 10
+      },
+      {
+        "from": "Protein total, CSF (mg/dL)",
+        "to": "Protein total, CSF (mg/L)",
+        "factor": 10
+      },
+      {
+        "from": "Sodium, sweat (mmol/L)",
+        "to": "Sodium, sweat (mEq/L)",
+        "factor": 1
+      }
+    ]
+  },
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": null,
+    "notes": [
+      "In this calculator, mcg is the abbreviation for micrograms.",
+      "To make simple unit conversions, select the starting units with the pull-down selector on the right. Then type a starting value in the top FROM input box. To convert the value, choose the new unit in the lower right selector. The converted value will appear immediately in the TO box.",
+      "Helpful Tips Conversion factors Acid output in gastric fluid mmol/h X 1 = Acid output in gastric fluid mEq/h Albumin in amniotic fluid mg/dL X 10 = Albumin in amniotic fluid mg/L Albumin in CSF mg/dL X 10 = Albumin in CSF mg/L Bilirubin in amniotic fluid mg/dL X 17.1 = Bilirubin in amniotic fluid mcmol/L Chloride in sweat mmol/L X 1 = Chloride in sweat mEq/L Coproporphyrins in feces mcg/g feces X 1.5 = Coproporphyrins in feces nmol/g feces Creatinine in amniotic fluid mg/dL X 88.4 = Creatinine in amniotic fluid mcmol/L DHEA-S (dehydro-epiandrosterone sulfate) in amniotic fluid ng/mL X 2.6 = DHEA-S (dehydro-epiandrosterone sulfate) in amniotic fluid nmol/L Estriol in amniotic fluid mcg/dL X 3.468 = Estriol in amniotic fluid nmol/L Estriol in amniotic fluid mcg/dL X 3.468 = Estriol in amniotic fluid nmol/L Glucose in CSF mg/dL X 0.05551 = Glucose in CSF mmol/L Hormone receptor estrogen in tissue nmol/kg protein X 1 = Hormone receptor estrogen in tissue fmol/mg protein Hormone receptor progesterone in tissue nmol/kg protein X 1 = Hormone receptor progesterone in tissue fmol/mg protein Nitrogen total in feces g/24 h X 71.39 = Nitrogen total in feces mmol/d Protein total in amniotic fluid g/dL X 10 = Protein total in amniotic fluid g/L Protein total in CSF mg/dL X 10 = Protein total in CSF mg/L RBC in CSF 10^6 /L X 1 = RBC in CSF /mcL Sodium in sweat mmol/L X 1 = Sodium in sweat mEq/L Sperm count in semen 10^6/mL X 1000 = Sperm count in semen 10^9/L Urea in amniotic fluid mg/dL X 0.1665 = Urea in amniotic fluid mmol/L Urobilinogen in feces mg/24 h X 1.693 = Urobilinogen in feces mcmol/d WBC in CSF 10^6 /L X 1 = WBC in CSF /mcL WBC in synovial fluid 10^6/L X 1 = WBC in synovial fluid /mcL"
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Young DS. Implementation of SI Units for Clinical Laboratory Data. Ann Int Med. 1987; 106:114.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "[PubMed 3789557]",
+        "pubmed_id": "3789557",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3789557/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 257117 v19.2]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "SI Unit Conversions- Body Fluid Chemistries.pdf",
+      "source_sha256": "ed5e163143a4c4bef099470f625919fdb1d733d4367f832e6a807e0210e0202c",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "SI Unit Conversions: Body Fluid Chemistries",
+        "form_name": "SI_bodyfluid",
+        "filename_title": "SI Unit Conversions- Body Fluid Chemistries",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('SI Unit Conversions: Body Fluid Chemistries')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (siunitconversionsbodyfluidchemistries)",
+          "title_vs_form": "differs (siunitconversionsbodyfluidchemistries vs sibodyfluid) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf148",
+      "title": "SI Unit Conversions: Body Fluid Chemistries",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "inputs_from_printed_form_only",
+        "severity": "medium",
+        "detail": "3 field(s) recovered from the printed form; the calculation itself is not in the PDF"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 7,
+    "checks_total": 7,
+    "missing": []
+  }
+}

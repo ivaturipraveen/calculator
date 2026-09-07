@@ -1,0 +1,245 @@
+{
+  "schema_version": "1.0",
+  "slug": "vecuronium",
+  "title": "Vecuronium",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "concentration",
+      "label": "Concentration",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "Infuse Rate",
+      "units": [
+        {
+          "code": "Infuse Rate",
+          "label": "Infuse Rate",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "concentration",
+        "id_const": "ID_CONCENTRATION"
+      },
+      "dimension": null,
+      "derived_constraints": {
+        "applies_to": "concentration_calc",
+        "min": 0.1,
+        "max": 1.0
+      },
+      "label_source": "printed form",
+      "accepts_sentinel": [
+        "other"
+      ],
+      "options": null
+    },
+    {
+      "key": "drug_amount",
+      "label": "Drug Amount",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg",
+      "units": null,
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "drugAmount",
+        "id_const": "ID_AMOUNT"
+      },
+      "unit_source": "formula_prose"
+    },
+    {
+      "key": "dose",
+      "label": "Dose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mcg/kg/minute",
+      "units": null,
+      "constraints": {
+        "min": 0.5,
+        "max": 3.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "dose",
+        "id_const": "ID_DOSE"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Dose must be a valid value."
+      ]
+    },
+    {
+      "key": "weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "weight",
+        "id_const": "ID_WEIGHT"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "display_unit": "kg",
+      "dimension": "mass",
+      "units_source": "corpus unit registry"
+    },
+    {
+      "key": "infusate_volume",
+      "label": "Infusate Volume",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mL",
+      "units": null,
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "infusateVolume",
+        "id_const": "ID_VOLUME"
+      },
+      "unit_source": "formula_prose"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "concentration_calc",
+        "expr": "(drug_amount / infusate_volume) if (concentration == 'other') else (concentration)"
+      },
+      {
+        "key": "rate",
+        "expr": "(dose * weight *60) / (concentration_calc * 1000)"
+      },
+      {
+        "key": "rate_v2",
+        "expr": "round(rate, 2)"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "infuse_rate",
+        "label": "Infuse Rate",
+        "expr": "rate_v2",
+        "decimals": null,
+        "base_unit": "mL/hour",
+        "kind": "number",
+        "label_source": "printed form",
+        "unit_source": "formula_prose"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": "Infuse Rate:\nIf Concentration = anything except “Other”:\nInfuse Rate = (Dose * Weight * 60) / (Concentration * 1000)\n• Infuse Rate is calculated in mL/hour\n• Dose is input in mcg/kg/minute\n• Weight is input in kg\n• Concentration is input in mg/mL\nIf Concentration = “Other”:\nInfuse Rate = (Dose * Weight * 60) / [(Drug Amount / Infusate Volume) * 1000]\nInfuse Rate = (Dose * Weight * 60) / [(Drug Amount / Infusate Volume) * 1000]\n• Infuse Rate is calculated in mL/hour\n• Dose is input in mcg/kg/minute\n• Weight is input in kg\n• Drug Amount is input in mg\n• Infusate Volume is input in mL",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 1
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Vecuronium.pdf",
+      "source_sha256": "6c63d422de5f270ab730c02b6a86188ccc441db7cff3409dc07127e3a1b4eeed",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Vecuronium",
+        "form_name": null,
+        "filename_title": "Vecuronium",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Vecuronium')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (vecuronium)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf176",
+      "title": "Vecuronium",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 84.6,
+    "checks_passed": 11,
+    "checks_total": 13,
+    "missing": [
+      "notes",
+      "unit options on every field"
+    ]
+  }
+}

@@ -1,0 +1,286 @@
+{
+  "schema_version": "1.0",
+  "slug": "fracture-index-without-known-bone-mineral-density-bmd",
+  "title": "Fracture Index without known Bone Mineral Density (BMD)",
+  "subtitle": null,
+  "category": "Endocrinology / Risk Score",
+  "renderer": "score",
+  "engine": "score",
+  "status": "draft",
+  "version": 1,
+  "inputs": [],
+  "compute": {
+    "engine": "score",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": {
+    "groups": [
+      {
+        "key": "ungrouped",
+        "label": "(ungrouped)",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_0_0",
+            "label": "Fractures after age 50",
+            "points": 1
+          },
+          {
+            "key": "opt_0_1",
+            "label": "Maternal hip fracture over 50 years old",
+            "points": 1
+          },
+          {
+            "key": "opt_0_2",
+            "label": "Body weight less than 125 lbs",
+            "points": 1
+          },
+          {
+            "key": "opt_0_3",
+            "label": "Smoker",
+            "points": 1
+          },
+          {
+            "key": "opt_0_4",
+            "label": "Arm assistance to stand from chair",
+            "points": 2
+          }
+        ]
+      },
+      {
+        "key": "age",
+        "label": "AGE",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_1_0",
+            "label": "Less than 65",
+            "points": 0
+          },
+          {
+            "key": "opt_1_1",
+            "label": "65-69 Years Old",
+            "points": 1
+          },
+          {
+            "key": "opt_1_2",
+            "label": "70-74 Years Old",
+            "points": 2
+          },
+          {
+            "key": "opt_1_3",
+            "label": "75-79 Years Old",
+            "points": 3
+          },
+          {
+            "key": "opt_1_4",
+            "label": "80-85 Years Old",
+            "points": 4
+          },
+          {
+            "key": "opt_1_5",
+            "label": "85 and Over",
+            "points": 5
+          }
+        ]
+      }
+    ],
+    "bands": [
+      {
+        "min": 1,
+        "max": 1,
+        "label": "10.5%",
+        "raw": "1 Point: 10.5%"
+      },
+      {
+        "min": 2,
+        "max": 2,
+        "label": "12.5%",
+        "raw": "2 Points: 12.5%"
+      },
+      {
+        "min": 3,
+        "max": 3,
+        "label": "16.4%",
+        "raw": "3 Points: 16.4%"
+      },
+      {
+        "min": 4,
+        "max": 4,
+        "label": "18.7%",
+        "raw": "4 Points: 18.7%"
+      },
+      {
+        "min": 5,
+        "max": 9,
+        "label": "26.1%",
+        "raw": "5 to 9 Points: 26.1%"
+      },
+      {
+        "min": 1,
+        "max": 1,
+        "label": "0.6%",
+        "raw": "1 Point: 0.6%"
+      },
+      {
+        "min": 2,
+        "max": 2,
+        "label": "1.4%",
+        "raw": "2 Points: 1.4%"
+      },
+      {
+        "min": 3,
+        "max": 3,
+        "label": "2.1%",
+        "raw": "3 Points: 2.1%"
+      },
+      {
+        "min": 4,
+        "max": 4,
+        "label": "3.2%",
+        "raw": "4 Points: 3.2%"
+      },
+      {
+        "min": 5,
+        "max": 9,
+        "label": "8.2%",
+        "raw": "5 to 9 Points: 8.2%"
+      },
+      {
+        "min": 1,
+        "max": 1,
+        "label": "1.4%",
+        "raw": "1 Point: 1.4%"
+      },
+      {
+        "min": 2,
+        "max": 2,
+        "label": "2.9%",
+        "raw": "2 Points: 2.9%"
+      },
+      {
+        "min": 3,
+        "max": 3,
+        "label": "5.1%",
+        "raw": "3 Points: 5.1%"
+      },
+      {
+        "min": 4,
+        "max": 4,
+        "label": "7.0%",
+        "raw": "4 Points: 7.0%"
+      },
+      {
+        "min": 5,
+        "max": 9,
+        "label": "9.9%",
+        "raw": "5 to 9 Points: 9.9%"
+      }
+    ],
+    "total": {
+      "key": "total_score",
+      "label": "Total Criteria Point Count",
+      "unit": "points",
+      "min": 1.0,
+      "max": 7.0
+    },
+    "interpretation": {
+      "key": "interpretation",
+      "label": "5 Year Nonvertebral Fracture Risk",
+      "printed_rows": [
+        "5 Year Nonvertebral Fracture Risk",
+        "5 Year Hip Fracture Risk",
+        "5 Year Vertebral Fracture Risk"
+      ]
+    }
+  },
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Black DM, Steinbuch M, Palermo L, et al. An assessment tool for predicting fracture risk in postmenopausal women. Osteoporos Int. 2001;12(7):519-28.[PubMed 11527048]",
+        "pubmed_id": "11527048",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11527048/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": [
+      {
+        "label": "5 to 9 Points:",
+        "value": 26.1,
+        "unit": "%"
+      },
+      {
+        "label": "5 to 9 Points:",
+        "value": 8.2,
+        "unit": "%"
+      },
+      {
+        "label": "5 to 9 Points:",
+        "value": 9.9,
+        "unit": "%"
+      }
+    ],
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Fracture Index without known Bone Mineral Density (BMD).pdf",
+      "source_sha256": "c5ce85a1f6d279fd520b2c5f1b09f03b3321cc689e9e1ebad5cfcc1322b04ff4",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Fracture Index without known Bone Mineral Density (BMD)",
+        "form_name": null,
+        "filename_title": "Fracture Index without known Bone Mineral Density (BMD)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Fracture Index without known Bone Mineral Density (BMD)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (fractureindexwithoutknownbonemineraldensitybmd)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf91",
+      "title": "Fracture Index without known Bone Mineral Density (BMD)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 9,
+    "checks_total": 9,
+    "missing": []
+  }
+}

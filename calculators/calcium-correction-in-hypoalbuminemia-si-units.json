@@ -1,0 +1,195 @@
+{
+  "schema_version": "1.0",
+  "slug": "calcium-correction-in-hypoalbuminemia-si-units",
+  "title": "Calcium Correction in Hypoalbuminemia (SI units)",
+  "subtitle": null,
+  "category": "Lab / Electrolytes",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "normal_albumin",
+      "js_name": "Normal_Albumin",
+      "label": "Normal Albumin",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "options": [
+        {
+          "label": "40 g/L",
+          "index": 0,
+          "value": 40.0
+        },
+        {
+          "label": "44 g/L",
+          "index": 1,
+          "value": 44.0
+        }
+      ],
+      "options_source": "pdf_script+printed_form",
+      "variant_variables": null,
+      "source": {
+        "kind": "radio_group",
+        "js_group": "Normal_Albumin"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "serum_ca",
+      "js_name": "Serum_Ca",
+      "label": "Serum Ca",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mmol/L",
+      "display_unit": "mmol/L",
+      "units": [
+        {
+          "code": "mmol/L",
+          "label": "mmol/L",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "creatinine",
+      "label_source": "printed form"
+    },
+    {
+      "key": "patient_albumin",
+      "js_name": "Patient_Albumin",
+      "label": "Patient Albumin",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "g/L",
+      "display_unit": "g/L",
+      "units": [
+        {
+          "code": "g/L",
+          "label": "g/L",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "ca",
+        "js_name": "Ca",
+        "label": "Ca",
+        "expr": "serum_ca + 0.02 * (normal_albumin - patient_albumin)",
+        "base_unit": "mmol/L",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "Ca = Serum_Ca + 0.02 * (Normal_Albumin - Patient_Albumin)",
+    "notes": [
+      "The Normal Albumin parameter is set to 40 g/L.",
+      "Some practitioners prefer 44 g/L as normal (see article 1 below.) Simply change the Normal Some practitioners prefer 44 g/L as normal (see article 1 below.) Simply change the Normal Albumin value above and the page will recalculate instantly."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Figge J, Jabor A, Kazda A, Fencl V. Anion gap and hypoalbuminemia. Crit Care Med. 1998 Nov;26(11):1807-10.[PubMed 9824071]",
+        "pubmed_id": "9824071",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9824071/"
+      },
+      {
+        "text": "Payne RB, Little AJ, Williams RB, Milner JR. Interpretation of serum calcium in patients with abnormal serum proteins. Br Med J. 1973 Dec 15;4(5893):643-6. [PubMed 4758544]",
+        "pubmed_id": "4758544",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/4758544/"
+      },
+      {
+        "text": "Jassam N, Gopaul S, McShane P, et al. Calcium adjustment equations in neonates and children.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Ann Clin Biochem. 2012; 49:352. [PubMed 22535865]",
+        "pubmed_id": "22535865",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22535865/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Calcium Correction in Hypoalbuminemia (SI units).pdf",
+      "source_sha256": "fc9ea679e77296f2fee7bf62c3d0ab44371a05a86b6918c369a52f8e89eb651c",
+      "extractor": "pdf",
+      "form_name": "CalciumAlbumin_SI",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Calcium Correction in Hypoalbuminemia (SI units)",
+        "form_name": "CalciumAlbumin_SI",
+        "filename_title": "Calcium Correction in Hypoalbuminemia (SI units)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Calcium Correction in Hypoalbuminemia (SI units)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (calciumcorrectioninhypoalbuminemiasiunits)",
+          "title_vs_form": "differs (calciumcorrectioninhypoalbuminemiasiunits vs calciumalbuminsi) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf37",
+      "title": "Calcium Correction in Hypoalbuminemia (SI units)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 81.2,
+    "checks_passed": 13,
+    "checks_total": 16,
+    "missing": [
+      "unit options on every field",
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

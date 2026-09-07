@@ -1,0 +1,205 @@
+{
+  "schema_version": "1.0",
+  "slug": "chads2-score",
+  "title": "CHADS2 Score",
+  "subtitle": null,
+  "category": "Cardiology / Scoring System",
+  "renderer": "score",
+  "engine": "score",
+  "status": "draft",
+  "version": 1,
+  "inputs": [],
+  "compute": {
+    "engine": "score",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": {
+    "groups": [
+      {
+        "key": "ungrouped",
+        "label": "(ungrouped)",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_0_0",
+            "label": "Diagnosed heart failure, past or current",
+            "points": 1
+          },
+          {
+            "key": "opt_0_1",
+            "label": "Hypertension treated or untreated",
+            "points": 1
+          },
+          {
+            "key": "opt_0_2",
+            "label": "Age ≥75 years",
+            "points": 1
+          },
+          {
+            "key": "opt_0_3",
+            "label": "Diabetes Mellitus",
+            "points": 1
+          },
+          {
+            "key": "opt_0_4",
+            "label": "Secondary prevention in patients with prior ischemic stroke, TIA or thromboembolism",
+            "points": 2
+          }
+        ]
+      }
+    ],
+    "bands": [
+      {
+        "min": 0,
+        "max": 0,
+        "label": "0.25 ON Rx; 0.49 NO Rx",
+        "raw": "0 Points: 0.25 ON Rx; 0.49 NO Rx"
+      },
+      {
+        "min": 1,
+        "max": 1,
+        "label": "0.72 ON Rx; 1.52 NO Rx",
+        "raw": "1 Point: 0.72 ON Rx; 1.52 NO Rx"
+      },
+      {
+        "min": 2,
+        "max": 2,
+        "label": "1.27 ON Rx; 2.50 No Rx",
+        "raw": "2 Points: 1.27 ON Rx; 2.50 No Rx"
+      },
+      {
+        "min": 3,
+        "max": 3,
+        "label": "2.20 ON Rx; 5.27 NO Rx",
+        "raw": "3 Points: 2.20 ON Rx; 5.27 NO Rx"
+      },
+      {
+        "min": 4,
+        "max": 4,
+        "label": "2.35 ON Rx; 6.02 NO Rx",
+        "raw": "4 Points: 2.35 ON Rx; 6.02 NO Rx"
+      },
+      {
+        "min": 5,
+        "max": 6,
+        "label": "4.60 ON Rx; 6.88 NO Rx",
+        "raw": "5 to 6 Points: 4.60 ON Rx; 6.88 NO Rx"
+      }
+    ],
+    "total": {
+      "key": "total_score",
+      "label": "Total Criteria Point Count",
+      "unit": "points",
+      "min": 1.0,
+      "max": 2.0
+    },
+    "interpretation": {
+      "key": "interpretation",
+      "label": "Stroke Risk per 100 Person Years/Warfarin Rx Interpretation",
+      "printed_rows": [
+        "Stroke Risk per 100 Person Years/Warfarin Rx Interpretation"
+      ]
+    }
+  },
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Gage BF, Waterman AD, Shannon W, et al. Validation of clinical classification schemes for predicting stroke: results from the National Registry of Atrial Fibrillation. JAMA. 2001 Jun 13;285(22):2864-70.[PubMed 11401607]",
+        "pubmed_id": "11401607",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11401607/"
+      },
+      {
+        "text": "Go AS, Hylek EM, Chang Y, et al. Anticoagulation therapy for stroke prevention in atrial fibrillation: how well do randomized trials translate into clinical practice? JAMA. 2003 Nov 26;290(20):2685- 92. [PubMed 14645310]",
+        "pubmed_id": "14645310",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/14645310/"
+      },
+      {
+        "text": "Cairns JA. ACP journal club. CHA2DS2-VASc had better discrimination than CHADS2 for predicting risk for thromboembolism in atrial fibrillation. Ann Intern Med. 2011 May 17;154(10):JC5- 13. doi: 10.1059/0003-4819-154-10-201105170-02013. [PubMed 21576531]",
+        "pubmed_id": "21576531",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21576531/"
+      },
+      {
+        "text": "Olesen JB, Lip GY, Hansen ML, et al. Validation of risk stratification schemes for predicting stroke and thromboembolism in patients with atrial fibrillation: nationwide cohort study. BMJ. 2011 Jan 31;342:d124. doi: 10.1136/bmj.d124. [PubMed 21282258]",
+        "pubmed_id": "21282258",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21282258/"
+      },
+      {
+        "text": "Wild D. ACP Journal Club. CHADS2 score predicted bleeding and death in atrial fibrillation treated with anticoagulants. Ann Intern Med. 2012 Apr 17;156(8):JC4-13. doi: 10.1059/0003-4819-156-8- 201204170-02013. [PubMed 22508753]",
+        "pubmed_id": "22508753",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22508753/"
+      },
+      {
+        "text": "Oldgren J, Alings M, Darius H, et al., RE-LY Investigators. Risks for stroke, bleeding, and death in patients with atrial fibrillation receiving dabigatran or warfarin in relation to the CHADS2 score: a subgroup analysis of the RE-LY trial. Ann Intern Med. 2011 Nov 15;155(10):660-7, W204. doi:",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "10.1059/0003-4819-155-10-201111150-00004. [PubMed 22084332]",
+        "pubmed_id": "22084332",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22084332/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "CHADS2 Score.pdf",
+      "source_sha256": "b75863919939c8fcf90e2f05cb8b77f36b64e86c7ad3f667178d099f4ca6381b",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "CHADS2 Score",
+        "form_name": null,
+        "filename_title": "CHADS2 Score",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('CHADS2 Score')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (chads2score)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf54",
+      "title": "CHADS2 Score",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 9,
+    "checks_total": 9,
+    "missing": []
+  }
+}

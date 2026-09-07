@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0",
+  "slug": "maintenance-fluid-calculation-for-children",
+  "title": "Maintenance Fluid Calculation for Children",
+  "subtitle": null,
+  "category": "Pediatrics",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "weight",
+      "js_name": "Weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "display_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 3.499,
+        "max": 200.0
+      },
+      "messages": {
+        "min": "The minimum value for Weight is 3.499 kg."
+      },
+      "dimension": "mass",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Weight is 3.499 kg. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Weight is 200 kg. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "daily_vol",
+        "js_name": "Daily_Vol",
+        "expr": "(100 * weight) if (weight < 10) else ((1000 + (50 * (weight - 10))) if ((weight >= 10) and (weight < 20 )) else ((1500 + (20 * (weight - 20))) if (weight >= 20) else (2400)))"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "daily_volume",
+        "js_name": "Daily_volume",
+        "label": "Daily volume",
+        "expr": "daily_vol",
+        "base_unit": "mL",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "fluid_infusion_rate",
+        "js_name": "Fluid_infusion_rate",
+        "label": "Fluid infusion rate",
+        "expr": "daily_volume / 24",
+        "base_unit": "mL/hr",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Fluid_infusion_rate = Daily_volume / 24",
+    "notes": [
+      "For infants 3.5 to 10 kg, the daily fluid requirement is 100 mL/kg.",
+      "For children 11 to 20 kg, the daily fluid requirement is 1000 mL + 50 mL/kg for every kg over 10.",
+      "For children 11 to 20 kg, the daily fluid requirement is 1000 mL + 50 mL/kg for every kg over 10.",
+      "For children >20 kg, the daily fluid requirement is 1500 mL + 20 mL/kg for every kg over 20, up to a maximum of 2400 mL daily.",
+      "This calculation does not apply to newborn infants (ie, from 0 to 28 days after full-term delivery)."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Holliday MA, Segar WE. The maintenance need for water in parenteral fluid therapy. Pediatrics. 1957; 19:823.[PubMed 13431307]",
+        "pubmed_id": "13431307",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/13431307/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 1
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Maintenance Fluid Calculation for Children.pdf",
+      "source_sha256": "7ae7f5d62e40b7a696f4a06873a99a9f9125ad88ea893fc344a9490dd426cb84",
+      "extractor": "pdf",
+      "form_name": "MaintenanceFluidChildren",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Maintenance Fluid Calculation for Children",
+        "form_name": "MaintenanceFluidChildren",
+        "filename_title": "Maintenance Fluid Calculation for Children",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Maintenance Fluid Calculation for Children')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (maintenancefluidcalculationforchildren)",
+          "title_vs_form": "differs (maintenancefluidcalculationforchildren vs maintenancefluidchildren) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf112",
+      "title": "Maintenance Fluid Calculation for Children",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 16,
+    "checks_total": 16,
+    "missing": []
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "schema_version": "1.0",
+  "slug": "glasgow-coma-scale",
+  "title": "Glasgow Coma Scale",
+  "subtitle": null,
+  "category": "Scoring System",
+  "renderer": "score",
+  "engine": "score",
+  "status": "draft",
+  "version": 1,
+  "inputs": [],
+  "compute": {
+    "engine": "score",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": {
+    "groups": [
+      {
+        "key": "eye opening",
+        "label": "Eye Opening",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_0_0",
+            "label": "Spontaneous",
+            "points": 4
+          },
+          {
+            "key": "opt_0_1",
+            "label": "To verbal command",
+            "points": 3
+          },
+          {
+            "key": "opt_0_2",
+            "label": "To pain",
+            "points": 2
+          },
+          {
+            "key": "opt_0_3",
+            "label": "None",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "key": "best motor response",
+        "label": "Best Motor Response",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_1_0",
+            "label": "Obeys verbal command",
+            "points": 6
+          },
+          {
+            "key": "opt_1_1",
+            "label": "Localizes painful stimuli",
+            "points": 5
+          },
+          {
+            "key": "opt_1_2",
+            "label": "Flexion withdrawal from painful stimuli",
+            "points": 4
+          },
+          {
+            "key": "opt_1_3",
+            "label": "Decorticate response to painful stimuli",
+            "points": 3
+          },
+          {
+            "key": "opt_1_4",
+            "label": "Decerebrate response to painful stimuli",
+            "points": 2
+          },
+          {
+            "key": "opt_1_5",
+            "label": "None",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "key": "best verbal response",
+        "label": "Best Verbal Response",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_2_0",
+            "label": "Oriented conversation",
+            "points": 5
+          },
+          {
+            "key": "opt_2_1",
+            "label": "Disoriented conversation",
+            "points": 4
+          },
+          {
+            "key": "opt_2_2",
+            "label": "Inappropriate words",
+            "points": 3
+          },
+          {
+            "key": "opt_2_3",
+            "label": "Incomprehensible words",
+            "points": 3
+          },
+          {
+            "key": "opt_2_4",
+            "label": "Incomprehensible sounds",
+            "points": 2
+          },
+          {
+            "key": "opt_2_5",
+            "label": "None",
+            "points": 1
+          }
+        ]
+      }
+    ],
+    "bands": [
+      {
+        "min": 15,
+        "max": 15,
+        "label": "Normal",
+        "raw": "15 Points: Normal"
+      },
+      {
+        "min": 3,
+        "max": 14,
+        "label": "Abnormal",
+        "raw": "3 to 14 Points: Abnormal"
+      }
+    ],
+    "total": {
+      "key": "total_score",
+      "label": "Total Criteria Point Count",
+      "unit": "points",
+      "min": 3.0,
+      "max": 15.0
+    },
+    "interpretation": {
+      "key": "interpretation",
+      "label": "Glasgow Coma Scale",
+      "printed_rows": [
+        "Glasgow Coma Scale"
+      ]
+    }
+  },
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Teasdale G, Jennett B. Assessment of coma and impaired conciousness: a practical scale.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Lancet. 1974; 2:81-84.[PubMed 4136544]",
+        "pubmed_id": "4136544",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/4136544/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Glasgow Coma Scale.pdf",
+      "source_sha256": "153b0f06c81166c68a894baf82662f09d1e33486c8e4ea51d4a07d86912f1b5d",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Glasgow Coma Scale",
+        "form_name": null,
+        "filename_title": "Glasgow Coma Scale",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Glasgow Coma Scale')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (glasgowcomascale)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "gcs",
+      "title": "Glasgow Coma Scale",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 9,
+    "checks_total": 9,
+    "missing": []
+  }
+}

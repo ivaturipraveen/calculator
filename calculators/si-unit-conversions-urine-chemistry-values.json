@@ -1,0 +1,164 @@
+{
+  "schema_version": "1.0",
+  "slug": "si-unit-conversions-urine-chemistry-values",
+  "title": "SI Unit Conversions: Urine Chemistry Values",
+  "subtitle": null,
+  "category": "Unit Conversion",
+  "renderer": "convert",
+  "engine": "convert",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "from",
+      "label": "FROM",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "to",
+      "label": "TO",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "set_maximal_display_precision_in_decimal_points_1",
+      "label": "Set maximal display precision in decimal points: 1",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "convert",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": null,
+  "tables": {
+    "pairs": [
+      {
+        "from": "Urine Protein (mg/dL)",
+        "to": "Urine Protein (g/L)",
+        "factor": 0.01
+      },
+      {
+        "from": "Urine Creatinine (mg/dL)",
+        "to": "Urine Creatinine (mmol/L)",
+        "factor": 0.0884
+      },
+      {
+        "from": "Urine Calcium (mg/dL)",
+        "to": "Urine Calcium (mmol/L)",
+        "factor": 0.2495
+      },
+      {
+        "from": "Urine Urea Nitrogen (mg/dL)",
+        "to": "Urine Urea Nitrogen (mmol/L)",
+        "factor": 0.357
+      },
+      {
+        "from": "Urine Uric Acid (mg/dL)",
+        "to": "Urine Uric Acid (mmol/L)",
+        "factor": 0.0595
+      }
+    ]
+  },
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": null,
+    "notes": [
+      "In this calculator, mcg is the abbreviation for micrograms.",
+      "To make simple unit conversions, select the starting units with the pull-down selector on the right. Then type a starting value in the top FROM input box. To convert the value, choose the new unit in the lower right selector. The converted value will appear immediately in the TO box.",
+      "Helpful Tips Conversion factors 17-Hydroxycorticosteroids (17-OHCS) mg/g of creatinine X 113.1 = 17-Hydroxycorticosteroids (17-OHCS) mg/mol of creatine 17-Hydroxyketosteroids (17-OHKS cortisol) mcg/24 h X 2.76 = 17-Hydroxyketosteroids (17-OHKS cortisol) nmol/d 17-Hydroxyketosteroids (17-OHKS cortisol) mg/24 h X 2.76 = 17-Hydroxyketosteroids (17-OHKS cortisol) mcmol/d 17-Ketosteroids (as DHEA) mg/24 h X 3.47 = 17-Ketosteroids (as DHEA) mcmol/d 5-Hydroxyindoleacetic acid (5-HIAA) mg/24 h X 5.2 = 5-Hydroxyindoleacetic acid (5-HIAA) mcmol/d Albumin mg/24 h X 0.001 = Albumin g/d Albumin mg/24 h X 0.001 = Albumin g/d Aldosterone mcg/24 h X 2.77 = Aldosterone nmol/d Aldosterone mmol/d X 1 = Aldosterone mEq/24 h Aminolevulinic acid mg/24 h X 7.63 = Aminolevulinic acid mcmol/d Amylase Somogyi units/h X 0.185 = Amylase U/h Ascorbic acid mg/dL X 5.678 = Ascorbic acid mcmol/L Calcium mg/24 h X 0.025 = Calcium mmol/d Catecholamines : Dopamine ng/mL X 6.53 = Catecholamines : Dopamine nmol/L Catecholamines : Dopamine pg/mL X 6.53 = Catecholamines : Dopamine pmol/L Catecholamines : Dopamine mcg/mg creatinine X 738 = Catecholamines : Dopamine mcmol/mol creatinine Catecholamines : Dopamine mcg/24 h X 6.53 = Catecholamines : Dopamine nmol/d Catecholamines : Epinephrine ng/mL X 5.46 = Catecholamines : Epinephrine mcmol/d Catecholamines : Epinephrine pg/mL X 5.46 = Catecholamines : Epinephrine pmol/L Catecholamines : Epinephrine mcg/mg creatinine X 617 = Catecholamines : Epinephrine mcmol/mol creatinine Catecholamines : Epinephrine mcg/24 h X 5.46 = Catecholamines : Epinephrine nmol/d Catecholamines : Norepinephrine ng/mL X 5.91 = Catecholamines : Norepinephrine nmol/L Catecholamines : Norepinephrine pg/mL X 5.91 = Catecholamines : Norepinephrine pmol/L Catecholamines : Norepinephrine mcg/mg creatinine X 669 = Catecholamines : Norepinephrine mcmol/mol creatinine Catecholamines : Norepinephrine mcg/24 h X 5.91 = Catecholamines : Norepinephrine nmol/d Chloride mmol/d X 1 = Chloride mEq/24 h Copper mcg/24 h X 0.0157 = Copper mcmol/d Coproporphyrin mcg/dL X 15.27 = Coproporphyrin nmol/L Coproporphyrins mcg/24 h X 1.527 = Coproporphyrins nmol/d Creatinine mg/kg/24 h X 8.84 = Creatinine mcmol/kg/24 h Creatinine mg/24 h X 0.0088 = Creatinine mmol/d Cyclic adenosine monophosphate (c-AMP) mg/g creatinine X 344 = Cyclic adenosine monophosphate (c-AMP) mcmol/mol creatinine Cyclic adenosine monophosphate (c-AMP) mg/24 h X 3.04 = Cyclic adenosine monophosphate (c-AMP) mcmol/d Estrogens total mcg/24 h X 3.47 = Estrogens total nmol/d Glucose mg/d X 0.0056 = Glucose mmol/d Homovanillic Acid (HVA) mcg/mg of creatinine X 0.621 = Homovanillic Acid (HVA) mmol/mol of creatinine Homovanillic Acid (HVA) mcg/24 h X 0.0055 = Homovanillic Acid (HVA) mcmol/d Homovanillic Acid (HVA) mg/24 h X 5.49 = Homovanillic Acid (HVA) mcmol/d Lead mcg/24 h X 0.0048 = Lead mcmol/d Magnesium mg/24 h X 0.411 = Magnesium mmol/d Metanephrines fractionated - metanephrine mg/g creatinine X 0.5736 = Metanephrines fractionated - metanephrine mcmol/mol creatinine Metanephrines fractionated - metanephrine Metanephrines fractionated - metanephrine Metanephrines fractionated - metanephrine mg/24 h X 5.07 = Metanephrines fractionated - metanephrine mcmol/d Metanephrines fractionated - normetanephrine mg/ g creatinine X 0.617 = Metanephrines fractionated - normetanephrine mmol/ mol creatinine Metanephrines fractionated - normetanephrine ng/mL X 5.46 = Metanephrines fractionated - normetanephrine nmol/L Muramidase (lysozyme) mg/d X 1 = Muramidase (lysozyme) mg/24 h Phosphate (inorganic phosphorus) g/24 h X 32.29 = Phosphate (inorganic phosphorus) mmol/d Porphobilinogen mg/24 h X 4.42 = Porphobilinogen mcmol/d Potassium mg/24 h X 0.0256 = Potassium mmol/d Pregnanediol mg/d X 3.12 = Pregnanediol mcmol/d Protein total mg/24 h X 0.001 = Protein total g/d Sodium mg/24 h X 0.0435 = Sodium mmol/d Urea nitrogen g/24 h X 0.0357 = Urea nitrogen mol/d urea Uric acid mg/24 h X 0.0059 = Uric acid mmol/d Uroporphyrin mcg/gm creatinine X 1.1362 = Uroporphyrin nmol/ mmol creatinine Uroporphyrin mcg/24 h X 1.204 = Uroporphyrin nmol/d Vanillylmandelic acid (VMA) mcg / mg creatinine X 0.571 = Vanillylmandelic acid (VMA) mmol / mol of creatinine Vanillylmandelic acid (VMA) mg/24 h X 5.046 = Vanillylmandelic acid (VMA) mcmol/d Xylose g/5 h X 6.66 = Xylose mmol/5 h Xylose mg/dL X 0.0666 = Xylose mmol/L Zinc mg/d X 15.3 = Zinc mcmol/d"
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Young DS. Implementation of SI Units for Clinical Laboratory Data. Ann Int Med. 1987; 106:114.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "[PubMed 3789557]",
+        "pubmed_id": "3789557",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3789557/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 257117 v19.2]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "SI Unit Conversions- Urine Chemistry Values.pdf",
+      "source_sha256": "9d69e9e435c67b6ade19775fd1856d7411396fadeb01435055f0e4df6a85f6e0",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "SI Unit Conversions: Urine Chemistry Values",
+        "form_name": "SI_uchem",
+        "filename_title": "SI Unit Conversions- Urine Chemistry Values",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('SI Unit Conversions: Urine Chemistry Values')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (siunitconversionsurinechemistryvalues)",
+          "title_vs_form": "differs (siunitconversionsurinechemistryvalues vs siuchem) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf153",
+      "title": "SI Unit Conversions: Urine Chemistry Values",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "inputs_from_printed_form_only",
+        "severity": "medium",
+        "detail": "3 field(s) recovered from the printed form; the calculation itself is not in the PDF"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 7,
+    "checks_total": 7,
+    "missing": []
+  }
+}

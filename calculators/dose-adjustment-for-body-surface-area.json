@@ -1,0 +1,193 @@
+{
+  "schema_version": "1.0",
+  "slug": "dose-adjustment-for-body-surface-area",
+  "title": "Dose Adjustment for Body Surface Area",
+  "subtitle": null,
+  "category": "Anthropometrics",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "standard_dose",
+      "js_name": "Standard_Dose",
+      "label": "Standard Dose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg",
+      "display_unit": "mg",
+      "units": [
+        {
+          "code": "mg",
+          "label": "mg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "mass",
+      "label_source": "printed form"
+    },
+    {
+      "key": "height",
+      "js_name": "Height",
+      "label": "Height",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "cm",
+      "display_unit": "cm",
+      "units": [
+        {
+          "code": "cm",
+          "label": "cm",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "length",
+      "label_source": "printed form"
+    },
+    {
+      "key": "weight",
+      "js_name": "Weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "display_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "mass",
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "bsa",
+        "js_name": "BSA",
+        "label": "BSA",
+        "expr": "0.007184 * pow(height, 0.725) * pow(weight, 0.425)",
+        "base_unit": "m2",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "adjusted_dose",
+        "js_name": "Adjusted_Dose",
+        "label": "Adjusted Dose",
+        "expr": "standard_dose * bsa / 1.73",
+        "base_unit": "mg",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "BSA = 0.007184 * Height0.725 * Weight0.425\nAdjusted_Dose = Standard_Dose * BSA / 1.73",
+    "notes": [
+      "In this calculator, mcg is the abbreviation for micrograms.",
+      "The default unit of measure for weight is kilograms. Please verify that the correct unit of measure has been selected.",
+      "This calculator uses the DuBois method to determine BSA.",
+      "Dose adjustment for BSA is not appropriate for all medications or patients."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Gerald, MC, O'Bannon. In: Nursing pharmacology and therapeutics 2nd ed. Englewood Cliffs, NJ:",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Prentice Hall Incorporated 1988.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Dubois D, Dubois EF. A formula to estimate the approximate surface area if height and weight be known. Arch Intern Med. 1916; 17:863-871.",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Dose Adjustment for Body Surface Area.pdf",
+      "source_sha256": "1698c359f7d6a4c64ce79c63b30b567e85f60ec0f311611f8c64b886a1e7ac03",
+      "extractor": "pdf",
+      "form_name": "DoseAdjustmentForBSA",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Dose Adjustment for Body Surface Area",
+        "form_name": "DoseAdjustmentForBSA",
+        "filename_title": "Dose Adjustment for Body Surface Area",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Dose Adjustment for Body Surface Area')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (doseadjustmentforbodysurfacearea)",
+          "title_vs_form": "differs (doseadjustmentforbodysurfacearea vs doseadjustmentforbsa) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf72",
+      "title": "Dose Adjustment for Body Surface Area",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 87.5,
+    "checks_passed": 14,
+    "checks_total": 16,
+    "missing": [
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

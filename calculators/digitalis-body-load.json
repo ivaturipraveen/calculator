@@ -1,0 +1,149 @@
+{
+  "schema_version": "1.0",
+  "slug": "digitalis-body-load",
+  "title": "Digitalis Body Load",
+  "subtitle": null,
+  "category": "Clinical Calculator",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "digoxin_conc",
+      "js_name": "Digoxin_Conc",
+      "label": "Digoxin Conc",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "ng/mL",
+      "display_unit": "ng/mL",
+      "units": [
+        {
+          "code": "ng/mL",
+          "label": "ng/mL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "weight",
+      "js_name": "Weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "display_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "mass",
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "dbl",
+        "js_name": "DBL",
+        "label": "DBL",
+        "expr": "digoxin_conc * 5.6 * weight / 1000",
+        "base_unit": "mg",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "DBL = Digoxin_Conc * 5.6 * Weight / 1000",
+    "notes": [
+      "In this calculator, mcg is the abbreviation for micrograms.",
+      "The default unit of measure for weight is kilograms. Please verify that the correct unit of measure has been selected."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Dillon BE, Morrissey RP. Chapter 47: Poisoning. In: Stone CK, Humphries RL, ed. CURRENT Diagnosis & Treatment: Emergency Medicine, 8th edition. 2017 McGraw-Hill Education, Inc.",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Digitalis Body Load.pdf",
+      "source_sha256": "a34df42a114b7f64d9ba97888bbbb5e72aa2b77567e4b6c768be92a5cec52461",
+      "extractor": "pdf",
+      "form_name": "DigoxinLoad",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Digitalis Body Load",
+        "form_name": "DigoxinLoad",
+        "filename_title": "Digitalis Body Load",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Digitalis Body Load')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (digitalisbodyload)",
+          "title_vs_form": "differs (digitalisbodyload vs digoxinload) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf68",
+      "title": "Digitalis Body Load",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 87.5,
+    "checks_passed": 14,
+    "checks_total": 16,
+    "missing": [
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

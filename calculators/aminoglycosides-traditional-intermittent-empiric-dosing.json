@@ -1,0 +1,617 @@
+{
+  "schema_version": "1.0",
+  "slug": "aminoglycosides-traditional-intermittent-empiric-dosing",
+  "title": "Aminoglycosides: Traditional Intermittent Empiric Dosing",
+  "subtitle": null,
+  "category": "Pharmacokinetics",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "cr_cl_method",
+      "label": "Clcr Method",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "CrClMethod",
+        "id_const": "ID_CRCL_METHOD"
+      },
+      "label_source": "printed form (word match)",
+      "options": [
+        {
+          "label": "Cockcroft-Gault",
+          "value": "Cockcroft-Gault"
+        },
+        {
+          "label": "BedsideSchwartz",
+          "value": "BedsideSchwartz"
+        },
+        {
+          "label": "Jelliffe",
+          "value": "Jelliffe",
+          "source": "script comparison"
+        },
+        {
+          "label": "Traub-Johnson",
+          "value": "Traub-Johnson",
+          "source": "script comparison"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "age",
+      "label": "Age",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "years",
+      "units": null,
+      "constraints": {
+        "min": 1.0,
+        "max": 100.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "age",
+        "id_const": "ID_AGE"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Age must be at least 1."
+      ]
+    },
+    {
+      "key": "height",
+      "label": "Height",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 10.0,
+        "max": 90.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "height",
+        "id_const": "ID_HEIGHT"
+      },
+      "label_source": "printed form",
+      "help": [
+        "Height must be between 10 and 90."
+      ]
+    },
+    {
+      "key": "weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "constraints": {
+        "min": 2.2,
+        "max": 200.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "weight",
+        "id_const": "ID_WEIGHT"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Weight must be between 2.2 and 200."
+      ],
+      "display_unit": "kg",
+      "dimension": "mass",
+      "units_source": "corpus unit registry"
+    },
+    {
+      "key": "sr_cr",
+      "label": "SrCr",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 0.3,
+        "max": 10.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "SrCr",
+        "id_const": "ID_SRCR"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "cdp",
+      "label": "Desired Peak (Cdp)",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 4.0,
+        "max": 40.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "Cdp",
+        "id_const": "ID_CDP"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "cdtr",
+      "label": "Desired Trough (Cdtr)",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 0.5,
+        "max": 8.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "Cdtr",
+        "id_const": "ID_CDTR"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "drug",
+      "label": "Drug",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "drug",
+        "id_const": "ID_DRUG"
+      },
+      "label_source": "printed form",
+      "options_incomplete": true,
+      "options_known_value": "Amikacin",
+      "options": [
+        {
+          "label": "Amikacin",
+          "value": "Amikacin",
+          "source": "script comparison"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "gender",
+      "label": "Gender",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "gender",
+        "id_const": "ID_GENDER"
+      },
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "male",
+          "value": "male"
+        },
+        {
+          "label": "female",
+          "value": "female"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "vd",
+      "label": "Vol of Dist. (Vd)",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "Vd",
+        "id_const": "ID_VD"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "detail",
+      "label": "Detail",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "Suggested Interval (tau)",
+      "units": [
+        {
+          "code": "Suggested Interval (tau)",
+          "label": "Suggested Interval (tau)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "detail",
+        "id_const": "ID_DETAIL"
+      },
+      "dimension": null,
+      "label_source": "printed form",
+      "options_incomplete": true,
+      "options_known_value": "Show"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "multiplier",
+        "expr": "height - 60"
+      },
+      {
+        "key": "multiplier_v2",
+        "expr": "(0) if (multiplier < 0) else (multiplier)"
+      },
+      {
+        "key": "ibw_v2",
+        "expr": "(pow(((height) * 2.54), 2) * 1.65 / 1000) if (age < 18 and height <= 60) else ((50 + 2.3 * multiplier_v2) if (gender == 'male') else (45.5 + 2.3 * multiplier_v2))"
+      },
+      {
+        "key": "weight_factor",
+        "expr": "weight"
+      },
+      {
+        "key": "weight_factor_v2",
+        "expr": "(weight_factor) if (weight < ibw_v2) else ((ibw_v2) if (weight <= 1.3 * ibw_v2) else (ibw_v2 + 0.4 * (weight - ibw_v2)))"
+      },
+      {
+        "key": "crcl",
+        "expr": "(((((((140 - (age)) * (weight) / (72 * (sr_cr))) * 0.85) if ((gender) == 'female') else ((140 - (age)) * (weight) / (72 * (sr_cr))))))) if (cr_cl_method == 'Cockcroft-Gault') else (((98 - 0.8 * (age - 20)) / sr_cr * 0.9 if gender == 'female' else (98 - 0.8 * (age - 20)) / sr_cr) if (cr_cl_method == 'Jelliffe') else (((0.413 * (((height)) * 2.54) / (sr_cr))) if (cr_cl_method == 'BedsideSchwartz') else (((0.48 * (((height)) * 2.54) / (sr_cr))) if (cr_cl_method == 'Traub-Johnson') else (0))))",
+        "note": "the Jelliffe branch is borrowed from aminoglycosides-extended-initial-dose, which computes it over the same fields; this PDF calls it from an include it does not carry"
+      },
+      {
+        "key": "crcl_v2",
+        "expr": "(125) if (crcl > 125) else (crcl)",
+        "note": "reads back the value the step above computed"
+      },
+      {
+        "key": "ke",
+        "expr": "(0.00293 * crcl_v2) + 0.014"
+      },
+      {
+        "key": "vd_calculated",
+        "expr": "vd * weight_factor_v2"
+      },
+      {
+        "key": "half_life",
+        "expr": "0.693 / ke"
+      },
+      {
+        "key": "calculated_ld",
+        "expr": "cdp * vd_calculated"
+      },
+      {
+        "key": "calculated_tau",
+        "expr": "ln(cdp / cdtr) / ke + 0.5"
+      },
+      {
+        "key": "suggested_tau",
+        "expr": "(8) if (calculated_tau < 10) else ((12) if (calculated_tau < 15) else ((18) if (calculated_tau < 21) else ((24) if (calculated_tau < 30) else ((36) if (calculated_tau < 42) else ((48) if (calculated_tau < 55) else (72))))))"
+      },
+      {
+        "key": "calculated_md",
+        "expr": "0.5 * ke * vd_calculated * cdp * (1 - pow(e, -1* ke * suggested_tau)) / (1 - pow(e, -1 * ke * 0.5))"
+      },
+      {
+        "key": "suggested_md_v2",
+        "expr": "(round(calculated_md / 25) * 25) if (drug == 'Amikacin') else (round(calculated_md / 10) * 10)"
+      },
+      {
+        "key": "suggested_ld_v2",
+        "expr": "(round(calculated_ld / 25) * 25) if (drug == 'Amikacin') else (round(calculated_ld / 10) * 10)"
+      },
+      {
+        "key": "cpp",
+        "expr": "2 * (suggested_md_v2 / (ke * vd_calculated)) * (1 - pow(e, -1 * ke * 0.5)) / (1 - pow(e, -1 * ke * suggested_tau))"
+      },
+      {
+        "key": "cptr",
+        "expr": "cpp * pow(e, -1 * ke * (suggested_tau - 0.5))"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "cr_cl",
+        "label": "CrCl",
+        "expr": "crcl_v2",
+        "decimals": 2,
+        "base_unit": null,
+        "kind": "number"
+      },
+      {
+        "key": "ke",
+        "label": "Ke",
+        "expr": "ke",
+        "decimals": 3,
+        "base_unit": null,
+        "kind": "number"
+      },
+      {
+        "key": "calculated_vd",
+        "label": "Calculated Vd",
+        "expr": "vd_calculated",
+        "decimals": 2,
+        "base_unit": null,
+        "kind": "number"
+      },
+      {
+        "key": "half_life",
+        "label": "Half Life",
+        "expr": "half_life",
+        "decimals": 1,
+        "base_unit": null,
+        "kind": "number"
+      },
+      {
+        "key": "calculated_ld",
+        "label": "Calculated Ld",
+        "expr": "calculated_ld",
+        "decimals": 1,
+        "base_unit": null,
+        "kind": "number"
+      },
+      {
+        "key": "calculated_tau",
+        "label": "Calculated Tau",
+        "expr": "calculated_tau",
+        "decimals": 3,
+        "base_unit": null,
+        "kind": "number"
+      },
+      {
+        "key": "suggested_tau",
+        "label": "Suggested Interval (tau)",
+        "expr": "suggested_tau",
+        "decimals": 1,
+        "base_unit": null,
+        "kind": "number",
+        "label_source": "printed form"
+      },
+      {
+        "key": "calculated_md",
+        "label": "Calculated Md",
+        "expr": "calculated_md",
+        "decimals": 3,
+        "base_unit": null,
+        "kind": "number"
+      },
+      {
+        "key": "suggested_md",
+        "label": "Suggested Maintenance Dose (MD)",
+        "expr": "suggested_md_v2",
+        "decimals": 1,
+        "base_unit": null,
+        "kind": "number",
+        "label_source": "printed form"
+      },
+      {
+        "key": "suggested_ld",
+        "label": "Suggested Loading Dose (LD)",
+        "expr": "suggested_ld_v2",
+        "decimals": 1,
+        "base_unit": null,
+        "kind": "number",
+        "label_source": "printed form"
+      },
+      {
+        "key": "cpp",
+        "label": "Predicted Peak (Cpp)",
+        "expr": "cpp",
+        "decimals": 1,
+        "base_unit": null,
+        "kind": "number",
+        "label_source": "printed form"
+      },
+      {
+        "key": "cptr",
+        "label": "Predicted Trough (Cptr)",
+        "expr": "cptr",
+        "decimals": 1,
+        "base_unit": null,
+        "kind": "number",
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Creatinine Clearance (Clcr)\nNote: A maximum of 125 mL/minute is used for Clcr. Calculation uses actual body weight to calculate for Clcr, therefore, in obese patients (and possibly patients with ascites)\ncreatinine clearance may be significantly overestimated. Some clinicians may prefer to use an adjusted body weight in such cases [eg, IBW + 0.4 (ABW - IBW)]. Patients with\nestimated Clcr ≥60 mL/minute and actual weight not >130% of IBW may be candidates for once daily dosing. Use clinical judgment.\nCockcroft-Gault Method:\nNote: This equation has not been updated for use with serum creatinine methods traceable to IDMS. Use with IDMS-traceable serum creatinine methods may overestimate renal\nfunction; use with caution.\nMales: Clcr = [(140 - Age) x Weight] / (72 x Creatinine)\nFemales: Clcr = [(140 - Age) x Weight] / [(72 x Creatinine)] x 0.85\nClcr = creatinine clearance; calculated in mL/minute\nAge is input in years\nWeight is input in kg\nCreatinine is input in mg/dL\nJelliffe Method:\nNote: This equation has not been updated for use with serum creatinine methods traceable to IDMS. Use with IDMS-traceable serum creatinine methods may overestimate renal\nfunction; use with caution.\nMales: Clcr = {98 - [0.8 x (Age - 20)]} / (Creatinine)\nFemales: Clcr = Use above equation, then multiply result by 0.9\nClcr = creatinine clearance; calculated in mL/minute/1.73 m2\nAge is input in years\nCreatinine is input in mg/dL\nBedside Schwartz Method (pediatrics; ages 1-16 years):\nClcr = (0.413 X Height) / Creatinine\nClcr = creatinine clearance; calculated in mL/minute/1.73 m2\nHeight (length) is input in cm\nCreatinine is input in mg/dL\nTraub-Johnson Method (pediatrics; ages 1-18 years):\nNote: This equation has not been updated for use with serum creatinine methods traceable to IDMS. Use with IDMS-traceable serum creatinine methods may overestimate renal\nfunction; use with caution.\nClcr = (0.48 x Height) / (Creatinine)\nClcr = creatinine clearance; calculated in mL/minute/1.73 m2\nHeight (length) is input in cm\nCreatinine is input in mg/dL\nElimination Rate Constant (Ke)\nKe = (0.00293 x Clcr) + 0.014 (Bauer, 1999)\nWeight Factor (WF) This may be actual body weight, ideal body weight (IBW), or adjusted body weight (ABW):\nIdeal Body Weight (IBW):\nChildren:\nIBW = [(height2 x 1.65)] ÷ 1000\nIBW = ideal body weight in kg\nHeight measured in cm\nNote: Intended for children <18 years with height ≤60 inches (152 cm)\nAdults:\nMale: IBW = 50 + [2.3 x (height - 60)]\nFemale: IBW = 45.5 + [2.3 x (height - 60)]\nIBW = ideal body weight in kg\nHeight measured in inches\nAdjusted Body Weight (ABW):\nABW = IBW + [0.4 x (weight - IBW)]\nWF = weight (if weight < IBW)\nWF = IBW (if IBW < weight < 130% of IBW) normal\nWF = ABW (if weight > 130% of IBW)\nVolume of Distribution (Vd)\nVd = 0.15 L/kg, 0.25 L/kg, 0.3 L/kg, 0.35 L/kg, or 0.50 L/kg (whichever selected) x WF\nWF = weight factor in kg\nHalf-Life (t)\nt = 0.693 ÷ Ke\nKe = elimination rate constant (hour-1)\nSuggested Loading Dose (LD)\nLD = Cdp x Vd\nCdp = desired peak\nVd = volume of distribution\nNote: Suggested dose rounding: Amikacin rounded to the nearest 25 mg; gentamicin/tobramycin rounded to the nearest 10 mg.\nSuggested Interval (tau)\ntau = [ln(Cdp ÷ Cdtr) ÷ Ke] + 0.5\nCdp = desired peak\nCdtr = desired trough\nKe = elimination rate constant\nNote: Suggested dosing interval rounded to 8, 12, 18, 24, 36, 48, 72 hours.\nSuggested Maintenance Dose (MD)\nMD = 0.5 x Ke x Vd x Cdp x [1 - e(-Ke x tau) ] ÷ [1 - e(-Ke x 0.5)]\nKe = elimination rate constant\nVd = volume of distribution in L\nCdp = desired peak in mg/L\ntau = suggested dosing interval\ntau = suggested dosing interval\nNote: Suggested dose rounding: Amikacin rounded to the nearest 25 mg; gentamicin/tobramycin rounded to the nearest 10 mg.\nPredicted Peak at Steady State (Cpp)\nCpp = [(MD ÷ (0.5 x Ke x Vd)) x (l - e-Ke x 0.5)] ÷ l - e(-Ke x tau)\nMD = suggested maintenance dose in mg\nKe = elimination rate constant\nVd = volume of distribution in L\ntau = suggested interval time in hours\nNote: Calculation is based on an infusion time of 30 minutes and drawing level 30 minutes after the infusion. Some institutions may have different infusion times or policies\nfor drawing the peak; therefore, drawn peak may differ from predicted peak.\nUse clinical judgment.\nPredicted Trough at Steady State (Cptr)\nCptr = Cpp x e[-Ke x (tau - 0.5)]\nCpp = predicted peak at steady state\nKe = elimination rate constant\ntau = suggested interval time in hours",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Bauer LA, \"Chapter 5. Clinical Pharmacokinetics and Pharmacodynamics (Chapter),\" Pharmacotherapy: A Pathophysiologic Approach, 7th ed, Chapter 5, DiPiro JT, Talbert RL, Yee GC, et al, eds, Stamford, CT: Appleton & Lange, 2008.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Edson RS and Terrell CL, \"The Aminoglycosides,\" Mayo Clin Proc, 1999, 74(5):519-28.[PubMed 10319086]",
+        "pubmed_id": "10319086",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10319086/"
+      },
+      {
+        "text": "Gonzalez LS and Spencer JP, \"Aminoglycosides: A Practical Review,\" Am Fam Physician, 1998, 58(8):1811-20.[PubMed 9835856]",
+        "pubmed_id": "9835856",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9835856/"
+      },
+      {
+        "text": "Kashuba AD, Bertino JS, and Nafziger AN, \"Dosing of Aminoglycosides to Rapidly Attain Pharmacodynamic Goals and Hasten Therapeutic Response by Using Individualized Pharmacokinetic Monitoring of Patients With Pneumonia Caused by Gram-Negative Organisms,\" Antimicrob Agents Chemother, 1998, 42(7):1842-4.[PubMed 9661031]",
+        "pubmed_id": "9661031",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9661031/"
+      },
+      {
+        "text": "Kashuba AD, Nafziger AN, Drusano GL, et al, \"Optimizing Aminoglycoside Therapy for Nosocomial Pneumonia Caused by Gram-Negative Bacteria,\" Antimicrob Agents Chemother, 1999, 43(3):623-9.[PubMed 10049277]",
+        "pubmed_id": "10049277",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10049277/"
+      },
+      {
+        "text": "Ritschel WA, \"Drug Dosage in Obese Patients,\" Handbook of Basic Pharmacokinetics, 4th ed, Chapter 26, Hamilton, IL: Drug Intelligence Publications, Inc, 1992, 396-401.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Traynor AM, Nafziger AN, and Bertino JS, \"Aminoglycoside Dosing Weight Correction Factors for Patients of Various Body Sizes,\" Antimicrob Agents Chemother, 1995, 39(2):545-8.[PubMed 7726530]",
+        "pubmed_id": "7726530",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/7726530/"
+      },
+      {
+        "text": "Wallace AW, Jones M, and Bertino JS, \"Evaluation of Four Once-Daily Aminoglycosides Dosing Nomograms,\" Pharmacotherapy, 2002, 22(9):1077-83.[PubMed 12222541]",
+        "pubmed_id": "12222541",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12222541/"
+      },
+      {
+        "text": "Winter ME, \"Aminoglycoside Antibiotics,\" Basic Clinical Pharmacokinetics, 2nd ed, Chapter 1, Koda-Kimble MA and Young LY, eds, Vancouver, WA: Applied Therapeutics, Inc, 1988, 103-37.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Zaske DE, \"Aminoglycosides,\" Applied Pharmacokinetics: Principles of Therapeutic Drug Monitoring, 3rd ed, Chapter 14, Evans WE, Schentag JJ, Jusko WJ, et al, eds, Vancouver, WA: Applied Therapeutics, Inc, 1992, 1-47.",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again. Aminoglycosides are antibiotics commonly used to treat serious enterococcal and gram-negative bacterial infections. They distribute well into synovial, peritoneal, ascitic, and pleural fluids, but poorly into CNS and the vitreous humor of eye. They are eliminated rapidly by the kidneys. Many factors go into aminoglycoside dosing including a patient's age, weight, creatinine clearance, severity of infection, and other disease states. Impaired renal function and increased age can decrease clearance, whereas fever, cystic fibrosis and young age can increase clearance of aminoglycosides. Heart failure, obesity, and ascites can increase volume of distribution. These calculations are only estimates and clinical judgment must be used. Usual desired peak serum concentrations: 1. Amikacin: 15-40 mcg/mL 2. Gentamicin and tobramycin: 4-10 mcg/mL (Note: In patients with suspected gram-negative pneumonia, the peak should be high enough to provide a Cmax:MIC ratio of at least 10:1). Usual desired trough serum concentrations: 1. Amikacin: 1-8 mcg/mL 2. Gentamicin and tobramycin: 0.5-2 mcg/mL Peak and trough serum concentrations can be obtained after the third dose. The peak should be drawn 30 minutes after the 30-minute infusion and the trough immediately before the next dose. Additional serum concentrations can be drawn every 7 days, unless there is a lack of clinical improvement or changes in renal function, in which case, more frequent monitoring may be required.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": [
+      "Clcr Method: Cockcroft-Gault requires a minimum age of 18",
+      "Clcr Method: Jelliffe requires a minimum age of 20",
+      "Clcr Method: Bedside Schwartz requires that the age be greater than 1.",
+      "Clcr Method: Bedside Schwartz requires a maximum age of 16.",
+      "Clcr Method: Bedside Schwartz: Age cannot be greater than 100 years.",
+      "Crcl Method: Traub-Johnson requires a maximum age of 18"
+    ],
+    "fields_with_help": 3
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Aminoglycosides- Traditional Intermittent Empiric Dosing.pdf",
+      "source_sha256": "02d0f38e4e077fa2bdcdfd4966a69eefcbe766f4b662e88dedb880adc0616360",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Aminoglycosides: Traditional Intermittent Empiric Dosing",
+        "form_name": null,
+        "filename_title": "Aminoglycosides- Traditional Intermittent Empiric Dosing",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Aminoglycosides: Traditional Intermittent Empiric Dosing')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (aminoglycosidestraditionalintermittentempiricdosing)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf18",
+      "title": "Aminoglycosides: Traditional Intermittent Empiric Dosing",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "method_branch_borrowed",
+        "severity": "medium",
+        "detail": "the Jelliffe option was computing zero because the PDF does not carry the shared routine it calls; the arithmetic shown is aminoglycosides-extended-initial-dose's, over the same fields -- check it before relying on that option"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 78.6,
+    "checks_passed": 11,
+    "checks_total": 14,
+    "missing": [
+      "notes",
+      "unit options on every field",
+      "complete option lists"
+    ]
+  }
+}

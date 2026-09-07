@@ -1,0 +1,324 @@
+{
+  "schema_version": "1.0",
+  "slug": "aminoglycosides-extended-interval-adjust",
+  "title": "Aminoglycosides: Extended, Interval Adjust",
+  "subtitle": null,
+  "category": "Pharmacokinetics",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "drug",
+      "label": "Drug",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "drug",
+        "id_const": "ID_DRUG"
+      },
+      "label_source": "printed form",
+      "options_incomplete": true,
+      "options_known_value": "Amikacin",
+      "options": [
+        {
+          "label": "Gentamicin",
+          "value": "Gentamicin"
+        },
+        {
+          "label": "Tobramycin",
+          "value": "Tobramycin"
+        },
+        {
+          "label": "Amikacin",
+          "value": "Amikacin"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "dose",
+      "label": "Dose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "dose",
+        "id_const": "ID_DOSE"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "timing_of_level",
+      "label": "Timing of Level",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "hrs after the start of infusion",
+      "units": null,
+      "constraints": {
+        "min": 6.0,
+        "max": 15.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "timing_of_level",
+        "id_const": "ID_TL"
+      },
+      "label_source": "printed form",
+      "help": [
+        "Timing of Level must be between 6 and 15 hrs after the start of infusion."
+      ]
+    },
+    {
+      "key": "drug_conc",
+      "label": "Drug Conc.",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 0.0,
+        "max": 50.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "drug_conc",
+        "id_const": "ID_CONC"
+      },
+      "label_source": "printed form",
+      "help": [
+        "Drug Conc. must be between 0 and 50."
+      ]
+    },
+    {
+      "key": "length_of_infusion",
+      "label": "Length of Infusion",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "length_of_infusion",
+        "id_const": "ID_LOI"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "nomogram",
+      "label": "Nomogram",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "nomogram",
+        "id_const": "ID_NOMOGRAM"
+      },
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "Urban_Craig_GT",
+          "value": "Urban_Craig_GT"
+        },
+        {
+          "label": "Urban_Craig_A",
+          "value": "Urban_Craig_A"
+        },
+        {
+          "label": "Rochester",
+          "value": "Rochester"
+        },
+        {
+          "label": "Hartford",
+          "value": "Hartford"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "interval_v2",
+        "expr": "0"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "interval",
+        "label": "Interval",
+        "expr": "interval_v2",
+        "decimals": null,
+        "base_unit": null,
+        "kind": "number"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Ali MZ and Goetz MB, “A Meta-Analysis of the Relative Efficacy and Toxicity of Single Daily Dosing Versus Multiple Daily Dosing of Aminoglycosides,” Clin Infect Dis, 1997, 24:796-809.[PubMed 9142772]",
+        "pubmed_id": "9142772",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9142772/"
+      },
+      {
+        "text": "Anaizi N, “Once-Daily Dosing of Aminoglycosides: A Consensus Document,” Int J Clin Pharmacol Ther, 1997, 35(6):223-6.[PubMed 9208335]",
+        "pubmed_id": "9208335",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9208335/"
+      },
+      {
+        "text": "Bailey TC, Little JR, Littenberg B, et al, “A Meta-Analysis of Extended-Interval Dosing Versus Multiple Daily Dosing of Aminoglycosides,” Clin Infect Dis, 1997, 24:786-95.[PubMed 9142771]",
+        "pubmed_id": "9142771",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9142771/"
+      },
+      {
+        "text": "Barza M, Ioannidis JPA, Cappelleri JC, et al, “Single or Multiple Daily Doses of Aminoglycosides: A Meta-Analysis,” BMJ, 1996, 312:338-45.[PubMed 8611830]",
+        "pubmed_id": "8611830",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/8611830/"
+      },
+      {
+        "text": "Edson RS and Terrell CL, \"The Aminoglycosides,\"Mayo Clin Proc, 1999, 74(5):519-28.[PubMed 1943249]",
+        "pubmed_id": "1943249",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/1943249/"
+      },
+      {
+        "text": "Hatala R, Dinh T, and Cook DJ, “Once-Daily Aminoglycoside Dosing in Immunocompetent Adults,” Ann Intern Med, 1996, 124(8):717-25.[PubMed 8633831]",
+        "pubmed_id": "8633831",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/8633831/"
+      },
+      {
+        "text": "Nicolau DP, Freeman CD, Belliveau PP, et al, “Experience with a Once-Daily Aminoglycoside Program Administered to 2,184 Adult Patients,” Antimicrob Agents Chemother, 1995, 39(3):650-5.[PubMed 7793867]",
+        "pubmed_id": "7793867",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/7793867/"
+      },
+      {
+        "text": "Traynor AM, Nafziger AN, and Bertino JS, \"Aminoglycoside Dosing Weight Correction Factors for Patients of Various Body Sizes,\"Antimicrob Agents Chemother, 1995, 39(2):545-48.[PubMed 7726530]",
+        "pubmed_id": "7726530",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/7726530/"
+      },
+      {
+        "text": "Urban AW and Craig WA, “Daily Dosage of Aminoglycosides,\" Remington JS and Schwartz MN, eds, Current Clinical Topics in Infectious Diseases, 17th edition, Malden, MA: Blackwell Science, 1997, 236-55.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Wallace AW, Jones M, and Bertino JS, \"Evaluation of Four Once-Daily Aminoglycosides Dosing Nomograms,\" Pharmacotherapy , 2002, 22(9):1077-83.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "[PubMed 12222541]",
+        "pubmed_id": "12222541",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/12222541/"
+      }
+    ],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again. Traditionally, aminoglycoside antibiotics have been administered in multiple daily doses (aka, conventional dosing). An alternative approach to dosing these agents involves achieving higher peak concentrations and using an extended dosing interval. This strategy is often referred to as “extended interval dosing”, “single daily dosing”, or “once daily dosing”. The dosing interval is then adjusted based on a random level taken several hours after the end of the infusion using one of several interval adjustment nomograms. Certain limitations exist for each of the nomograms: Hartford Hospital nomogram: Only intended for use with gentamicin and tobramycin at a dose of 7 mg/kg. Random level must be drawn 6-16 hours after the start of infusion. University of Rochester Medical Center nomogram: Only intended for use with gentamicin and tobramycin at a dose of 5 mg/kg. Random level must be drawn 7-14 hours after the end of infusion. Urban-Craig (Gentamicin and Tobramycin) nomogram: Only intended for use with gentamicin and tobramycin at a dose of 5 mg/kg. Random level must be drawn 6-14 hours after the start of infusion. Urban-Craig (Amikacin) nomogram: Only intended for use with amikacin at a dose of 15 mg/kg. Random level must be drawn 6-14 hours after the start of infusion. If the level is undetectable and the patient is not showing signs of clinical response, conventional dosing should be considered.",
+    "stated_limits": [
+      {
+        "name": "Timing of Level",
+        "applies_to": null,
+        "min": 6.0,
+        "unit": "hrs",
+        "max": 15.0
+      }
+    ],
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": [
+      "The Urban-Craig nomogram requires a drug level that has been collected 6-14 hours after the start of infusion.",
+      "The University of Rochester Medical Center nomogram requires a drug level that has been collected 7-14 hours after the end of infusion.",
+      "The Hartford Hospital nomogram requires a drug level that has been collected 6-14 hours after the start of infusion."
+    ],
+    "fields_with_help": 2
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Aminoglycosides- Extended, Interval Adjust.pdf",
+      "source_sha256": "140762facdf0d640d9cb55f1a783f3b0e9f20445cd82c35b749324f1503e4287",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Aminoglycosides: Extended, Interval Adjust",
+        "form_name": null,
+        "filename_title": "Aminoglycosides- Extended, Interval Adjust",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Aminoglycosides: Extended, Interval Adjust')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (aminoglycosidesextendedintervaladjust)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf15",
+      "title": "Aminoglycosides: Extended, Interval Adjust",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "result_is_constant",
+        "severity": "critical",
+        "detail": "this calculator returns zero whatever is entered: its answer is read off a nomogram grid the source builds as HTML, and only the initial value survived extraction -- use the source calculator for this one"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 71.4,
+    "checks_passed": 10,
+    "checks_total": 14,
+    "missing": [
+      "printed equation text",
+      "notes",
+      "unit options on every field",
+      "complete option lists"
+    ]
+  }
+}

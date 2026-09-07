@@ -1,0 +1,170 @@
+{
+  "schema_version": "1.0",
+  "slug": "creatinine-clearance-measured",
+  "title": "Creatinine Clearance (measured)",
+  "subtitle": null,
+  "category": "Renal Function",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "urine_creat",
+      "js_name": "Urine_Creat",
+      "label": "Urine Creat",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/dL",
+      "display_unit": "mg/dL",
+      "units": [
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "creatinine",
+      "label_source": "printed form"
+    },
+    {
+      "key": "serum_creat",
+      "js_name": "Serum_Creat",
+      "label": "Serum Creat",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/dL",
+      "display_unit": "mg/dL",
+      "units": [
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "creatinine",
+      "label_source": "printed form"
+    },
+    {
+      "key": "days_urine_volume",
+      "js_name": "Days_Urine_Volume",
+      "label": "Days Urine Volume",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mL",
+      "display_unit": "mL",
+      "units": [
+        {
+          "code": "mL",
+          "label": "mL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "volume",
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "creat_clear",
+        "js_name": "Creat_Clear",
+        "label": "Creat Clear",
+        "expr": "urine_creat * days_urine_volume / serum_creat / 1440",
+        "base_unit": "mL/min",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "Creat_Clear = Urine_Creat * Days_Urine_Volume / Serum_Creat / 1440",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Levey AS, Inker LA. Assessment of Glomerular Filtration Rate in Health and Disease: A State of the Art Review. Clin Pharmacol Ther. 2017 Sep;102(3):405-419.[PubMed 28474735]",
+        "pubmed_id": "28474735",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28474735/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Creatinine Clearance (measured).pdf",
+      "source_sha256": "88f386b0e72f2f574b53b9a1a7f4826f32995b9503c25fdee61b3e8fe718225d",
+      "extractor": "pdf",
+      "form_name": "CreatinineCl",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Creatinine Clearance (measured)",
+        "form_name": "CreatinineCl",
+        "filename_title": "Creatinine Clearance (measured)",
+        "confidence": 0.97,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Creatinine Clearance (measured)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (creatinineclearancemeasured)",
+          "title_vs_form": "PARTIAL (creatinineclearancemeasured ~ creatininecl)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf62",
+      "title": "Creatinine Clearance (measured)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 81.2,
+    "checks_passed": 13,
+    "checks_total": 16,
+    "missing": [
+      "notes",
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

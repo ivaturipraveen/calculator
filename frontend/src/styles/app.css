@@ -1,0 +1,2352 @@
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: var(--t-md);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: var(--accent-ink);
+  text-decoration-color: color-mix(in oklab, var(--accent) 40%, transparent);
+  text-underline-offset: 2px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ------------------------------------------------------------------ shell */
+
+/* Three columns, and only the columns scroll.
+ *
+ * The index on the left is the navigation, permanently; the middle is the
+ * calculator; the right is what the source document says. Because the page
+ * itself never scrolls, changing calculator never loses your place in the list
+ * and the reference column never scrolls away from the field it explains. */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--t-base);
+  overflow: hidden;
+}
+
+h1,
+h2.serif,
+.serif {
+  font-family: var(--serif);
+  font-weight: 600;
+  letter-spacing: -0.012em;
+}
+
+.mono {
+  font-family: var(--mono);
+}
+
+.shell {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+/* ----------------------------------------------------------------- topbar */
+
+.topbar {
+  flex: none;
+  height: var(--topbar-h);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 0 22px;
+  background: var(--white);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--ink);
+  text-decoration: none;
+  flex: none;
+}
+
+.brand-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 9px;
+  background: var(--blue);
+  color: #fff;
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.brand b {
+  display: block;
+  font-family: var(--serif);
+  font-size: var(--t-2xl);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+}
+
+.brand small {
+  display: block;
+  font-size: var(--t-xs);
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+.topbar__search {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.topbar__search input,
+.search-wrap input {
+  width: 100%;
+  height: 36px;
+  padding: 0 12px 0 31px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--paper);
+  font-family: var(--sans);
+  font-size: var(--t-base);
+  color: var(--ink);
+}
+
+.topbar__search input:focus,
+.search-wrap input:focus {
+  outline: 2px solid var(--amber);
+  outline-offset: 0;
+  border-color: var(--amber);
+}
+
+.search__icon,
+.search-wrap .icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  translate: 0 -50%;
+  opacity: 0.5;
+  font-size: var(--t-md);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--mono);
+  font-size: var(--t-xs);
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ok-dot);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ok-dot) 20%, transparent);
+}
+
+.btn-icon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--white);
+  color: var(--ink-soft);
+  font-size: var(--t-lg);
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.12s ease, color 0.12s ease, background 0.12s ease;
+}
+
+/* The chevrons that open and close a column. A closed column's only way back
+   is this one glyph, and ◂ / ▸ draw small in most faces -- so they get sized
+   for the job rather than for the type scale. */
+.btn-icon--toggle {
+  width: 40px;
+  height: 40px;
+  font-size: 30px;
+  color: var(--ink-soft);
+}
+
+.btn-icon--toggle:hover {
+  color: var(--amber-deep);
+}
+
+/* The bare one sits inside the reference column's heading, so it keeps the
+   glyph but drops the box around it. */
+.btn-icon--bare.btn-icon--toggle {
+  width: 32px;
+  height: 32px;
+}
+
+.btn-icon:hover {
+  border-color: var(--amber);
+  color: var(--amber-deep);
+  background: var(--amber-tint);
+}
+
+.btn-icon--bare {
+  border-color: transparent;
+  background: transparent;
+  width: 26px;
+  height: 26px;
+}
+
+/* -------------------------------------------------------- global banner */
+
+.disclaimer-banner {
+  flex: none;
+  padding: 9px 24px;
+  background: var(--warn-soft);
+  border-bottom: 1px solid var(--warn-border);
+  color: var(--warn);
+  font-size: var(--t-sm);
+  line-height: 1.5;
+}
+
+.disclaimer-banner b {
+  color: color-mix(in oklab, var(--warn) 75%, var(--ink));
+}
+
+/* --------------------------------------------------- left: the A-Z index */
+
+.index-pane {
+  width: var(--index-w);
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--white);
+  border-right: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.index-head {
+  flex: none;
+  padding: 14px 15px 11px;
+  border-bottom: 1px solid var(--line);
+}
+
+.index-head-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 11px;
+}
+
+.index-head-row h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: var(--t-xl);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.search-wrap {
+  position: relative;
+}
+
+.category-filter {
+  position: relative;
+  margin-top: 9px;
+}
+
+.category-filter select {
+  width: 100%;
+  appearance: none;
+  padding: 8px 30px 8px 13px;
+  border: 1.5px solid var(--amber);
+  border-radius: var(--r-pill);
+  background: var(--paper);
+  color: var(--amber-deep);
+  font-family: var(--sans);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.category-filter::after {
+  content: "▾";
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  translate: 0 -50%;
+  color: var(--amber-deep);
+  font-size: var(--t-xs);
+  pointer-events: none;
+}
+
+.category-filter select:focus {
+  outline: none;
+  border-color: var(--amber-deep);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--amber) 22%, transparent);
+}
+
+.count-line {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 9px;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--ink-faint);
+}
+
+.calc-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-bottom: 12px;
+}
+
+.calc-list__empty {
+  padding: 22px 16px;
+  font-size: var(--t-base);
+  color: var(--ink-faint);
+}
+
+/* The letter stays put while its own names scroll past it. */
+.group-label {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 5px 16px;
+  background: var(--surface-sunken);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: var(--t-xs);
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: var(--ink-soft);
+}
+
+.calc-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 14px 9px 16px;
+  border-bottom: 1px solid var(--card-line);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: var(--t-base);
+  line-height: 1.35;
+}
+
+.calc-item:hover {
+  background: color-mix(in oklab, var(--amber-tint) 55%, var(--white));
+}
+
+.calc-item.is-active {
+  background: var(--amber-tint);
+  border-left: 3px solid var(--amber);
+  padding-left: 13px;
+  font-weight: 600;
+}
+
+.calc-item__name {
+  flex: 1;
+  min-width: 0;
+}
+
+.chev {
+  flex: none;
+  opacity: 0.35;
+  font-size: var(--t-sm);
+}
+
+.badge {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px 3px 8px;
+  border-radius: var(--r-pill);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex: none;
+  background: currentColor;
+}
+
+.badge--live {
+  background: var(--ok-soft);
+  color: var(--ok);
+}
+
+.badge--limited {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+/* Collapsed, the index leaves a hairline strip to bring it back. */
+.sidebar-reopen {
+  flex: none;
+  width: 46px;
+  display: flex;
+  justify-content: center;
+  padding-top: 13px;
+  background: var(--white);
+  border-right: 1px solid var(--line);
+}
+
+.info-reopen {
+  flex: none;
+  width: 46px;
+  display: flex;
+  justify-content: center;
+  padding-top: 13px;
+  background: var(--white);
+  border-left: 1px solid var(--line);
+}
+
+/* ------------------------------------------------- centre: the calculator */
+
+.detail-pane {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.detail-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 30px 36px 72px;
+}
+
+.detail-inner--wide {
+  max-width: 1000px;
+}
+
+.eyebrow-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 11px;
+}
+
+.eyebrow {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 10px;
+  background: var(--tag-purple-bg);
+  color: var(--tag-purple-fg);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+}
+
+.eyebrow--type {
+  background: var(--tag-teal-bg);
+  color: var(--tag-teal-fg);
+}
+
+.eyebrow--live {
+  background: var(--surface-sunken);
+  color: var(--ink-soft);
+  letter-spacing: 0.6px;
+  text-transform: none;
+}
+
+.detail-inner h1 {
+  margin: 0 0 7px;
+  font-family: var(--serif);
+  font-size: var(--t-3xl);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.subtitle {
+  margin: 0 0 6px;
+  max-width: 64ch;
+  font-size: var(--t-md);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.source-line {
+  margin: 0 0 22px;
+  font-family: var(--mono);
+  font-size: var(--t-xs);
+  color: var(--ink-faint);
+}
+
+.source-line span {
+  color: var(--ink-soft);
+}
+
+.detail-actions {
+  display: flex;
+  gap: 9px;
+  margin: 4px 0 18px;
+}
+
+/* --------------------------------------------- right: formula & references */
+
+.info-resizer {
+  flex: none;
+  width: 7px;
+  cursor: col-resize;
+  position: relative;
+  background: transparent;
+  touch-action: none;
+}
+
+.info-resizer::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 3px;
+  width: 1px;
+  background: var(--line);
+}
+
+.info-resizer:hover::after,
+.info-resizer.dragging::after {
+  left: 2px;
+  width: 3px;
+  background: var(--amber);
+}
+
+.info-pane {
+  flex: none;
+  min-width: 300px;
+  max-width: 760px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 24px 26px 60px;
+  background: var(--paper);
+  border-left: 1px solid var(--line);
+  font-size: var(--t-base);
+  line-height: 1.62;
+  color: var(--ink);
+}
+
+.info-pane-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+  font-family: var(--mono);
+  font-size: var(--t-xs);
+  font-weight: 500;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* Every section in this column is open. A panel here is a heading and its
+   text, not a thing to click. */
+.info-pane .panel {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  margin-bottom: 22px;
+}
+
+.info-pane .panel__head {
+  padding: 0;
+  border: 0;
+  margin-bottom: 9px;
+}
+
+.info-pane .panel__head h2 {
+  font-family: var(--mono);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.info-pane .panel__body {
+  padding: 0;
+}
+
+.info-pane .prose {
+  font-size: var(--t-base);
+  color: var(--ink);
+}
+
+.info-empty {
+  font-size: var(--t-sm);
+  font-style: italic;
+  color: var(--ink-faint);
+}
+
+/* ------------------------------------------------------------ browse rows */
+
+.browse {
+  margin: 22px 0 26px;
+}
+
+.browse__title {
+  margin: 0 0 10px;
+  font-family: var(--mono);
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.browse__row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.browse__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--white);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: var(--t-sm);
+  font-weight: 500;
+}
+
+.browse__chip:hover {
+  border-color: var(--amber);
+  background: var(--amber-tint);
+}
+
+.browse__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--dot, var(--amber));
+}
+
+.browse__count {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--ink-faint);
+}
+
+/* ------------------------------------------------------------------ cards */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(248px, 1fr));
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.calc-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 13px 15px 12px 17px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--white);
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.calc-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: var(--dot, var(--amber));
+  opacity: 0.7;
+}
+
+.calc-card:hover {
+  border-color: var(--amber);
+  box-shadow: var(--shadow-md);
+}
+
+.calc-card h3 {
+  margin: 0;
+  font-size: var(--t-md);
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.008em;
+}
+
+.calc-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin-top: auto;
+  font-size: var(--t-xs);
+  color: var(--ink-faint);
+}
+
+.calc-card__cat {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  color: var(--ink-soft);
+}
+
+.calc-card__cat::before {
+  content: "";
+  flex: none;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--dot, var(--amber));
+}
+
+.calc-card__limited {
+  margin-left: auto;
+  padding: 1px 7px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--danger-border);
+  background: var(--danger-soft);
+  color: var(--danger);
+  font-size: 10.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 7px;
+  margin: 12px 0 4px;
+}
+
+.filter-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px 4px 11px;
+  border: 1px solid var(--amber);
+  border-radius: var(--r-pill);
+  background: var(--amber-tint);
+  color: var(--amber-deep);
+  font-size: var(--t-sm);
+  font-weight: 600;
+}
+
+.filter-pill button {
+  border: 0;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  font-size: var(--t-md);
+  line-height: 1;
+  padding: 0 3px;
+}
+
+.empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+/* ------------------------------------------------------------ panel/cards */
+
+.panel {
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--white);
+  margin-bottom: 18px;
+  overflow: hidden;
+}
+
+.panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 20px 0;
+}
+
+.panel__head h2 {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: var(--t-md);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--ink);
+}
+
+.panel__head p {
+  margin: 2px 0 0;
+  font-size: var(--t-sm);
+  font-weight: 400;
+  color: var(--ink-faint);
+}
+
+.panel__body {
+  padding: 14px 20px 20px;
+}
+
+.panel__body--flush {
+  padding: 0;
+}
+
+/* Print: the chrome is not worth the ink. */
+@media print {
+  body {
+    overflow: visible;
+  }
+
+  .topbar,
+  .index-pane,
+  .sidebar-reopen,
+  .info-resizer,
+  .info-reopen,
+  .detail-actions,
+  .mobile-summary {
+    display: none !important;
+  }
+
+  .shell,
+  .app,
+  .detail-pane,
+  .info-pane {
+    display: block;
+    height: auto;
+    overflow: visible;
+    width: auto;
+  }
+
+  .panel,
+  .hero {
+    break-inside: avoid;
+    box-shadow: none;
+  }
+}
+
+/* ------------------------------------------------------------------ fields */
+
+.field-grid {
+  display: grid;
+  /* Three columns at a desktop width, not four: a clinical form is read down
+     a column, and four narrow ones turn a weight and its unit into a squeeze. */
+  grid-template-columns: repeat(auto-fit, minmax(252px, 1fr));
+  gap: 18px 18px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-width: 0;
+}
+
+/* The question on the left, what constrains it on the right, on one line. */
+.field__top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 20px;
+}
+
+.field__label {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  min-width: 0;
+  font-size: var(--t-xs);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: var(--ink-soft);
+}
+
+.field__req {
+  color: var(--accent);
+  font-size: var(--t-sm);
+  line-height: 1;
+}
+
+.field__aside {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  flex: none;
+}
+
+/* A limit is data about the box, so it is set like data -- tabular, quiet, and
+   in the unit the box is currently in. */
+.field__range {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 1px 7px;
+  border-radius: var(--r-sm);
+  background: var(--surface-sunken);
+  color: var(--text-faint);
+  font-size: var(--t-xs);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.field__range-unit {
+  opacity: 0.75;
+}
+
+.field__info {
+  display: grid;
+  place-items: center;
+  width: 19px;
+  height: 19px;
+  padding: 0;
+  border: 1px solid var(--border-strong);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text-faint);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.12s ease, border-color 0.12s ease, background 0.12s ease;
+}
+
+.field__info:hover,
+.field__info[aria-expanded="true"] {
+  color: var(--accent-ink);
+  border-color: var(--accent-border);
+  background: var(--accent-soft);
+}
+
+/* A field only some paths need: say which, quietly, where the star would be. */
+.field__when {
+  padding: 1px 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-pill);
+  background: var(--surface-sunken);
+  color: var(--text-faint);
+  font-size: var(--t-xs);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* A value and the unit it is in are one thing, so they get one border. Two
+   separate boxes read as two questions, and on a narrow screen they wrap
+   apart. */
+.field__control {
+  display: flex;
+  align-items: stretch;
+  border-radius: 7px;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  overflow: hidden;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.field__control:hover {
+  border-color: color-mix(in oklab, var(--amber) 45%, var(--line));
+}
+
+.field__control:focus-within {
+  border-color: var(--amber);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--amber) 28%, transparent);
+}
+
+.field--invalid .field__control {
+  border-color: var(--danger);
+  background: color-mix(in oklab, var(--danger-soft) 45%, var(--surface));
+}
+
+.field__control > .input,
+.field__control > .select {
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.field__control > .input:focus,
+.field__control > .select:focus {
+  box-shadow: none;
+}
+
+.field__control > .unit-select,
+.field__control > .unit-static {
+  border: 0;
+  border-left: 1px solid var(--border);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  background: var(--surface-sunken);
+}
+
+/* Every value a clinician reads digit by digit is set in the monospace: a
+   weight, a level, a rate. It is also what makes a mistyped 0033 obvious. */
+.input,
+.select {
+  width: 100%;
+  min-width: 0;
+  height: 38px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--paper);
+  font-family: var(--mono);
+  font-size: var(--t-base);
+  color: var(--ink);
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.input::placeholder {
+  color: var(--text-faint);
+}
+
+.input:hover,
+.select:hover {
+  border-color: color-mix(in oklab, var(--amber) 45%, var(--line));
+}
+
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--amber);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--amber) 28%, transparent);
+}
+
+.input[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+.select {
+  appearance: none;
+  font-family: var(--sans);
+  padding-right: 32px;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 17px) 20px, calc(100% - 12px) 20px;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.unit-select {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 62px;
+  max-width: 120px;
+  padding: 0 22px 0 10px;
+  background-color: var(--surface-sunken);
+  background-position: calc(100% - 13px) 17px, calc(100% - 9px) 17px;
+  font-family: var(--sans);
+  font-size: var(--t-xs);
+  color: var(--ink-soft);
+}
+
+/* A field with only one unit still shows it, but as a label rather than a
+   control the clinician can fruitlessly click. */
+.unit-static {
+  flex: none;
+  display: grid;
+  place-items: center;
+  min-width: 62px;
+  padding: 0 11px;
+  background: var(--surface-sunken);
+  font-size: var(--t-xs);
+  color: var(--ink-soft);
+  white-space: nowrap;
+}
+
+.field__error {
+  display: flex;
+  align-items: flex-start;
+  gap: 5px;
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--danger);
+}
+
+/* The document's own guidance, on request. */
+.field__help {
+  margin: 0;
+  padding: 9px 11px 9px 26px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--accent-border);
+  background: var(--accent-soft);
+  font-size: var(--t-xs);
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.field__help li + li {
+  margin-top: 4px;
+}
+
+.field__note {
+  font-size: var(--t-xs);
+  color: var(--text-faint);
+}
+
+/* ------------------------------------------------------------------ scores */
+
+.criteria {
+  display: flex;
+  flex-direction: column;
+}
+
+.criterion {
+  border: 0;
+  margin: 0;
+  padding: 16px 18px;
+}
+
+.criterion + .criterion {
+  border-top: 1px solid var(--border);
+}
+
+.criterion__label {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 0;
+  margin: 0 0 10px;
+  font-size: var(--t-md);
+  font-weight: 600;
+}
+
+.choice-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface-2);
+  cursor: pointer;
+  transition: border-color 0.1s ease, background 0.1s ease;
+}
+
+.choice:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-sunken);
+}
+
+.choice:has(input:checked) {
+  border-color: var(--blue);
+  background: var(--blue-soft);
+  box-shadow: inset 0 0 0 1px var(--blue);
+}
+
+.choice input {
+  margin: 2px 0 0;
+  accent-color: var(--blue);
+  width: 17px;
+  height: 17px;
+  flex: none;
+}
+
+.choice__text {
+  flex: 1;
+  font-size: var(--t-base);
+  line-height: 1.45;
+}
+
+.choice__points {
+  flex: none;
+  align-self: center;
+  min-width: 36px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-size: var(--t-xs);
+  font-variant-numeric: tabular-nums;
+  font-weight: 620;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.choice:has(input:checked) .choice__points {
+  border-color: var(--blue);
+  background: var(--white);
+  color: var(--blue);
+}
+
+/* A score with a dozen criteria is a very long single column on a desktop --
+   REVEAL runs to nine, SOFA to six, APACHE to fourteen. Set them in two
+   columns and each criterion becomes a card of its own, so the reader can see
+   how much is left to answer without scrolling to find out. */
+@media (min-width: 1180px) {
+  .criteria {
+    display: block;
+    columns: 2;
+    column-gap: 16px;
+    padding: 16px 20px;
+  }
+
+  .criterion {
+    break-inside: avoid;
+    margin: 0 0 14px;
+    padding: 13px 15px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-md);
+    background: var(--surface-2);
+  }
+
+  .criterion + .criterion {
+    border-top: 1px solid var(--border);
+  }
+
+  .criterion__label {
+    margin-bottom: 9px;
+  }
+
+  .choice {
+    background: var(--surface);
+  }
+}
+
+/* ----------------------------------------------------------------- results */
+
+.results-panel {
+  position: sticky;
+  top: 78px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* The answer, stated once and unmistakably.
+ *
+ * Label on the left in small caps, the figure on the right in the monospace
+ * that carries every number on the page. Amber on amber-tint: the one place
+ * the accent is allowed to fill a shape, because it is the one thing the
+ * reader came for. */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 17px 20px;
+  border: 1px solid var(--amber);
+  border-radius: var(--r-lg);
+  background: var(--amber-tint);
+  color: var(--ink);
+}
+
+.hero__label {
+  font-size: var(--t-sm);
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.hero__value {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--amber-deep);
+  overflow-wrap: anywhere;
+}
+
+.hero__unit {
+  font-size: var(--t-md);
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.hero__pending {
+  font-family: var(--sans);
+  font-size: var(--t-base);
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--ink-faint);
+}
+
+.hero--pending {
+  background: var(--paper);
+  border-color: var(--line);
+  border-style: dashed;
+}
+
+.hero--pending .hero__value {
+  font-size: var(--t-lg);
+  color: var(--ink-faint);
+}
+
+.value-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: var(--border);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.value-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 11px 14px;
+  background: var(--surface);
+}
+
+.value-row__label {
+  font-size: var(--t-base);
+  color: var(--text-muted);
+  min-width: 0;
+}
+
+.value-row__value {
+  flex: none;
+  font-family: var(--mono);
+  font-size: var(--t-md);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.value-row__unit {
+  font-size: var(--t-sm);
+  font-weight: 500;
+  color: var(--text-muted);
+  margin-left: 4px;
+}
+
+.value-row--pending .value-row__value {
+  color: var(--text-faint);
+  font-weight: 500;
+}
+
+.score-total {
+  display: flex;
+  align-items: baseline;
+  gap: 11px;
+}
+
+.score-total__value {
+  font-family: var(--mono);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--amber-deep);
+}
+
+.score-total__of {
+  font-size: var(--t-base);
+  color: var(--accent-ink);
+  opacity: 0.75;
+}
+
+.band {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 13px 15px;
+  border-radius: var(--r-md);
+  border: 1px solid;
+}
+
+.band__label {
+  font-weight: 640;
+  font-size: var(--t-lg);
+  letter-spacing: -0.012em;
+}
+
+.band__range {
+  font-size: var(--t-xs);
+  opacity: 0.88;
+  font-variant-numeric: tabular-nums;
+}
+
+.band--good {
+  background: var(--ok-soft);
+  border-color: var(--ok-border);
+  color: var(--ok);
+}
+
+.band--caution {
+  background: var(--warn-soft);
+  border-color: var(--warn-border);
+  color: var(--warn);
+}
+
+.band--bad {
+  background: var(--danger-soft);
+  border-color: var(--danger-border);
+  color: var(--danger);
+}
+
+.band--neutral {
+  background: var(--info-soft);
+  border-color: var(--info-border);
+  color: var(--info);
+}
+
+.band-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.band-row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  font-size: var(--t-base);
+  background: var(--surface-2);
+}
+
+.band-row--active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  font-weight: 620;
+  box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.band-row__range {
+  flex: none;
+  min-width: 80px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  font-size: var(--t-sm);
+}
+
+.band-row--active .band-row__range {
+  color: var(--accent-ink);
+}
+
+.notice {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 16px;
+  padding: 11px 14px;
+  border-radius: var(--r-md);
+  font-size: var(--t-sm);
+  line-height: 1.55;
+  border: 1px solid;
+}
+
+.notice strong {
+  font-weight: 600;
+}
+
+.notice--warn {
+  background: var(--warn-soft);
+  border-color: var(--warn-border);
+  color: var(--warn);
+}
+
+.notice--error {
+  background: var(--danger-soft);
+  border-color: var(--danger-border);
+  color: var(--danger);
+}
+
+.notice--info {
+  background: var(--info-soft);
+  border-color: var(--info-border);
+  color: var(--info);
+}
+
+.notice ul {
+  margin: 0;
+  padding-left: 17px;
+}
+
+.notice li + li {
+  margin-top: 4px;
+}
+
+/* ------------------------------------------------------------------ tables */
+
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+table.data {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--t-base);
+}
+
+table.data th,
+table.data td {
+  padding: 10px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+table.data tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+table.data th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--surface-sunken);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  box-shadow: inset 0 -1px 0 var(--line);
+}
+
+table.data td.num,
+table.data th.num {
+  text-align: right;
+  font-family: var(--mono);
+  font-size: var(--t-sm);
+}
+
+table.data tbody tr:hover {
+  background: var(--surface-sunken);
+}
+
+table.data tbody tr.row-group {
+  border-top: 2px solid var(--border-strong);
+}
+
+table.data tbody tr.row-cont td:first-child {
+  color: var(--text-faint);
+}
+
+table.data tbody tr.is-current {
+  background: var(--accent-soft);
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+table.data tbody tr.is-current td {
+  font-weight: 630;
+  color: var(--accent-ink);
+}
+
+.table-foot {
+  padding: 11px 18px;
+  border-top: 1px solid var(--border);
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font-size: var(--t-sm);
+}
+
+/* -------------------------------------------------------------------- tree */
+
+.tree-q {
+  padding: 26px 20px 22px;
+  text-align: center;
+}
+
+.tree-q__step {
+  font-size: var(--t-xs);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-bottom: 10px;
+}
+
+.tree-q__text {
+  margin: 0 auto 20px;
+  max-width: 46ch;
+  font-size: var(--t-xl);
+  line-height: 1.4;
+  font-weight: 560;
+  letter-spacing: -0.015em;
+}
+
+.tree-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* The amber outline button the mockup uses for every action on the page. */
+.btn-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 15px;
+  border: 1px solid var(--amber);
+  border-radius: var(--r-md);
+  background: transparent;
+  color: var(--amber-deep);
+  font-family: var(--sans);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease;
+}
+
+.btn-reset:hover {
+  background: var(--amber-tint);
+}
+
+.btn-reset:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.btn-reset.is-done {
+  border-color: var(--ok-border);
+  background: var(--ok-soft);
+  color: var(--ok);
+}
+
+/* A small neutral label: the calculator's shape on a card. */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--surface-sunken);
+  color: var(--ink-soft);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.tag--accent {
+  border-color: var(--accent-border);
+  background: var(--amber-tint);
+  color: var(--amber-deep);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 0 24px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  font-size: var(--t-md);
+  font-weight: 570;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: background 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease,
+    translate 0.1s ease;
+}
+
+.btn:hover {
+  background: var(--surface-sunken);
+  border-color: var(--text-faint);
+}
+
+.btn:active {
+  translate: 0 1px;
+}
+
+.btn--primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  box-shadow: var(--shadow-accent);
+}
+
+.btn--primary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+/* The brand's outlined companion to the filled button. */
+.btn--outline {
+  background: transparent;
+  border-color: var(--accent-border);
+  color: var(--accent-ink);
+}
+
+.btn--outline:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.btn--ghost {
+  border-color: transparent;
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.btn--ghost:hover {
+  background: var(--surface-sunken);
+  color: var(--text);
+  border-color: transparent;
+}
+
+.btn--sm {
+  min-height: 32px;
+  padding: 0 12px;
+  font-size: var(--t-sm);
+}
+
+.trail {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  padding: 15px 18px;
+  border-top: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.trail__row {
+  display: flex;
+  gap: 11px;
+  font-size: var(--t-sm);
+  color: var(--text-muted);
+}
+
+.trail__answer {
+  flex: none;
+  min-width: 28px;
+  font-weight: 680;
+  color: var(--accent-ink);
+  text-transform: uppercase;
+  font-size: var(--t-xs);
+  letter-spacing: 0.05em;
+  padding-top: 1px;
+}
+
+/* ------------------------------------------------------------------ prose */
+
+.prose {
+  font-size: var(--t-base);
+  line-height: 1.65;
+  color: var(--text-muted);
+  max-width: 78ch;
+}
+
+.prose p {
+  margin: 0 0 11px;
+}
+
+.prose p:last-child {
+  margin-bottom: 0;
+}
+
+/* The source states its formula as prose with the equation set into it.
+   Rendering the whole block as code makes the sentences unreadable, so only
+   the lines that ARE equations get the monospace treatment. */
+.formula {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 0;
+  font-size: var(--t-base);
+  line-height: 1.62;
+  color: var(--text-muted);
+}
+
+.formula__eq {
+  padding: 11px 15px;
+  margin: 5px 0;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  background: var(--surface-sunken);
+  font-family: var(--mono);
+  font-size: var(--t-sm);
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* Consecutive equation lines are one block, not a stack of separate cards. */
+.formula__eq + .formula__eq {
+  margin-top: -5px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top-color: transparent;
+}
+
+.formula__eq:has(+ .formula__eq) {
+  margin-bottom: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.formula__line {
+  overflow-wrap: anywhere;
+}
+
+/* "• Weight is input in kg" is a condition on the equation above it. */
+.formula__line:not(.formula__head) {
+  padding-left: 2px;
+  font-size: var(--t-sm);
+  color: var(--text-faint);
+}
+
+.formula__head {
+  margin-top: 8px;
+  font-weight: 620;
+  color: var(--text);
+}
+
+.formula__head:first-child {
+  margin-top: 0;
+}
+
+.ref-list {
+  margin: 0;
+  padding-left: 21px;
+  font-size: var(--t-sm);
+  line-height: 1.6;
+  color: var(--text-muted);
+}
+
+.ref-list li + li {
+  margin-top: 8px;
+}
+
+details.disclosure > summary {
+  cursor: pointer;
+  padding: 14px 18px;
+  font-size: var(--t-base);
+  font-weight: 620;
+  color: var(--text-muted);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+details.disclosure > summary::-webkit-details-marker {
+  display: none;
+}
+
+details.disclosure > summary::after {
+  content: "▾";
+  transition: rotate 0.15s ease;
+  color: var(--text-faint);
+}
+
+details.disclosure[open] > summary::after {
+  rotate: 180deg;
+}
+
+details.disclosure > summary:hover {
+  color: var(--text);
+}
+
+/* ------------------------------------------------------------ status bits */
+
+.skeleton {
+  border-radius: var(--r-md);
+  background: linear-gradient(
+    90deg,
+    var(--surface-sunken) 25%,
+    color-mix(in oklab, var(--surface-sunken) 50%, var(--surface)) 50%,
+    var(--surface-sunken) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.3s linear infinite;
+}
+
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+.spinner-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* -------------------------------------------------------------- responsive */
+
+/* The three columns collapse in order of how much they can be spared: the
+   reference column first (it is reading, not doing), then the index. */
+@media (max-width: 1280px) {
+  .info-pane {
+    width: 360px !important;
+    min-width: 320px;
+  }
+
+  .detail-inner {
+    padding: 26px 28px 64px;
+  }
+}
+
+@media (max-width: 1060px) {
+  .info-resizer,
+  .info-reopen {
+    display: none;
+  }
+
+  /* Below this the page stops being three columns and becomes two: the index,
+     and the calculator with its reference material following underneath. */
+  .app {
+    flex-wrap: wrap;
+  }
+
+  .detail-pane {
+    flex: 1 1 100%;
+    overflow: visible;
+  }
+
+  .info-pane {
+    flex: 1 1 100%;
+    width: auto !important;
+    max-width: none;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    overflow: visible;
+    padding: 22px 28px 60px;
+  }
+
+  .app {
+    overflow-y: auto;
+  }
+
+  .index-pane {
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    max-height: 100%;
+  }
+}
+
+@media (max-width: 780px) {
+  body {
+    overflow: auto;
+  }
+
+  .shell {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .app {
+    display: block;
+    overflow: visible;
+  }
+
+  .index-pane {
+    width: auto;
+    max-height: 44vh;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .sidebar-reopen,
+  .info-reopen {
+    width: auto;
+    border: 0;
+    border-bottom: 1px solid var(--line);
+    justify-content: flex-start;
+    padding: 8px 14px;
+  }
+
+  .topbar {
+    height: auto;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 14px;
+  }
+
+  .topbar__search {
+    order: 3;
+    flex-basis: 100%;
+    max-width: none;
+  }
+
+  .status {
+    display: none;
+  }
+
+  .detail-inner,
+  .info-pane {
+    padding: 20px 16px 40px;
+  }
+
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-inner h1 {
+    font-size: var(--t-2xl);
+  }
+
+  table.data th,
+  table.data td {
+    padding: 9px 12px;
+  }
+}
+
+/* A phone keeps the answer in view while the form is scrolled. */
+.mobile-summary {
+  display: none;
+}
+
+@media (max-width: 780px) {
+  .mobile-summary {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 30;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 11px 16px calc(11px + env(safe-area-inset-bottom));
+    background: var(--amber-tint);
+    border-top: 1px solid var(--amber);
+    box-shadow: 0 -4px 16px rgb(38 41 45 / 0.08);
+  }
+
+  .mobile-summary__label {
+    font-size: var(--t-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mobile-summary__value {
+    flex: none;
+    font-family: var(--mono);
+    font-size: var(--t-lg);
+    font-weight: 500;
+    color: var(--amber-deep);
+  }
+}
+
+
+/* ------------------------------------------------- calculator head + rail */
+
+.calc__sub {
+  margin: 0 0 10px;
+  max-width: 62ch;
+  font-size: var(--t-md);
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+/* The source document, named on the page rather than buried in a report. */
+.meta__source {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 34ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-faint);
+  font-size: var(--t-xs);
+}
+
+.meta__source::before {
+  content: "";
+  flex: none;
+  width: 9px;
+  height: 11px;
+  border: 1px solid currentColor;
+  border-radius: 1.5px;
+  opacity: 0.75;
+}
+
+.meta__pending {
+  color: var(--text-faint);
+}
+
+.results-panel__eyebrow {
+  font-size: var(--t-xs);
+  font-weight: 620;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  padding-left: 2px;
+}
+
+/* The values the answer came from, folded away beside it. A number on its own
+   is not checkable; reading it back is how a typo is caught. */
+.used {
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.used > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 9px 13px;
+  font-size: var(--t-sm);
+  font-weight: 550;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.used > summary::-webkit-details-marker {
+  display: none;
+}
+
+.used > summary::after {
+  content: "▾";
+  color: var(--text-faint);
+  font-size: var(--t-xs);
+  transition: rotate 0.15s ease;
+}
+
+.used[open] > summary::after {
+  rotate: 180deg;
+}
+
+.used > summary:hover {
+  color: var(--text);
+  background: var(--surface-sunken);
+}
+
+.used__list {
+  margin: 0;
+  padding: 2px 13px 11px;
+  border-top: 1px solid var(--border);
+}
+
+.used__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 5px 0;
+  font-size: var(--t-xs);
+}
+
+.used__row + .used__row {
+  border-top: 1px dashed var(--border);
+}
+
+.used__row dt {
+  color: var(--text-faint);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.used__row dd {
+  margin: 0;
+  flex: none;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.used__unit {
+  margin-left: 4px;
+  font-weight: 450;
+  color: var(--text-faint);
+}
+
+.criterion__any {
+  margin-left: 8px;
+  padding: 1px 7px;
+  border-radius: var(--r-pill);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border);
+  font-size: var(--t-xs);
+  font-weight: 500;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+/* Small muted text used beside a label or above a table. */
+.field__hint {
+  margin-left: auto;
+  font-size: var(--t-xs);
+  font-weight: 450;
+  color: var(--text-faint);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.panel__body > p.field__hint,
+.panel__body > div.field__hint {
+  margin-left: 0;
+  white-space: normal;
+  font-size: var(--t-sm);
+}
+
+/* The groups the printed form uses. Their positions are not in the PDF, so
+   they are named beside the fields rather than used to split them. */
+.form-groups {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 15px;
+  padding-bottom: 13px;
+  border-bottom: 1px dashed var(--border);
+}
+
+.form-groups__intro {
+  font-size: var(--t-xs);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  margin-right: 2px;
+}
+
+.form-groups__chip {
+  padding: 2px 9px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--border);
+  background: var(--surface-sunken);
+  font-size: var(--t-xs);
+  font-weight: 550;
+  color: var(--text-muted);
+}
+
+/* Legal text: the source document's own wording, complete and unclickable. */
+.prose--fine {
+  font-size: var(--t-sm);
+  line-height: 1.6;
+  color: var(--ink-soft);
+}

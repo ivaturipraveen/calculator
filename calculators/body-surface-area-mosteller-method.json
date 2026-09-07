@@ -1,0 +1,148 @@
+{
+  "schema_version": "1.0",
+  "slug": "body-surface-area-mosteller-method",
+  "title": "Body Surface Area (Mosteller Method)",
+  "subtitle": null,
+  "category": "Anthropometrics",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "height",
+      "js_name": "Height",
+      "label": "Height",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "cm",
+      "display_unit": "cm",
+      "units": [
+        {
+          "code": "cm",
+          "label": "cm",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "length",
+      "label_source": "printed form"
+    },
+    {
+      "key": "weight",
+      "js_name": "Weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "display_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "mass",
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "bsa",
+        "js_name": "BSA",
+        "label": "BSA",
+        "expr": "sqrt(height * weight / 3600)",
+        "base_unit": "sqm",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "BSA = sqr(Height * Weight / 3600)",
+    "notes": [
+      "The default unit of measure for weight is kilograms. Please verify that the correct unit of measure has been selected."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Mosteller RD. Simplified calculation of body surface area. NEJM. 1987; 317:1098.[PubMed 3657876]",
+        "pubmed_id": "3657876",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3657876/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Body Surface Area (Mosteller Method).pdf",
+      "source_sha256": "d7ba4eefd0fffc80ed8734611bcf8c82cc51c20d595b32880fd65beaa8353d3a",
+      "extractor": "pdf",
+      "form_name": "BodySurfaceArea_SR",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Body Surface Area (Mosteller Method)",
+        "form_name": "BodySurfaceArea_SR",
+        "filename_title": "Body Surface Area (Mosteller Method)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Body Surface Area (Mosteller Method)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (bodysurfaceareamostellermethod)",
+          "title_vs_form": "differs (bodysurfaceareamostellermethod vs bodysurfaceareasr) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "bsa",
+      "title": "Body Surface Area (Mosteller Method)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 87.5,
+    "checks_passed": 14,
+    "checks_total": 16,
+    "missing": [
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

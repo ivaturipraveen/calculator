@@ -1,0 +1,246 @@
+{
+  "schema_version": "1.0",
+  "slug": "nitroprusside",
+  "title": "Nitroprusside",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "concentration",
+      "label": "Concentration",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "Infusion Rate",
+      "units": [
+        {
+          "code": "Infusion Rate",
+          "label": "Infusion Rate",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 50.0,
+        "max": 1000.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "concentration",
+        "id_const": "ID_CONCENTRATION"
+      },
+      "dimension": null,
+      "label_source": "printed form",
+      "accepts_sentinel": [
+        "other"
+      ]
+    },
+    {
+      "key": "dose",
+      "label": "Dose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mcg/kg/minute",
+      "units": null,
+      "constraints": {
+        "min": 0.2,
+        "max": 10.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "dose",
+        "id_const": "ID_DOSE"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Dose must be a valid value."
+      ]
+    },
+    {
+      "key": "weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "weight",
+        "id_const": "ID_WEIGHT"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "display_unit": "kg",
+      "dimension": "mass",
+      "units_source": "corpus unit registry"
+    },
+    {
+      "key": "infusate_volume",
+      "label": "Infusate Volume",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mL",
+      "units": null,
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "infusateVolume",
+        "id_const": "ID_VOLUME"
+      },
+      "unit_source": "formula_prose"
+    },
+    {
+      "key": "drug_amount",
+      "label": "Drug Amount",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg",
+      "units": null,
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "drugAmount",
+        "id_const": "ID_DRUG_AMOUNT"
+      },
+      "unit_source": "formula_prose"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "calculated_concentration",
+        "expr": "(drug_amount/infusate_volume) if (concentration == \"other\") else ((concentration) / 1000)"
+      },
+      {
+        "key": "dose_wb",
+        "expr": "dose * weight"
+      },
+      {
+        "key": "rate",
+        "expr": "(dose_wb * 60) / (1000 * calculated_concentration)"
+      },
+      {
+        "key": "rate_v2",
+        "expr": "round(rate, 2)"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "infuse_rate",
+        "label": "Infusion Rate",
+        "expr": "rate_v2",
+        "decimals": null,
+        "base_unit": "mL/hour",
+        "kind": "number",
+        "label_source": "printed form (position)",
+        "unit_source": "formula_prose"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": "Infusion Rate:\nIf Concentration = anything except “Other”:\nInfusion Rate = (Dose * Weight * 60) / Concentration\n• Infusion Rate is calculated in mL/hour\n• Dose is input in mcg/kg/minute\n• Weight is input in kg\n• Concentration is input in mcg/mL\nIf Concentration = “Other”:\nIf Concentration = “Other”:\nInfusion Rate = (Dose * Weight * 60) / [(Drug Amount / Infusate Volume) * 1000]\n• Infusion Rate is calculated in mL/hour\n• Dose is input in mcg/kg/minute\n• Weight is input in kg\n• Drug Amount is input in mg\n• Infusate Volume is input in mL",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 1
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Nitroprusside.pdf",
+      "source_sha256": "c9f89faef4b16a265bbfa291c38fc120fba76a067c690b48fb18e9013f21fa80",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Nitroprusside",
+        "form_name": null,
+        "filename_title": "Nitroprusside",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Nitroprusside')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (nitroprusside)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf126",
+      "title": "Nitroprusside",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 84.6,
+    "checks_passed": 11,
+    "checks_total": 13,
+    "missing": [
+      "notes",
+      "unit options on every field"
+    ]
+  }
+}

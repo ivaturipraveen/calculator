@@ -1,0 +1,151 @@
+{
+  "schema_version": "1.0",
+  "slug": "unit-conversions-time",
+  "title": "Unit Conversions: Time",
+  "subtitle": null,
+  "category": "Unit Conversion",
+  "renderer": "convert",
+  "engine": "convert",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "from",
+      "label": "FROM:",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "to",
+      "label": "TO:",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "set_maximal_display_precision_in_decimal_points_1",
+      "label": "Set maximal display precision in decimal points: 1",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "convert",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": null,
+  "tables": {
+    "pairs": [
+      {
+        "from": "minute",
+        "to": "second",
+        "factor": 60
+      },
+      {
+        "from": "hour",
+        "to": "minute",
+        "factor": 60
+      },
+      {
+        "from": "day",
+        "to": "hour",
+        "factor": 24
+      },
+      {
+        "from": "week",
+        "to": "day",
+        "factor": 7
+      }
+    ]
+  },
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": null,
+    "notes": [
+      "To make simple unit conversions, select the starting units with the pull-down selector on the right. Then type a starting value in the top FROM input box. To convert the value, choose the new unit in the lower right selector. The converted value will appear immediately in the TO box.",
+      "Helpful Tips Conversion factors day (24 hours)",
+      "X 86400 = second hour (60 minutes)",
+      "X 3600 = second minute (60 seconds) X 60 = second month (30 days)",
+      "X 2.592e+6 = second year (365.25 days)",
+      "X 3.15576e+7 = second"
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Unit Conversions- Time.pdf",
+      "source_sha256": "37e693dd34221e5c8e9c68a2812332dd01660075c8818ab2a13ed969afdb8b2c",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Unit Conversions: Time",
+        "form_name": "Time",
+        "filename_title": "Unit Conversions- Time",
+        "confidence": 0.97,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Unit Conversions: Time')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (unitconversionstime)",
+          "title_vs_form": "PARTIAL (unitconversionstime ~ time)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf170",
+      "title": "Unit Conversions: Time",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "inputs_from_printed_form_only",
+        "severity": "medium",
+        "detail": "3 field(s) recovered from the printed form; the calculation itself is not in the PDF"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 6,
+    "checks_total": 6,
+    "missing": []
+  }
+}

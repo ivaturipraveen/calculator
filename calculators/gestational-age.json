@@ -1,0 +1,331 @@
+{
+  "schema_version": "1.0",
+  "slug": "gestational-age",
+  "title": "Gestational Age",
+  "subtitle": null,
+  "category": "Obstetrics",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "crown_rump_length",
+      "js_name": "Crown_Rump_Length",
+      "label": "Crown Rump Length",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mm",
+      "display_unit": "mm",
+      "units": [
+        {
+          "code": "mm",
+          "label": "mm",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 0.0,
+        "max": 100.0
+      },
+      "messages": {
+        "min": "The minimum value for Crown Rump Length is 0 mm.",
+        "max": "The maximum value for Crown Rump Length is 100 mm."
+      },
+      "dimension": "length",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Crown Rump Length is 0 mm. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Crown Rump Length is 100 mm. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "biparietal_diameter",
+      "js_name": "Biparietal_Diameter",
+      "label": "Biparietal Diameter",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mm",
+      "display_unit": "mm",
+      "units": [
+        {
+          "code": "mm",
+          "label": "mm",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "length",
+      "label_source": "printed form"
+    },
+    {
+      "key": "head_circumference",
+      "js_name": "Head_Circumference",
+      "label": "Head Circumference",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mm",
+      "display_unit": "mm",
+      "units": [
+        {
+          "code": "mm",
+          "label": "mm",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 80.0,
+        "max": 330.0
+      },
+      "messages": {
+        "min": "The minimum value for Head Circumference is 80 mm.",
+        "max": "The maximum value for Head Circumference is 330 mm."
+      },
+      "dimension": "length",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Head Circumference is 80 mm. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Head Circumference is 330 mm. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "current_time",
+      "label": "Current Date",
+      "type": "date",
+      "unit": "epoch_ms",
+      "base_unit": "epoch_ms",
+      "required": false,
+      "constraints": {},
+      "help": "Date value, supplied as milliseconds since the Unix epoch",
+      "label_source": "printed form (word match)"
+    },
+    {
+      "key": "lmp_time",
+      "label": "Last Menstrual Period",
+      "type": "date",
+      "unit": "epoch_ms",
+      "base_unit": "epoch_ms",
+      "required": false,
+      "constraints": {},
+      "help": "Date value, supplied as milliseconds since the Unix epoch",
+      "label_source": "printed form (word match)"
+    },
+    {
+      "key": "us_time",
+      "label": "Ultrasound Date",
+      "type": "date",
+      "unit": "epoch_ms",
+      "base_unit": "epoch_ms",
+      "required": false,
+      "constraints": {},
+      "help": "Date value, supplied as milliseconds since the Unix epoch",
+      "label_source": "printed form (word match)"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "bpdindays",
+        "expr": "(2 * biparietal_diameter) + 44.2",
+        "note": "recovered from a module assignment"
+      },
+      {
+        "key": "crlindays",
+        "expr": "7 * (5.2876 + (0.1584 * crown_rump_length) - (0.0007 * pow(crown_rump_length, 2)))",
+        "note": "recovered from a module assignment"
+      },
+      {
+        "key": "hcindays",
+        "expr": "7 * exp(1.854 + (.010451 * head_circumference) - (.000029919 * pow(head_circumference,2)) + (0.000000043156 * pow(head_circumference,3)))",
+        "note": "recovered from a module assignment"
+      },
+      {
+        "key": "lmpmillis",
+        "js_name": "lmpmillis",
+        "expr": "current_time - lmp_time"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "lmpweeks",
+        "js_name": "lmpweeks",
+        "label": "lmpweeks",
+        "expr": "lmpmillis / 604800000",
+        "base_unit": null,
+        "units": null
+      },
+      {
+        "key": "bpdweeks",
+        "js_name": "bpdweeks",
+        "label": "bpdweeks",
+        "expr": "bpdindays / 7",
+        "base_unit": null,
+        "units": null
+      },
+      {
+        "key": "hcweeks",
+        "js_name": "hcweeks",
+        "label": "hcweeks",
+        "expr": "hcindays / 7",
+        "base_unit": null,
+        "units": null
+      },
+      {
+        "key": "crlweeks",
+        "js_name": "crlweeks",
+        "label": "crlweeks",
+        "expr": "crlindays / 7",
+        "base_unit": null,
+        "units": null
+      },
+      {
+        "key": "edc_lmp",
+        "label": "EDC by LMP",
+        "expr": "lmp_time + 24192000000",
+        "decimals": 0,
+        "base_unit": "epoch_ms",
+        "kind": "date",
+        "note": "date arithmetic, epoch ms"
+      },
+      {
+        "key": "edc_bpd",
+        "label": "EDC by BPD",
+        "expr": "us_time - (bpdindays * 86400000 ) + 24192000000",
+        "decimals": 0,
+        "base_unit": "epoch_ms",
+        "kind": "date",
+        "note": "date arithmetic, epoch ms"
+      },
+      {
+        "key": "edc_hc",
+        "label": "EDC by HC",
+        "expr": "us_time - (hcindays * 86400000 ) + 24192000000",
+        "decimals": 0,
+        "base_unit": "epoch_ms",
+        "kind": "date",
+        "note": "date arithmetic, epoch ms"
+      },
+      {
+        "key": "edc_crl",
+        "label": "EDC by CRL",
+        "expr": "us_time - (crlindays * 86400000 ) + 24192000000",
+        "decimals": 0,
+        "base_unit": "epoch_ms",
+        "kind": "date",
+        "note": "date arithmetic, epoch ms"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 0,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": null,
+    "notes": [
+      "This calculator gives you many options for estimating gestation and delivery dates. Input any or all parameters to compare the various date calculations. The Current Date is set to your local workstation date.",
+      "EDC by LMP is calculated by adding 280 days (40 weeks) to the first day of the last menstrual period.",
+      "Gestation by LMP is calculated from the first day of the last menstrual period.",
+      "Gestation by CRL is calculated: Weeks = 5.2876 + (0.1584 * Crown Rump Length) - (0.0007 * Crown Rump Length2). This will be gestation at time of ultrasound.",
+      "Gestation by BPD is calculated using the formula: Days = 2 * Biparietal Diameter + 44.2. This will be gestation at time of ultrasound.",
+      "Gestation by HC is calculated: Weeks = e(1.854 + (0.010451 * Head Circumference) - (0.000029919 * Head Circumference2) + (0.000000043156 * Head Circumference3)). This will be gestation at time of ultrasound.",
+      "CRL dates are appropriate for the first trimester, while BPD and HC dates are best applied to the second trimester."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Mul T, Mongelli M, Gardosi J. A comparative analysis of second-trimester ultrasound dating formulae in pregnancies conceived with artificial reproductive techniques. Ultrasound Obstet Gynecol. 1996 Dec;8(6):397-402.[PubMed 9014279]",
+        "pubmed_id": "9014279",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9014279/"
+      },
+      {
+        "text": "Westerway SC, Davison A, Cowell S. Ultrasonic fetal measurements: new Australian standards for the new millennium. Aust N Z J Obstet Gynaecol. 2000 Aug;40(3):297-302. [PubMed 11065037]",
+        "pubmed_id": "11065037",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11065037/"
+      },
+      {
+        "text": "Altman DG, Chitty LS. New charts for ultrasound dating of pregnancy. Ultrasound Obstet Gynecol. 1997 Sep;10(3):174-91. [PubMed 9339525]",
+        "pubmed_id": "9339525",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9339525/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": [
+      "Ultrasound Estimation:",
+      "1st Trimester Measurement",
+      "2nd and 3rd Trimester Measurements"
+    ]
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 2
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Gestational Age.pdf",
+      "source_sha256": "98d0857993991f68d6b5c617aa8f6df3c83e54c8e22fa3f8ed4861bb0a319984",
+      "extractor": "pdf",
+      "form_name": "GestationDate",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Gestational Age",
+        "form_name": "GestationDate",
+        "filename_title": "Gestational Age",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Gestational Age')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (gestationalage)",
+          "title_vs_form": "differs (gestationalage vs gestationdate) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf93",
+      "title": "Gestational Age",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "dead_steps_pruned",
+        "severity": "low",
+        "detail": "unreachable and unused: ['monthname', 'current_date_value', 'selectedindex', 'lmp_date_value', 'lmpdays', 'us_date_value']"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 87.5,
+    "checks_passed": 14,
+    "checks_total": 16,
+    "missing": [
+      "printed equation text",
+      "unit options on every field"
+    ]
+  }
+}

@@ -1,0 +1,454 @@
+{
+  "schema_version": "1.0",
+  "slug": "tpn-osmolarity-determination",
+  "title": "TPN Osmolarity Determination",
+  "subtitle": null,
+  "category": "Renal Function / Electrolytes",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "amino_acids",
+      "js_name": "Amino_Acids",
+      "label": "Amino Acids",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mL 15% Solution",
+      "display_unit": "mL 15% Solution",
+      "units": [
+        {
+          "code": "mL 15% Solution",
+          "label": "mL 15% Solution",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "dextrose",
+      "js_name": "Dextrose",
+      "label": "Dextrose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mL 70% Solution",
+      "display_unit": "mL 70% Solution",
+      "units": [
+        {
+          "code": "mL 70% Solution",
+          "label": "mL 70% Solution",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "lipids",
+      "js_name": "Lipids",
+      "label": "Lipids",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mL 30% Solution",
+      "display_unit": "mL 30% Solution",
+      "units": [
+        {
+          "code": "mL 30% Solution",
+          "label": "mL 30% Solution",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "sterile_water",
+      "js_name": "Sterile_Water",
+      "label": "Sterile Water",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mL",
+      "display_unit": "mL",
+      "units": [
+        {
+          "code": "mL",
+          "label": "mL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "volume",
+      "label_source": "printed form"
+    },
+    {
+      "key": "calcium_chloride",
+      "js_name": "Calcium_Chloride",
+      "label": "Calcium Chloride",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq",
+      "display_unit": "mEq",
+      "units": [
+        {
+          "code": "mEq",
+          "label": "mEq",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "calcium_gluconate",
+      "js_name": "Calcium_Gluconate",
+      "label": "Calcium Gluconate",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq",
+      "display_unit": "mEq",
+      "units": [
+        {
+          "code": "mEq",
+          "label": "mEq",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "potassium_chloride",
+      "js_name": "Potassium_Chloride",
+      "label": "Potassium Chloride",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq",
+      "display_unit": "mEq",
+      "units": [
+        {
+          "code": "mEq",
+          "label": "mEq",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "potassium_acetate",
+      "js_name": "Potassium_Acetate",
+      "label": "Potassium Acetate",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq",
+      "display_unit": "mEq",
+      "units": [
+        {
+          "code": "mEq",
+          "label": "mEq",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "potassium_phosphate",
+      "js_name": "Potassium_Phosphate",
+      "label": "Potassium Phosphate",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mMol",
+      "display_unit": "mMol",
+      "units": [
+        {
+          "code": "mMol",
+          "label": "mMol",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "magnesium_sulfate",
+      "js_name": "Magnesium_Sulfate",
+      "label": "Magnesium Sulfate",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq",
+      "display_unit": "mEq",
+      "units": [
+        {
+          "code": "mEq",
+          "label": "mEq",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "sodium_chloride",
+      "js_name": "Sodium_Chloride",
+      "label": "Sodium Chloride",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq",
+      "display_unit": "mEq",
+      "units": [
+        {
+          "code": "mEq",
+          "label": "mEq",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "sodium_acetate",
+      "js_name": "Sodium_Acetate",
+      "label": "Sodium Acetate",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq",
+      "display_unit": "mEq",
+      "units": [
+        {
+          "code": "mEq",
+          "label": "mEq",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "sodium_phosphate",
+      "js_name": "Sodium_Phosphate",
+      "label": "Sodium Phosphate",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mMol",
+      "display_unit": "mMol",
+      "units": [
+        {
+          "code": "mMol",
+          "label": "mMol",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "w_vol",
+        "js_name": "W_Vol",
+        "expr": "0.0"
+      },
+      {
+        "key": "l_vol",
+        "js_name": "L_Vol",
+        "expr": "0.0"
+      },
+      {
+        "key": "d_vol",
+        "js_name": "D_Vol",
+        "expr": "0.0"
+      },
+      {
+        "key": "aa_vol",
+        "js_name": "AA_Vol",
+        "expr": "0.0"
+      },
+      {
+        "key": "total_volume",
+        "js_name": "Total_Volume",
+        "expr": "amino_acids + dextrose + lipids + sterile_water"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "total_osm",
+        "js_name": "Total_Osm",
+        "label": "Total Osm",
+        "expr": "amino_acids + dextrose + lipids + (1.46 * calcium_chloride) + (1.46 * calcium_gluconate) + (2 * potassium_chloride) + (2 * potassium_acetate) + (2.47 * potassium_phosphate) + magnesium_sulfate + (2 * sodium_chloride) + (2 * sodium_acetate) + (4 * sodium_phosphate)",
+        "base_unit": "mOsm",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "total_volume_of_base_solution",
+        "js_name": "Total_Volume_of_Base_Solution",
+        "label": "Total Volume of Base Solution",
+        "expr": "total_volume",
+        "base_unit": "mL",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "tpn_osmolarity",
+        "js_name": "TPN_Osmolarity",
+        "label": "TPN Osmolarity",
+        "expr": "1000 * total_osm / total_volume",
+        "base_unit": "mOsm/L",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 0,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Total_Osm = Amino_Acids + Dextrose + Lipids + (1.46 * Calcium_Chloride) + (1.46 * Calcium_Gluconate) + (2 * Potassium_Chloride) + (2 * Potassium_Acetate) + (2.47 * Potassium_Phosphate) + Magnesium_Sulfate + (2 * Sodium_Chloride) + (2 * Sodium_Acetate) + (4 * Sodium_Phosphate)\nTotal_Volume_of_Base_Solution = Total_Volume\nTPN_Osmolarity = 1000 * Total_Osm / Total_Volume",
+    "notes": [
+      "Central line administration is recommended for solutions with osmolarity greater than 900 mOsm/L.",
+      "Copyright © 2010 Wolters Kluwer Health, Inc. The information contained in this reference is intended to supplement the knowledge of health care professionals regarding drug information. This information is advisory only and is not intended to replace sound clinical judgment or individualized patient care in the delivery of health care services. Wolters Kluwer Health, Inc. disclaims all warranties, whether express or implied, including any warranty as to the quality, accuracy or suitability of this information for any particular purpose."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Holliday MA, Segar WE. The maintenance need for water in parenteral fluid therapy. Pediatrics. 1957 May;19(5):823-32.[PubMed 13431307]",
+        "pubmed_id": "13431307",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/13431307/"
+      },
+      {
+        "text": "Pittiruti M, Hamilton H, Biffi R, et al. ESPEN Guidelines on Parenteral Nutrition: central venous catheters (access, care, diagnosis and therapy of complications). Clin Nutr. 2009 Aug;28(4):365-77. [PubMed 19464090]",
+        "pubmed_id": "19464090",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/19464090/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": [
+      "Additives"
+    ]
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "TPN Osmolarity Determination.pdf",
+      "source_sha256": "e86427b0a98b1457d64695ec43119616ffe65da276bf6c11d86fa0bb8b06bfc0",
+      "extractor": "pdf",
+      "form_name": "TPNOsm",
+      "identity": {
+        "doc_id": "70017",
+        "title": "TPN Osmolarity Determination",
+        "form_name": "TPNOsm",
+        "filename_title": "TPN Osmolarity Determination",
+        "confidence": 0.97,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('TPN Osmolarity Determination')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (tpnosmolaritydetermination)",
+          "title_vs_form": "PARTIAL (tpnosmolaritydetermination ~ tpnosm)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf164",
+      "title": "TPN Osmolarity Determination",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 87.5,
+    "checks_passed": 14,
+    "checks_total": 16,
+    "missing": [
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

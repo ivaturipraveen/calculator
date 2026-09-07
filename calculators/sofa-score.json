@@ -1,0 +1,322 @@
+{
+  "schema_version": "1.0",
+  "slug": "sofa-score",
+  "title": "SOFA Score",
+  "subtitle": null,
+  "category": "Critical Care / Scoring System",
+  "renderer": "score",
+  "engine": "score",
+  "status": "draft",
+  "version": 1,
+  "inputs": [],
+  "compute": {
+    "engine": "score",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": {
+    "groups": [
+      {
+        "key": "lung respiration",
+        "label": "Lung: Respiration",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_0_0",
+            "label": "PaO2/FIO2 >400",
+            "points": 0
+          },
+          {
+            "key": "opt_0_1",
+            "label": "PaO2/FIO2 301 to 400",
+            "points": 1
+          },
+          {
+            "key": "opt_0_2",
+            "label": "PaO2/FIO2 <=300",
+            "points": 2
+          },
+          {
+            "key": "opt_0_3",
+            "label": "PaO2/FIO2 101 to 200 with ventilatory support",
+            "points": 3
+          },
+          {
+            "key": "opt_0_4",
+            "label": "PaO2/FIO2 <=100 with ventilatory support",
+            "points": 4
+          }
+        ]
+      },
+      {
+        "key": "coagulation platelets",
+        "label": "Coagulation: Platelets",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_1_0",
+            "label": ">150 x103/mm3",
+            "points": 0
+          },
+          {
+            "key": "opt_1_1",
+            "label": "101 to 150 x103/mm3",
+            "points": 1
+          },
+          {
+            "key": "opt_1_2",
+            "label": "51 to 100 x103/mm3",
+            "points": 2
+          },
+          {
+            "key": "opt_1_3",
+            "label": "21 to 50 x103/mm3",
+            "points": 3
+          },
+          {
+            "key": "opt_1_4",
+            "label": "<=20 x103/mm3",
+            "points": 4
+          }
+        ]
+      },
+      {
+        "key": "liver bilirubin",
+        "label": "Liver: Bilirubin",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_2_0",
+            "label": "<1.2 mg/dL (20 mcmol/L)",
+            "points": 0
+          },
+          {
+            "key": "opt_2_1",
+            "label": "1.2 to 1.9 mg/dL (20 to 32 mcmol/L)",
+            "points": 1
+          },
+          {
+            "key": "opt_2_2",
+            "label": "2 to 5.9 mg/dL (33 to 101 mcmol/L)",
+            "points": 2
+          },
+          {
+            "key": "opt_2_3",
+            "label": "6 to 11.9 mg/dL (102 to 204 mcmol/L)",
+            "points": 3
+          },
+          {
+            "key": "opt_2_4",
+            "label": ">12 mg/dL (>204 mcmol/L)",
+            "points": 4
+          }
+        ]
+      },
+      {
+        "key": "cardiovascular blood pressure",
+        "label": "Cardiovascular: Blood Pressure",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_3_0",
+            "label": "Hypotension absent",
+            "points": 0
+          },
+          {
+            "key": "opt_3_1",
+            "label": "Mean arterial pressure <70 mmHg",
+            "points": 1
+          },
+          {
+            "key": "opt_3_2",
+            "label": "On Dopamine <=5 mcg/kg/min or any Dobutamine",
+            "points": 2
+          },
+          {
+            "key": "opt_3_3",
+            "label": "On Dopamine >5 mcg/kg/min, Epinephrine <=0.1 mcg/kg/min or Norepinephrine <=0.1 mcg/kg/min",
+            "points": 3
+          },
+          {
+            "key": "opt_3_4",
+            "label": "On Dopamine >15 mcg/kg/min or Epinephrine >0.1 mcg/kg/min or Norepinephrine >0.1 mcg/kg/min",
+            "points": 4
+          }
+        ]
+      },
+      {
+        "key": "brain glasgow coma score",
+        "label": "Brain: Glasgow Coma Score",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_4_0",
+            "label": "15",
+            "points": 0
+          },
+          {
+            "key": "opt_4_1",
+            "label": "13 to 14",
+            "points": 1
+          },
+          {
+            "key": "opt_4_2",
+            "label": "10 to 12",
+            "points": 2
+          },
+          {
+            "key": "opt_4_3",
+            "label": "6 to 9",
+            "points": 3
+          },
+          {
+            "key": "opt_4_4",
+            "label": "<6",
+            "points": 4
+          }
+        ]
+      },
+      {
+        "key": "kidney renal function",
+        "label": "Kidney: Renal Function",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_5_0",
+            "label": "Creatinine <1.2 mg/dL (110 mcmol/L)",
+            "points": 0
+          },
+          {
+            "key": "opt_5_1",
+            "label": "Creatinine 1.2 to 1.9 mg/dL (110 to 170 mcmol/L)",
+            "points": 1
+          },
+          {
+            "key": "opt_5_2",
+            "label": "Creatinine 2 to 3.4 mg/dL (171 to 299 mcmol/L)",
+            "points": 2
+          },
+          {
+            "key": "opt_5_3",
+            "label": "Creatinine 3.5 to 4.9 mg/dL (300 to 440 mcmol/L) or urine output 200 to 500 mL/day",
+            "points": 3
+          },
+          {
+            "key": "opt_5_4",
+            "label": "Creatinine >5 mg/dL (440 mcmol/L) or urine output <200 mL/day",
+            "points": 4
+          }
+        ]
+      }
+    ],
+    "bands": [],
+    "total": {
+      "key": "total_score",
+      "label": "Total Criteria Point Count",
+      "unit": "points",
+      "min": 0.0,
+      "max": 24.0
+    }
+  },
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [
+      "Vasoactive drug dose criteria based on administration for at least one hour.",
+      "The SOFA score helps predict morbidity rather than mortality, though individuals with a score of 15 or more had a mortality rate of 90%1."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Vincent JL, de Mendonca A, Cantraine F, et al. Use of the SOFA score to assess the incidence of organ dysfunction/failure in intensive care units: results of a multicenter, prospective study.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Working group on \"sepsis-related problems\" of the European Society of Intensive Care Medicine.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Crit Care Med. 1998 Nov;26(11):1793-800.[PubMed 9824069]",
+        "pubmed_id": "9824069",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/9824069/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "SOFA Score.pdf",
+      "source_sha256": "522b5dbc0d859582e1f95006408102c1a821b800f5b1c8e35158964f2c2244be",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "SOFA Score",
+        "form_name": null,
+        "filename_title": "SOFA Score",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('SOFA Score')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (sofascore)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf157",
+      "title": "SOFA Score",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "score_no_bands",
+        "severity": "medium",
+        "detail": "no interpretation bands in the PDF or the mockup"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 88.9,
+    "checks_passed": 8,
+    "checks_total": 9,
+    "missing": [
+      "interpretation bands"
+    ]
+  }
+}

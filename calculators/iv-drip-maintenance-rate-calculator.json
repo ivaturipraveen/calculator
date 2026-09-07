@@ -1,0 +1,141 @@
+{
+  "schema_version": "1.0",
+  "slug": "iv-drip-maintenance-rate-calculator",
+  "title": "IV Drip Maintenance Rate Calculator",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "total_fluid_volume",
+      "js_name": "Total_Fluid_Volume",
+      "label": "Total Fluid Volume",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mL",
+      "display_unit": "mL",
+      "units": [
+        {
+          "code": "mL",
+          "label": "mL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "volume",
+      "label_source": "printed form"
+    },
+    {
+      "key": "total_admin_time",
+      "js_name": "Total_Admin_Time",
+      "label": "Total Admin Time",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "hr",
+      "display_unit": "hr",
+      "units": [
+        {
+          "code": "hr",
+          "label": "hr",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "time",
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "drip_rate",
+        "js_name": "Drip_Rate",
+        "label": "Drip Rate",
+        "expr": "total_fluid_volume / total_admin_time",
+        "base_unit": "mL/hr",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "Drip_Rate = Total_Fluid_Volume / Total_Admin_Time",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1] EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "IV Drip Maintenance Rate Calculator.pdf",
+      "source_sha256": "d87326c625646fbd85b4607765f3a706084af1cfdcfbdfa698f7ad48728cd964",
+      "extractor": "pdf",
+      "form_name": "IVDripRate",
+      "identity": {
+        "doc_id": "70017",
+        "title": "IV Drip Maintenance Rate Calculator",
+        "form_name": "IVDripRate",
+        "filename_title": "IV Drip Maintenance Rate Calculator",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('IV Drip Maintenance Rate Calculator')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (ivdripmaintenanceratecalculator)",
+          "title_vs_form": "differs (ivdripmaintenanceratecalculator vs ivdriprate) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf105",
+      "title": "IV Drip Maintenance Rate Calculator",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 80.0,
+    "checks_passed": 12,
+    "checks_total": 15,
+    "missing": [
+      "notes",
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

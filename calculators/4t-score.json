@@ -1,0 +1,224 @@
+{
+  "schema_version": "1.0",
+  "slug": "4t-score",
+  "title": "4T score",
+  "subtitle": null,
+  "category": "Hematology / Scoring System",
+  "renderer": "score",
+  "engine": "score",
+  "status": "draft",
+  "version": 1,
+  "inputs": [],
+  "compute": {
+    "engine": "score",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": {
+    "groups": [
+      {
+        "key": "thrombocytopenia",
+        "label": "Thrombocytopenia",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_0_0",
+            "label": "Platelet count fall >50 percent AND nadir ≥20,000/microL",
+            "points": 2
+          },
+          {
+            "key": "opt_0_1",
+            "label": "Platelet count fall 30 to 50 percent OR nadir 10 to 19,000/microL",
+            "points": 1
+          },
+          {
+            "key": "opt_0_2",
+            "label": "Platelet count fall <30 percent OR nadir <10,000/microL",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "key": "timing of platelet count fall",
+        "label": "Timing of platelet count fall",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_1_0",
+            "label": "Clear onset between days 5 and 10 of heparin exposure, OR platelet count fall at ≤1 day if prior heparin exposure within the last 30 days",
+            "points": 2
+          },
+          {
+            "key": "opt_1_1",
+            "label": "Consistent with fall in platelet count at 5 to 10 days, but unclear (eg, missing platelet counts), OR onset after day 10, OR fall ≤1 day with prior heparin exposure within 30 to 100 days",
+            "points": 1
+          },
+          {
+            "key": "opt_1_2",
+            "label": "Platelet count fall at <4 days without recent heparin exposure",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "key": "thrombosis or other sequelae",
+        "label": "Thrombosis or other sequelae",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_2_0",
+            "label": "Confirmed new thrombosis, skin necrosis, or acute systemic reaction after intravenous unfractionated heparin bolus",
+            "points": 2
+          },
+          {
+            "key": "opt_2_1",
+            "label": "Progressive or recurrent thrombosis, non-necrotizing (erythematous) skin lesions, or suspected thrombosis that has not been proven",
+            "points": 1
+          },
+          {
+            "key": "opt_2_2",
+            "label": "None",
+            "points": 0
+          }
+        ]
+      },
+      {
+        "key": "other causes for thrombocytopenia present",
+        "label": "Other causes for thrombocytopenia present",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_3_0",
+            "label": "None apparent",
+            "points": 2
+          },
+          {
+            "key": "opt_3_1",
+            "label": "Possible",
+            "points": 1
+          },
+          {
+            "key": "opt_3_2",
+            "label": "Definite",
+            "points": 0
+          }
+        ]
+      }
+    ],
+    "bands": [
+      {
+        "min": 0,
+        "max": 3,
+        "label": "Low probability",
+        "raw": "0 to 3 points: Low probability"
+      },
+      {
+        "min": 4,
+        "max": 5,
+        "label": "Intermediate probability",
+        "raw": "4 to 5 points: Intermediate probability"
+      },
+      {
+        "min": 6,
+        "max": 8,
+        "label": "High probability",
+        "raw": "6 to 8 points: High probability"
+      }
+    ],
+    "total": {
+      "key": "total_score",
+      "label": "Total Criteria Point Count",
+      "unit": "points",
+      "min": 0.0,
+      "max": 8.0
+    },
+    "interpretation": {
+      "key": "interpretation",
+      "label": "4 Ts score interpretation",
+      "printed_rows": [
+        "4 Ts score interpretation"
+      ]
+    }
+  },
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Lo GK, Juhl D, Warkentin TE, et al. Evaluation of pretest clinical score (4 T's) for the diagnosis of heparin-induced thrombocytopenia in two clinical settings. J Thromb Haemost. 2006 Apr;4(4):759- 65.[PubMed 16634744]",
+        "pubmed_id": "16634744",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16634744/"
+      },
+      {
+        "text": "Cuker A, Gimotty PA, Crowther MA, Warkentin TE. Predictive value of the 4Ts scoring system for heparin-induced thrombocytopenia: a systematic review and meta-analysis. Blood. 2012 Nov 15;120(20):4160-7. [PubMed 22990018]",
+        "pubmed_id": "22990018",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/22990018/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "4T score.pdf",
+      "source_sha256": "15d38ccb4896e61e223d4ddfc45142fb0733928138bb18bbee587337b8b8f96e",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "4T score",
+        "form_name": null,
+        "filename_title": "4T score",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('4T score')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (4tscore)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "fourt",
+      "title": "4T Score",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 9,
+    "checks_total": 9,
+    "missing": []
+  }
+}

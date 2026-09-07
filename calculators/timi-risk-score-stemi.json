@@ -1,0 +1,256 @@
+{
+  "schema_version": "1.0",
+  "slug": "timi-risk-score-stemi",
+  "title": "TIMI Risk Score (STEMI)",
+  "subtitle": null,
+  "category": "Cardiology / Scoring System",
+  "renderer": "score",
+  "engine": "score",
+  "status": "draft",
+  "version": 1,
+  "inputs": [],
+  "compute": {
+    "engine": "score",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": {
+    "groups": [
+      {
+        "key": "ungrouped",
+        "label": "(ungrouped)",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_0_0",
+            "label": "DM, history of HTN or history of Angina",
+            "points": 1
+          },
+          {
+            "key": "opt_0_1",
+            "label": "Systolic blood pressure less than 100 mm Hg",
+            "points": 3
+          },
+          {
+            "key": "opt_0_2",
+            "label": "Heart rate greater than 100 BPM",
+            "points": 2
+          },
+          {
+            "key": "opt_0_3",
+            "label": "Killip class II-IV",
+            "points": 2
+          },
+          {
+            "key": "opt_0_4",
+            "label": "Body weight <150 lb or 67 kg",
+            "points": 1
+          },
+          {
+            "key": "opt_0_5",
+            "label": "Anterior lead ST elevation or left BBB",
+            "points": 1
+          },
+          {
+            "key": "opt_0_6",
+            "label": "Time to treat more >4 hours",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "key": "age",
+        "label": "Age",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_1_0",
+            "label": "≥75 years old",
+            "points": 3
+          },
+          {
+            "key": "opt_1_1",
+            "label": "65-74 years old",
+            "points": 2
+          },
+          {
+            "key": "opt_1_2",
+            "label": "<65 years old",
+            "points": 0
+          }
+        ]
+      }
+    ],
+    "bands": [
+      {
+        "min": 0,
+        "max": 0,
+        "label": "0.8%",
+        "raw": "0 Points: 0.8%"
+      },
+      {
+        "min": 1,
+        "max": 1,
+        "label": "1.6%",
+        "raw": "1 Point: 1.6%"
+      },
+      {
+        "min": 2,
+        "max": 2,
+        "label": "2.2%",
+        "raw": "2 Points: 2.2%"
+      },
+      {
+        "min": 3,
+        "max": 3,
+        "label": "4.4%",
+        "raw": "3 Points: 4.4%"
+      },
+      {
+        "min": 4,
+        "max": 4,
+        "label": "7.3%",
+        "raw": "4 Points: 7.3%"
+      },
+      {
+        "min": 5,
+        "max": 5,
+        "label": "12%",
+        "raw": "5 Points: 12%"
+      },
+      {
+        "min": 6,
+        "max": 6,
+        "label": "16%",
+        "raw": "6 Points: 16%"
+      },
+      {
+        "min": 7,
+        "max": 7,
+        "label": "23%",
+        "raw": "7 Points: 23%"
+      },
+      {
+        "min": 8,
+        "max": 8,
+        "label": "27%",
+        "raw": "8 Points: 27%"
+      },
+      {
+        "min": 9,
+        "max": 14,
+        "label": "36%",
+        "raw": "9 to 14 Points: 36%"
+      }
+    ],
+    "total": {
+      "key": "total_score",
+      "label": "Total Criteria Point Count",
+      "unit": "points",
+      "min": 1.0,
+      "max": 6.0
+    },
+    "interpretation": {
+      "key": "interpretation",
+      "label": "TIMI Risk Score Predicts 30 Day Mortality After an MI",
+      "printed_rows": [
+        "TIMI Risk Score Predicts 30 Day Mortality After an MI"
+      ]
+    }
+  },
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [
+      "Entry criteria: Chest pain for more than 30 minutes, ST elevation, symptom onset less than 6 hours, fibrinolytic eligible."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Ray J. The TIMI risk score predicted mortality in patients with ST-elevation myocardial infarction.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "ACP J Club. 2002 Mar-Apr;136(2):76.[PubMed 11874301]",
+        "pubmed_id": "11874301",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11874301/"
+      },
+      {
+        "text": "Morrow DA, Antman EM, Charlesworth A, et al. TIMI risk score for ST-elevation myocardial infarction: A convenient, bedside, clinical score for risk assessment at presentation: An intravenous nPA for treatment of infarcting myocardium early II trial substudy. Circulation. 2000 Oct 24;102(17):2031-7. [PubMed 11044416]",
+        "pubmed_id": "11044416",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11044416/"
+      },
+      {
+        "text": "Morrow DA, Antman EM, Parsons L, et al. Application of the TIMI risk score for ST-elevation MI in the National Registry of Myocardial Infarction 3. JAMA. 2001 Sep 19;286(11):1356-9. [PubMed 11560541]",
+        "pubmed_id": "11560541",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11560541/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": [
+      {
+        "label": "9 to 14 Points:",
+        "value": 36.0,
+        "unit": "%"
+      }
+    ],
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "TIMI Risk Score (STEMI).pdf",
+      "source_sha256": "2bab01174a6ddce40a7728e0715880e4d95f19337cab1a263b0d974939211e9e",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "TIMI Risk Score (STEMI)",
+        "form_name": null,
+        "filename_title": "TIMI Risk Score (STEMI)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('TIMI Risk Score (STEMI)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (timiriskscorestemi)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf159",
+      "title": "TIMI Risk Score (STEMI)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 9,
+    "checks_total": 9,
+    "missing": []
+  }
+}

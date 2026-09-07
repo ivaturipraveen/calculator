@@ -1,0 +1,216 @@
+{
+  "schema_version": "1.0",
+  "slug": "amiodarone",
+  "title": "Amiodarone",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "drug_amount",
+      "label": "Drug Amount",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg",
+      "units": null,
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "drugAmount",
+        "id_const": "ID_AMOUNT"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Drug Amount must be at least 0."
+      ]
+    },
+    {
+      "key": "dose",
+      "label": "Dose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/minute",
+      "units": null,
+      "constraints": {
+        "min": 0.16667,
+        "max": 1.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "dose",
+        "id_const": "ID_DOSE"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Dose must be between 0.16667 and 1 mg/minute."
+      ]
+    },
+    {
+      "key": "infusate_volume",
+      "label": "Infusate Volume",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "Infusion Rate",
+      "units": [
+        {
+          "code": "Infusion Rate",
+          "label": "Infusion Rate",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "infusateVolume",
+        "id_const": "ID_VOLUME"
+      },
+      "dimension": null,
+      "label_source": "printed form",
+      "accepts_sentinel": [
+        "other",
+        "Select a value"
+      ]
+    },
+    {
+      "key": "infusate_custom_volume",
+      "label": "Infusate Custom Volume",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "infusateCustomVolume",
+        "id_const": "ID_CUSTOM_VOLUME"
+      }
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "rate",
+        "expr": "(dose / ( drug_amount / infusate_volume)) * 60"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "infusion_rate",
+        "label": "Infusion Rate",
+        "expr": "rate",
+        "decimals": 1,
+        "base_unit": "mL/hour",
+        "kind": "number",
+        "label_source": "printed form",
+        "unit_source": "formula_prose"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Infusion Rate:\nInfusion Rate = (Dose * 60) / (Drug Amount / Infusate Volume)\n• Infusion Rate is calculated in mL/hour\n• Dose is input in mg/minute\n• Drug Amount is input in mg\n• Infusate Volume is input in mL",
+    "notes": [
+      "This calculator is intended for use in adult patients to calculate infusion rates for continuous infusions (eg, lasting >1 hour).",
+      "Mean daily doses >2.1 g/day have been associated with hypotension."
+    ],
+    "conditional_notes": [
+      "Concentration is above 2\nmg/mL; administer via a central venous catheter"
+    ],
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again.",
+    "stated_limits": [
+      {
+        "name": "Concentration",
+        "applies_to": null,
+        "min": 1.0,
+        "unit": "mg/mL",
+        "max": 6.0
+      },
+      {
+        "name": "Daily Dosage",
+        "applies_to": null,
+        "max": 2.1,
+        "unit": "g/day"
+      }
+    ],
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": [
+      "Please select an option from the Infusate Volume drop-down menu"
+    ],
+    "fields_with_help": 2
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Amiodarone.pdf",
+      "source_sha256": "e098951e836d88b24513b74320aac672d8d5e4b9fad73d2029ee258f0c390cff",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Amiodarone",
+        "form_name": null,
+        "filename_title": "Amiodarone",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Amiodarone')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (amiodarone)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf19",
+      "title": "Amiodarone",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 92.3,
+    "checks_passed": 12,
+    "checks_total": 13,
+    "missing": [
+      "unit options on every field"
+    ]
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "schema_version": "1.0",
+  "slug": "pediatric-dosing-oral-solid",
+  "title": "Pediatric Dosing: Oral Solid",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "dose",
+      "label": "Dose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 0.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "dose",
+        "id_const": "ID_DOSE"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "constraints": {
+        "min": 1.0,
+        "max": 114.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "weight",
+        "id_const": "ID_WEIGHT"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Weight must be between 1 and 114."
+      ],
+      "display_unit": "kg",
+      "dimension": "mass",
+      "units_source": "corpus unit registry"
+    },
+    {
+      "key": "frequency",
+      "label": "Frequency",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "hours",
+      "units": [
+        {
+          "code": "Days",
+          "label": "Days",
+          "factor": 24.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "Hours",
+          "label": "Hours",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "frequency",
+        "id_const": "ID_FREQUENCY"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "display_unit": "hours",
+      "dimension": "time",
+      "units_source": "corpus unit registry"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "output_dose",
+        "expr": "weight * dose"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "output_dose",
+        "label": "Output Dose",
+        "expr": "output_dose",
+        "decimals": 1,
+        "kind": "number",
+        "unit_source": "formula_prose",
+        "unit_rejected": "the units selected for Input",
+        "base_unit": null
+      },
+      {
+        "key": "every",
+        "label": "Every",
+        "expr": "frequency",
+        "decimals": null,
+        "base_unit": "hours",
+        "kind": "number",
+        "unit_source": "formula_prose"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Dose:\nOutput Dose = (Input Dose * Weight)\n• Output Dose is calculated in the units selected for Input Dose\n• Output Dose is calculated in the units selected for Input Dose\n• Input Dose is input as specified\n• Weight is input in kg\nEvery = Frequency\n• Every is calculated in hours\n• Frequency is input in hours",
+    "notes": [],
+    "conditional_notes": [
+      "\nWarning: Calculator does not make adjustments for maximum doses - please check all calculations\nwith dosing in monograph<\\/p>\nNote: Doses may need to be rounded to accommodate available dosage forms<\\/p>"
+    ],
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again. This calculation is intended to be used for patients <12 years of age. Children ≥12 years of age should typically follow adult dosing. This calculation allows for the calculation of amount of drug required to deliver a specified dose at a specified frequency using an oral solid dosage form. The calculator does not make adjustments for maximum doses - please check all calculations with dosing in monograph. In addition, the calculator does not take into account available dosage forms - please refer to the individual drug monograph; it may be necessary to round results appropriately.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 1
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Pediatric Dosing- Oral Solid.pdf",
+      "source_sha256": "d96fd8fe4572d5287500b1b10cd56064bb0da202bab1a34b0da85f352621629e",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Pediatric Dosing: Oral Solid",
+        "form_name": null,
+        "filename_title": "Pediatric Dosing- Oral Solid",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Pediatric Dosing: Oral Solid')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (pediatricdosingoralsolid)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf135",
+      "title": "Pediatric Dosing: Oral Solid",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 84.6,
+    "checks_passed": 11,
+    "checks_total": 13,
+    "missing": [
+      "notes",
+      "unit options on every field"
+    ]
+  }
+}

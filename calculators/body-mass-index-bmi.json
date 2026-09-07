@@ -1,0 +1,153 @@
+{
+  "schema_version": "1.0",
+  "slug": "body-mass-index-bmi",
+  "title": "Body Mass Index (BMI)",
+  "subtitle": null,
+  "category": "Anthropometrics",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "height",
+      "js_name": "Height",
+      "label": "Height",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "in",
+      "display_unit": "in",
+      "units": [
+        {
+          "code": "in",
+          "label": "in",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "length",
+      "label_source": "printed form"
+    },
+    {
+      "key": "weight",
+      "js_name": "Weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "lb",
+      "display_unit": "lb",
+      "units": [
+        {
+          "code": "lb",
+          "label": "lb",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "mass",
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "bmi",
+        "js_name": "BMI",
+        "label": "BMI",
+        "expr": "(weight/2.205) / pow((height/39.37), 2)",
+        "base_unit": "kg/m2",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "BMI = (Weight/2.205) / (Height/39.37)2",
+    "notes": [
+      "The default unit of measure for weight is pounds. Please verify that the correct unit of measure has been selected."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Pi-Sunyer FX, Aronne LJ, et al. The Practical guide:Identification, Evaluation and treatment of Overweight and Obesity in Adults. National Institute of Health, National Heart, Lung, And Blood Institute, North American Association For The Study Of Obesity. NIH publication 00-4084, 2002.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Khosla T, Lowe CR. Indices of obesity derived from body weight and height. Br J Prev Soc Med. 1967; 21: 122-128.[PubMed 6033482]",
+        "pubmed_id": "6033482",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/6033482/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Body Mass Index (BMI).pdf",
+      "source_sha256": "8e426ec6c4643d6a48a8937b31b9d8949752bbf58082a8d8732b885959eedf4a",
+      "extractor": "pdf",
+      "form_name": "BodyMassIndex",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Body Mass Index (BMI)",
+        "form_name": "BodyMassIndex",
+        "filename_title": "Body Mass Index (BMI)",
+        "confidence": 0.97,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Body Mass Index (BMI)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (bodymassindexbmi)",
+          "title_vs_form": "PARTIAL (bodymassindexbmi ~ bodymassindex)"
+        }
+      }
+    },
+    "html": {
+      "id": "bmi",
+      "title": "Body Mass Index (BMI)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 87.5,
+    "checks_passed": 14,
+    "checks_total": 16,
+    "missing": [
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

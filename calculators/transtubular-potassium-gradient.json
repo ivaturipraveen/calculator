@@ -1,0 +1,203 @@
+{
+  "schema_version": "1.0",
+  "slug": "transtubular-potassium-gradient",
+  "title": "Transtubular Potassium Gradient",
+  "subtitle": null,
+  "category": "Renal Function",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "urine_k",
+      "js_name": "Urine_K",
+      "label": "Urine K",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq/L",
+      "display_unit": "mEq/L",
+      "units": [
+        {
+          "code": "mEq/L",
+          "label": "mEq/L",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "serum_k",
+      "js_name": "Serum_K",
+      "label": "Serum K",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq/L",
+      "display_unit": "mEq/L",
+      "units": [
+        {
+          "code": "mEq/L",
+          "label": "mEq/L",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "urine_osm",
+      "js_name": "Urine_Osm",
+      "label": "Urine Osm",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mOsm/kg",
+      "display_unit": "mOsm/kg",
+      "units": [
+        {
+          "code": "mOsm/kg",
+          "label": "mOsm/kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "serum_osm",
+      "js_name": "Serum_Osm",
+      "label": "Serum Osm",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mOsm/kg",
+      "display_unit": "mOsm/kg",
+      "units": [
+        {
+          "code": "mOsm/kg",
+          "label": "mOsm/kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "ttkg",
+        "js_name": "TTKG",
+        "label": "TTKG",
+        "expr": "(urine_k / serum_k) / (urine_osm / serum_osm)",
+        "base_unit": "#",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "TTKG = (Urine_K / Serum_K) / (Urine_Osm / Serum_Osm)",
+    "notes": [
+      "The transtubular potassium gradient in the cortical collecting duct is an index reflecting conservation of potassium. A normal TTKG in normal subjects on normal diets is 8-9.",
+      "With a potassium load the TTKG may rise to 11.",
+      "In the face of Hyperkalemia, a low TTKG (<7) may indicate hypoaldosteronism.",
+      "Without other disease, hypokalemia should produce a TTKG <3 (some authors say TTKG <2.)",
+      "The expected TTKG in hyperkalemia is >10."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "West ML, Marsden PA, Richardson RM, et al. New clinical approach to evaluate disorders of potassium excretion. Mineral Electrolyt Metab. 12:234,1986.[PubMed 3762510]",
+        "pubmed_id": "3762510",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3762510/"
+      },
+      {
+        "text": "Ethier JH, Kamel KS, Magner PO, et al. The transtubular potassium concentration in patients with hypokalemia and hyperkalemia. Am J Kidney Dis. 15:309,1990. [PubMed 2321642]",
+        "pubmed_id": "2321642",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/2321642/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Transtubular Potassium Gradient.pdf",
+      "source_sha256": "8dfa0887ffdd45ebbc5b11cac7e46b472ff961ae614145c3cbdcd782ea7da677",
+      "extractor": "pdf",
+      "form_name": "TranstubularKGrad",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Transtubular Potassium Gradient",
+        "form_name": "TranstubularKGrad",
+        "filename_title": "Transtubular Potassium Gradient",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Transtubular Potassium Gradient')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (transtubularpotassiumgradient)",
+          "title_vs_form": "differs (transtubularpotassiumgradient vs transtubularkgrad) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf165",
+      "title": "Transtubular Potassium Gradient",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 87.5,
+    "checks_passed": 14,
+    "checks_total": 16,
+    "missing": [
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

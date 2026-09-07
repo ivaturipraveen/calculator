@@ -1,0 +1,196 @@
+{
+  "schema_version": "1.0",
+  "slug": "clostridium-difficile-disease-severity-score-hines-va",
+  "title": "Clostridium Difficile Disease Severity Score (Hines VA)",
+  "subtitle": null,
+  "category": "Infectious Disease / Scoring System",
+  "renderer": "score",
+  "engine": "score",
+  "status": "draft",
+  "version": 1,
+  "inputs": [],
+  "compute": {
+    "engine": "score",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": {
+    "groups": [
+      {
+        "key": "exam findings",
+        "label": "Exam findings",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_0_0",
+            "label": "Fever (≥38 degrees C)",
+            "points": 1
+          },
+          {
+            "key": "opt_0_1",
+            "label": "Ileus by clinical or xray",
+            "points": 1
+          },
+          {
+            "key": "opt_0_2",
+            "label": "Hypotension with SysBP <100 mmHg",
+            "points": 1
+          }
+        ]
+      },
+      {
+        "key": "white blood cell count x 109l",
+        "label": "White blood cell count [x 10^9/L]",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_1_0",
+            "label": "WBC <15",
+            "points": 0
+          },
+          {
+            "key": "opt_1_1",
+            "label": "WBC 15 to 30",
+            "points": 1
+          },
+          {
+            "key": "opt_1_2",
+            "label": "WBC >30",
+            "points": 2
+          }
+        ]
+      },
+      {
+        "key": "cat scan findings of colonic wall thickening dilated colon o",
+        "label": "CAT scan findings of colonic wall thickening, dilated colon, or ascites",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_2_0",
+            "label": "No findings",
+            "points": 0
+          },
+          {
+            "key": "opt_2_1",
+            "label": "One finding",
+            "points": 1
+          },
+          {
+            "key": "opt_2_2",
+            "label": "Two or more findings",
+            "points": 2
+          }
+        ]
+      }
+    ],
+    "bands": [
+      {
+        "min": 0,
+        "max": 2,
+        "label": "Mild to moderate disease",
+        "raw": "0 to 2 points: Mild to moderate disease"
+      },
+      {
+        "min": 3,
+        "max": 7,
+        "label": "Severe disease",
+        "raw": "3 to 7 points: Severe disease"
+      }
+    ],
+    "total": {
+      "key": "total_score",
+      "label": "Total Criteria Point Count",
+      "unit": "points",
+      "min": 1.0,
+      "max": 5.0
+    },
+    "interpretation": {
+      "key": "interpretation",
+      "label": "CDD Score Interpretation",
+      "printed_rows": [
+        "CDD Score Interpretation"
+      ]
+    }
+  },
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [
+      "In the Belmares study, patients with a score of 3 or more were more likely to fail metronidazole treatment."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Belmares J, Gerding DN, Parada JP, et al. Outcome of metronidazole therapy for Clostridium difficile disease and correlation with a scoring system. J Infect. 2007 Dec;55(6):495-501.[PubMed 17983659]",
+        "pubmed_id": "17983659",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/17983659/"
+      },
+      {
+        "text": "Fujitani S, George WL, Murthy AR. Comparison of clinical severity score indices for Clostridium difficile infection. Infect Control Hosp Epidemiol. 2011 Mar;32(3):220-8. [PubMed 21460506]",
+        "pubmed_id": "21460506",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21460506/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Clostridium Difficile Disease Severity Score (Hines VA).pdf",
+      "source_sha256": "b43722e1e42c98fa4eb5a6716f4d769cc1ec51ec3189e40522f73709e19b0ca4",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Clostridium Difficile Disease Severity Score (Hines VA)",
+        "form_name": null,
+        "filename_title": "Clostridium Difficile Disease Severity Score (Hines VA)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Clostridium Difficile Disease Severity Score (Hines VA)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (clostridiumdifficilediseaseseverityscorehinesva)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf58",
+      "title": "Clostridium Difficile Disease Severity Score (Hines VA)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 9,
+    "checks_total": 9,
+    "missing": []
+  }
+}

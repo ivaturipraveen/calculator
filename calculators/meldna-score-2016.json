@@ -1,0 +1,256 @@
+{
+  "schema_version": "1.0",
+  "slug": "meldna-score-2016",
+  "title": "MELDNa Score (2016)",
+  "subtitle": null,
+  "category": "Hepatology",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "hemodialysis_twice_in_week_prior",
+      "js_name": "Hemodialysis_twice_in_week_prior",
+      "label": "Hemodialysis twice in week prior",
+      "widget": "select",
+      "required": true,
+      "default": 0,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "options": [
+        {
+          "label": "No",
+          "value": 0
+        },
+        {
+          "label": "Yes",
+          "value": 1
+        }
+      ],
+      "options_source": "pdf_script+printed_form",
+      "source": {
+        "kind": "input_override",
+        "js_group": "Hemodialysis_twice_in_week_prior",
+        "overrides": "creatinine",
+        "forced_value": 4.0
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "creatinine",
+      "js_name": "Creatinine",
+      "label": "Creatinine",
+      "widget": "quantity",
+      "required": false,
+      "default": null,
+      "base_unit": "mg/dL",
+      "display_unit": "mg/dL",
+      "units": [
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "creatinine",
+      "label_source": "printed form",
+      "required_when": {
+        "field": "hemodialysis_twice_in_week_prior",
+        "equals": [
+          0
+        ]
+      }
+    },
+    {
+      "key": "bilirubin",
+      "js_name": "Bilirubin",
+      "label": "Bilirubin",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/dL",
+      "display_unit": "mg/dL",
+      "units": [
+        {
+          "code": "mg/dL",
+          "label": "mg/dL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "creatinine",
+      "label_source": "printed form"
+    },
+    {
+      "key": "inr",
+      "js_name": "INR",
+      "label": "INR",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "ratio",
+      "display_unit": "ratio",
+      "units": [
+        {
+          "code": "ratio",
+          "label": "ratio",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "fraction",
+      "label_source": "printed form"
+    },
+    {
+      "key": "serum_na",
+      "js_name": "Serum_Na",
+      "label": "Serum Na",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq/L",
+      "display_unit": "mEq/L",
+      "units": [
+        {
+          "code": "mEq/L",
+          "label": "mEq/L",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "creatinine_effective",
+        "expr": "(4.0) if (hemodialysis_twice_in_week_prior == 1) else (creatinine)",
+        "note": "Hemodialysis twice in week prior forces creatinine to 4.0"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "meld_score",
+        "js_name": "MELD_Score",
+        "label": "MELD Score",
+        "expr": "round((9.57 * ln(creatinine_effective)) + (3.78 * ln(bilirubin)) + (11.2 * ln(inr)) + 6.43 )",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "meldna_score",
+        "js_name": "MELDNa_Score",
+        "label": "MELDNa Score",
+        "expr": "meld_score + (abs(meld_score > 11)) * ((1.32 * (137 - serum_na)) - (0.033 * meld_score * (137 - serum_na)))",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 0,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "MELD_Score = (Round the following expression to the nearest integer)((9.57 * ln(Creatinine)) + (3.78 * ln(Bilirubin)) + (11.2 * ln(INR)) + 6.43 )\nMELDNa_Score = MELD_Score + ((1 if the following expression is true, 0 if false)(MELD_Score > 11)) * ((1.32 * (137 - Serum_Na)) - (0.033 * MELD_Score * (137 - Serum_Na)))",
+    "notes": [
+      "The MELDNa equations use Creatinine values between 1 and 4 mg/dL, Bilirubin values of 1 mg/dL or greater, INR values of 1 or greater, and Serum Na levels between 125 and 137 mEq/L. Input values outside these ranges are internally converted to either the maximum or minimum values required by the equations.",
+      "Use of this equation is not appropriate for patients under the age of 12.",
+      "Hyponatremia contributes to the MELDNa Score only when the initial MELD Score is greater than 11.",
+      "The Model of End-stage Liver Disease, or MELD Score is used to estimate relative disease severity and likely survival of patients awaiting liver transplantation.",
+      "The MELDNa score system adds a Serum Na parameter, so the added risk of significant hyponatremia may be taken into account.",
+      "Children under the age of 12 should be assessed by the PELD Score.",
+      "If a patient has had 2 or more hemodialysis treatments or 24 hours of CVVHD in the week prior to the time of the scoring, Creatinine will be set to 4 mg/dL, the maximum creatinine level allowed in the model.",
+      "For patients with hepatocellular carcinoma, the PELD/MELD score is increased according to an For patients with hepatocellular carcinoma, the PELD/MELD score is increased according to an algorithm established by UNOS (United Network for Organ Sharing.)",
+      "Additional information about the MELD and PELD scores is at the UNOS website, http://optn.transplant.hrsa.gov/resources/professionalResources.asp?index=8"
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Kim WR, Biggins SW, Kremers WK, Wiesner RH, et al. Hyponatremia and mortality among patients on the liver-transplant waiting list. N Engl J Med. 2008 Sep 4;359(10):1018-26.[PubMed 18768945]",
+        "pubmed_id": "18768945",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/18768945/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "MELDNa Score (2016).pdf",
+      "source_sha256": "5db3d5adfd3699e1478d4e7f1e6ce7e956bad607d99017c0935cf5bcc52633ab",
+      "extractor": "pdf",
+      "form_name": "MELDNa2016",
+      "identity": {
+        "doc_id": "70017",
+        "title": "MELDNa Score (2016)",
+        "form_name": "MELDNa2016",
+        "filename_title": "MELDNa Score",
+        "confidence": 0.75,
+        "verified": false,
+        "flags": [
+          "title_filename_partial"
+        ],
+        "checks": {
+          "title": "present ('MELDNa Score (2016)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "PARTIAL (meldnascore2016 ~ meldnascore)",
+          "title_vs_form": "differs (meldnascore2016 vs meldna2016) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf116",
+      "title": "MELDNa Score (2016)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 81.2,
+    "checks_passed": 13,
+    "checks_total": 16,
+    "missing": [
+      "unit options on every field",
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

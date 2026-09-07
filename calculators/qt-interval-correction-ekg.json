@@ -1,0 +1,171 @@
+{
+  "schema_version": "1.0",
+  "slug": "qt-interval-correction-ekg",
+  "title": "QT Interval Correction (EKG)",
+  "subtitle": null,
+  "category": "Cardiology",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "qt_interval",
+      "js_name": "QT_Interval",
+      "label": "QT Interval",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "sec",
+      "display_unit": "sec",
+      "units": [
+        {
+          "code": "sec",
+          "label": "sec",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "time",
+      "label_source": "printed form"
+    },
+    {
+      "key": "heart_rate",
+      "js_name": "Heart_Rate",
+      "label": "Heart Rate",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "bpm",
+      "display_unit": "bpm",
+      "units": [
+        {
+          "code": "bpm",
+          "label": "bpm",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "rr_interval",
+        "expr": "60000 / heart_rate"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "rr_interval",
+        "js_name": "RR_Interval",
+        "label": "RR Interval",
+        "expr": "60 / heart_rate",
+        "base_unit": "sec",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "qti_corrected",
+        "js_name": "QTI_Corrected",
+        "label": "QTI Corrected",
+        "expr": "qt_interval / sqrt(rr_interval)",
+        "base_unit": "sec",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "RR_Interval = 60 / Heart_Rate\nQTI_Corrected = QT_Interval / sqr(RR_Interval)",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Bazett HC. An analysis of the time relationships of electrocardiograms. Heart. 1920;7:355-70.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Malik M. Problems of heart rate correction in assessment of drug-induced QT interval prolongation. J Cardiovasc Electrophysiol. 2001 Apr;12(4):411-20.[PubMed 11332559]",
+        "pubmed_id": "11332559",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/11332559/"
+      },
+      {
+        "text": "Vandenberk B, Vandael E, Robyns T, et al. Which QT Correction Formulae to Use for QT Vandenberk B, Vandael E, Robyns T, et al. Which QT Correction Formulae to Use for QT Monitoring? J Am Heart Assoc. 2016 Jun 17;5(6). [PubMed 27317349]",
+        "pubmed_id": "27317349",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27317349/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "QT Interval Correction (EKG).pdf",
+      "source_sha256": "1427687730e85b9f20f2f3ef2695493256180606ab24ee25c1a554793fca8700",
+      "extractor": "pdf",
+      "form_name": "QTIntervalCorrection",
+      "identity": {
+        "doc_id": "70017",
+        "title": "QT Interval Correction (EKG)",
+        "form_name": "QTIntervalCorrection",
+        "filename_title": "QT Interval Correction (EKG)",
+        "confidence": 0.97,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('QT Interval Correction (EKG)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (qtintervalcorrectionekg)",
+          "title_vs_form": "PARTIAL (qtintervalcorrectionekg ~ qtintervalcorrection)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf142",
+      "title": "QT Interval Correction (EKG)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 81.2,
+    "checks_passed": 13,
+    "checks_total": 16,
+    "missing": [
+      "notes",
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

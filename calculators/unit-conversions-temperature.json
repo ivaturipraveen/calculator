@@ -1,0 +1,146 @@
+{
+  "schema_version": "1.0",
+  "slug": "unit-conversions-temperature",
+  "title": "Unit Conversions: Temperature",
+  "subtitle": null,
+  "category": "Unit Conversion",
+  "renderer": "convert",
+  "engine": "convert",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "from",
+      "label": "FROM:",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "to",
+      "label": "TO:",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "set_maximal_display_precision_in_decimal_points_1",
+      "label": "Set maximal display precision in decimal points: 1",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "convert",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": null,
+  "tables": {
+    "pairs": [
+      {
+        "from": "Celsius (°C)",
+        "to": "Fahrenheit (°F)",
+        "factor": 1.8,
+        "offset": 32
+      },
+      {
+        "from": "Celsius (°C)",
+        "to": "Kelvin (K)",
+        "factor": 1,
+        "offset": 273.15
+      },
+      {
+        "from": "Fahrenheit (°F)",
+        "to": "Kelvin (K)",
+        "factor": 0.5555555556,
+        "offset": 255.372222
+      }
+    ]
+  },
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": null,
+    "notes": [
+      "To make simple unit conversions, select the starting units with the pull-down selector on the right. Then type a starting value in the top FROM input box. To convert the value, choose the new unit in the lower right selector. The converted value will appear immediately in the TO box.",
+      "Temperature conversions use the following formulas:",
+      "Temperature in degrees Fahrenheit (°F) = (Temperature in degrees Centigrade (°C) X 9/5) + 32 Temperature in degrees Centigrade (°C) = (Temperature in degrees Fahrenheit (°F) - 32) X 5/9 Temperature in degrees Kelvin (°K) = (Temperature in degrees Centigrade (°C) + 273.15"
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Unit Conversions- Temperature.pdf",
+      "source_sha256": "19444717b207b130879168e0924388ee6afb4cdc06310364fe81c60fab49dd06",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Unit Conversions: Temperature",
+        "form_name": "Temperature",
+        "filename_title": "Unit Conversions- Temperature",
+        "confidence": 0.97,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Unit Conversions: Temperature')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (unitconversionstemperature)",
+          "title_vs_form": "PARTIAL (unitconversionstemperature ~ temperature)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf169",
+      "title": "Unit Conversions: Temperature",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "inputs_from_printed_form_only",
+        "severity": "medium",
+        "detail": "3 field(s) recovered from the printed form; the calculation itself is not in the PDF"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 6,
+    "checks_total": 6,
+    "missing": []
+  }
+}

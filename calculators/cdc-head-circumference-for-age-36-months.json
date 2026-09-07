@@ -1,0 +1,681 @@
+{
+  "schema_version": "1.0",
+  "slug": "cdc-head-circumference-for-age-36-months",
+  "title": "CDC Head Circumference for Age (<36 months)",
+  "subtitle": null,
+  "category": "Pediatrics / Growth Chart",
+  "renderer": "lms",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "sex",
+      "js_name": "Sex",
+      "label": "Sex",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "options": [
+        {
+          "label": "Female",
+          "index": 0,
+          "value": 1.0
+        },
+        {
+          "label": "Male",
+          "index": 1,
+          "value": 2.0
+        }
+      ],
+      "options_source": "pdf_script+printed_form",
+      "variant_variables": null,
+      "source": {
+        "kind": "radio_group",
+        "js_group": "Sex"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "age",
+      "js_name": "Age",
+      "label": "Age",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mo",
+      "display_unit": "mo",
+      "units": [
+        {
+          "code": "mo",
+          "label": "mo",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 0.0,
+        "max": 35.99
+      },
+      "messages": {
+        "max": "The maximum value for Age is 35.99 mo."
+      },
+      "dimension": "time_age",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Age is 0 mo. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Age is 35.99 mo. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "head_circumference",
+      "js_name": "Head_Circumference",
+      "label": "Head Circumference",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "cm",
+      "display_unit": "cm",
+      "units": [
+        {
+          "code": "cm",
+          "label": "cm",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 20.0,
+        "max": 200.0
+      },
+      "messages": {
+        "min": "The minimum value for Head Circumference is 20 cm.",
+        "max": "The maximum value for Head Circumference is 200 cm."
+      },
+      "dimension": "length",
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Head Circumference is 20 cm. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Head Circumference is 200 cm. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    }
+  ],
+  "compute": {
+    "engine": "lookup+expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "z_score",
+        "js_name": "Z_Score",
+        "label": "Z Score",
+        "expr": "(pow((head_circumference / M), L) - 1) / (L * S)",
+        "base_unit": null,
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "percentile",
+        "js_name": "Percentile",
+        "label": "Percentile",
+        "expr": "z_to_percentile(z_score)",
+        "units": null,
+        "label_source": "printed form",
+        "unit_rejected": "Percentile < 3:",
+        "base_unit": null
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": {
+    "lookups": [
+      {
+        "key": "Age",
+        "operator": "<",
+        "columns": [
+          "L",
+          "M",
+          "S"
+        ],
+        "row_count": 35,
+        "rows": [
+          {
+            "threshold": 1.0,
+            "L": -1.440271514,
+            "M": 36.03453876,
+            "S": 0.042999604
+          },
+          {
+            "threshold": 2.0,
+            "L": -1.581016348,
+            "M": 37.97671987,
+            "S": 0.038067862
+          },
+          {
+            "threshold": 3.0,
+            "L": -1.593136386,
+            "M": 39.3801263,
+            "S": 0.035079612
+          },
+          {
+            "threshold": 4.0,
+            "L": -1.521492427,
+            "M": 40.46773733,
+            "S": 0.033096443
+          },
+          {
+            "threshold": 6.0,
+            "L": -1.231713389,
+            "M": 42.0833507,
+            "S": 0.030709039
+          },
+          {
+            "threshold": 7.0,
+            "L": -1.046582628,
+            "M": 42.71033603,
+            "S": 0.029974303
+          },
+          {
+            "threshold": 8.0,
+            "L": -0.848932692,
+            "M": 43.25428882,
+            "S": 0.029430992
+          },
+          {
+            "threshold": 9.0,
+            "L": -0.645779124,
+            "M": 43.73249646,
+            "S": 0.029030379
+          },
+          {
+            "threshold": 10.0,
+            "L": -0.442165412,
+            "M": 44.15742837,
+            "S": 0.028739112
+          },
+          {
+            "threshold": 11.0,
+            "L": -0.24163206,
+            "M": 44.53836794,
+            "S": 0.028533537
+          },
+          {
+            "threshold": 12.0,
+            "L": -0.046673786,
+            "M": 44.88240562,
+            "S": 0.028396382
+          },
+          {
+            "threshold": 13.0,
+            "L": 0.141031094,
+            "M": 45.19507651,
+            "S": 0.028314722
+          },
+          {
+            "threshold": 14.0,
+            "L": 0.320403169,
+            "M": 45.48078147,
+            "S": 0.028278682
+          },
+          {
+            "threshold": 15.0,
+            "L": 0.490807133,
+            "M": 45.74307527,
+            "S": 0.028280585
+          },
+          {
+            "threshold": 16.0,
+            "L": 0.65193505,
+            "M": 45.98486901,
+            "S": 0.028314363
+          },
+          {
+            "threshold": 17.0,
+            "L": 0.803718086,
+            "M": 46.20857558,
+            "S": 0.028375159
+          },
+          {
+            "threshold": 18.0,
+            "L": 0.946259679,
+            "M": 46.41621635,
+            "S": 0.028459033
+          },
+          {
+            "threshold": 19.0,
+            "L": 1.079784984,
+            "M": 46.60950084,
+            "S": 0.028562759
+          },
+          {
+            "threshold": 20.0,
+            "L": 1.204602687,
+            "M": 46.78988722,
+            "S": 0.028683666
+          },
+          {
+            "threshold": 21.0,
+            "L": 1.321076285,
+            "M": 46.95862881,
+            "S": 0.028819525
+          },
+          {
+            "threshold": 22.0,
+            "L": 1.429602576,
+            "M": 47.11681039,
+            "S": 0.028968459
+          },
+          {
+            "threshold": 23.0,
+            "L": 1.530595677,
+            "M": 47.26537682,
+            "S": 0.029128879
+          },
+          {
+            "threshold": 24.0,
+            "L": 1.624475262,
+            "M": 47.40515585,
+            "S": 0.029299426
+          },
+          {
+            "threshold": 25.0,
+            "L": 1.71165803,
+            "M": 47.53687649,
+            "S": 0.029478937
+          },
+          {
+            "threshold": 26.0,
+            "L": 1.792551616,
+            "M": 47.66118396,
+            "S": 0.029666406
+          },
+          {
+            "threshold": 27.0,
+            "L": 1.867550375,
+            "M": 47.77865186,
+            "S": 0.02986096
+          },
+          {
+            "threshold": 28.0,
+            "L": 1.93703258,
+            "M": 47.8897923,
+            "S": 0.030061839
+          },
+          {
+            "threshold": 29.0,
+            "L": 2.001358669,
+            "M": 47.99506422,
+            "S": 0.030268375
+          },
+          {
+            "threshold": 30.0,
+            "L": 2.060870301,
+            "M": 48.09488048,
+            "S": 0.030479985
+          },
+          {
+            "threshold": 31.0,
+            "L": 2.115889982,
+            "M": 48.18961365,
+            "S": 0.03069615
+          },
+          {
+            "threshold": 32.0,
+            "L": 2.16672113,
+            "M": 48.2796011,
+            "S": 0.030916413
+          },
+          {
+            "threshold": 33.0,
+            "L": 2.21364844,
+            "M": 48.36514917,
+            "S": 0.031140368
+          },
+          {
+            "threshold": 34.0,
+            "L": 2.256943216,
+            "M": 48.44653703,
+            "S": 0.031367651
+          },
+          {
+            "threshold": 35.0,
+            "L": 2.296844024,
+            "M": 48.52401894,
+            "S": 0.031597939
+          },
+          {
+            "threshold": 36.0,
+            "L": 2.333589434,
+            "M": 48.59782828,
+            "S": 0.031830942
+          }
+        ],
+        "fallback": null,
+        "suffix": null,
+        "select_key": "sex",
+        "select_value": 1.0,
+        "variant_label": "Female"
+      },
+      {
+        "key": "Age",
+        "operator": "<",
+        "columns": [
+          "L",
+          "M",
+          "S"
+        ],
+        "row_count": 36,
+        "rows": [
+          {
+            "threshold": 1.0,
+            "L": 4.310927464,
+            "M": 37.19361054,
+            "S": 0.047259148
+          },
+          {
+            "threshold": 2.0,
+            "L": 3.869576802,
+            "M": 39.20742929,
+            "S": 0.040947903
+          },
+          {
+            "threshold": 3.0,
+            "L": 3.305593039,
+            "M": 40.65233195,
+            "S": 0.037027722
+          },
+          {
+            "threshold": 4.0,
+            "L": 2.720590297,
+            "M": 41.76516959,
+            "S": 0.034364245
+          },
+          {
+            "threshold": 5.0,
+            "L": 2.16804824,
+            "M": 42.66116148,
+            "S": 0.034364245
+          },
+          {
+            "threshold": 6.0,
+            "L": 1.675465689,
+            "M": 43.40488731,
+            "S": 0.031064702
+          },
+          {
+            "threshold": 7.0,
+            "L": 1.255160322,
+            "M": 44.03609923,
+            "S": 0.03002267
+          },
+          {
+            "threshold": 8.0,
+            "L": 0.91054114,
+            "M": 44.58096912,
+            "S": 0.029242173
+          },
+          {
+            "threshold": 9.0,
+            "L": 0.639510474,
+            "M": 45.05761215,
+            "S": 0.028660454
+          },
+          {
+            "threshold": 10.0,
+            "L": 0.436978864,
+            "M": 45.4790756,
+            "S": 0.0282336
+          },
+          {
+            "threshold": 11.0,
+            "L": 0.296275856,
+            "M": 45.85505706,
+            "S": 0.027929764
+          },
+          {
+            "threshold": 12.0,
+            "L": 0.210107251,
+            "M": 46.19295427,
+            "S": 0.027725179
+          },
+          {
+            "threshold": 13.0,
+            "L": 0.171147024,
+            "M": 46.49853438,
+            "S": 0.027601686
+          },
+          {
+            "threshold": 14.0,
+            "L": 0.172393886,
+            "M": 46.77637684,
+            "S": 0.027545148
+          },
+          {
+            "threshold": 15.0,
+            "L": 0.207371541,
+            "M": 47.03017599,
+            "S": 0.027544382
+          },
+          {
+            "threshold": 16.0,
+            "L": 0.270226126,
+            "M": 47.2629533,
+            "S": 0.027590417
+          },
+          {
+            "threshold": 17.0,
+            "L": 0.355757274,
+            "M": 47.47720989,
+            "S": 0.02767598
+          },
+          {
+            "threshold": 18.0,
+            "L": 0.459407627,
+            "M": 47.67503833,
+            "S": 0.027795115
+          },
+          {
+            "threshold": 19.0,
+            "L": 0.577227615,
+            "M": 47.85820606,
+            "S": 0.0279429
+          },
+          {
+            "threshold": 20.0,
+            "L": 0.705826778,
+            "M": 48.02821867,
+            "S": 0.028115241
+          },
+          {
+            "threshold": 21.0,
+            "L": 0.842319055,
+            "M": 48.18636864,
+            "S": 0.028308707
+          },
+          {
+            "threshold": 22.0,
+            "L": 0.984266833,
+            "M": 48.3337732,
+            "S": 0.028520407
+          },
+          {
+            "threshold": 23.0,
+            "L": 1.129626698,
+            "M": 48.47140432,
+            "S": 0.028747896
+          },
+          {
+            "threshold": 24.0,
+            "L": 1.276691223,
+            "M": 48.60011223,
+            "S": 0.028989089
+          },
+          {
+            "threshold": 25.0,
+            "L": 1.424084853,
+            "M": 48.72064621,
+            "S": 0.029242207
+          },
+          {
+            "threshold": 26.0,
+            "L": 1.570621291,
+            "M": 48.83366629,
+            "S": 0.029505723
+          },
+          {
+            "threshold": 27.0,
+            "L": 1.715393998,
+            "M": 48.93976089,
+            "S": 0.029778323
+          },
+          {
+            "threshold": 28.0,
+            "L": 1.857652984,
+            "M": 49.03945383,
+            "S": 0.030058871
+          },
+          {
+            "threshold": 29.0,
+            "L": 1.996810563,
+            "M": 49.13321432,
+            "S": 0.030346384
+          },
+          {
+            "threshold": 30.0,
+            "L": 2.132411346,
+            "M": 49.22146409,
+            "S": 0.030640006
+          },
+          {
+            "threshold": 31.0,
+            "L": 2.264111009,
+            "M": 49.30458348,
+            "S": 0.030938992
+          },
+          {
+            "threshold": 32.0,
+            "L": 2.391658052,
+            "M": 49.38291658,
+            "S": 0.031242693
+          },
+          {
+            "threshold": 33.0,
+            "L": 2.514878222,
+            "M": 49.45677569,
+            "S": 0.031550537
+          },
+          {
+            "threshold": 34.0,
+            "L": 2.633661226,
+            "M": 49.526445,
+            "S": 0.031862026
+          },
+          {
+            "threshold": 35.0,
+            "L": 2.747949445,
+            "M": 49.59218385,
+            "S": 0.03217672
+          },
+          {
+            "threshold": 36.0,
+            "L": 2.857728375,
+            "M": 49.65422952,
+            "S": 0.032494231
+          }
+        ],
+        "fallback": null,
+        "suffix": null,
+        "select_key": "sex",
+        "select_value": 2.0,
+        "variant_label": "Male"
+      }
+    ],
+    "lookup": null
+  },
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "Z_Score = ((Head_Circumference/M)L - 1) / (L * S)\nPercentile = ZtoPercentile(Z_Score)",
+    "notes": [
+      "Microcephaly is a Head Circumference greater than two standard deviations below the mean.",
+      "Macrocephaly is a Head Circumference greater than two standard deviations above the mean.",
+      "At the extremes (>97th percentile or <3rd percentile), small differences in percentiles represent clinically important differences. At these extremes, the Z-score is a more precise reflection of how far the measurement deviates from the mean and is a useful tool for tracking changes.",
+      "LMS data used in this calculator are shown in the data table below.",
+      "For all LMS tables, the row in the table corresponding to the patient-specific value is found in the first column of the table; values to be used for L (the Box-Cox power), M (the median), and S (the generalized coefficient of variation) in the equation for Z-score are retrieved.",
+      "Z-scores may be used to do a table lookup for the corresponding percentile in the Normal table percentiles for Z-score table (below). Numbers along the left side (Y-axis) of the table represent the first number and first decimal place of the Z-score, while the numbers along the top (X-axis) of the table represent the second decimal position of the Z-score.",
+      "Helpful Tips Examples Z-score Percentile equivalent - 3.0 0.3 - 2.0 2.5 + 2.0 97.5 + 3.0 99.7 LMS Parameters for Girls: Head Circumference for Age Age [months]"
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "LMS Parameters for Girls: Head Circumference for Age. National health and nutrition survey (NHANES), CDC/National Center for Health Statistics.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "LMS Parameters for Boys: Head Circumference for Age. National health and nutrition survey (NHANES), CDC/National Center for Health Statistics.",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 2
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "CDC Head Circumference for Age (under 36 months).pdf",
+      "source_sha256": "a5f27931251c20c910c7894c4d23d1761d2aec1f4cf6aadbbac45b4907d33596",
+      "extractor": "pdf",
+      "form_name": "CDCInfantHeadCircForAge",
+      "identity": {
+        "doc_id": "70017",
+        "title": "CDC Head Circumference for Age (<36 months)",
+        "form_name": "CDCInfantHeadCircForAge",
+        "filename_title": "CDC Head Circumference for Age (under 36 months)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('CDC Head Circumference for Age (<36 months)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (cdcheadcircumferenceforagelt36months)",
+          "title_vs_form": "differs (cdcheadcircumferenceforagelt36months vs cdcinfantheadcircforage) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "cdc_head_circ",
+      "title": "CDC Head Circumference for Age (under 36 months)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 93.8,
+    "checks_passed": 15,
+    "checks_total": 16,
+    "missing": [
+      "unit options on every field"
+    ]
+  }
+}

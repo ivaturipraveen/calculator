@@ -1,0 +1,236 @@
+/* Design tokens.
+ *
+ * The palette, the type and the proportions are taken from the reference
+ * mockup the team signed off on: warm paper rather than grey, amber as the one
+ * accent, a transitional serif for titles, and a monospace that carries every
+ * number, unit and section label. Three faces, each with a job -- the serif
+ * says what this is, the sans is for reading, the mono is for anything a
+ * clinician has to read digit by digit.
+ *
+ * Every colour is defined once on :root and only redefined for dark, so a
+ * component never has to know which theme it is in.
+ */
+
+:root {
+  color-scheme: light;
+
+  /* ground */
+  --paper: #fbfaf8;
+  --white: #ffffff;
+  --surface: #ffffff;
+  --surface-2: #fbfaf8;
+  --surface-sunken: #f4f2ed;
+  --line: #e7e5e0;
+  --card-line: #eaeae7;
+  --line-strong: #d8d5cd;
+
+  /* ink */
+  --ink: #26292d;
+  --ink-soft: #7a8088;
+  --ink-faint: #a7acb2;
+  --text: var(--ink);
+  --text-muted: var(--ink-soft);
+  --text-faint: var(--ink-faint);
+  --border: var(--line);
+  --border-strong: var(--line-strong);
+  --bg: var(--paper);
+
+  /* the one accent */
+  --amber: #d9a441;
+  --amber-deep: #c08f31;
+  --amber-tint: #fbf0dc;
+  --amber-tint-2: #f7e6c4;
+  --accent: var(--amber);
+  --accent-hover: var(--amber-deep);
+  --accent-ink: #8a6a2e;
+  --accent-soft: var(--amber-tint);
+  --accent-soft-2: var(--amber-tint-2);
+  --accent-border: #ead9ae;
+  --on-accent: #ffffff;
+
+  /* a second voice, for links and the thing you have chosen */
+  --blue: #2e6da4;
+  --blue-soft: #eaf1fa;
+
+  /* status */
+  --ok: #1e7a4c;
+  --ok-soft: #e5f5ec;
+  --ok-border: #b9e0ca;
+  --ok-dot: #2fa360;
+  --warn: #8a6a2e;
+  --warn-soft: #fbf3e2;
+  --warn-border: #ead9ae;
+  --danger: #b42318;
+  --danger-soft: #fbeae8;
+  --danger-border: #f1c8c3;
+  --info: var(--blue);
+  --info-soft: var(--blue-soft);
+  --info-border: #c4d7ee;
+
+  /* tags */
+  --tag-purple-bg: #d9b7e8;
+  --tag-purple-fg: #5c2e76;
+  --tag-teal-bg: #8fdce8;
+  --tag-teal-fg: #0e5a66;
+  --tag-slate-bg: #8c9bab;
+  --tag-slate-fg: #ffffff;
+
+  /* specialty hues, kept warm so amber stays the family colour */
+  --hue-0: #c08f31;
+  --hue-1: #a8622f;
+  --hue-2: #2e6da4;
+  --hue-3: #1e7a4c;
+  --hue-4: #5c2e76;
+  --hue-5: #0e5a66;
+  --hue-6: #8c5a2b;
+  --hue-7: #7a4fb0;
+
+  /* shape */
+  --r-sm: 6px;
+  --r-md: 8px;
+  --r-lg: 12px;
+  --r-pill: 20px;
+
+  --shadow-sm: 0 1px 2px rgb(38 41 45 / 0.04);
+  --shadow-md: 0 4px 14px rgb(38 41 45 / 0.07), 0 1px 2px rgb(38 41 45 / 0.04);
+  --shadow-lg: 0 18px 44px rgb(38 41 45 / 0.12), 0 3px 8px rgb(38 41 45 / 0.05);
+
+  --serif: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  --sans: "Inter Tight", ui-sans-serif, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo,
+    Consolas, monospace;
+
+  /* type scale */
+  --t-xs: 11.5px;
+  --t-sm: 12.5px;
+  --t-base: 13.5px;
+  --t-md: 14px;
+  --t-lg: 16px;
+  --t-xl: 19px;
+  --t-2xl: 22px;
+  --t-3xl: 28px;
+
+  /* the three columns */
+  --index-w: 292px;
+  --info-w: 440px;
+  --topbar-h: 60px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --paper: #17171a;
+    --white: #1e1f22;
+    --surface: #1e1f22;
+    --surface-2: #1a1b1e;
+    --surface-sunken: #232427;
+    --line: #2f3033;
+    --card-line: #2a2b2e;
+    --line-strong: #3f4145;
+
+    --ink: #eceae6;
+    --ink-soft: #a3a7ad;
+    --ink-faint: #74787e;
+
+    --amber: #e0ae52;
+    --amber-deep: #eec072;
+    --amber-tint: #2b2317;
+    --amber-tint-2: #3a301d;
+    --accent-ink: #e5bb72;
+    --accent-border: #4d4028;
+
+    --blue: #7aa9d8;
+    --blue-soft: #1b2632;
+
+    --ok: #5cc78e;
+    --ok-soft: #14291d;
+    --ok-border: #275238;
+    --ok-dot: #3fae70;
+    --warn: #e0b268;
+    --warn-soft: #2b2317;
+    --warn-border: #4d4028;
+    --danger: #f0938a;
+    --danger-soft: #2f1b19;
+    --danger-border: #5d302b;
+    --info-soft: #1b2632;
+    --info-border: #2f4055;
+
+    --tag-purple-bg: #4a2a5c;
+    --tag-purple-fg: #e2c2ef;
+    --tag-teal-bg: #16414a;
+    --tag-teal-fg: #9fe4ef;
+
+    --hue-0: #e0ae52;
+    --hue-1: #d08b5a;
+    --hue-2: #7aa9d8;
+    --hue-3: #5cc78e;
+    --hue-4: #b98cd4;
+    --hue-5: #6cb6c9;
+    --hue-6: #cf9a63;
+    --hue-7: #b28ce0;
+
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+    --shadow-md: 0 4px 14px rgb(0 0 0 / 0.45), 0 1px 2px rgb(0 0 0 / 0.3);
+    --shadow-lg: 0 20px 48px rgb(0 0 0 / 0.6), 0 3px 8px rgb(0 0 0 / 0.35);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --paper: #17171a;
+  --white: #1e1f22;
+  --surface: #1e1f22;
+  --surface-2: #1a1b1e;
+  --surface-sunken: #232427;
+  --line: #2f3033;
+  --card-line: #2a2b2e;
+  --line-strong: #3f4145;
+
+  --ink: #eceae6;
+  --ink-soft: #a3a7ad;
+  --ink-faint: #74787e;
+
+  --amber: #e0ae52;
+  --amber-deep: #eec072;
+  --amber-tint: #2b2317;
+  --amber-tint-2: #3a301d;
+  --accent-ink: #e5bb72;
+  --accent-border: #4d4028;
+
+  --blue: #7aa9d8;
+  --blue-soft: #1b2632;
+
+  --ok: #5cc78e;
+  --ok-soft: #14291d;
+  --ok-border: #275238;
+  --ok-dot: #3fae70;
+  --warn: #e0b268;
+  --warn-soft: #2b2317;
+  --warn-border: #4d4028;
+  --danger: #f0938a;
+  --danger-soft: #2f1b19;
+  --danger-border: #5d302b;
+  --info-soft: #1b2632;
+  --info-border: #2f4055;
+
+  --tag-purple-bg: #4a2a5c;
+  --tag-purple-fg: #e2c2ef;
+  --tag-teal-bg: #16414a;
+  --tag-teal-fg: #9fe4ef;
+
+  --hue-0: #e0ae52;
+  --hue-1: #d08b5a;
+  --hue-2: #7aa9d8;
+  --hue-3: #5cc78e;
+  --hue-4: #b98cd4;
+  --hue-5: #6cb6c9;
+  --hue-6: #cf9a63;
+  --hue-7: #b28ce0;
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 14px rgb(0 0 0 / 0.45), 0 1px 2px rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 20px 48px rgb(0 0 0 / 0.6), 0 3px 8px rgb(0 0 0 / 0.35);
+}

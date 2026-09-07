@@ -1,0 +1,25 @@
+# Local environments
+backend/.venv/
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+__pycache__/
+*.pyc
+.DS_Store
+
+# Build outputs. `calculators/` is the published artefact and IS tracked; the
+# extractor's working directory is not -- `run.py --build` regenerates it.
+backup/extractor/dist/
+
+# Older copies of the same working directory, kept on disk, referenced by
+# nothing. `verify_published` reads dist/, not these.
+backup/extractor/dist_base/
+backup/extractor/dist_old/
+backup/extractor/out/
+
+# The source corpus: Lexicomp / Wolters Kluwer / EBMcalc PDF exports, and the
+# HTML mockup built from them. Third-party commercial clinical content -- not
+# ours to publish. See "Rebuilding from source" in the README.
+backup/source-pdfs/
+backup/extractor/pdfs/
+backup/inpharmd-clinical-calculators-mockup_15.html

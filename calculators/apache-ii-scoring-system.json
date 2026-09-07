@@ -1,0 +1,579 @@
+{
+  "schema_version": "1.0",
+  "slug": "apache-ii-scoring-system",
+  "title": "APACHE II Scoring System",
+  "subtitle": null,
+  "category": "Critical Care / Scoring System",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "rectal_temp",
+      "js_name": "Rectal_Temp",
+      "label": "Rectal Temp",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "display_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "36-38.4°C [96.8-101.2°F]",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "map",
+      "js_name": "MAP",
+      "label": "MAP",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "70-109 mmHg (0)",
+      "display_unit": "70-109 mmHg (0)",
+      "units": [
+        {
+          "code": "70-109 mmHg (0)",
+          "label": "70-109 mmHg (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "70-109 mmHg",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "hr",
+      "js_name": "HR",
+      "label": "HR",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "70-109 beats/min (0)",
+      "display_unit": "70-109 beats/min (0)",
+      "units": [
+        {
+          "code": "70-109 beats/min (0)",
+          "label": "70-109 beats/min (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form (word match)",
+      "options": [
+        {
+          "label": "70-109 beats/min",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "rr",
+      "js_name": "RR",
+      "label": "RR",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "12-24 breaths/min (0)",
+      "display_unit": "12-24 breaths/min (0)",
+      "units": [
+        {
+          "code": "12-24 breaths/min (0)",
+          "label": "12-24 breaths/min (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "12-24 breaths/min",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "aa_gradient_or_po2",
+      "js_name": "Aa_Gradient_or_PO2",
+      "label": "Aa Gradient or PO2",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "Pull down to select (0)",
+      "display_unit": "Pull down to select (0)",
+      "units": [
+        {
+          "code": "Pull down to select (0)",
+          "label": "Pull down to select (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "Pull down to select",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "ph_or_hco3",
+      "js_name": "pH_or_HCO3",
+      "label": "pH or HCO3",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "Pull down to select (0)",
+      "display_unit": "Pull down to select (0)",
+      "units": [
+        {
+          "code": "Pull down to select (0)",
+          "label": "Pull down to select (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "Pull down to select",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "na",
+      "js_name": "Na",
+      "label": "Na",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "130-149 mEq/L (0)",
+      "display_unit": "130-149 mEq/L (0)",
+      "units": [
+        {
+          "code": "130-149 mEq/L (0)",
+          "label": "130-149 mEq/L (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "130-149 mEq/L",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "k",
+      "js_name": "K",
+      "label": "K",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "3.5-5.4 mEq/L (0)",
+      "display_unit": "3.5-5.4 mEq/L (0)",
+      "units": [
+        {
+          "code": "3.5-5.4 mEq/L (0)",
+          "label": "3.5-5.4 mEq/L (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "3.5-5.4 mEq/L",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "creat",
+      "js_name": "Creat",
+      "label": "Creat",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "0.6-1.4 mg/dL (0)",
+      "display_unit": "0.6-1.4 mg/dL (0)",
+      "units": [
+        {
+          "code": "0.6-1.4 mg/dL (0)",
+          "label": "0.6-1.4 mg/dL (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "0.6-1.4 mg/dL",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "hct",
+      "js_name": "Hct",
+      "label": "Hct",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "30-45.9 percent (0)",
+      "display_unit": "30-45.9 percent (0)",
+      "units": [
+        {
+          "code": "30-45.9 percent (0)",
+          "label": "30-45.9 percent (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "30-45.9 percent",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "wbc",
+      "js_name": "WBC",
+      "label": "WBC",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "display_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "3-14.9 x10(3) cells/mm3",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "glasgow",
+      "js_name": "Glasgow",
+      "label": "Glasgow",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "15 (0)",
+      "display_unit": "15 (0)",
+      "units": [
+        {
+          "code": "15 (0)",
+          "label": "15 (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "15",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    },
+    {
+      "key": "age",
+      "js_name": "Age",
+      "label": "Age",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "≤44 years (0)",
+      "display_unit": "≤44 years (0)",
+      "units": [
+        {
+          "code": "≤44 years (0)",
+          "label": "≤44 years (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "≤44 years",
+          "value": 0
+        },
+        {
+          "label": "45-54 years",
+          "value": 2
+        },
+        {
+          "label": "55-64 years",
+          "value": 3
+        },
+        {
+          "label": "65-74 years",
+          "value": 5
+        },
+        {
+          "label": "≥75 years",
+          "value": 6
+        }
+      ],
+      "options_source": "html_mockup"
+    },
+    {
+      "key": "chronic_dx",
+      "js_name": "Chronic_Dx",
+      "label": "Chronic Dx",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": "No (0)",
+      "display_unit": "No (0)",
+      "units": [
+        {
+          "code": "No (0)",
+          "label": "No (0)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "options": [
+        {
+          "label": "No",
+          "value": 0.0,
+          "is_default_only": true
+        }
+      ],
+      "options_source": "pdf_printed_default_only",
+      "options_incomplete": true
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "apache_score",
+        "js_name": "Apache_Score",
+        "label": "Apache Score",
+        "expr": "rectal_temp + map + hr + rr + aa_gradient_or_po2 + ph_or_hco3 + na + k + creat + hct + wbc + glasgow + age + chronic_dx",
+        "base_unit": "points",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 0,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Apache_Score = Rectal_Temp + MAP + HR + RR + Aa_Gradient_or_PO2 + pH_or_HCO3 + Na + K + Creat + Hct + WBC + Glasgow + Age + Chronic_Dx",
+    "notes": [
+      "For the APACHE II score to be correct, a value must be selected for every variable.",
+      "The numbers in the parentheses represent the point value assigned to each clinical parameter above.",
+      "The Apache Score is the sum of these points.",
+      "Chronic Dx includes biopsy proven cirrhosis and documented portal hypertension; past upper GI bleeding attributed to portal hypertension; prior hepatic failure; prior hepatic encephalopathy; NYHA class IV; chronic restrictive, obstructive, or vascular lung disease resulting in severe exercise restriction; documented hypoxemia or hypercapnia; secondary polycythemia; severe pulmonary hypertension (>40 mmHg); ventilator dependence; chronic hemodialysis.",
+      "Chronic Dx also includes immunosuppression from chemotherapy, radiation therapy, long-term or recent high-dose steroids, immunodeficiency (eg, leukemia, lymphoma, AIDS)."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Knaus WA, et al. APACHE II: a severity of disease classification system. Crit Care Med. 1985 Oct;13(10):818-29.[PubMed 3928249]",
+        "pubmed_id": "3928249",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3928249/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "APACHE II Scoring System.pdf",
+      "source_sha256": "7231a688d80843a2499b3938ba301281e752a86cda568c33eaafc7518573628b",
+      "extractor": "pdf",
+      "form_name": "ApacheScore",
+      "identity": {
+        "doc_id": "70017",
+        "title": "APACHE II Scoring System",
+        "form_name": "ApacheScore",
+        "filename_title": "APACHE II Scoring System",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('APACHE II Scoring System')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (apacheiiscoringsystem)",
+          "title_vs_form": "differs (apacheiiscoringsystem vs apachescore) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf25",
+      "title": "APACHE II Scoring System",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "option_list_incomplete",
+        "severity": "high",
+        "detail": "0 field(s) have no option list and 13 carry only the printed default; the full lists exist only in the live app"
+      },
+      {
+        "kind": "most_controls_frozen",
+        "severity": "critical",
+        "detail": "13 of the 14 controls on this form offer a single choice, because the source PDF prints only the option each dropdown opened on -- so the result barely moves, or does not move at all, with the patient; use the source calculator until the full option lists are available",
+        "fields": [
+          "rectal_temp",
+          "map",
+          "hr",
+          "rr",
+          "aa_gradient_or_po2",
+          "ph_or_hco3",
+          "na",
+          "k",
+          "creat",
+          "hct",
+          "wbc",
+          "glasgow",
+          "chronic_dx"
+        ]
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 75.0,
+    "checks_passed": 12,
+    "checks_total": 16,
+    "missing": [
+      "unit options on every field",
+      "validation bounds",
+      "field help text",
+      "complete option lists"
+    ]
+  }
+}

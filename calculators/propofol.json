@@ -1,0 +1,285 @@
+{
+  "schema_version": "1.0",
+  "slug": "propofol",
+  "title": "Propofol",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "titration_table",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "dose",
+      "label": "Dose",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mcg/kg/minute",
+      "units": null,
+      "constraints": {
+        "min": 5.0,
+        "max": 300.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "dose",
+        "id_const": "ID_DOSE"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Dose must be between 5 and 300 mcg/kg/minute."
+      ]
+    },
+    {
+      "key": "weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        },
+        {
+          "code": "lbs",
+          "label": "lbs",
+          "factor": 0.45359237,
+          "offset": 0.0,
+          "resolved": true,
+          "source": "corpus unit registry"
+        }
+      ],
+      "constraints": {
+        "min": 3.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "weight",
+        "id_const": "ID_WEIGHT"
+      },
+      "label_source": "printed form",
+      "unit_source": "formula_prose",
+      "help": [
+        "Weight must be at least 3."
+      ],
+      "display_unit": "kg",
+      "dimension": "mass",
+      "units_source": "corpus unit registry"
+    },
+    {
+      "key": "concentration",
+      "label": "Concentration",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "Infusion Rate",
+      "units": [
+        {
+          "code": "Infusion Rate",
+          "label": "Infusion Rate",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "concentration",
+        "id_const": "ID_CONCENTRATION"
+      },
+      "dimension": null,
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "rate",
+        "expr": "((dose * weight) * 60) / (1000*concentration)"
+      },
+      {
+        "key": "rate_v2",
+        "expr": "round(rate, 2)"
+      },
+      {
+        "key": "value",
+        "expr": "((dose * weight) * 60) / (1000 *\nconcentration)",
+        "note": "per-row formula"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "infuse_rate",
+        "label": "Infusion Rate",
+        "expr": "rate_v2",
+        "decimals": null,
+        "base_unit": "mL/hour",
+        "kind": "number",
+        "label_source": "printed form (position)",
+        "unit_source": "formula_prose"
+      }
+    ],
+    "row_variable": "dose"
+  },
+  "scoring": null,
+  "tables": {
+    "dose_ladder": {
+      "name": "TABLE_VALUES_COL_1",
+      "values": [
+        5.0,
+        10.0,
+        15.0,
+        20.0,
+        25.0,
+        30.0,
+        35.0,
+        40.0,
+        45.0,
+        50.0,
+        55.0,
+        60.0,
+        65.0,
+        70.0,
+        75.0,
+        80.0,
+        85.0,
+        90.0,
+        95.0,
+        100.0,
+        105.0,
+        110.0,
+        115.0,
+        120.0,
+        125.0,
+        130.0,
+        135.0,
+        140.0,
+        145.0,
+        150.0,
+        155.0,
+        160.0,
+        165.0,
+        170.0,
+        175.0,
+        180.0,
+        185.0,
+        190.0,
+        195.0,
+        200.0,
+        205.0,
+        210.0,
+        215.0,
+        220.0,
+        225.0,
+        230.0,
+        235.0,
+        240.0,
+        245.0,
+        250.0,
+        255.0,
+        260.0,
+        265.0,
+        270.0,
+        275.0,
+        280.0,
+        285.0,
+        290.0,
+        295.0,
+        300.0
+      ],
+      "count": 60,
+      "step": 5.0,
+      "truncated_in_pdf": true
+    }
+  },
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": "Infusion Rate:\nInfusion Rate = (Dose * Weight * 60) / (Concentration * 1000)\n• Infusion Rate is calculated in mL/hour\n• Dose is input in mcg/kg/minute\n• Weight is input in kg\n• Concentration is input in mg/mL",
+    "notes": [
+      "This calculation is for maintenance infusions only."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Diprivan (propofol) [prescribing information]. Lake Zurich: Fresenius Kabi USA, LLC; October 2017.",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 2
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Propofol.pdf",
+      "source_sha256": "95aa55faf5e6d741b55f226e7bef3d97241e49d2da4ed6230083d1cb94616ffe",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Propofol",
+        "form_name": null,
+        "filename_title": "Propofol",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Propofol')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (propofol)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf140",
+      "title": "Propofol",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "dose_ladder_truncated",
+        "severity": "high",
+        "detail": "the printed dose array is cut off after 60 values (last 300.0, step 5.0); confirm the full ladder before publishing"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 92.9,
+    "checks_passed": 13,
+    "checks_total": 14,
+    "missing": [
+      "unit options on every field"
+    ]
+  }
+}

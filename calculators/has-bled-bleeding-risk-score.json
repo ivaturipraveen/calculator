@@ -1,0 +1,195 @@
+{
+  "schema_version": "1.0",
+  "slug": "has-bled-bleeding-risk-score",
+  "title": "HAS-BLED Bleeding Risk Score",
+  "subtitle": null,
+  "category": "Cardiology / Scoring System",
+  "renderer": "score",
+  "engine": "score",
+  "status": "draft",
+  "version": 1,
+  "inputs": [],
+  "compute": {
+    "engine": "score",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": {
+    "groups": [
+      {
+        "key": "ungrouped",
+        "label": "(ungrouped)",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_0_0",
+            "label": "Hypertension",
+            "points": 1
+          },
+          {
+            "key": "opt_0_1",
+            "label": "Abnormal liver function",
+            "points": 1
+          },
+          {
+            "key": "opt_0_2",
+            "label": "Abnormal renal function",
+            "points": 1
+          },
+          {
+            "key": "opt_0_3",
+            "label": "Stroke",
+            "points": 1
+          },
+          {
+            "key": "opt_0_4",
+            "label": "Bleeding tendency or predisposition",
+            "points": 1
+          },
+          {
+            "key": "opt_0_5",
+            "label": "Labile INRs in patients taking warfarin",
+            "points": 1
+          },
+          {
+            "key": "opt_0_6",
+            "label": "Elderly: age greater than 65 years",
+            "points": 1
+          },
+          {
+            "key": "opt_0_7",
+            "label": "Drugs: concomitant antiplatelet agent(s) or NSAIDS",
+            "points": 1
+          },
+          {
+            "key": "opt_0_8",
+            "label": "Drugs: alcohol abuse",
+            "points": 1
+          }
+        ]
+      }
+    ],
+    "bands": [
+      {
+        "min": 0,
+        "max": 0,
+        "label": "1.13 bleeds per 100 patient-years",
+        "raw": "0 points: 1.13 bleeds per 100 patient-years"
+      },
+      {
+        "min": 1,
+        "max": 1,
+        "label": "1.02 bleeds per 100 patient-years",
+        "raw": "1 point: 1.02 bleeds per 100 patient-years"
+      },
+      {
+        "min": 2,
+        "max": 2,
+        "label": "1.88 bleeds per 100 patient-years",
+        "raw": "2 points: 1.88 bleeds per 100 patient-years"
+      },
+      {
+        "min": 3,
+        "max": 3,
+        "label": "3.74 bleeds per 100 patient-years",
+        "raw": "3 points: 3.74 bleeds per 100 patient-years"
+      },
+      {
+        "min": 4,
+        "max": 4,
+        "label": "8.70 bleeds per 100 patient-years",
+        "raw": "4 points: 8.70 bleeds per 100 patient-years"
+      },
+      {
+        "min": 5,
+        "max": 9,
+        "label": "Insufficient data (high risk)",
+        "raw": "5 to 9 points: Insufficient data (high risk)"
+      }
+    ],
+    "total": {
+      "key": "total_score",
+      "label": "Total Criteria Point Count",
+      "unit": "points",
+      "min": 1.0,
+      "max": 1.0
+    },
+    "interpretation": {
+      "key": "interpretation",
+      "label": "HAS-BLED Score Interpretation",
+      "printed_rows": [
+        "HAS-BLED Score Interpretation"
+      ]
+    }
+  },
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Lip GY. Implications of the CHA(2)DS(2)-VASc and HAS-BLED Scores for thromboprophylaxis in atrial fibrillation. Am J Med. 2011 Feb;124(2):111-4.[PubMed 20887966]",
+        "pubmed_id": "20887966",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/20887966/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "HAS-BLED Bleeding Risk Score.pdf",
+      "source_sha256": "56d23cfb63ce75dc16019e121f5410ded7549772d9e59a1e016c37e0d5684237",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "HAS-BLED Bleeding Risk Score",
+        "form_name": null,
+        "filename_title": "HAS-BLED Bleeding Risk Score",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('HAS-BLED Bleeding Risk Score')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (hasbledbleedingriskscore)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf98",
+      "title": "HAS-BLED Bleeding Risk Score",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 9,
+    "checks_total": 9,
+    "missing": []
+  }
+}

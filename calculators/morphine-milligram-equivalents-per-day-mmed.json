@@ -1,0 +1,555 @@
+{
+  "schema_version": "1.0",
+  "slug": "morphine-milligram-equivalents-per-day-mmed",
+  "title": "Morphine Milligram Equivalents Per Day (MMED)",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "mmed",
+  "engine": "unknown",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "codeine",
+      "label": "Codeine",
+      "type": "number",
+      "unit": "mg/day",
+      "base_unit": "mg/day",
+      "required": false,
+      "default": 0,
+      "constraints": {
+        "min": 0,
+        "max": null
+      },
+      "help": "Total daily dose of Codeine (mg/day)"
+    },
+    {
+      "key": "dihydrocodeine",
+      "label": "Dihydrocodeine",
+      "type": "number",
+      "unit": "mg/day",
+      "base_unit": "mg/day",
+      "required": false,
+      "default": 0,
+      "constraints": {
+        "min": 0,
+        "max": null
+      },
+      "help": "Total daily dose of Dihydrocodeine (mg/day)"
+    },
+    {
+      "key": "fentanyl",
+      "label": "FentaNYL (transdermal patch)",
+      "type": "number",
+      "unit": "mcg/hour",
+      "base_unit": "mcg/hour",
+      "required": false,
+      "default": 0,
+      "constraints": {
+        "min": 0,
+        "max": null
+      },
+      "help": "Total daily dose of FentaNYL (transdermal patch) (mcg/hour)"
+    },
+    {
+      "key": "hydrocodone",
+      "label": "HYDROcodone",
+      "type": "number",
+      "unit": "mg/day",
+      "base_unit": "mg/day",
+      "required": false,
+      "default": 0,
+      "constraints": {
+        "min": 0,
+        "max": null
+      },
+      "help": "Total daily dose of HYDROcodone (mg/day)"
+    },
+    {
+      "key": "hydromorphone",
+      "label": "HYDROmorphone",
+      "type": "number",
+      "unit": "mg/day",
+      "base_unit": "mg/day",
+      "required": false,
+      "default": 0,
+      "constraints": {
+        "min": 0,
+        "max": null
+      },
+      "help": "Total daily dose of HYDROmorphone (mg/day)"
+    },
+    {
+      "key": "levorphanol",
+      "label": "Levorphanol",
+      "type": "number",
+      "unit": "mg/day",
+      "base_unit": "mg/day",
+      "required": false,
+      "default": 0,
+      "constraints": {
+        "min": 0,
+        "max": null
+      },
+      "help": "Total daily dose of Levorphanol (mg/day)"
+    },
+    {
+      "key": "methadone",
+      "label": "Methadone",
+      "type": "number",
+      "unit": "mg/day",
+      "base_unit": "mg/day",
+      "required": false,
+      "default": 0,
+      "constraints": {
+        "min": 0,
+        "max": null
+      },
+      "help": "Total daily dose of Methadone (mg/day)"
+    },
+    {
+      "key": "morphine",
+      "label": "Morphine",
+      "type": "number",
+      "unit": "mg/day",
+      "base_unit": "mg/day",
+      "required": false,
+      "default": 0,
+      "constraints": {
+        "min": 0,
+        "max": null
+      },
+      "help": "Total daily dose of Morphine (mg/day)"
+    },
+    {
+      "key": "oxycodone",
+      "label": "OxyCODONE",
+      "type": "number",
+      "unit": "mg/day",
+      "base_unit": "mg/day",
+      "required": false,
+      "default": 0,
+      "constraints": {
+        "min": 0,
+        "max": null
+      },
+      "help": "Total daily dose of OxyCODONE (mg/day)"
+    },
+    {
+      "key": "oxymorphone",
+      "label": "OxyMORphone",
+      "type": "number",
+      "unit": "mg/day",
+      "base_unit": "mg/day",
+      "required": false,
+      "default": 0,
+      "constraints": {
+        "min": 0,
+        "max": null
+      },
+      "help": "Total daily dose of OxyMORphone (mg/day)"
+    },
+    {
+      "key": "pentazocine",
+      "label": "Pentazocine",
+      "type": "number",
+      "unit": "mg/day",
+      "base_unit": "mg/day",
+      "required": false,
+      "default": 0,
+      "constraints": {
+        "min": 0,
+        "max": null
+      },
+      "help": "Total daily dose of Pentazocine (mg/day)"
+    },
+    {
+      "key": "tapentadol",
+      "label": "Tapentadol",
+      "type": "number",
+      "unit": "mg/day",
+      "base_unit": "mg/day",
+      "required": false,
+      "default": 0,
+      "constraints": {
+        "min": 0,
+        "max": null
+      },
+      "help": "Total daily dose of Tapentadol (mg/day)"
+    },
+    {
+      "key": "tramadol",
+      "label": "TraMADol",
+      "type": "number",
+      "unit": "mg/day",
+      "base_unit": "mg/day",
+      "required": false,
+      "default": 0,
+      "constraints": {
+        "min": 0,
+        "max": null
+      },
+      "help": "Total daily dose of TraMADol (mg/day)"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "codeine_mme",
+        "expr": "codeine * 0.15",
+        "note": "dose x MME conversion factor"
+      },
+      {
+        "key": "dihydrocodeine_mme",
+        "expr": "dihydrocodeine * 0.25",
+        "note": "dose x MME conversion factor"
+      },
+      {
+        "key": "fentanyl_mme",
+        "expr": "fentanyl * 2.4",
+        "note": "dose x MME conversion factor"
+      },
+      {
+        "key": "hydrocodone_mme",
+        "expr": "hydrocodone * 1",
+        "note": "dose x MME conversion factor"
+      },
+      {
+        "key": "hydromorphone_mme",
+        "expr": "hydromorphone * 5",
+        "note": "dose x MME conversion factor"
+      },
+      {
+        "key": "levorphanol_mme",
+        "expr": "levorphanol * 11",
+        "note": "dose x MME conversion factor"
+      },
+      {
+        "key": "methadone_mme",
+        "expr": "(0) if (methadone <= 0) else ((methadone * 4) if (methadone <= 20) else ((methadone * 8) if (methadone <= 40) else ((methadone * 10) if (methadone <= 60) else ((methadone * 12)))))",
+        "note": "dose x MME conversion factor"
+      },
+      {
+        "key": "morphine_mme",
+        "expr": "morphine * 1",
+        "note": "dose x MME conversion factor"
+      },
+      {
+        "key": "oxycodone_mme",
+        "expr": "oxycodone * 1.5",
+        "note": "dose x MME conversion factor"
+      },
+      {
+        "key": "oxymorphone_mme",
+        "expr": "oxymorphone * 3",
+        "note": "dose x MME conversion factor"
+      },
+      {
+        "key": "pentazocine_mme",
+        "expr": "pentazocine * 0.37",
+        "note": "dose x MME conversion factor"
+      },
+      {
+        "key": "tapentadol_mme",
+        "expr": "tapentadol * 0.4",
+        "note": "dose x MME conversion factor"
+      },
+      {
+        "key": "tramadol_mme",
+        "expr": "tramadol * 0.2",
+        "note": "dose x MME conversion factor"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "codeine_mme",
+        "label": "Codeine MMED",
+        "expr": "codeine_mme",
+        "decimals": 2,
+        "base_unit": "MMED",
+        "kind": "number"
+      },
+      {
+        "key": "dihydrocodeine_mme",
+        "label": "Dihydrocodeine MMED",
+        "expr": "dihydrocodeine_mme",
+        "decimals": 2,
+        "base_unit": "MMED",
+        "kind": "number"
+      },
+      {
+        "key": "fentanyl_mme",
+        "label": "FentaNYL (transdermal patch) MMED",
+        "expr": "fentanyl_mme",
+        "decimals": 2,
+        "base_unit": "MMED",
+        "kind": "number"
+      },
+      {
+        "key": "hydrocodone_mme",
+        "label": "HYDROcodone MMED",
+        "expr": "hydrocodone_mme",
+        "decimals": 2,
+        "base_unit": "MMED",
+        "kind": "number"
+      },
+      {
+        "key": "hydromorphone_mme",
+        "label": "HYDROmorphone MMED",
+        "expr": "hydromorphone_mme",
+        "decimals": 2,
+        "base_unit": "MMED",
+        "kind": "number"
+      },
+      {
+        "key": "levorphanol_mme",
+        "label": "Levorphanol MMED",
+        "expr": "levorphanol_mme",
+        "decimals": 2,
+        "base_unit": "MMED",
+        "kind": "number"
+      },
+      {
+        "key": "methadone_mme",
+        "label": "Methadone MMED",
+        "expr": "methadone_mme",
+        "decimals": 2,
+        "base_unit": "MMED",
+        "kind": "number"
+      },
+      {
+        "key": "morphine_mme",
+        "label": "Morphine MMED",
+        "expr": "morphine_mme",
+        "decimals": 2,
+        "base_unit": "MMED",
+        "kind": "number"
+      },
+      {
+        "key": "oxycodone_mme",
+        "label": "OxyCODONE MMED",
+        "expr": "oxycodone_mme",
+        "decimals": 2,
+        "base_unit": "MMED",
+        "kind": "number"
+      },
+      {
+        "key": "oxymorphone_mme",
+        "label": "OxyMORphone MMED",
+        "expr": "oxymorphone_mme",
+        "decimals": 2,
+        "base_unit": "MMED",
+        "kind": "number"
+      },
+      {
+        "key": "pentazocine_mme",
+        "label": "Pentazocine MMED",
+        "expr": "pentazocine_mme",
+        "decimals": 2,
+        "base_unit": "MMED",
+        "kind": "number"
+      },
+      {
+        "key": "tapentadol_mme",
+        "label": "Tapentadol MMED",
+        "expr": "tapentadol_mme",
+        "decimals": 2,
+        "base_unit": "MMED",
+        "kind": "number"
+      },
+      {
+        "key": "tramadol_mme",
+        "label": "TraMADol MMED",
+        "expr": "tramadol_mme",
+        "decimals": 2,
+        "base_unit": "MMED",
+        "kind": "number"
+      },
+      {
+        "key": "total_mmed",
+        "label": "Total MMED",
+        "expr": "codeine_mme + dihydrocodeine_mme + fentanyl_mme + hydrocodone_mme + hydromorphone_mme + levorphanol_mme + methadone_mme + morphine_mme + oxycodone_mme + oxymorphone_mme + pentazocine_mme + tapentadol_mme + tramadol_mme",
+        "decimals": 2,
+        "base_unit": "MMED",
+        "kind": "number"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": {
+    "drugs": [
+      {
+        "key": "codeine",
+        "label": "Codeine",
+        "unit": "mg/day",
+        "factor": 0.15
+      },
+      {
+        "key": "dihydrocodeine",
+        "label": "Dihydrocodeine",
+        "unit": "mg/day",
+        "factor": 0.25
+      },
+      {
+        "key": "fentanyl",
+        "label": "FentaNYL (transdermal patch)",
+        "unit": "mcg/hour",
+        "factor": 2.4
+      },
+      {
+        "key": "hydrocodone",
+        "label": "HYDROcodone",
+        "unit": "mg/day",
+        "factor": 1
+      },
+      {
+        "key": "hydromorphone",
+        "label": "HYDROmorphone",
+        "unit": "mg/day",
+        "factor": 5
+      },
+      {
+        "key": "levorphanol",
+        "label": "Levorphanol",
+        "unit": "mg/day",
+        "factor": 11
+      },
+      {
+        "key": "methadone",
+        "label": "Methadone",
+        "unit": "mg/day",
+        "factor": null
+      },
+      {
+        "key": "morphine",
+        "label": "Morphine",
+        "unit": "mg/day",
+        "factor": 1
+      },
+      {
+        "key": "oxycodone",
+        "label": "OxyCODONE",
+        "unit": "mg/day",
+        "factor": 1.5
+      },
+      {
+        "key": "oxymorphone",
+        "label": "OxyMORphone",
+        "unit": "mg/day",
+        "factor": 3
+      },
+      {
+        "key": "pentazocine",
+        "label": "Pentazocine",
+        "unit": "mg/day",
+        "factor": 0.37
+      },
+      {
+        "key": "tapentadol",
+        "label": "Tapentadol",
+        "unit": "mg/day",
+        "factor": 0.4
+      },
+      {
+        "key": "tramadol",
+        "label": "TraMADol",
+        "unit": "mg/day",
+        "factor": 0.2
+      }
+    ]
+  },
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Morphine Milligram Equivalent per day [MMED] for each drug = (Total daily opioid dose) *\n(Conversion factor)\n• See table below for drug-specific conversion factors\nTotal MMED = sum of all individual drug MMEDs (calculated in morphine milligram equivalents per\nday)\nDrug\nMorphine Milligram Equivalent (MME) Conversion\nFactora\nCodeine (mg)\n0.15\nDihydrocodeine (mg)\n0.25\nFentaNYL (transdermal patch)\n(mcg/hour)b\n2.4\nHYDROcodone (mg)\n1\nHYDROmorphone (mg)\n5\nLevorphanol tartrate (mg)\n11\nMethadone (mg)c,d\n>0 to ≤20\n4\n>20 to ≤40\n8\n>20 to ≤40\n8\n>40 to ≤60\n10\n>60\n12\nMorphine (mg)\n1\nOxyCODONE (mg)\n1.5\nOxyMORphone (mg)\n3\nPentazocine (mg)\n0.37\nTapentadol (mg)e\n0.4\nTraMADol (mg)e\n0.2\na Note: Published conversion factors are estimates, and do not account for individual differences\nin drug metabolism or pharmacokinetics (CDC [Dowell 2022]; Von Korff 2008).\nb The MME conversion factor for fentanyl patches is based on the assumptions that 1 mg (1,000\nmcg) of parenteral fentanyl is equivalent to 100 mg of oral morphine, and that one patch delivers\nthe dispensed mcg/hour over a 24-hour day.\nc MMED risk evaluation thresholds should not be applied to dosing decisions regarding\nmedications for opioid use disorder (eg, methadone) (CDC [Dowell 2022]).\nd Some publications list the methadone conversion factor as 4.7 (CDC [Dowell 2022]). However,\ncalculating MMED for methadone in practice often involves a sliding-scale approach whereby the\nconversion factor increases with increasing dose to avoid underestimating MMED. Centers for\nMedicare & Medicaid Services (and this calculator) uses the graduated methadone MME\nconversion factors to calculate MMED within the Overutilization Monitoring System (OMS) for\nidentifying and reporting potential opioid overutilizers. Available at https://medicaid-\ndocuments.dhhs.utah.gov/Documents/files/Opioid-Morphine-EQ-Conversion-Factors.pdf.\ne Tapentadol and tramadol are mixed mechanism opioids with weaker μ-receptor agonist activity\nthan pure μ-receptor agonists. MMEs are based on degree of μ-receptor agonist activity; however,\nit is unknown whether these drugs are associated with overdose in the same dose-dependent\nmanner as pure μ-receptor agonists (CDC [Dowell 2022]).",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Centers for Disease Control and Prevention (CDC). Opioid oral morphine milligram equivalent (MME) conversion factors. https://medicaid-documents.dhhs.utah.gov/Documents/files/Opioid- Morphine-EQ-Conversion-Factors.pdf. Accessed July 28, 2025.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Dowell D, Ragan KR, Jones CM, Baldwin GT, Chou R. CDC clinical practice guideline for prescribing opioids for pain - United States, 2022. MMWR Recomm Rep. 2022;71(3):1-95. doi:10.15585/mmwr.rr7103a1[PubMed 36327391]",
+        "pubmed_id": "36327391",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/36327391/"
+      },
+      {
+        "text": "Garg RK, Fulton-Kehoe D, Franklin GM. Patterns of opioid use and risk of opioid overdose death among Medicaid patients. Med Care. 2017 Jul;55(7):661-668. doi:10.1097/MLR.0000000000000738[PubMed 28614178]",
+        "pubmed_id": "28614178",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28614178/"
+      },
+      {
+        "text": "King NB, Fraser V, Boikos C, Richardson R, Harper S. Determinants of increased opioid-related mortality in the United States and Canada, 1990-2013: a systematic review. Am J Public Health. mortality in the United States and Canada, 1990-2013: a systematic review. Am J Public Health. 2014 Aug;104(8):e32-42. doi:10.2105/AJPH.2014.301966[PubMed 24922138]",
+        "pubmed_id": "24922138",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/24922138/"
+      },
+      {
+        "text": "Von Korff MV, Saunders K, Ray GT, et al. De facto long-term opioid therapy for noncancer pain.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Clin J Pain. 2008;24(6):521-7. doi:10.1097/AJP.0b013e318169d03b[PubMed 18574361]",
+        "pubmed_id": "18574361",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/18574361/"
+      }
+    ],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again. Estimation of morphine milligram equivalents per day (MMED) is one important component in the identification of patients receiving opioid therapy who may be at a higher risk of opioid- induced respiratory depression and death (eg, patients receiving ≥50 oral MMED) and may help to determine who may benefit from closer monitoring, reduction or tapering of opioids, prescribing of naloxone, and other safeguards (CDC [Dowell 2022]). Other patient-specific factors besides MMED may also increase the risk of opioid-induced respiratory depression and death in patients receiving opioid therapy, including age, concomitant use of sedative- hypnotic agents (eg, benzodiazepines, skeletal muscle relaxants), and duration of opioid use (Garg 2017; King 2014). Common risk mitigation strategies include opioid management plans, patient education, urine drug screening, use of prescription drug monitoring program data, more frequent monitoring, pill counts, use of abuse-deterrent opioid formulations, and co- prescription of naloxone, among others (CDC [Dowell 2022]).",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Morphine Milligram Equivalents Per Day (MMED).pdf",
+      "source_sha256": "481371c0e2b003c54b8c6201b6aeff18d92481eaf7ac3da2a4ccd9805b52c300",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Morphine Milligram Equivalents Per Day (MMED)",
+        "form_name": null,
+        "filename_title": "Morphine Milligram Equivalents Per Day (MMED)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Morphine Milligram Equivalents Per Day (MMED)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (morphinemilligramequivalentsperdaymmed)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf121",
+      "title": "Morphine Milligram Equivalents Per Day (MMED)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 4,
+    "checks_total": 4,
+    "missing": []
+  }
+}

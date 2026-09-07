@@ -1,0 +1,205 @@
+{
+  "schema_version": "1.0",
+  "slug": "si-unit-conversions-chemistry-values",
+  "title": "SI Unit Conversions: Chemistry Values",
+  "subtitle": null,
+  "category": "Unit Conversion",
+  "renderer": "convert",
+  "engine": "convert",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "from",
+      "label": "FROM",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "to",
+      "label": "TO",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "set_maximal_display_precision_in_decimal_points_1",
+      "label": "Set maximal display precision in decimal points: 1",
+      "type": "number",
+      "required": false,
+      "constraints": {},
+      "source": {
+        "kind": "printed_form"
+      },
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "convert",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": null,
+  "tables": {
+    "pairs": [
+      {
+        "from": "Albumin (g/dL)",
+        "to": "Albumin (g/L)",
+        "factor": 10
+      },
+      {
+        "from": "Bilirubin (mg/dL)",
+        "to": "Bilirubin (µmol/L)",
+        "factor": 17.1
+      },
+      {
+        "from": "BUN / Urea Nitrogen (mg/dL)",
+        "to": "Urea (mmol/L)",
+        "factor": 0.357
+      },
+      {
+        "from": "Calcium (mg/dL)",
+        "to": "Calcium (mmol/L)",
+        "factor": 0.2495
+      },
+      {
+        "from": "Cholesterol (mg/dL)",
+        "to": "Cholesterol (mmol/L)",
+        "factor": 0.02586
+      },
+      {
+        "from": "Creatinine (mg/dL)",
+        "to": "Creatinine (µmol/L)",
+        "factor": 88.4
+      },
+      {
+        "from": "Glucose (mg/dL)",
+        "to": "Glucose (mmol/L)",
+        "factor": 0.05551
+      },
+      {
+        "from": "Magnesium (mg/dL)",
+        "to": "Magnesium (mmol/L)",
+        "factor": 0.4114
+      },
+      {
+        "from": "Phosphorus (mg/dL)",
+        "to": "Phosphorus (mmol/L)",
+        "factor": 0.3229
+      },
+      {
+        "from": "Potassium (mg/dL)",
+        "to": "Potassium (mmol/L)",
+        "factor": 0.2558
+      },
+      {
+        "from": "Total Protein (g/dL)",
+        "to": "Total Protein (g/L)",
+        "factor": 10
+      },
+      {
+        "from": "Triglycerides (mg/dL)",
+        "to": "Triglycerides (mmol/L)",
+        "factor": 0.01129
+      },
+      {
+        "from": "Uric Acid (mg/dL)",
+        "to": "Uric Acid (µmol/L)",
+        "factor": 59.48
+      }
+    ]
+  },
+  "display": {
+    "decimal_precision": 1,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": null,
+    "notes": [
+      "In this calculator, mcg is the abbreviation for micrograms.",
+      "To make simple unit conversions, select the starting units with the pull-down selector on the right. Then type a starting value in the top FROM input box. To convert the value, choose the new unit in the lower right selector. The converted value will appear immediately in the TO box.",
+      "Helpful Tips Conversion factors 1, 25-Dihydroxyvitamin D (calciferol 1 25) pg/ml X 2.6 = 1, 25-Dihydroxyvitamin D (calciferol 1 25) pmol/L 11-Deoxycorticosterone (DOC) pg/mL X 3.03 = 11-Deoxycorticosterone (DOC) pmol/L 11-Deoxycortisol (adult) ng/dL X 0.02886 = 11-Deoxycortisol (adult) nmol/L 17-Hydroxyprogesterone (adult) ng/dL X 0.03 = 17-Hydroxyprogesterone (adult) nmol/L 25-Hydroxyvitamin D (calciferol 25) ng/mL X 2.496 = 25-Hydroxyvitamin D (calciferol 25) nmol/L 5'-Nucleotidase U/L X 0.01667 = 5'-Nucleotidase mcKat/L 5-Hydroxyindoleacetic acid (5-HIAA, urine) mg/24 hours X 5.23 = 5-Hydroxyindoleacetic acid (5-HIAA, urine) mcmol/24 hours Acetone mg/dL X 172.18 = Acetone mcmol/L Acetone mg/L X 17.218 = Acetone mcmol/L Acetone mg/L X 17.218 = Acetone mcmol/L Acetone mmol/L X 1000 = Acetone mcmol/L Adrenocorticotropic hormone (ACTH) pg/mL X 0.2202 = Adrenocorticotropic hormone (ACTH) pmol/L Alanine amino-transferase (ALT SGPT) U/L at 37 degC X 0.01667 = Alanine amino-transferase (ALT SGPT) mcKat/L Albumin g/dL X 10 = Albumin g/L Aldolase U/L X 0.01667 = Aldolase mcKat/L Aldosterone (24 hr) mcg/24 hours X 2.774 = Aldosterone (24 hr) nmol/24 hours Aldosterone ng/dL X 27.7 = Aldosterone pmol/L Alkaline phosphatase U/L X 0.01667 = Alkaline phosphatase mcKat/L Alpha-1 Antitrypsin mg/dL X .01 = Alpha-1 Antitrypsin g/L Alpha-Fetoprotein (AFP) g/L X 1000000 = Alpha-Fetoprotein (AFP) mcg/L Alpha-Fetoprotein (AFP) mcg/dL X 10 = Alpha-Fetoprotein (AFP) mcg/L Alpha-Fetoprotein (AFP) mg/dL X 10000 = Alpha-Fetoprotein (AFP) mcg/L Alpha-Fetoprotein (AFP) mg/L X 1000 = Alpha-Fetoprotein (AFP) mcg/L Alpha-Fetoprotein (AFP) ng/dL X .01 = Alpha-Fetoprotein (AFP) mcg/L Alpha-Fetoprotein (AFP) ng/L X .001 = Alpha-Fetoprotein (AFP) mcg/L Alpha-Fetoprotein (AFP) ng/mL X 1 = Alpha-Fetoprotein (AFP) mcg/L Ammonia (N) mcg/dL X 0.714 = Ammonia (N) mcmol/L Ammonia (NH3) mcg/dL X 0.5872 = Ammonia (N) mcmol/L Ammonia (NH3) mcmol/L X 1 = Ammonia (N) mcmol/L Amylase U/L X 0.01667 = Amylase mcKat/L Androstenedione ng/dL X 0.0349 = Androstenedione nmol/L Angiotensin converting enzyme (ACE) mcKat/L X 1000 = Angiotensin converting enzyme (ACE) nKat/L Angiotensin converting enzyme (ACE) U/L X 16.67 = Angiotensin converting enzyme (ACE) nKat/L Angiotensin I pg/mL X 0.7713 = Angiotensin I pmol/L Angiotensin II pg/mL X 0.956 = Angiotensin II pmol/L Antidiuretic hormone (ADH) pg/mL X 0.922 = Antidiuretic hormone (ADH) pmol/L Apolipoprotein A1 mg/dL X 0.01 = Apolipoprotein A1 g/L Apolipoprotein B mg/dL X 0.01 = Apolipoprotein B g/L Aspartate amino-transferase (AST SGOT)",
+      "U/L at 37 degC X 0.01667 = Aspartate amino-transferase (AST SGOT) mcKat/L Bicarbonate mmol/L X 1 = Bicarbonate mEq/L Bilirubin mg/dL X 17.104 = Bilirubin mcmol/L BUN (blood urea nitrogen) mg/dL X 0.357 = BUN (blood urea nitrogen) mmol/L C peptide ng/mL X 0.33 = C peptide nmol/L Calcitonin pg/mL X .292 = Calcitonin pmol/L Calcium ionized mg/dL X 0.25 = Calcium ionized mmol/L Calcium mg/dL X 0.25 = Calcium mmol/L Calcium mg/dL X 0.25 = Calcium mmol/L Carbon dioxide partial pressure pCO2 mm Hg X 0.133 = Carbon dioxide partial pressure pCO2 kPa Carbon dioxide total mmol/L X 1 = Carbon dioxide total mEq/L Carcinoembryonic Antigen (CEA) mcg/mL X 1000 = Carcinoembryonic Antigen (CEA) mcg/L Carcinoembryonic Antigen (CEA) mg/L X 1000 = Carcinoembryonic Antigen (CEA) mcg/L Carcinoembryonic Antigen (CEA) ng/mL X 1 = Carcinoembryonic Antigen (CEA) mcg/L Carotene mcg/dL X 0.0186 = Carotene mcmol/L Catecholamines fractionated - epinephrine pg/mL X 5.459 = Catecholamines fractionated - epinephrine pmol/L Catecholamines fractionated - norepinephrine pg/mL X 5.911 = Catecholamines fractionated - norepinephrine pmol/L Ceruloplasmin mg/dL X 10 = Ceruloplasmin mg/L Chloride mmol/L X 1 = Chloride mEq/L Cholesterol mg/dL X 0.02586 = Cholesterol mmol/L Chromium mcg/L X 19.232 = Chromium nmol/L Cobalt mcg/L X 16.968 = Cobalt nmol/L Copper mcg/dL X 0.157 = Copper mcmol/L Coproporphyrins (urine) mcg/24 hours X 1.527 = Coproporphyrins (urine) nmol/24 hours Cortisol (urine) mcg/24 hours X 2.759 = Cortisol (urine) nmol/24 hours Cortisol mcg/dL X 27.59 = Cortisol nmol/L Cortisol ng/mL X 2.759 = Cortisol nmol/L Creatine kinase isoenzyme MB ng/mL X 1 = Creatine kinase isoenzyme MB mcg/L Creatine kinase U/L at 37 degC X 0.01667 = Creatine kinase mcKat/L Creatine mg/dL X 76.3 = Creatine mcmol/L Creatinine mg/dL X 88.4 = Creatinine mcmol/L Cyclic Adenosine monophosphate (cAMP) nmol/dL X 10 = Cyclic Adenosine monophosphate (cAMP) nmol/L Dehydroepiandrosterone (DHEA) ng/mL X 3.467 = Dehydroepiandrosterone (DHEA) nmol/L Dehydroepiandrosterone sulfate (DHEA-S) mcg/dL X 0.0271 = Dehydroepiandrosterone sulfate (DHEA-S) mcmol/L Delta-Aminolevulinic acid mg/dL X 76.26 = Delta-Aminolevulinic acid mcmol/L Deoxycorticosterone ng/dL X 0.0303 = Deoxycorticosterone nmol/L Dopamine (plasma) pg/mL X 6.528 = Dopamine (plasma) pmol/L Dopamine (urine) mcg/24 hours X 6.528 = Dopamine (urine) nmol/24 hours Epinephrine (plasma) pg/mL X 5.459 = Epinephrine (plasma) pmol/L Epinephrine (urine) mcg/24 hours X 5.459 = Epinephrine (urine) nmol/24 hours Estradiol (E2) pg/ml X 3.671 = Estradiol (E2) pmol/L Estradiol (E2) pg/ml X 3.671 = Estradiol (E2) pmol/L Estriol (E3) ng/mL X 3.467 = Estriol (E3) nmol/L Ethanol (ethyl alcohol) mg/dL X 0.217 = Ethanol (ethyl alcohol) mmol/L Ethylene glycol mg/dL X 0.1611 = Ethylene glycol mmol/L Ethylene glycol mg/L X 0.01611 = Ethylene glycol mmol/L Ferritin ng/mL X 2.247 = Ferritin pmol/L Fibrinogen mg/dL X 0.0294 = Fibrinogen mcmol/L Folate ng/mL X 2.266 = Folate nmol/L Galactose mg/dL X 0.05551 = Galactose mmol/L Gamma glutamyl transferease (GGT) U/L at 37 degC X 0.01667 = Gamma glutamyl transferease (GGT) mcKat/L Gastrin pg/mL X 0.481 = Gastrin pmol/L Glucose mg/dL X 0.05551 = Glucose mmol/L Glutathione mg/dL X 0.0325 = Glutathione mmol/L Growth hormone ng/mL X 1 = Growth hormone mcg/L Haptoglobin mg/dL X 0.01 = Haptoglobin g/L HDL-cholesterol mg/dL X 0.02586 = HDL-cholesterol mmol/L Histamine mcg/L X 8.997 = Histamine nmol/L Human chorionic gonadotropin (HCG) beta-subunit mU/mL X 1 = Human chorionic gonadotropin (HCG) beta-subunit IU/L Insulin mcIU/mL X 6.945 = Insulin pmol/L Insulin-like growth factor (somatomedin C) ng/mL X 0.131 = Insulin-like growth factor (somatomedin C) nmol/L Iron binding capacity mcg/dL X 0.179 = Iron binding capacity mcmol/L Iron mcg/dL X 0.179 = Iron mcmol/L Iron saturation % X 0.01 = Iron saturation fraction Isocitrate dehydrogenase (ICD) U/L X 0.01667 = Isocitrate dehydrogenase (ICD) mcKat/L Lactate dehydrogenase (LD) U/L at 37 degC X 0.01667 = Lactate dehydrogenase (LD) mcKat/L at 37 degC Lactate mg/dL X 0.111 = Lactate mmol/L LDL-cholesterol mg/dL X 0.02586 = LDL-cholesterol mmol/L Lead mcg/dL X 0.0483 = Lead mcmol/L Leucine aminopeptidase (LAP) U/L X 0.01667 = Leucine aminopeptidase (LAP) mcKat/L Lipase U/L X 0.01667 = Lipase mcKat/L Lipoprotein(a) cholesterol mg/dL X 0.02586 = Lipoprotein(a) cholesterol mcmol/L Luteinizing hormone (LH) mIU/mL X 1 = Luteinizing hormone (LH) IU/L Magnesium mEq/L X 0.5 = Magnesium mmol/L Magnesium mg/dL X 0.411 = Magnesium mmol/L Malic dehydrogenase U/L X 0.01667 = Malic dehydrogenase mcKat/L Metanephrines (total plasma) pg/mL X 5.26 = Metanephrines (total plasma) pmol/L Metanephrines (total urine) mcg/24 hours X 5.26 = Metanephrines (total urine) nmol/24 Metanephrines (total urine) mcg/24 hours X 5.26 = Metanephrines (total urine) nmol/24 hours Methanol (methyl alcohol) mcg/mL X 0.0312 = Methanol (methyl alcohol) mmol/L Methanol (methyl alcohol) mg/L X 0.0312 = Methanol (methyl alcohol) mmol/L Methemoglobin g/dL X 155 = Methemoglobin mcmol/L Muramidase (lysozyme) mg/L X 1 = Muramidase (lysozyme) mcg/mL Myoglobin (serum) mcg/L X 0.05868 = Myoglobin (serum) nmol/L Norepinephrine (plasma) pg/mL X 5.911 = Norepinephrine (plasma) pmol/L Norepinephrine (urine) mcg/24 hours X 5.911 = Norepinephrine (urine) nmol/24 hours Normetanephrine (plasma) pg/mL X 5.46 = Normetanephrine (plasma) pmol/L Normetanephrine (urine) mcg/24 hours X 5.46 = Normetanephrine (urine) nmol/24 hours Osteocalcin ng/mL X 1 = Osteocalcin mcg/L Oxygen partial pressure (pO2) mm Hg X 0.133 = Oxygen partial pressure (pO2) kPa Parathyroid hormone (PTH) pg/mL X 1 = Parathyroid hormone (PTH) ng/L Parathyroid hormone-intact (intact-PTH) pg/mL X 0.1061 = Parathyroid hormone-intact (intact- PTH) pmol/L Phenylalanine mg/dL X 60.54 = Phenylalanine mcmol/L Phosphate (serum inorganic phosphorus) mg/dL X 0.323 = Phosphate (serum inorganic phosphorus) mmol/L Phosphate (urine inorganic phosphorus) g/24 hours X 32.29 = Phosphate (urine inorganic phosphorus) mmol/24 hours Plasminogen (plasma) mg/dL X 0.113 = Plasminogen (plasma) mcmol/L Porphobilinogen mg/dL X 44.2 = Porphobilinogen mcmol/L Potassium mmol/L X 1 = Potassium mEq/L Progesterone ng/mL X 3.18 = Progesterone nmol/L Prolactin mcg/L X 43.478 = Prolactin pmol/L Protein total g/dL X 10 = Protein total g/L Protoporphyrin mcg/dL X 0.0178 = Protoporphyrin mcmol/L Pyruvate mg/dL X 113.6 = Pyruvate mcmol/L Renin (plasma renin activity PRA) ng/mL/hr X 1 = Renin (plasma renin activity PRA) mcg/L/hr Renin (plasma renin concentration) pg/mL X 0.02261 = Renin (plasma renin concentration) pmol/L Reverse T3 (rT3) ng/dL X 0.0154 = Reverse T3 (rT3) nmol/L Serotonin ng/mL X 0.0057 = Serotonin mcmol/L Sodium mmol/L X 1 = Sodium mEq/L Somatomedin C (insulin-like growth factor) ng/mL X 0.131 = Somatomedin C (insulin-like growth factor) nmol/L Somatostatin pg/mL X 0.611 = Somatostatin pmol/L Testosterone (total) ng/dL X 0.0347 = Testosterone (total) nmol/L Testosterone (unbound) pg/mL X 3.47 = Testosterone (unbound) pmol/L Thyroglobulin ng/mL X 1 = Thyroglobulin mcg/L Thyroglobulin ng/mL X 1 = Thyroglobulin mcg/L Thyroid stimulating hormone (TSH) mIU/L X 1 = Thyroid stimulating hormone (TSH) mcIU/mL Thyrotropin releasing hormone (TRH) pg/mL X 2.759 = Thyrotropin releasing hormone (TRH) pmol/L Thyroxine (T4) total mcg/dL X 12.87 = Thyroxine (T4) total nmol/L Thyroxine binding globulin (TBG) mcg/mL X 17.094 = Thyroxine binding globulin (TBG) nmol/L Thyroxine free (free T4) ng/dL X 12.871 = Thyroxine free (free T4) pmol/L Transferrin (TIBC) mg/dL X 0.1299 = Transferrin (TIBC) mcmol/L Triglycerides mg/dL X 0.0113 = Triglycerides mmol/L Triiodothyronine (T3) total (total T3) ng/dL X 0.0154 = Triiodothyronine (T3) total (total T3) nmol/L Triiodothyronine (T3) total (total T3) pg/dL X 0.0000154 = Triiodothyronine (T3) total (total T3) nmol/L Triiodothyronine (T3) total (total T3) pmol/L X .001 = Triiodothyronine (T3) total (total T3) nmol/L Triiodothyronine free (free T3) ng/dL X 0.0154 = Triiodothyronine free (free T3) nmol/L Triiodothyronine free (free T3) pg/dL X 0.0000154 = Triiodothyronine free (free T3) nmol/L Triiodothyronine free (free T3) pmol/L X .001 = Triiodothyronine free (free T3) nmol/L Troponin I (cardiac) ng/mL X 1 = Troponin I (cardiac) mcg/L Urea nitrogen (BUN) mg/dL X 0.357 = Urea nitrogen (BUN) mmol/L Uric acid mg/dL X 59.5 = Uric acid mcmol/L Vanillylmandelic acid (VMA urine) mg/24 hours X 5.046 = Vanillylmandelic acid (VMA urine) mcmol/24 hours Vasoactive intestinal polypeptide (VIP) pg/mL X 0.301 = Vasoactive intestinal polypeptide (VIP) pmol/L Vitamin A1 (retinol) mcg/dL X 0.0349 = Vitamin A1 (retinol) mcmol/L Vitamin B1 (thiamine pyrophosphate) mcg/dL X 23.51 = Vitamin B1 (thiamine pyrophosphate) nmol/L Vitamin B12 (cyanocobalamin) pg/mL X 0.7373 = Vitamin B12 (cyanocobalamin) pmol/L Vitamin B12 unsaturated binding capacity pg/mL X 0.7373 = Vitamin B12 unsaturated binding capacity pmol/L Vitamin B6 (pyridoxine as pyridoxal-5 phosphate) ng/mL X 4.05 = Vitamin B6 (pyridoxine as pyridoxal-5 phosphate) nmol/L Vitamin C (ascorbic acid) mg/dL X 56.78 = Vitamin C (ascorbic acid) mcmol/L Vitamin D (calciferol 1 25) pg/mL X 2.6 = Vitamin D (calciferol 1 25) pmol/L Vitamin D (calciferol 25) ng/mL X 2.496 = Vitamin D (calciferol 25) nmol/L Vitamin E (tocopherol) mcg/mL X 2.32 = Vitamin E (tocopherol) mcmol/L Vitamin K ng/mL X 2.22 = Vitamin K nmol/L Xylose (from absorption) mg/dL X 0.06661 = Xylose (from absorption) mmol/L Zinc mcg/dL X 0.153 = Zinc mcmol/L"
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Young DS. Implementation of SI Units for Clinical Laboratory Data. Ann Int Med. 1987; 106:114.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "[PubMed 3789557]",
+        "pubmed_id": "3789557",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/3789557/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 257117 v19.2]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "SI Unit Conversions- Chemistry Values.pdf",
+      "source_sha256": "a8f637a4313cd355a6f214ff43a2c8845771464843176b33eb8b726ddc795d8d",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "SI Unit Conversions: Chemistry Values",
+        "form_name": "SI_chem",
+        "filename_title": "SI Unit Conversions- Chemistry Values",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('SI Unit Conversions: Chemistry Values')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (siunitconversionschemistryvalues)",
+          "title_vs_form": "differs (siunitconversionschemistryvalues vs sichem) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf149",
+      "title": "SI Unit Conversions: Chemistry Values",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [
+      {
+        "kind": "inputs_from_printed_form_only",
+        "severity": "medium",
+        "detail": "3 field(s) recovered from the printed form; the calculation itself is not in the PDF"
+      }
+    ],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 7,
+    "checks_total": 7,
+    "missing": []
+  }
+}

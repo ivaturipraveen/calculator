@@ -1,0 +1,200 @@
+{
+  "schema_version": "1.0",
+  "slug": "weight-based-dosage-calculator",
+  "title": "Weight Based Dosage Calculator",
+  "subtitle": null,
+  "category": "Drug Dosing / Infusion",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "dosage",
+      "js_name": "Dosage",
+      "label": "Dosage",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg/kg",
+      "display_unit": "mg/kg",
+      "units": [
+        {
+          "code": "mg/kg",
+          "label": "mg/kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    },
+    {
+      "key": "weight",
+      "js_name": "Weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "display_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "mass",
+      "label_source": "printed form"
+    },
+    {
+      "key": "med_amount",
+      "js_name": "Med_Amount",
+      "label": "Med Amount",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mg",
+      "display_unit": "mg",
+      "units": [
+        {
+          "code": "mg",
+          "label": "mg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "mass",
+      "label_source": "printed form"
+    },
+    {
+      "key": "per_volume",
+      "js_name": "Per_Volume",
+      "label": "Per Volume",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mL",
+      "display_unit": "mL",
+      "units": [
+        {
+          "code": "mL",
+          "label": "mL",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "volume",
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "dose",
+        "js_name": "Dose",
+        "label": "Dose",
+        "expr": "weight * dosage",
+        "base_unit": "mg",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "liquid_dose",
+        "js_name": "Liquid_Dose",
+        "label": "Liquid Dose",
+        "expr": "dose * per_volume / med_amount",
+        "base_unit": "mL",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "Dose = Weight * Dosage\nLiquid_Dose = Dose * Per_Volume / Med_Amount",
+    "notes": [
+      "In this calculator, mcg is the abbreviation for micrograms.",
+      "The default unit of measure for weight is kilograms. Please verify that the correct unit of measure has been selected."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": [
+      "Liquid Formulation (optional):"
+    ]
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Weight Based Dosage Calculator.pdf",
+      "source_sha256": "081621f6e30b789e1627a2b3e2f85d4f439c0877757066b8ccdb8dc537a3a15c",
+      "extractor": "pdf",
+      "form_name": "WeightBasedDose",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Weight Based Dosage Calculator",
+        "form_name": "WeightBasedDose",
+        "filename_title": "Weight Based Dosage Calculator",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Weight Based Dosage Calculator')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (weightbaseddosagecalculator)",
+          "title_vs_form": "differs (weightbaseddosagecalculator vs weightbaseddose) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf178",
+      "title": "Weight Based Dosage Calculator",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 86.7,
+    "checks_passed": 13,
+    "checks_total": 15,
+    "missing": [
+      "validation bounds",
+      "field help text"
+    ]
+  }
+}

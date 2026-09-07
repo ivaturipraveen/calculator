@@ -1,0 +1,1438 @@
+{
+  "count": 179,
+  "generated": "2026-09-07",
+  "calculators": [
+    {
+      "slug": "4t-score",
+      "title": "4T score",
+      "category": "Hematology / Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "a-a-gradient",
+      "title": "A-a Gradient",
+      "category": "Pulmonology",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 7
+    },
+    {
+      "slug": "absolute-neutrophil-count",
+      "title": "Absolute Neutrophil Count",
+      "category": "Hematology",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "acc-aha-2013-cardiovascular-risk-assessment",
+      "title": "ACC/AHA 2013 Cardiovascular Risk Assessment",
+      "category": "Cardiology / Scoring System",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 9
+    },
+    {
+      "slug": "acetaminophen-toxicity-assessment",
+      "title": "Acetaminophen Toxicity Assessment",
+      "category": "Toxicology / Assessment Tool",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "acetylcysteine",
+      "title": "Acetylcysteine",
+      "category": "Toxicology / Dosing Calculator",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "adjusted-body-weight",
+      "title": "Adjusted Body Weight",
+      "category": "Dosing / Weight-Based Calculations",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "advanced-life-support-adult",
+      "title": "Advanced Life Support: Adult",
+      "category": "Emergency Medicine / Dosing Reference",
+      "renderer": "dose_table",
+      "status": "draft",
+      "inputs": 1
+    },
+    {
+      "slug": "advanced-life-support-neonatal",
+      "title": "Advanced Life Support: Neonatal",
+      "category": "Emergency Medicine / Dosing Reference",
+      "renderer": "dose_table",
+      "status": "draft",
+      "inputs": 1
+    },
+    {
+      "slug": "advanced-life-support-pediatric",
+      "title": "Advanced Life Support: Pediatric",
+      "category": "Emergency Medicine / Dosing Reference",
+      "renderer": "dose_table",
+      "status": "draft",
+      "inputs": 1
+    },
+    {
+      "slug": "amikacin-level-prediction",
+      "title": "Amikacin Level Prediction",
+      "category": "Pharmacokinetics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 9
+    },
+    {
+      "slug": "aminoglycoside-clearance-estimate",
+      "title": "Aminoglycoside Clearance Estimate",
+      "category": "Pharmacokinetics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "aminoglycosides-extended-initial-dose",
+      "title": "Aminoglycosides: Extended, Initial Dose",
+      "category": "Pharmacokinetics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 8
+    },
+    {
+      "slug": "aminoglycosides-extended-interval-adjust",
+      "title": "Aminoglycosides: Extended, Interval Adjust",
+      "category": "Pharmacokinetics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 6
+    },
+    {
+      "slug": "aminoglycosides-traditional-intermittent-dosing-by-serum-levels",
+      "title": "Aminoglycosides: Traditional Intermittent Dosing by Serum Levels",
+      "category": "Pharmacokinetics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 10
+    },
+    {
+      "slug": "aminoglycosides-traditional-intermittent-empiric-dosing",
+      "title": "Aminoglycosides: Traditional Intermittent Empiric Dosing",
+      "category": "Pharmacokinetics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 11
+    },
+    {
+      "slug": "amiodarone",
+      "title": "Amiodarone",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "amoxicillin-dental",
+      "title": "Amoxicillin (Dental)",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "anion-gap",
+      "title": "Anion Gap",
+      "category": "Lab / Electrolytes",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "anion-gap-and-delta-delta-gradient",
+      "title": "Anion Gap & Delta Delta Gradient",
+      "category": "Lab / Electrolytes",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "anion-gap-and-delta-delta-ratio",
+      "title": "Anion Gap & Delta Delta Ratio",
+      "category": "Lab / Electrolytes",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "anion-gap-in-hypoalbumin-states",
+      "title": "Anion Gap in Hypoalbumin States",
+      "category": "Lab / Electrolytes",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "apache-ii-scoring-system",
+      "title": "APACHE II Scoring System",
+      "category": "Critical Care / Scoring System",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 14
+    },
+    {
+      "slug": "apache-ii-scoring-system-by-diagnosis",
+      "title": "APACHE II Scoring System by Diagnosis",
+      "category": "Critical Care / Scoring System",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 16
+    },
+    {
+      "slug": "apgar-score",
+      "title": "Apgar Score",
+      "category": "Obstetrics / Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "atracurium",
+      "title": "Atracurium",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "titration_table",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "azithromycin-dental",
+      "title": "Azithromycin (Dental)",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "basal-energy-expenditure",
+      "title": "Basal Energy Expenditure",
+      "category": "Anthropometrics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "bivalirudin",
+      "title": "Bivalirudin",
+      "category": "Cardiology / Dosing Calculator",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "body-mass-index-bmi",
+      "title": "Body Mass Index (BMI)",
+      "category": "Anthropometrics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "body-surface-area-bsa-gehan-and-george-method",
+      "title": "Body Surface Area (BSA, Gehan and George Method)",
+      "category": "Anthropometrics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "body-surface-area-du-bois-method",
+      "title": "Body Surface Area (Du Bois Method)",
+      "category": "Anthropometrics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "body-surface-area-mosteller-method",
+      "title": "Body Surface Area (Mosteller Method)",
+      "category": "Anthropometrics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "calcium-correction-in-hypoalbuminemia",
+      "title": "Calcium Correction in Hypoalbuminemia",
+      "category": "Lab / Electrolytes",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "calcium-correction-in-hypoalbuminemia-si-units",
+      "title": "Calcium Correction in Hypoalbuminemia (SI units)",
+      "category": "Lab / Electrolytes",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "calvert-formula-carboplatin-dosing",
+      "title": "Calvert Formula (CARBOplatin Dosing)",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "cardiovascular-risk-assessment-10-year-framingham-2008",
+      "title": "Cardiovascular Risk Assessment (10-year, Framingham 2008)",
+      "category": "Cardiology / Scoring System",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 8
+    },
+    {
+      "slug": "cdc-bmi-for-age-boys-2-20-years",
+      "title": "CDC BMI for Age (Boys; 2 - 20 years)",
+      "category": "Pediatrics / Growth Chart",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "cdc-bmi-for-age-girls-2-20-years",
+      "title": "CDC BMI for Age (Girls; 2 - 20 years)",
+      "category": "Pediatrics / Growth Chart",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "cdc-growth-percentiles-36-months",
+      "title": "CDC Growth Percentiles (<36 months)",
+      "category": "Pediatrics / Growth Chart",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "cdc-head-circumference-for-age-36-months",
+      "title": "CDC Head Circumference for Age (<36 months)",
+      "category": "Pediatrics / Growth Chart",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "cdc-height-for-age-boys-2-20-years",
+      "title": "CDC Height for Age (Boys; 2 - 20 years)",
+      "category": "Pediatrics / Growth Chart",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "cdc-height-for-age-girls-2-20-years",
+      "title": "CDC Height for Age (Girls; 2 - 20 years)",
+      "category": "Pediatrics / Growth Chart",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "cdc-length-for-age-36-months",
+      "title": "CDC Length for Age (<36 months)",
+      "category": "Pediatrics / Growth Chart",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "cdc-weight-for-age-36-months",
+      "title": "CDC Weight for Age (<36 months)",
+      "category": "Pediatrics / Growth Chart",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "cdc-weight-for-age-boys-2-20-years",
+      "title": "CDC Weight for Age (Boys; 2 - 20 years)",
+      "category": "Pediatrics / Growth Chart",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "cdc-weight-for-age-girls-2-20-years",
+      "title": "CDC Weight for Age (Girls; 2 - 20 years)",
+      "category": "Pediatrics / Growth Chart",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "cdc-weight-for-height-boys-77-121-cm",
+      "title": "CDC Weight for Height (Boys; 77 - 121 cm)",
+      "category": "Pediatrics / Growth Chart",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "cdc-weight-for-height-girls-77-121-cm",
+      "title": "CDC Weight for Height (Girls; 77 - 121 cm)",
+      "category": "Pediatrics / Growth Chart",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "cdc-weight-for-length-36-months",
+      "title": "CDC Weight for Length (<36 months)",
+      "category": "Pediatrics / Growth Chart",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "cha2ds2-vasc-score",
+      "title": "CHA2DS2-VASc Score",
+      "category": "Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "chads2-score",
+      "title": "CHADS2 Score",
+      "category": "Cardiology / Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "child-pugh-classification",
+      "title": "Child Pugh Classification",
+      "category": "Hepatology / Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "child-pugh-classification-si-units",
+      "title": "Child Pugh Classification (SI units)",
+      "category": "Hepatology / Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "cisatracurium",
+      "title": "Cisatracurium",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "titration_table",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "clostridium-difficile-disease-severity-score-hines-va",
+      "title": "Clostridium Difficile Disease Severity Score (Hines VA)",
+      "category": "Infectious Disease / Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "clostridium-difficile-disease-severity-score-upmc-2008",
+      "title": "Clostridium Difficile Disease Severity Score (UPMC 2008)",
+      "category": "Infectious Disease / Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "corticosteroid-conversion-glucocorticoid-effect",
+      "title": "Corticosteroid Conversion (Glucocorticoid Effect)",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "convert",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "corticosteroid-conversion-mineralocorticoid-effect",
+      "title": "Corticosteroid Conversion (Mineralocorticoid Effect)",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "convert",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "creatinine-clearance-measured",
+      "title": "Creatinine Clearance (measured)",
+      "category": "Renal Function",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "creatinine-clearance-measured-si-units",
+      "title": "Creatinine Clearance (measured, SI units)",
+      "category": "Renal Function",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "creatinine-clearance-by-cockcroft-gault-age-16-years",
+      "title": "Creatinine Clearance by Cockcroft-Gault, Age ≥16 Years",
+      "category": "Renal Function",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "creatinine-clearance-by-jelliffe",
+      "title": "Creatinine Clearance by Jelliffe",
+      "category": "Renal Function",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "dexmedetomidine",
+      "title": "Dexmedetomidine",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "diabetes-risk-score-type-2",
+      "title": "Diabetes Risk Score (Type 2)",
+      "category": "Endocrinology / Risk Score",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 7
+    },
+    {
+      "slug": "digitalis-body-load",
+      "title": "Digitalis Body Load",
+      "category": "Clinical Calculator",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "diltiazem",
+      "title": "Diltiazem",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "titration_table",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "dobutamine",
+      "title": "DOBUTamine",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "titration_table",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "dopamine",
+      "title": "DOPamine",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "titration_table",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "dose-adjustment-for-body-surface-area",
+      "title": "Dose Adjustment for Body Surface Area",
+      "category": "Anthropometrics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "dose-driven-iv-drip-rate-calculator",
+      "title": "Dose Driven IV-Drip Rate Calculator",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "egfr-by-ckd-epi-creatinine-equation-egfrcr-2021-in-adults",
+      "title": "eGFR by CKD-EPI Creatinine Equation (eGFRcr) (2021) in Adults",
+      "category": "Renal Function",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "egfr-by-ckd-epi-creatinine-cystatin-c-equation-egfrcr-cys-2021-in",
+      "title": "eGFR by CKD-EPI Creatinine-Cystatin C Equation (eGFRcr-cys) (2021) in",
+      "category": "Renal Function",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 6
+    },
+    {
+      "slug": "egfr-by-ckd-epi-cystatin-c-equation-egfrcys-2012-in-adults",
+      "title": "eGFR by CKD-EPI Cystatin C Equation (eGFRcys) (2012) in Adults",
+      "category": "Renal Function",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "epidural-formulation-compounding-calculator",
+      "title": "Epidural Formulation Compounding Calculator",
+      "category": "Pain Management / Compounding",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "epinephrine",
+      "title": "EPINEPHrine",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "titration_table",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "epinephrine-weight-based",
+      "title": "EPINEPHrine, Weight Based",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "eptifibatide",
+      "title": "Eptifibatide",
+      "category": "Cardiology / Dosing Calculator",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "equianalgesic-dose-estimation-opioids",
+      "title": "Equianalgesic Dose Estimation (Opioids)",
+      "category": "Pain Management",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "esmolol",
+      "title": "Esmolol",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 6
+    },
+    {
+      "slug": "ethanol",
+      "title": "Ethanol",
+      "category": "Toxicology",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "fentanyl",
+      "title": "FentaNYL",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "titration_table",
+      "status": "draft",
+      "inputs": 7
+    },
+    {
+      "slug": "fomepizole",
+      "title": "Fomepizole",
+      "category": "Toxicology",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 1
+    },
+    {
+      "slug": "fractional-excretion-of-sodium",
+      "title": "Fractional Excretion of Sodium",
+      "category": "Renal Function",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "fractional-excretion-of-sodium-si-units",
+      "title": "Fractional Excretion of Sodium (SI units)",
+      "category": "Renal Function",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "fractional-excretion-of-urate",
+      "title": "Fractional Excretion of Urate",
+      "category": "Renal Function",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "fracture-index-with-known-bone-mineral-density-bmd",
+      "title": "Fracture Index with Known Bone Mineral Density (BMD)",
+      "category": "Endocrinology / Risk Score",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "fracture-index-without-known-bone-mineral-density-bmd",
+      "title": "Fracture Index without known Bone Mineral Density (BMD)",
+      "category": "Endocrinology / Risk Score",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "gentamicin-level-prediction",
+      "title": "Gentamicin Level Prediction",
+      "category": "Pharmacokinetics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 9
+    },
+    {
+      "slug": "gestational-age",
+      "title": "Gestational Age",
+      "category": "Obstetrics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 6
+    },
+    {
+      "slug": "glasgow-coma-scale",
+      "title": "Glasgow Coma Scale",
+      "category": "Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "glomerular-filtration-rate-by-bedside-schwartz",
+      "title": "Glomerular Filtration Rate by Bedside Schwartz",
+      "category": "Renal Function",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "glomerular-filtration-rate-by-mdrd",
+      "title": "Glomerular Filtration Rate by MDRD",
+      "category": "Renal Function",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "glomerular-filtration-rate-by-schwartz",
+      "title": "Glomerular Filtration Rate by Schwartz",
+      "category": "Renal Function",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "has-bled-bleeding-risk-score",
+      "title": "HAS-BLED Bleeding Risk Score",
+      "category": "Cardiology / Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "henderson-hasselbach-equation",
+      "title": "Henderson-Hasselbach Equation",
+      "category": "Pulmonology",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "heparin-maintenance-infusion",
+      "title": "Heparin Maintenance Infusion",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "titration_table",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "hyponatremia-correction-infusate-rate",
+      "title": "Hyponatremia Correction Infusate Rate",
+      "category": "Lab / Electrolytes",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 6
+    },
+    {
+      "slug": "ideal-body-weight-and-dosing-weight",
+      "title": "Ideal Body Weight and Dosing Weight",
+      "category": "Anthropometrics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "ideal-body-weight-percentage",
+      "title": "Ideal Body Weight Percentage",
+      "category": "Anthropometrics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "ideal-body-weight-pediatric",
+      "title": "Ideal Body Weight: Pediatric",
+      "category": "Anthropometrics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "iv-drip-maintenance-rate-calculator",
+      "title": "IV Drip Maintenance Rate Calculator",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "labetalol",
+      "title": "Labetalol",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "lean-body-weight-female",
+      "title": "Lean Body Weight (Female)",
+      "category": "Anthropometrics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "lean-body-weight-male",
+      "title": "Lean Body Weight (Male)",
+      "category": "Anthropometrics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "lean-body-weight-by-fat-free-mass",
+      "title": "Lean Body Weight by Fat Free Mass",
+      "category": "Anthropometrics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "lidocaine",
+      "title": "Lidocaine",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "titration_table",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "magnesium-sulfate",
+      "title": "Magnesium Sulfate",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "maintenance-fluid-calculation-for-children",
+      "title": "Maintenance Fluid Calculation for Children",
+      "category": "Pediatrics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 1
+    },
+    {
+      "slug": "meld-score",
+      "title": "MELD Score",
+      "category": "Scoring System",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "meld-score-si-units",
+      "title": "MELD Score (SI units)",
+      "category": "Hepatology",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "meldna-score",
+      "title": "MELDNa Score",
+      "category": "Hepatology",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "meldna-score-2016",
+      "title": "MELDNa Score (2016)",
+      "category": "Hepatology",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "meldna-score-2016-si-units",
+      "title": "MELDNa Score (2016) (SI units)",
+      "category": "Hepatology",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "meldna-score-si-units",
+      "title": "MELDNa Score (SI units)",
+      "category": "Hepatology",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "milrinone",
+      "title": "Milrinone",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "modified-wells-score-for-dvt",
+      "title": "Modified Wells Score for DVT",
+      "category": "Hematology / Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "morphine-milligram-equivalents-per-day-mmed",
+      "title": "Morphine Milligram Equivalents Per Day (MMED)",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "mmed",
+      "status": "draft",
+      "inputs": 13
+    },
+    {
+      "slug": "newborn-hyperbilirubinemia-assessment-35-weeks-gestation",
+      "title": "Newborn hyperbilirubinemia assessment (≥35 weeks gestation)",
+      "category": "Pediatrics / Obstetrics",
+      "renderer": "dose_table",
+      "status": "draft",
+      "inputs": 7
+    },
+    {
+      "slug": "nih-stroke-score",
+      "title": "NIH Stroke Score",
+      "category": "Neurology / Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "nitroglycerin-adult",
+      "title": "Nitroglycerin: Adult",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "titration_table",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "nitroglycerin-pediatric",
+      "title": "Nitroglycerin: Pediatric",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "titration_table",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "nitroprusside",
+      "title": "Nitroprusside",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "norepinephrine",
+      "title": "Norepinephrine",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "titration_table",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "norepinephrine-weight-based",
+      "title": "Norepinephrine, Weight Based",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "osmolal-gap",
+      "title": "Osmolal Gap",
+      "category": "Lab / Electrolytes",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "osmolal-gap-si-units",
+      "title": "Osmolal Gap (SI Units)",
+      "category": "Lab / Electrolytes",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "osmolality-estimator-serum",
+      "title": "Osmolality Estimator (serum)",
+      "category": "Lab / Electrolytes",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "palliative-prognostic-score-in-terminal-illness",
+      "title": "Palliative Prognostic Score in Terminal Illness",
+      "category": "Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "pediatric-dosing-oral-liquid-parenteral",
+      "title": "Pediatric Dosing: Oral Liquid/Parenteral",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "pediatric-dosing-oral-solid",
+      "title": "Pediatric Dosing: Oral Solid",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "pharyngitis-evaluation-and-treatment-criteria",
+      "title": "Pharyngitis Evaluation and Treatment Criteria",
+      "category": "Infectious Disease / Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "phenylephrine",
+      "title": "Phenylephrine",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "titration_table",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "phenytoin-drug-level-adjusted",
+      "title": "Phenytoin Drug Level, Adjusted",
+      "category": "Neurology",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "procainamide",
+      "title": "Procainamide",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "titration_table",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "propofol",
+      "title": "Propofol",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "titration_table",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "pulmonary-embolism-wells-score",
+      "title": "Pulmonary Embolism Wells Score",
+      "category": "Pulmonology / Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "qt-interval-correction-ekg",
+      "title": "QT Interval Correction (EKG)",
+      "category": "Cardiology",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "qt-interval-correction-ekg-multi-equation",
+      "title": "QT Interval Correction (EKG, Multi-Equation)",
+      "category": "Cardiology",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "rabies-post-exposure-prophylaxis-treecalc",
+      "title": "Rabies Post Exposure Prophylaxis TreeCalc®",
+      "category": "Clinical Calculator",
+      "renderer": "tree",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "reveal-pah-score",
+      "title": "REVEAL PAH Score",
+      "category": "Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "si-unit-conversions-body-fluid-chemistries",
+      "title": "SI Unit Conversions: Body Fluid Chemistries",
+      "category": "Unit Conversion",
+      "renderer": "convert",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "si-unit-conversions-chemistry-values",
+      "title": "SI Unit Conversions: Chemistry Values",
+      "category": "Unit Conversion",
+      "renderer": "convert",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "si-unit-conversions-coagulation-tests",
+      "title": "SI Unit Conversions: Coagulation Tests",
+      "category": "Unit Conversion",
+      "renderer": "convert",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "si-unit-conversions-drugs",
+      "title": "SI Unit Conversions: Drugs",
+      "category": "Unit Conversion",
+      "renderer": "convert",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "si-unit-conversions-hematology",
+      "title": "SI Unit Conversions: Hematology",
+      "category": "Unit Conversion",
+      "renderer": "convert",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "si-unit-conversions-urine-chemistry-values",
+      "title": "SI Unit Conversions: Urine Chemistry Values",
+      "category": "Unit Conversion",
+      "renderer": "convert",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "single-dose-volume-conversion",
+      "title": "Single Dose-Volume Conversion",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "sodium-correction-in-hyperglycemia",
+      "title": "Sodium Correction in Hyperglycemia",
+      "category": "Lab / Electrolytes",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "sodium-deficit-in-hyponatremia",
+      "title": "Sodium Deficit in Hyponatremia",
+      "category": "Lab / Electrolytes",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "sofa-score",
+      "title": "SOFA Score",
+      "category": "Critical Care / Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "thyroid-medication-dosing-conversions",
+      "title": "Thyroid Medication Dosing Conversions",
+      "category": "Unit Conversion",
+      "renderer": "convert",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "timi-risk-score-stemi",
+      "title": "TIMI Risk Score (STEMI)",
+      "category": "Cardiology / Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "timi-risk-score-ua-nstemi",
+      "title": "TIMI Risk Score (UA/NSTEMI)",
+      "category": "Cardiology / Scoring System",
+      "renderer": "score",
+      "status": "draft",
+      "inputs": 0
+    },
+    {
+      "slug": "titration-table",
+      "title": "Titration Table",
+      "category": "Clinical Calculator",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 10
+    },
+    {
+      "slug": "tobramycin-level-prediction",
+      "title": "Tobramycin Level Prediction",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 9
+    },
+    {
+      "slug": "tpn-osmolarity-determination",
+      "title": "TPN Osmolarity Determination",
+      "category": "Renal Function / Electrolytes",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 13
+    },
+    {
+      "slug": "transtubular-potassium-gradient",
+      "title": "Transtubular Potassium Gradient",
+      "category": "Renal Function",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "treprostinil",
+      "title": "Treprostinil",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 14
+    },
+    {
+      "slug": "unit-conversion-metric-conversions",
+      "title": "Unit Conversion: Metric Conversions",
+      "category": "Unit Conversion",
+      "renderer": "convert",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "unit-conversions-length",
+      "title": "Unit Conversions: Length",
+      "category": "Unit Conversion",
+      "renderer": "convert",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "unit-conversions-temperature",
+      "title": "Unit Conversions: Temperature",
+      "category": "Unit Conversion",
+      "renderer": "convert",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "unit-conversions-time",
+      "title": "Unit Conversions: Time",
+      "category": "Unit Conversion",
+      "renderer": "convert",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "unit-conversions-volume",
+      "title": "Unit Conversions: Volume",
+      "category": "Unit Conversion",
+      "renderer": "convert",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "unit-conversions-weight",
+      "title": "Unit Conversions: Weight",
+      "category": "Unit Conversion",
+      "renderer": "convert",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "urinary-protein-excretion-estimation",
+      "title": "Urinary Protein Excretion Estimation",
+      "category": "Renal Function",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 2
+    },
+    {
+      "slug": "valganciclovir",
+      "title": "ValGANciclovir",
+      "category": "Pediatrics",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 7
+    },
+    {
+      "slug": "vancomycin-dosing-by-peak-and-trough-levels",
+      "title": "Vancomycin: Dosing by Peak and Trough Levels",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 10
+    },
+    {
+      "slug": "vecuronium",
+      "title": "Vecuronium",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 5
+    },
+    {
+      "slug": "water-deficit-in-hypernatremia",
+      "title": "Water Deficit in Hypernatremia",
+      "category": "Lab / Electrolytes",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "weight-based-dosage-calculator",
+      "title": "Weight Based Dosage Calculator",
+      "category": "Drug Dosing / Infusion",
+      "renderer": "formula",
+      "status": "draft",
+      "inputs": 4
+    },
+    {
+      "slug": "who-assessment-of-malnutrition-boys-0-2-years",
+      "title": "WHO Assessment of Malnutrition (Boys; 0 - 2 Years)",
+      "category": "Pediatrics / Growth Chart",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "who-assessment-of-malnutrition-boys-2-5-years",
+      "title": "WHO Assessment of Malnutrition (Boys; 2 - 5 Years)",
+      "category": "Pediatrics / Growth Chart",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "who-assessment-of-malnutrition-girls-0-2-years",
+      "title": "WHO Assessment of Malnutrition (Girls; 0 - 2 Years)",
+      "category": "Pediatrics / Growth Chart",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "who-assessment-of-malnutrition-girls-2-5-years",
+      "title": "WHO Assessment of Malnutrition (Girls; 2 - 5 Years)",
+      "category": "Pediatrics / Growth Chart",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "who-head-circumference-for-age-24-months",
+      "title": "WHO Head Circumference for Age (<24 months)",
+      "category": "Anthropometrics",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "who-length-for-age-24-months",
+      "title": "WHO Length for Age (<24 months)",
+      "category": "Anthropometrics",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "who-weight-for-age-24-months",
+      "title": "WHO Weight for Age (<24 months)",
+      "category": "Anthropometrics",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 3
+    },
+    {
+      "slug": "who-weight-for-length-24-months",
+      "title": "WHO Weight for Length (<24 months)",
+      "category": "Anthropometrics",
+      "renderer": "lms",
+      "status": "draft",
+      "inputs": 3
+    }
+  ]
+}

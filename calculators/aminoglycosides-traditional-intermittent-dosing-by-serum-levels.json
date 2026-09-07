@@ -1,0 +1,425 @@
+{
+  "schema_version": "1.0",
+  "slug": "aminoglycosides-traditional-intermittent-dosing-by-serum-levels",
+  "title": "Aminoglycosides: Traditional Intermittent Dosing by Serum Levels",
+  "subtitle": null,
+  "category": "Pharmacokinetics",
+  "renderer": "formula",
+  "engine": "wk",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "cp",
+      "label": "Measured Peak level (Cp)",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "Cp",
+        "id_const": "ID_CP"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "tp",
+      "label": "Hrs after dose (Tp)",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 0.5
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "Tp",
+        "id_const": "ID_TP"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "ctr",
+      "label": "Measured Trough level (Ctr)",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 0.0,
+        "exclusive_min": true
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "Ctr",
+        "id_const": "ID_CTR"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "ttr",
+      "label": "Hrs after dose (Ttr)",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "Ttr",
+        "id_const": "ID_TTR"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "tau",
+      "label": "Current Dosing Interval (tau)",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "tau",
+        "id_const": "ID_TAU"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "md",
+      "label": "Current Dose (MD)",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 0.0,
+        "exclusive_min": true
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "MD",
+        "id_const": "ID_MD"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "cdp",
+      "label": "Desired Peak (Cdp)",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 4.0,
+        "max": 40.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "Cdp",
+        "id_const": "ID_CDP"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "cdtr",
+      "label": "Desired Trough (Cdtr)",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {
+        "min": 0.5,
+        "max": 8.0
+      },
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "Cdtr",
+        "id_const": "ID_CDTR"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "drug",
+      "label": "Drug",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "drug",
+        "id_const": "ID_DRUG"
+      },
+      "dimension": null,
+      "label_source": "printed form",
+      "options_incomplete": true,
+      "options_known_value": "Amikacin",
+      "options": [
+        {
+          "label": "Amikacin",
+          "value": "Amikacin",
+          "source": "script comparison"
+        }
+      ],
+      "options_source": "pdf_script_comparisons"
+    },
+    {
+      "key": "detail",
+      "label": "Detail",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "Suggested Dose (MD)",
+      "units": [
+        {
+          "code": "Suggested Dose (MD)",
+          "label": "Suggested Dose (MD)",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "source": {
+        "engine": "wk",
+        "dom_id": "detail",
+        "id_const": "ID_DETAIL"
+      },
+      "dimension": null,
+      "label_source": "printed form",
+      "options_incomplete": true,
+      "options_known_value": "Show"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [
+      {
+        "key": "ke",
+        "expr": "ln(cp / ctr) / (ttr - tp)"
+      },
+      {
+        "key": "half_life",
+        "expr": "0.693 / ke"
+      },
+      {
+        "key": "t1",
+        "expr": "tp - 0.5"
+      },
+      {
+        "key": "t2",
+        "expr": "tau - ttr"
+      },
+      {
+        "key": "vd",
+        "expr": "(md / 0.5) * (1 - pow(e, (-1 * ke * 0.5))) / (ke * (cp / pow(e, (-1 * ke * t1)) - ctr * pow(e, (-1 * ke * t2))))"
+      },
+      {
+        "key": "calculated_tau",
+        "expr": "(ln(cdp / cdtr) / ke) + 0.5"
+      },
+      {
+        "key": "suggested_tau",
+        "expr": "72"
+      },
+      {
+        "key": "suggested_tau_v2",
+        "expr": "(8) if (calculated_tau <= 10) else ((12) if (calculated_tau <= 15) else ((18) if (calculated_tau <= 21) else ((24) if (calculated_tau <= 29) else ((36) if (calculated_tau <= 42) else ((48) if (calculated_tau <= 60) else (suggested_tau))))))"
+      },
+      {
+        "key": "calculated_md",
+        "expr": "0.5 * ke * vd * cdp * (1 - pow(e, (-1 * ke * suggested_tau_v2))) / (1 - pow(e, (-1 * ke * 0.5)))"
+      },
+      {
+        "key": "suggested_md",
+        "expr": "calculated_md"
+      },
+      {
+        "key": "suggested_md_v2",
+        "expr": "((25) if ((round(suggested_md / 25) * 25) == 0) else (round(suggested_md / 25) * 25)) if (drug == 'Amikacin') else ((10) if ((round(suggested_md / 10) * 10) == 0) else (round(suggested_md / 10) * 10))"
+      },
+      {
+        "key": "crcl",
+        "expr": "(ke - 0.014) / 0.00293"
+      }
+    ],
+    "outputs": [
+      {
+        "key": "ke",
+        "label": "Ke",
+        "expr": "ke",
+        "decimals": 3,
+        "base_unit": null,
+        "kind": "number"
+      },
+      {
+        "key": "half_life",
+        "label": "Half Life",
+        "expr": "half_life",
+        "decimals": 1,
+        "base_unit": null,
+        "kind": "number"
+      },
+      {
+        "key": "vd",
+        "label": "Vd",
+        "expr": "vd",
+        "decimals": 2,
+        "base_unit": null,
+        "kind": "number"
+      },
+      {
+        "key": "calculated_tau",
+        "label": "Calculated Tau",
+        "expr": "calculated_tau",
+        "decimals": 3,
+        "base_unit": null,
+        "kind": "number"
+      },
+      {
+        "key": "suggested_tau",
+        "label": "Suggested Interval (tau)",
+        "expr": "suggested_tau_v2",
+        "decimals": null,
+        "base_unit": null,
+        "kind": "number",
+        "label_source": "printed form"
+      },
+      {
+        "key": "calculated_md",
+        "label": "Calculated Md",
+        "expr": "calculated_md",
+        "decimals": 3,
+        "base_unit": null,
+        "kind": "number"
+      },
+      {
+        "key": "suggested_md",
+        "label": "Suggested Dose (MD)",
+        "expr": "suggested_md_v2",
+        "decimals": null,
+        "base_unit": null,
+        "kind": "number",
+        "label_source": "printed form"
+      },
+      {
+        "key": "calculated_cr_cl",
+        "label": "Calculated CrCl",
+        "expr": "crcl",
+        "decimals": 2,
+        "base_unit": null,
+        "kind": "number"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 3,
+    "has_precision_control": false,
+    "precision_source": "script"
+  },
+  "content": {
+    "equation": "Actual Elimination Rate Constant (Ke)\nKe = [ln(Cp ÷ Ctr)] ÷ (Ttr - Tp)\nCp = measured peak level drawn\nTp = hours after dose started to infuse (usually shortly after end of infusion)\nCtr = measured trough level drawn\nTtr = hours after dose started to infuse (usually shortly before next dose)\nHalf-Life (t)\nt = 0.693 ÷ Ke\nKe = elimination rate constant (hour-1)\nVolume of Distribution (Vd)\nVd = (MD ÷ 0.5) x [1 - e(-Ke x 0.5)] ÷ (Ke x [Cp ÷ e (-Ke x T1) - Ctr x e(-Ke x T2)])\nMD = current maintenance dose\nKe = elimination rate constant\nCp = measured peak level drawn\nCtr = measured trough level drawn\nT1 = time between end of infusion and measured peak level (Tp - 0.5)\nT2 = time between measured trough level and next dose (tau - Ttr)\nSuggested Interval (tau)\ntau = [ln(Cdp ÷ Cdtr) ÷ Ke] + 0.5\nCdp = desired peak\nCdp = desired peak\nCdtr = desired trough\nKe = elimination rate constant\nNote: Suggested dosing interval rounded to 8, 12, 18, 24, 36, 48, 72 hours\nSuggested Dose (MD)\nMD = 0.5 x Ke x Vd x Cdp x [1 - e(-Ke x tau)] ÷ [1 - e(-Ke x 0.5)]\nKe = elimination rate constant\nVd = volume of distribution in L\nCdp = desired peak in mg/L\ntau = suggested interval\nNote:Suggested dose rounding:\nAmikacin rounded to nearest 25 mg\nGentamicin/tobramycin rounded to nearest 10 mg\nCalculated Clcr From Ke\nClcr = (Ke - 0.014) ÷ 0.00293\nIt has been documented, particularly in a critical care setting, that the calculated Ke can be used to estimate Clcr. This may be used to determine whether\ndosage adjustments should be considered for other renally-adjusted medications (Zarowitz, 1992).",
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT \".\" ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Bauer LA, \"Clinical Pharmacokinetics and Pharmacodynamics,\" Pharmacotherapy: A Pathophysiologic Approach, 4th ed, Chapter 3, Dipiro JT, Talbert RL, Yee GC, et al, eds, Stamford, CT: Appleton & Lange, 1999, 34-6.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Matzke GR. \"Vancomycin,\" Applied Pharmacokinetics: Principles of Therapeutic Drug Monitoring, 3rd ed, Chapter 15, Evans WE, Schentag JJ, Jusko WJ, et al, eds, Vancouver, WA: Applied Therapeutics, Inc, 1992, 1-31.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Zarowitz BJ, Robert S, and Peterson EL, \"Prediction of Glomerular Filtration Rate Using Aminoglycoside Clearance in Critically Ill Medical Patients,\" Ann Pharmacother, 1992, 26(10):1205-10. [PubMed 1421639]",
+        "pubmed_id": "1421639",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/1421639/"
+      }
+    ],
+    "disclaimer": null,
+    "copyright": null,
+    "instructions": "To perform a calculation, enter the required variables. Once all the inputs are entered, click the \"Calculate\" button to perform the calculation. Any time an input variable is adjusted, the \"Calculate\" button must be clicked to populate the new output. To start over, click the \"Reset\" button to clear all values and begin the calculation again. Examples for Inputting Patient Information Patient information: Drug: Gentamicin Lab results: Peak: 12 mcg/mL; trough: 3 mcg/mL Dose administered at 0900; peak level drawn at 1100; trough level drawn at 2000 Current dose: 160 mg; current interval: 12 hours Desired peak: 8 mcg/mL; desired trough: 1 mcg/mL How to input into calculator: Drug: Select gentamicin from the drop down list. Measured peak level (Cp): Enter 12 mcg/mL. Hours after dose (Tp): Enter 2 hours (1100 - 0900). Measured trough level (Ctr): Enter 3 mcg/mL. Hours after dose (Ttr): Enter 11 hours (2000 - 0900). Current dosing interval (tau): Enter 12 hours. Current dose (MD): Enter 160 mg. Desired peak (Cdp): Enter 8 mcg/mL. Desired peak (Cdp): Enter 8 mcg/mL. Desired trough (Cdtr): Enter 1 mcg/mL. Detail: Select show if you would like Ke, half-life, Vd, calculated Clcr, calculated dose, and calculated interval to display along with suggested dose and interval. Select hide if you just want suggested dose and interval to display. Click calculate Once a patient is at steady state (usually around the third dose in patients with a stable Scr), levels can be drawn to determine accuracy of empiric dosing. A peak level should be drawn 30 minutes after the end of the 30-minute infusion and a trough level just before the next dose is due. Therapeutic peaks are usually 15-40 mcg/mL for amikacin and 4-10 mcg/mL for gentamicin and tobramycin. Therapeutic troughs are 1-8 mcg/mL for amikacin and 0.5-2 mcg/mL for gentamicin and tobramycin. The toxic effects of aminoglycosides include ototoxicity and nephrotoxicity.",
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Aminoglycosides- Traditional Intermittent Dosing by Serum Levels.pdf",
+      "source_sha256": "b8108fe2f4906d27b4d00b465bd072562c6d8897df7b69d72dfb526e342d0b51",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Aminoglycosides: Traditional Intermittent Dosing by Serum Levels",
+        "form_name": null,
+        "filename_title": "Aminoglycosides- Traditional Intermittent Dosing by Serum Levels",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Aminoglycosides: Traditional Intermittent Dosing by Serum Levels')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (aminoglycosidestraditionalintermittentdosingbyserumlevels)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf17",
+      "title": "Aminoglycosides: Traditional Intermittent Dosing by Serum Levels",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 71.4,
+    "checks_passed": 10,
+    "checks_total": 14,
+    "missing": [
+      "notes",
+      "unit options on every field",
+      "field help text",
+      "complete option lists"
+    ]
+  }
+}

@@ -1,0 +1,311 @@
+{
+  "schema_version": "1.0",
+  "slug": "hyponatremia-correction-infusate-rate",
+  "title": "Hyponatremia Correction Infusate Rate",
+  "subtitle": null,
+  "category": "Lab / Electrolytes",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "iv_na",
+      "js_name": "IV_Na",
+      "label": "IV Na",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "options": [
+        {
+          "label": "5% NaCl",
+          "index": 0,
+          "value": 855.0
+        },
+        {
+          "label": "3% NaCl",
+          "index": 1,
+          "value": 513.0
+        },
+        {
+          "label": "0.9% NaCl (Normal Saline)",
+          "index": 2,
+          "value": 154.0
+        },
+        {
+          "label": "Ringer Lactate (Includes 4 mEq/L K+)",
+          "index": 3,
+          "value": 134.0
+        }
+      ],
+      "options_source": "pdf_script+printed_form",
+      "variant_variables": null,
+      "source": {
+        "kind": "radio_group",
+        "js_group": "IV_Na"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "water_fract",
+      "js_name": "Water_Fract",
+      "label": "Water Fract",
+      "widget": "select",
+      "required": true,
+      "default": null,
+      "base_unit": null,
+      "units": null,
+      "constraints": {},
+      "options": [
+        {
+          "label": "Child",
+          "index": 0,
+          "value": 0.6
+        },
+        {
+          "label": "Adult Female",
+          "index": 1,
+          "value": 0.5
+        },
+        {
+          "label": "Elderly Female",
+          "index": 2,
+          "value": 0.45
+        },
+        {
+          "label": "Adult Male",
+          "index": 3,
+          "value": 0.6
+        },
+        {
+          "label": "Elderly Male",
+          "index": 4,
+          "value": 0.5
+        }
+      ],
+      "options_source": "pdf_script+printed_form",
+      "variant_variables": null,
+      "source": {
+        "kind": "radio_group",
+        "js_group": "Water_Fract"
+      },
+      "label_source": "printed form"
+    },
+    {
+      "key": "serum_na_change_per_hr",
+      "js_name": "Serum_Na_Change_Per_Hr",
+      "label": "Serum Na Change Per Hr",
+      "widget": "quantity",
+      "required": true,
+      "default": 0.25,
+      "base_unit": "mEq/L/hr",
+      "display_unit": "mEq/L/hr",
+      "units": [
+        {
+          "code": "mEq/L/hr",
+          "label": "mEq/L/hr",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 0.0,
+        "max": 2.0
+      },
+      "messages": {
+        "min": "The minimum value for Serum Na Change Per Hr is 0 mEq/L/hr.",
+        "max": "The maximum value for Serum Na Change Per Hr is 2 mEq/L/hr."
+      },
+      "dimension": null,
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Serum Na Change Per Hr is 0 mEq/L/hr. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Serum Na Change Per Hr is 2 mEq/L/hr. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "serum_na",
+      "js_name": "Serum_Na",
+      "label": "Serum Na",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq/L",
+      "display_unit": "mEq/L",
+      "units": [
+        {
+          "code": "mEq/L",
+          "label": "mEq/L",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 0.0,
+        "max": 2.0,
+        "source": "alert text"
+      },
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Serum Na Change Per Hr is 0 mEq/L/hr. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Serum Na Change Per Hr is 2 mEq/L/hr. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "weight",
+      "js_name": "Weight",
+      "label": "Weight",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "kg",
+      "display_unit": "kg",
+      "units": [
+        {
+          "code": "kg",
+          "label": "kg",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": "mass",
+      "label_source": "printed form"
+    },
+    {
+      "key": "iv_k",
+      "js_name": "IV_K",
+      "label": "IV K",
+      "widget": "quantity",
+      "required": true,
+      "default": 0.0,
+      "base_unit": "mEq/L",
+      "display_unit": "mEq/L",
+      "units": [
+        {
+          "code": "mEq/L",
+          "label": "mEq/L",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {},
+      "messages": null,
+      "dimension": null,
+      "label_source": "printed form"
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "infusate_rate",
+        "js_name": "Infusate_Rate",
+        "label": "Infusate Rate",
+        "expr": "(1000 * serum_na_change_per_hr * ((water_fract * weight) + 1)) / (iv_na + iv_k - serum_na)",
+        "base_unit": "mL/hr",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "serum_na_change_per_liter",
+        "js_name": "Serum_Na_Change_Per_Liter",
+        "label": "Serum Na Change Per Liter",
+        "expr": "(iv_na + iv_k - serum_na) / ((water_fract * weight) + 1)",
+        "base_unit": "mEq/L",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "Infusate_Rate = (1000 * Serum_Na_Change_Per_Hr * ((Water_Fract * Weight) + 1)) / (IV_Na + IV_K - Serum_Na)\nSerum_Na_Change_Per_Liter = (IV_Na + IV_K - Serum_Na) / ((Water_Fract * Weight) + 1)",
+    "notes": [
+      "Equation parameters such as Water Fract, have two or more discrete values that may be used in the calculation. The numbers in the parentheses, e.g. (0.6), represent the values that will be used.",
+      "The default unit of measure for weight is kilograms. Please verify that the correct unit of measure has been selected.",
+      "OVERLY RAPID CORRECTION OF HYPONATREMIA MAY CAUSE CEREBRAL EDEMA AND OSMOTIC DEMYELINATION WHICH CAN RESULT IN BRAIN DAMAGE OR DEATH.",
+      "The serum Sodium should generally be corrected at a rate that does not exceed 8 mEq/L/day.",
+      "Remaining within this target, the initial rate of correction can still be 1-2 mEq/L/hr for several hours in patients with severe symptoms.",
+      "In milder cases, fluid restriction alone (800-1200 mL/day) is usually adequate to correct the serum sodium.",
+      "Hypokalemia can aggravate the cerebral effects of hyponatremia and should be corrected."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Adrogue HJ, Madias NE. Hyponatremia. N Engl J Med. 2000;342(21):1581-89.[PubMed 10824078]",
+        "pubmed_id": "10824078",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/10824078/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 2
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Hyponatremia Correction Infusate Rate.pdf",
+      "source_sha256": "ba7d87cbc92d161739758a014a3cf57cc9a616cb13aec23dbf0a85eaf5a6031f",
+      "extractor": "pdf",
+      "form_name": "HyponatremiaCorrection",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Hyponatremia Correction Infusate Rate",
+        "form_name": "HyponatremiaCorrection",
+        "filename_title": "Hyponatremia Correction Infusate Rate",
+        "confidence": 0.97,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Hyponatremia Correction Infusate Rate')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (hyponatremiacorrectioninfusaterate)",
+          "title_vs_form": "PARTIAL (hyponatremiacorrectioninfusaterate ~ hyponatremiacorrection)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf101",
+      "title": "Hyponatremia Correction Infusate Rate",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 93.8,
+    "checks_passed": 15,
+    "checks_total": 16,
+    "missing": [
+      "unit options on every field"
+    ]
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "schema_version": "1.0",
+  "slug": "clostridium-difficile-disease-severity-score-upmc-2008",
+  "title": "Clostridium Difficile Disease Severity Score (UPMC 2008)",
+  "subtitle": null,
+  "category": "Infectious Disease / Scoring System",
+  "renderer": "score",
+  "engine": "score",
+  "status": "draft",
+  "version": 1,
+  "inputs": [],
+  "compute": {
+    "engine": "score",
+    "steps": [],
+    "outputs": []
+  },
+  "scoring": {
+    "groups": [
+      {
+        "key": "clinical findings",
+        "label": "Clinical findings",
+        "widget": "radio_group",
+        "selection": "single",
+        "required": true,
+        "options": [
+          {
+            "key": "opt_0_0",
+            "label": "Existing chronic medical conditions or immunosuppresion",
+            "points": 1
+          },
+          {
+            "key": "opt_0_1",
+            "label": "Altered mental status",
+            "points": 1
+          },
+          {
+            "key": "opt_0_2",
+            "label": "Abdominal distention or pain",
+            "points": 1
+          },
+          {
+            "key": "opt_0_3",
+            "label": "WBC >20 x 10^9/L or WBC <1.5 x 10^9/L or WBC Bands >10%",
+            "points": 1
+          },
+          {
+            "key": "opt_0_4",
+            "label": "Serum albumin <3 g/dL",
+            "points": 1
+          },
+          {
+            "key": "opt_0_5",
+            "label": "Ascites present",
+            "points": 1
+          },
+          {
+            "key": "opt_0_6",
+            "label": "CAT scan findings of colitis, pneumatosis coli, or bowel wall thickening",
+            "points": 1
+          }
+        ]
+      }
+    ],
+    "bands": [
+      {
+        "min": 0,
+        "max": 3,
+        "label": "Mild to moderate disease",
+        "raw": "0 to 3 points: Mild to moderate disease"
+      },
+      {
+        "min": 4,
+        "max": 7,
+        "label": "Severe disease",
+        "raw": "4 to 7 points: Severe disease"
+      }
+    ],
+    "total": {
+      "key": "total_score",
+      "label": "Total Criteria Point Count",
+      "unit": "points",
+      "min": 1.0,
+      "max": 1.0
+    },
+    "interpretation": {
+      "key": "interpretation",
+      "label": "Severity Score Interpretation",
+      "printed_rows": [
+        "Severity Score Interpretation"
+      ]
+    }
+  },
+  "tables": null,
+  "display": {
+    "decimal_precision": null,
+    "has_precision_control": false
+  },
+  "content": {
+    "equation": null,
+    "notes": [],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "University of Pittsburgh Medical Center. Guide to Antimicrobial Chemotherapy. 2008 4th ed. page 70 http://www.residency.dom.pitt.edu/Hcorner/Documents/AntimicrobialGuide2008.pdf. Accessed 2/4/2015.",
+        "pubmed_id": null,
+        "url": null
+      },
+      {
+        "text": "Fujitani S, George WL, Murthy AR. Comparison of clinical severity score indices for Clostridium difficile infection. Infect Control Hosp Epidemiol. 2011 Mar;32(3):220-8.[PubMed 21460506]",
+        "pubmed_id": "21460506",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/21460506/"
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 0
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Clostridium Difficile Disease Severity Score (UPMC 2008).pdf",
+      "source_sha256": "68d27bab4b4111e1bccf1957e88edf6fc18af4b10f5bec4e585eed5ca915eb56",
+      "extractor": "pdf",
+      "form_name": null,
+      "identity": {
+        "doc_id": "70017",
+        "title": "Clostridium Difficile Disease Severity Score (UPMC 2008)",
+        "form_name": null,
+        "filename_title": "Clostridium Difficile Disease Severity Score (UPMC 2008)",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Clostridium Difficile Disease Severity Score (UPMC 2008)')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (clostridiumdifficilediseaseseverityscoreupmc2008)",
+          "title_vs_form": "no form name (score-type calculator)"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf59",
+      "title": "Clostridium Difficile Disease Severity Score (UPMC 2008)",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 9,
+    "checks_total": 9,
+    "missing": []
+  }
+}

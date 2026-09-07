@@ -1,0 +1,271 @@
+{
+  "schema_version": "1.0",
+  "slug": "anion-gap-and-delta-delta-ratio",
+  "title": "Anion Gap & Delta Delta Ratio",
+  "subtitle": null,
+  "category": "Lab / Electrolytes",
+  "renderer": "formula",
+  "engine": "ebmcalc",
+  "status": "draft",
+  "version": 1,
+  "inputs": [
+    {
+      "key": "na",
+      "js_name": "Na",
+      "label": "Na",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq/L",
+      "display_unit": "mEq/L",
+      "units": [
+        {
+          "code": "mEq/L",
+          "label": "mEq/L",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 80.0,
+        "max": 200.0
+      },
+      "messages": {
+        "min": "The minimum value for Na is 80 mEq/L.",
+        "max": "The maximum value for Na is 200 mEq/L."
+      },
+      "dimension": null,
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Na is 80 mEq/L. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Na is 200 mEq/L. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "cl",
+      "js_name": "Cl",
+      "label": "Cl",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq/L",
+      "display_unit": "mEq/L",
+      "units": [
+        {
+          "code": "mEq/L",
+          "label": "mEq/L",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 60.0,
+        "max": 180.0
+      },
+      "messages": {
+        "min": "The minimum value for Cl is 60 mEq/L."
+      },
+      "dimension": null,
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Cl is 60 mEq/L. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Cl is 180 mEq/L. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "hco3",
+      "js_name": "HCO3",
+      "label": "HCO3",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq/L",
+      "display_unit": "mEq/L",
+      "units": [
+        {
+          "code": "mEq/L",
+          "label": "mEq/L",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 0.0,
+        "max": 30.0
+      },
+      "messages": {
+        "min": "The minimum value for HCO3 is 0 mEq/L.",
+        "max": "The maximum value for HCO3 is 30 mEq/L."
+      },
+      "dimension": null,
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for HCO3 is 0 mEq/L. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for HCO3 is 30 mEq/L. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    },
+    {
+      "key": "baseline_gap",
+      "js_name": "Baseline_Gap",
+      "label": "Baseline Gap",
+      "widget": "quantity",
+      "required": true,
+      "default": null,
+      "base_unit": "mEq/L",
+      "display_unit": "mEq/L",
+      "units": [
+        {
+          "code": "mEq/L",
+          "label": "mEq/L",
+          "factor": 1.0,
+          "offset": 0.0,
+          "resolved": true
+        }
+      ],
+      "constraints": {
+        "min": 0.0,
+        "max": 50.0
+      },
+      "messages": {
+        "min": "The minimum value for Baseline Gap is 0 mEq/L."
+      },
+      "dimension": null,
+      "label_source": "printed form",
+      "help": [
+        "The minimum value for Baseline Gap is 0 mEq/L. If you are specifying a value with a different unit, change the unit selector first.",
+        "The maximum value for Baseline Gap is 50 mEq/L. If you are specifying a value with a different unit, change the unit selector first."
+      ]
+    }
+  ],
+  "compute": {
+    "engine": "expr",
+    "steps": [],
+    "outputs": [
+      {
+        "key": "anion_gap",
+        "js_name": "Anion_Gap",
+        "label": "Anion Gap",
+        "expr": "na - (cl + hco3)",
+        "base_unit": "mEq/L",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "delta_gap",
+        "js_name": "Delta_Gap",
+        "label": "Delta Gap",
+        "expr": "anion_gap - baseline_gap",
+        "base_unit": "mEq/L",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "delta_hco3",
+        "js_name": "Delta_HCO3",
+        "label": "Delta HCO3",
+        "expr": "25 - hco3",
+        "base_unit": "mEq/L",
+        "units": null,
+        "label_source": "printed form"
+      },
+      {
+        "key": "delta_delta_ratio",
+        "js_name": "Delta_Delta_Ratio",
+        "label": "Delta Delta Ratio",
+        "expr": "delta_gap / delta_hco3",
+        "base_unit": "ratio",
+        "units": null,
+        "label_source": "printed form"
+      }
+    ]
+  },
+  "scoring": null,
+  "tables": null,
+  "display": {
+    "decimal_precision": 2,
+    "has_precision_control": true
+  },
+  "content": {
+    "equation": "Anion_Gap = Na - (Cl + HCO3)\nDelta_Gap = Anion_Gap - Baseline_Gap\nDelta_HCO3 = 25 - HCO3\nDelta_Delta_Ratio = Delta_Gap / Delta_HCO3",
+    "notes": [
+      "It is important to know the subject's baseline or premorbid Anion Gap to accurately understand the acid-base disorders suggested by the Delta Delta Ratio. the acid-base disorders suggested by the Delta Delta Ratio.",
+      "A Delta Delta Ratio between 1-2 usually indicates:",
+      "Uncomplicated high Anion Gap metabolic acidosis.",
+      "Diabetic Ketoacidosis typically has a ratio close to 1.",
+      "Lactic acidosis typically has a ratio around 1.6 due to intracellular hydrogen ion buffering.",
+      "A Delta Delta Ratio greater than 2 usually indicates:",
+      "HCO3 is higher than expected compared to the rise in the Anion Gap.",
+      "Concurrent metabloic alkalosis, as in vomiting.",
+      "A Delta Delta Ratio less than 1 may indicate:",
+      "Ketoacidosis resolving with urinary ketone losses.",
+      "Combined high and normal Anion Gap metabolic acidosis."
+    ],
+    "conditional_notes": null,
+    "calc_details": null,
+    "data_input_disclaimer": "ONLY DIGITS 0 TO 9 AND A SINGLE DECIMAL POINT (\".\") ARE ACCEPTABLE AS NUMERIC INPUTS. ATTEMPTED INPUT OF OTHER CHARACTERS INTO A NUMERIC FIELD MAY LEAD TO AN INCORRECT RESULT.",
+    "references": [
+      {
+        "text": "Wrenn K. The delta (delta) gap: an approach to mixed acid-base disorders. Ann Emerg Med. 1990 Nov;19(11):1310-3.[PubMed 2240729]",
+        "pubmed_id": "2240729",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/2240729/"
+      },
+      {
+        "text": "Breyer JA. Acid base course material. 6th National Critical Care Medicine Review Course.",
+        "pubmed_id": null,
+        "url": null
+      }
+    ],
+    "disclaimer": "All information contained in and produced by the EBMcalc system is provided for educational purposes only. This information should not be used for the diagnosis or treatment of any health problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL problem or disease. THIS INFORMATION IS NOT INTENDED TO REPLACE CLINICAL JUDGMENT OR GUIDE INDIVIDUAL PATIENT CARE IN ANY MANNER.Click here for full notice and disclaimer.",
+    "copyright": "EBMcalc is Copyright © 1998-2022 Foundation Internet Services, LLC [Build 265843 v22.1]",
+    "instructions": null,
+    "stated_limits": null,
+    "reference_tables": null,
+    "fixed_values": null,
+    "form_sections": null
+  },
+  "help": {
+    "general": null,
+    "fields_with_help": 4
+  },
+  "provenance": {
+    "pdf": {
+      "source_file": "Anion Gap & Delta Delta Ratio.pdf",
+      "source_sha256": "b8f3ce6d16bd7fbff140eaf68f2f9ee9dc319b7d8dd02e37c3f0e73dcd8c6aa8",
+      "extractor": "pdf",
+      "form_name": "AnionGapDeltaRatio",
+      "identity": {
+        "doc_id": "70017",
+        "title": "Anion Gap & Delta Delta Ratio",
+        "form_name": "AnionGapDeltaRatio",
+        "filename_title": "Anion Gap & Delta Delta Ratio",
+        "confidence": 0.9,
+        "verified": true,
+        "flags": [],
+        "checks": {
+          "title": "present ('Anion Gap & Delta Delta Ratio')",
+          "doc_id": "present (70017)",
+          "title_vs_filename": "MATCH (aniongapanddeltadeltaratio)",
+          "title_vs_form": "differs (aniongapanddeltadeltaratio vs aniongapdeltaratio) - expected, vendor abbreviates"
+        }
+      }
+    },
+    "html": {
+      "id": "pdf23",
+      "title": "Anion Gap & Delta Delta Ratio",
+      "matched": true
+    },
+    "unit_registry_stems": null,
+    "conflicts": [],
+    "built": "2026-09-07"
+  },
+  "tests": [],
+  "completeness": {
+    "score": 100.0,
+    "checks_passed": 16,
+    "checks_total": 16,
+    "missing": []
+  }
+}
