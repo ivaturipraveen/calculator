@@ -2168,6 +2168,11 @@ def build_spec(
                          for bnd in (scoring.get("bands") or [])},
         )
         if _rlabels:
+            # The header names the table's columns, and the text layer leaves
+            # its column rule in as "**". The bands themselves now carry those
+            # names, so the header only has to read as a header rather than as
+            # a stray "Risk ** Death".
+            _rlabels = [engine_score._COL_SEP.sub(" \u00b7 ", r) for r in _rlabels]
             scoring["interpretation"] = {
                 "key": "interpretation", "label": _rlabels[0],
                 "printed_rows": _rlabels,

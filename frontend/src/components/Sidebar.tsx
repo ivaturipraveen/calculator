@@ -60,7 +60,11 @@ export function Sidebar({
   useEffect(() => {
     if (!active || collapsed) return;
     const el = listRef.current?.querySelector<HTMLElement>(".calc-item.is-active");
-    el?.scrollIntoView({ block: "nearest" });
+    // Scrolling the list is a convenience, so it must never be load-bearing:
+    // where scrollIntoView is missing the throw escaped the effect and took the
+    // whole sidebar down with it -- no index at all, rather than an index that
+    // did not scroll.
+    if (typeof el?.scrollIntoView === "function") el.scrollIntoView({ block: "nearest" });
   }, [active, collapsed, groups]);
 
   if (collapsed) {

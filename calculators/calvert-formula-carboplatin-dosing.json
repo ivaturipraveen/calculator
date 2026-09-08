@@ -385,7 +385,7 @@
         "detail": "when GFR is not known it is estimated with the Cockcroft-Gault or Jelliffe equation taken from this corpus's own calculators, because the shared library the PDF calls is not in the PDF; confirm against the live app before relying on it"
       }
     ],
-    "built": "2026-09-07"
+    "built": "2026-09-08"
   },
   "tests": [],
   "completeness": {

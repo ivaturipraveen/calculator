@@ -201,6 +201,37 @@ describe("score calculator", () => {
     expect(document.querySelector(".band__label")).toHaveTextContent(/high probability/i);
     expect(document.querySelector(".band-row--active")).toHaveTextContent(/high probability/i);
   });
+
+  // The source PDFs print these two tables in a shape the text layer mangles,
+  // and both mangled into numbers a clinician could not act on: TIMI's two
+  // endpoints ran together as "3% ** 5%", and Fracture Index's three outcome
+  // tables flattened into one that gave a score of 1-2 three different answers.
+  it("keeps TIMI's two endpoints apart instead of running them together", async () => {
+    mountCalculator("timi-risk-score-ua-nstemi");
+    await screen.findByRole("heading", { name: /TIMI Risk Score/i });
+
+    const rows = await screen.findAllByText(/Urgent Revasc/i);
+    expect(rows.length).toBeGreaterThan(0);
+    const table = document.body.textContent ?? "";
+    expect(table).not.toContain("**");
+    // 0-1 point: 3% death/MI, 5% for the composite (Antman 2000).
+    const first = document.querySelector(".band-row");
+    expect(first).toHaveTextContent(/Death \/ MI Risk: 3%/i);
+    expect(first).toHaveTextContent(/Urgent Revasc Risk: 5%/i);
+  });
+
+  it("says which fracture each Fracture Index risk refers to", async () => {
+    mountCalculator("fracture-index-with-known-bone-mineral-density-bmd");
+    await screen.findByRole("heading", { name: /Fracture Index/i });
+
+    // The same score appears three times; each must name its own outcome.
+    for (const outcome of ["Nonvertebral", "Hip", "Vertebral"]) {
+      const rows = await screen.findAllByText(
+        new RegExp(`5 Year ${outcome} Fracture Risk: [\\d.]+%`, "i"),
+      );
+      expect(rows.length).toBe(5);
+    }
+  });
 });
 
 describe("growth chart", () => {

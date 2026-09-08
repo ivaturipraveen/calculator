@@ -123,91 +123,91 @@
       {
         "min": 1,
         "max": 2,
-        "label": "8.6%",
+        "label": "5 Year Nonvertebral Fracture Risk: 8.6%",
         "raw": "1 to 2 Points: 8.6%"
       },
       {
         "min": 3,
         "max": 4,
-        "label": "13.1%",
+        "label": "5 Year Nonvertebral Fracture Risk: 13.1%",
         "raw": "3 to 4 Points: 13.1%"
       },
       {
         "min": 5,
         "max": 5,
-        "label": "16.5%",
+        "label": "5 Year Nonvertebral Fracture Risk: 16.5%",
         "raw": "5 Points: 16.5%"
       },
       {
         "min": 6,
         "max": 7,
-        "label": "19.8%",
+        "label": "5 Year Nonvertebral Fracture Risk: 19.8%",
         "raw": "6 to 7 Points: 19.8%"
       },
       {
         "min": 8,
         "max": 15,
-        "label": "27.5%",
+        "label": "5 Year Nonvertebral Fracture Risk: 27.5%",
         "raw": "8 to 15 Points: 27.5%"
       },
       {
         "min": 1,
         "max": 2,
-        "label": "0.4%",
+        "label": "5 Year Hip Fracture Risk: 0.4%",
         "raw": "1 to 2 Points: 0.4%"
       },
       {
         "min": 3,
         "max": 4,
-        "label": "0.9%",
+        "label": "5 Year Hip Fracture Risk: 0.9%",
         "raw": "3 to 4 Points: 0.9%"
       },
       {
         "min": 5,
         "max": 5,
-        "label": "1.9%",
+        "label": "5 Year Hip Fracture Risk: 1.9%",
         "raw": "5 Points: 1.9%"
       },
       {
         "min": 6,
         "max": 7,
-        "label": "3.9%",
+        "label": "5 Year Hip Fracture Risk: 3.9%",
         "raw": "6 to 7 Points: 3.9%"
       },
       {
         "min": 8,
         "max": 15,
-        "label": "8.7%",
+        "label": "5 Year Hip Fracture Risk: 8.7%",
         "raw": "8 to 15 Points: 8.7%"
       },
       {
         "min": 1,
         "max": 2,
-        "label": "1.2%",
+        "label": "5 Year Vertebral Fracture Risk: 1.2%",
         "raw": "1 to 2 Points: 1.2%"
       },
       {
         "min": 3,
         "max": 4,
-        "label": "2.5%",
+        "label": "5 Year Vertebral Fracture Risk: 2.5%",
         "raw": "3 to 4 Points: 2.5%"
       },
       {
         "min": 5,
         "max": 5,
-        "label": "5.3%",
+        "label": "5 Year Vertebral Fracture Risk: 5.3%",
         "raw": "5 Points: 5.3%"
       },
       {
         "min": 6,
         "max": 7,
-        "label": "7.1%",
+        "label": "5 Year Vertebral Fracture Risk: 7.1%",
         "raw": "6 to 7 Points: 7.1%"
       },
       {
         "min": 8,
         "max": 15,
-        "label": "11.2%",
+        "label": "5 Year Vertebral Fracture Risk: 11.2%",
         "raw": "8 to 15 Points: 11.2%"
       }
     ],
@@ -251,23 +251,7 @@
     "instructions": null,
     "stated_limits": null,
     "reference_tables": null,
-    "fixed_values": [
-      {
-        "label": "8 to 15 Points:",
-        "value": 27.5,
-        "unit": "%"
-      },
-      {
-        "label": "8 to 15 Points:",
-        "value": 8.7,
-        "unit": "%"
-      },
-      {
-        "label": "8 to 15 Points:",
-        "value": 11.2,
-        "unit": "%"
-      }
-    ],
+    "fixed_values": null,
     "form_sections": null
   },
   "help": {
@@ -303,7 +287,7 @@
     },
     "unit_registry_stems": null,
     "conflicts": [],
-    "built": "2026-09-07"
+    "built": "2026-09-08"
   },
   "tests": [],
   "completeness": {

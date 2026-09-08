@@ -22,6 +22,7 @@ Interpretation bands come from the Results/Additional Information prose:
 from __future__ import annotations
 
 import re
+from collections import Counter
 from dataclasses import dataclass, field
 from typing import Optional
 
@@ -180,9 +181,13 @@ def parse_bands(*sections: str) -> list[dict]:
             else:
                 joined.append(l)
         sec = "\n".join(joined)
+        heading = ""
         for line in sec.split("\n"):
             s = _clean(line)
             if not s:
+                continue
+            if _OUTCOME_HEADING.match(s):
+                heading = s.rstrip(":").strip()
                 continue
             m = BAND.match(s)
             if m:
@@ -190,7 +195,8 @@ def parse_bands(*sections: str) -> list[dict]:
                 key = (lo, hi, label)
                 if key not in seen:
                     seen.add(key)
-                    out.append({"min": lo, "max": hi, "label": label, "raw": s})
+                    out.append({"min": lo, "max": hi, "label": label, "raw": s,
+                                "heading": heading})
                 continue
             m = BAND_BETWEEN.match(s)
             if m:
@@ -198,7 +204,8 @@ def parse_bands(*sections: str) -> list[dict]:
                 key = (lo, hi, label)
                 if key not in seen:
                     seen.add(key)
-                    out.append({"min": lo, "max": hi, "label": label, "raw": s})
+                    out.append({"min": lo, "max": hi, "label": label, "raw": s,
+                                "heading": heading})
                 continue
             m = BAND_CMP.match(s)
             if m:
@@ -207,7 +214,8 @@ def parse_bands(*sections: str) -> list[dict]:
                 key = (lo, hi, label)
                 if key not in seen:
                     seen.add(key)
-                    out.append({"min": lo, "max": hi, "label": label, "raw": s})
+                    out.append({"min": lo, "max": hi, "label": label, "raw": s,
+                                "heading": heading})
                 continue
             m = BAND_SINGLE.match(s)
             if m:
@@ -216,8 +224,36 @@ def parse_bands(*sections: str) -> list[dict]:
                     key = (v, v, label)
                     if key not in seen:
                         seen.add(key)
-                        out.append({"min": v, "max": v, "label": label, "raw": s})
-    return out
+                        out.append({"min": v, "max": v, "label": label,
+                                    "raw": s, "heading": heading})
+    return _qualify_colliding_bands(out)
+
+
+# A heading over a run of bands names the outcome they score. Fracture Index
+# prints three of them -- nonvertebral, hip and vertebral 5-year risk -- one
+# after another, so "1 to 2 Points" arrives three times carrying 8.6%, 0.4% and
+# 1.2%. Flattened without their headings those read as one table contradicting
+# itself, and the page answers a woman who scored 2 with whichever came first.
+_OUTCOME_HEADING = re.compile(
+    r"""^(?!.*\d\s*(?:to|-|\u2013)?\s*\d*\s*points?\b)  # not itself a band
+         (?=(?:.*[A-Za-z]){4})                       # has real words
+         (?!.*[:%])                                  # headings carry neither
+         .{4,70}$""", re.I | re.X)
+
+
+def _qualify_colliding_bands(bands: list[dict]) -> list[dict]:
+    """Name the outcome only where two bands claim the same score.
+
+    Prefixing every band with its heading would rewrite labels across the whole
+    corpus to no purpose. The ambiguity is what needs fixing, so this touches
+    only the ranges that are genuinely claimed twice.
+    """
+    spans = Counter((b["min"], b["max"]) for b in bands)
+    for b in bands:
+        head = b.pop("heading", "") or ""
+        if head and spans[(b["min"], b["max"])] > 1:
+            b["label"] = f"{head}: {b['label']}"
+    return bands
 
 
 def _num(s: str) -> float | int:
@@ -241,14 +277,72 @@ def parse(sections: dict[str, str], js: str = "") -> ParsedScore:
     # itself, under a heading like "4 Ts score interpretation", rather than in a
     # Results or Notes section -- so those must be searched too or the bands look
     # absent when the document plainly states them.
-    out.bands = parse_bands(
+    _band_sections = (
         sections.get("Results", ""),
         sections.get("Additional Information", ""),
         sections.get("Notes", ""),
         sections.get("Calculation Details", ""),
         sections.get("Calculator", ""),
     )
+    out.bands = split_marked_columns(parse_bands(*_band_sections), *_band_sections)
     return out
+
+
+# EBMcalc prints an interpretation table's column rule as "**" in the text
+# layer, so a row arrives as "3% ** 5%". Those are two different outcomes, not
+# a range: TIMI UA/NSTEMI states death/MI beside death/MI/urgent revascular-
+# isation, and its second column is the 4.7/8.3/13.2/19.9/26.2/40.9 series from
+# Antman 2000. Left as "3% ** 5%" the page shows a clinician a number they
+# cannot act on and hides which endpoint it belongs to.
+_COL_SEP = re.compile(r"\s*\*\*\s*")
+# The columns that follow the outcome ones carry no number, so they ride along
+# on the header line and have to come off it.
+_COL_TAIL = re.compile(r"\s+(?:interpretation|notes?|comments?)\s*$", re.I)
+# "<Name> Score and <first outcome>" is the house style for the header's left
+# half; everything before "and" is the score column, not an outcome.
+_SCORE_COL = re.compile(r"^.*?\bscores?\b\s+and\s+(.+)$", re.I)
+
+
+def _column_names(*sections: str) -> list[str] | None:
+    """Name the two outcome columns an interpretation table separates with "**".
+
+    Only a header can name them, and a header is the line that has the marker
+    but no percentage in it. Returns None when no such line reads cleanly, so
+    the caller can still de-mangle the rows without inventing column names.
+    """
+    for sec in sections:
+        for line in (sec or "").split("\n"):
+            s = line.strip()
+            if not s or "**" not in s or "%" in s:
+                continue
+            parts = _COL_SEP.split(s)
+            if len(parts) != 2:
+                continue
+            left, right = parts[0].strip(), _COL_TAIL.sub("", parts[1]).strip()
+            m = _SCORE_COL.match(left)
+            if m:
+                left = m.group(1).strip()
+            if left and right and len(left) <= 70 and len(right) <= 70:
+                return [left, right]
+    return None
+
+
+def split_marked_columns(bands: list[dict], *sections: str) -> list[dict]:
+    """Turn "3% ** 5%" back into two named outcomes."""
+    names = _column_names(*sections)
+    for b in bands:
+        parts = [x.strip() for x in _COL_SEP.split(b.get("label") or "")]
+        if len(parts) != 2 or not all(parts):
+            continue
+        b["columns"] = (
+            [{"name": names[i], "value": parts[i]} for i in range(2)]
+            if names else [{"name": None, "value": p} for p in parts]
+        )
+        b["label"] = (
+            f"{names[0]}: {parts[0]} \u00b7 {names[1]}: {parts[1]}"
+            if names else f"{parts[0]} \u00b7 {parts[1]}"
+        )
+    return bands
 
 
 def max_total(groups: list[ScoreGroup]) -> float:

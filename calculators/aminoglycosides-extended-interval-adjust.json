@@ -343,7 +343,7 @@
         "detail": "this calculator returns zero whatever is entered: its answer is read off a nomogram grid the source builds as HTML, and only the initial value survived extraction -- use the source calculator for this one"
       }
     ],
-    "built": "2026-09-07"
+    "built": "2026-09-08"
   },
   "tests": [],
   "completeness": {

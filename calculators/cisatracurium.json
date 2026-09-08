@@ -249,7 +249,7 @@
         "detail": "the printed dose array is cut off after 20 values (last 10.0, step 0.5); confirm the full ladder before publishing"
       }
     ],
-    "built": "2026-09-07"
+    "built": "2026-09-08"
   },
   "tests": [],
   "completeness": {

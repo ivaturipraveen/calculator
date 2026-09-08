@@ -202,13 +202,7 @@
     "instructions": null,
     "stated_limits": null,
     "reference_tables": null,
-    "fixed_values": [
-      {
-        "label": "9 to 14 Points:",
-        "value": 36.0,
-        "unit": "%"
-      }
-    ],
+    "fixed_values": null,
     "form_sections": null
   },
   "help": {
@@ -244,7 +238,7 @@
     },
     "unit_registry_stems": null,
     "conflicts": [],
-    "built": "2026-09-07"
+    "built": "2026-09-08"
   },
   "tests": [],
   "completeness": {

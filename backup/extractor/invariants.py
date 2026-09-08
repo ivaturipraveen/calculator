@@ -15,6 +15,10 @@ These are the properties a correct spec must have regardless of its formula:
   ladder_covers       every ladder key must be computable from the inputs
   no_dead_options     an option list must have at least two distinct values
   bounds_sane         min < max, and defaults must sit inside the bounds
+  bands_unambiguous   one score must not map to two different answers without
+                      saying which outcome each belongs to
+  labels_are_readable a label must not carry the PDF text layer's own table
+                      furniture ("3% ** 5%") or be a bare number
 
 Run after every build. A regression here is a wrong clinical number, not a
 cosmetic defect.
@@ -279,8 +283,66 @@ def check_bounds(spec: dict) -> list[dict]:
     return out
 
 
+def check_bands_unambiguous(spec: dict) -> list[dict]:
+    """One score must not map to two different answers.
+
+    Fracture Index prints three outcome tables in a row -- nonvertebral, hip
+    and vertebral 5-year risk -- and flattened without their headings they read
+    as a single table saying a score of 1-2 means 8.6%, 0.4% and 1.2% at once.
+    Whichever the renderer reached first became the answer. A band that repeats
+    a range is only safe when its label says which outcome it belongs to.
+    """
+    bands = (spec.get("scoring") or {}).get("bands") or []
+    spans = Counter((b.get("min"), b.get("max")) for b in bands)
+    out: list[dict] = []
+    for span, n in spans.items():
+        if n < 2:
+            continue
+        labels = [b.get("label") or "" for b in bands
+                  if (b.get("min"), b.get("max")) == span]
+        if len(set(labels)) < len(labels):
+            out.append({"check": "bands_unambiguous", "severity": "critical",
+                        "detail": f"score {span[0]}-{span[1]} has {n} bands and "
+                                  f"repeats a label: {labels}"})
+        elif not all(":" in l for l in labels):
+            out.append({"check": "bands_unambiguous", "severity": "high",
+                        "detail": f"score {span[0]}-{span[1]} maps to {n} "
+                                  f"different answers, none naming its outcome: "
+                                  f"{labels}"})
+    return out
+
+
+def check_labels_are_readable(spec: dict) -> list[dict]:
+    """A label must not carry the text layer's own table furniture.
+
+    TIMI UA/NSTEMI's rows arrived as "3% ** 5%" -- two endpoints with the
+    column rule still between them -- which tells a clinician neither number's
+    meaning and collided as a React key.
+    """
+    out: list[dict] = []
+    bands = (spec.get("scoring") or {}).get("bands") or []
+    for b in bands:
+        if "**" in (b.get("label") or ""):
+            out.append({"check": "labels_are_readable", "severity": "high",
+                        "detail": f"band label still has a column rule in it: "
+                                  f"{b.get('label')!r}"})
+    interp = (spec.get("scoring") or {}).get("interpretation") or {}
+    for row in ([interp.get("label")] + list(interp.get("printed_rows") or [])):
+        if row and "**" in row:
+            out.append({"check": "labels_are_readable", "severity": "high",
+                        "detail": f"interpretation header still has a column "
+                                  f"rule in it: {row!r}"})
+    for f in ((spec.get("content") or {}).get("fixed_values") or []):
+        lbl = (f.get("label") or "").strip()
+        if "**" in lbl or not re.search(r"[A-Za-z]{2}", lbl):
+            out.append({"check": "labels_are_readable", "severity": "high",
+                        "detail": f"stated quantity has no real name: {lbl!r}"})
+    return out
+
+
 CHECKS = (check_ladders, check_options, check_bounds, check_select_is_live,
-          check_result_is_constant)
+          check_result_is_constant, check_bands_unambiguous,
+          check_labels_are_readable)
 
 
 def main() -> int:

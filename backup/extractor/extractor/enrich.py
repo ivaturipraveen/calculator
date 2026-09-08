@@ -1673,6 +1673,15 @@ def _looks_like_heading(note) -> bool:
 
 
 _FIXED_VALUE = re.compile(r"^(.{2,44}?)\s+(-?\d+(?:\.\d+)?)\s*([A-Za-z%/µ]{1,10})$")
+# A stated quantity is named ("Infusate Volume 250 mL"). A row of an
+# interpretation table is not: TIMI UA/NSTEMI's "3% ** 5%" matched with the
+# label "3% **" and the value 5, putting seven nonsense entries on the page and
+# two identical ones next to each other. A label that is itself just a number,
+# or that reads as a score band, is a row -- not a quantity the form states.
+_NOT_A_LABEL = re.compile(
+    r"""^(?: [\d.]+\s*%?\s*\**            # "3% **", "12"
+          | .*?\b\d+(?:\s*to\s*\d+)?\s*points?\b.*   # "6 to 7 Points: 19% **"
+        )$""", re.I | re.X)
 
 
 def fixed_values(sec_calc: str, inputs: list[dict]) -> list[dict]:
@@ -1694,6 +1703,8 @@ def fixed_values(sec_calc: str, inputs: list[dict]) -> list[dict]:
             continue
         label, value, unit = m.group(1).strip(), m.group(2), m.group(3)
         if squash(label) in known or _UNIT_LINE.fullmatch(label):
+            continue
+        if _NOT_A_LABEL.match(label):
             continue
         out.append({"label": label, "value": float(value), "unit": unit})
     return out

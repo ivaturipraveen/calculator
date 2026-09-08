@@ -65,38 +65,98 @@
       {
         "min": 0,
         "max": 1,
-        "label": "3% ** 5%",
-        "raw": "0 to 1 Point: 3% ** 5%"
+        "label": "2 week Death / MI Risk: 3% · Death / MI / Urgent Revasc Risk: 5%",
+        "raw": "0 to 1 Point: 3% ** 5%",
+        "columns": [
+          {
+            "name": "2 week Death / MI Risk",
+            "value": "3%"
+          },
+          {
+            "name": "Death / MI / Urgent Revasc Risk",
+            "value": "5%"
+          }
+        ]
       },
       {
         "min": 2,
         "max": 2,
-        "label": "3% ** 8%",
-        "raw": "2 Points: 3% ** 8%"
+        "label": "2 week Death / MI Risk: 3% · Death / MI / Urgent Revasc Risk: 8%",
+        "raw": "2 Points: 3% ** 8%",
+        "columns": [
+          {
+            "name": "2 week Death / MI Risk",
+            "value": "3%"
+          },
+          {
+            "name": "Death / MI / Urgent Revasc Risk",
+            "value": "8%"
+          }
+        ]
       },
       {
         "min": 3,
         "max": 3,
-        "label": "5% ** 13%",
-        "raw": "3 Points: 5% ** 13%"
+        "label": "2 week Death / MI Risk: 5% · Death / MI / Urgent Revasc Risk: 13%",
+        "raw": "3 Points: 5% ** 13%",
+        "columns": [
+          {
+            "name": "2 week Death / MI Risk",
+            "value": "5%"
+          },
+          {
+            "name": "Death / MI / Urgent Revasc Risk",
+            "value": "13%"
+          }
+        ]
       },
       {
         "min": 4,
         "max": 4,
-        "label": "7% ** 20%",
-        "raw": "4 Points: 7% ** 20%"
+        "label": "2 week Death / MI Risk: 7% · Death / MI / Urgent Revasc Risk: 20%",
+        "raw": "4 Points: 7% ** 20%",
+        "columns": [
+          {
+            "name": "2 week Death / MI Risk",
+            "value": "7%"
+          },
+          {
+            "name": "Death / MI / Urgent Revasc Risk",
+            "value": "20%"
+          }
+        ]
       },
       {
         "min": 5,
         "max": 5,
-        "label": "12% ** 26%",
-        "raw": "5 Points: 12% ** 26%"
+        "label": "2 week Death / MI Risk: 12% · Death / MI / Urgent Revasc Risk: 26%",
+        "raw": "5 Points: 12% ** 26%",
+        "columns": [
+          {
+            "name": "2 week Death / MI Risk",
+            "value": "12%"
+          },
+          {
+            "name": "Death / MI / Urgent Revasc Risk",
+            "value": "26%"
+          }
+        ]
       },
       {
         "min": 6,
         "max": 7,
-        "label": "19% ** 41%",
-        "raw": "6 to 7 Points: 19% ** 41%"
+        "label": "2 week Death / MI Risk: 19% · Death / MI / Urgent Revasc Risk: 41%",
+        "raw": "6 to 7 Points: 19% ** 41%",
+        "columns": [
+          {
+            "name": "2 week Death / MI Risk",
+            "value": "19%"
+          },
+          {
+            "name": "Death / MI / Urgent Revasc Risk",
+            "value": "41%"
+          }
+        ]
       }
     ],
     "total": {
@@ -108,9 +168,9 @@
     },
     "interpretation": {
       "key": "interpretation",
-      "label": "TIMI Score and 2 week Death / MI Risk ** Death / MI / Urgent Revasc Risk Interpretation",
+      "label": "TIMI Score and 2 week Death / MI Risk · Death / MI / Urgent Revasc Risk Interpretation",
       "printed_rows": [
-        "TIMI Score and 2 week Death / MI Risk ** Death / MI / Urgent Revasc Risk Interpretation"
+        "TIMI Score and 2 week Death / MI Risk · Death / MI / Urgent Revasc Risk Interpretation"
       ]
     }
   },
@@ -140,43 +200,7 @@
     "instructions": null,
     "stated_limits": null,
     "reference_tables": null,
-    "fixed_values": [
-      {
-        "label": "3% **",
-        "value": 5.0,
-        "unit": "%"
-      },
-      {
-        "label": "3% **",
-        "value": 5.0,
-        "unit": "%"
-      },
-      {
-        "label": "3% **",
-        "value": 8.0,
-        "unit": "%"
-      },
-      {
-        "label": "5% **",
-        "value": 13.0,
-        "unit": "%"
-      },
-      {
-        "label": "7% **",
-        "value": 20.0,
-        "unit": "%"
-      },
-      {
-        "label": "12% **",
-        "value": 26.0,
-        "unit": "%"
-      },
-      {
-        "label": "6 to 7 Points: 19% **",
-        "value": 41.0,
-        "unit": "%"
-      }
-    ],
+    "fixed_values": null,
     "form_sections": null
   },
   "help": {
@@ -212,7 +236,7 @@
     },
     "unit_registry_stems": null,
     "conflicts": [],
-    "built": "2026-09-07"
+    "built": "2026-09-08"
   },
   "tests": [],
   "completeness": {

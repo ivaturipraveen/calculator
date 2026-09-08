@@ -49,6 +49,39 @@ C = {"crit": "\033[91m", "warn": "\033[93m", "ok": "\033[92m", "cy": "\033[96m",
      "dim": "\033[90m", "b": "\033[1m", "r": "\033[0m"}
 
 
+_UNTERMINATED = re.compile(r"""(?P<q>['"])[^'"\n]*\Z""")
+
+
+def truncated_export(sections: dict) -> str | None:
+    """Describe how a PDF's text layer cut its own Scripts section short.
+
+    Truncation is common here -- 56 of the 186 exports stop partway through a
+    string -- and nearly always harmless, because it lands in the trailing
+    ``test()`` / ``clrResults()`` helpers, long after the arithmetic. So this is
+    NOT a health check for the corpus, and calling it on a spec that built fine
+    would only cry wolf.
+
+    It earns its keep in the one case where the cut takes the calculation with
+    it. Both Rapid Sequence Intubation exports stop at
+    ``dsstarthtm = dsstarthtm + '`` inside ``writeDoseSheet()`` -- the function
+    that *is* the calculator -- so the crash-cart dose sheet is not in the file
+    at all. Hence the single caller: a spec that already extracted to nothing,
+    asking whether the content is missing or merely unparsed. Returns None when
+    the section ends cleanly.
+    """
+    js = (sections or {}).get("Scripts") or ""
+    if not js.strip():
+        return None
+    tail = js.rstrip()
+    if not _UNTERMINATED.search(tail):
+        return None
+    # Name the function it died inside; that is what a re-export has to restore.
+    fns = re.findall(r"function\s+(\w+)\s*\(", tail)
+    where = f" inside {fns[-1]}()" if fns else ""
+    return (f"source PDF's text layer stops mid-string{where} -- "
+            f"the rest of the script is not in the file")
+
+
 def slug_for(title: str) -> str:
     s = re.sub(r"[^a-z0-9]+", "-", title.lower().replace("&", " and "))
     return s.strip("-")
@@ -448,18 +481,22 @@ def main() -> int:
             })["used_by"].append(spec["slug"])
 
         # A spec that can neither ask for anything nor produce anything is not a
-        # calculator page -- it is a blank one with a title on it. Both Rapid
-        # Sequence Intubation exports come out this way: their whole content is
-        # a crash-cart drug model in a shape no engine here parses yet. Naming
-        # the gap is honest; shipping an empty page that looks like a working
-        # calculator is not.
+        # calculator page -- it is a blank one with a title on it. Shipping an
+        # empty page that looks like a working calculator is not honest; naming
+        # the gap is. Where the cause is a truncated source export, say so --
+        # "no engine parses this" would send the next maintainer off to write an
+        # engine for content that is not in the file to begin with.
         if not (spec.get("inputs") or (spec.get("compute") or {}).get("outputs")
                 or (spec.get("tables") or {}) or (spec.get("scoring") or {}).get("groups")):
             counts["empty_after_extraction"] += 1
+            cut = truncated_export(sections)
             review.append({
                 "severity": "high", "stage": "build", "file": path.name,
                 "reason": "extracted to nothing -- no inputs, outputs or tables; "
                           "excluded rather than published as a blank page",
+                "cause": cut or "content present but in a shape no engine parses",
+                "recoverable": "not from this file -- needs a complete re-export"
+                               if cut else "possibly, with a new engine",
             })
             continue
 
